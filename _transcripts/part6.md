@@ -454,3 +454,109 @@ Within 5 minutes of or in conjunction with the takeoff
 
 [End of orange-tagged box]
 
+## IMG_1249
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.11 Engine Anti-Ice Opera... | section bar: "...i-Ice Operation - In Flight"
+
+### 2.30.16.3.11. Engine Anti-Ice Operation - In Flight
+
+Engine anti–ice must be ON during all flight operations when icing conditions exist or are anticipated, except during climb and cruise when the temperature is below -40°C SAT. Engine anti–ice must be ON before and during descent in all icing conditions, including temperatures below -40°C SAT.
+
+When operating in areas of possible icing, activate engine anti–ice before entering icing conditions.
+
+[Dashed box — applicability tags, MIXED red and orange labels, in displayed order (R = red, O = orange):]
+TC-SEI (R), TC-SEJ (R), TC-SEK (R), TC-SEM (R), TC-SEN (R), TC-SEO (R), TC-SEP (R), TC-SEU (R), TC-SEY (R), TC-SEZ (R), TC-SLA (O), TC-SLB (O), TC-SLC (O), TC-SLD (O), TC-SLE (O), TC-SLF (O), TC-SMA (O), TC-SMB (O), TC-SMD (O), TC-SME (O), TC-SMF (O), TC-SMI (O), TC-SMJ (O), TC-SMK (O), TC-SML (O), TC-SMN (O), TC-SMP (O), TC-SMR (O), TC-SMS (O), TC-SMT (O), TC-SMU (O), TC-SMV (O), TC-SMZ (O), TC-SNN (R), TC-SNR (R), TC-SNT (R), TC-SNU (R), TC-SNV (R), TC-SOA (R), TC-SOB (R), TC-SOC (R), TC-SOD (R), TC-SOE (R), TC-SOF (R), TC-SOG (R), TC-SOH (R), TC-SOI (O), TC-SOJ (O), TC-SOK (O), TC-SOL (O), TC-SOM (O), TC-SON (R), TC-SOO (R), TC-SOP (R), TC-SOR (R), TC-SOV (R), TC-SOY (R), TC-SOZ (R), TC-SPA (R), TC-SPB (R), TC-SPC (R), TC-SPD (R), TC-SPE (R), TC-SPF (R), TC-SPH (R), TC-SPI (R), TC-SPJ (R), TC-SPK (R), TC-SPM (R), TC-SPO (R), TC-SPR (R), TC-SPS (R), TC-SPT (R), TC-SPU (R), TC-SPV (R), TC-SPY (R), TC-SPZ (R), TC-SRB (R), TC-SRC (R), TC-SRE (R), TC-SRF (R), TC-SRG (R), TC-SUU (R)
+
+(Transcriber note: this list omits TC-SPN and TC-SPP — they have their own box in IMG_1250 — and TC-SRI does not appear in this list as displayed.)
+
+> **WARNING**
+>
+> Do not rely on airframe visual icing cues before activating engine anti–ice. Use the temperature and visible moisture criteria because late activation of engine anti-ice may allow excessive ingestion of ice and result in engine damage or failure. [bottom partly obscured by app back button; full text confirmed in IMG_1250]
+
+## IMG_1250
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.11 Engine Anti-Ice Opera... | section bar: "...i-Ice Operation - In Flight"
+
+(Overlaps IMG_1249 — first WARNING repeats)
+
+> **WARNING**
+>
+> Do not rely on airframe visual icing cues before activating engine anti–ice. Use the temperature and visible moisture criteria because late activation of engine anti-ice may allow excessive ingestion of ice and result in engine damage or failure.
+
+[End of mixed-tag box]
+
+[Dashed box — applicability tags (RED labels): TC-SPN, TC-SPP]
+
+> **WARNING**
+>
+> Do not rely on airframe visual icing cues or illumination of the ICING light before activating engine anti–ice. Use the temperature and visible moisture criteria because late activation of engine anti-ice may allow excessive ingestion of ice and result in engine damage or failure.
+
+[End of TC-SPN/TC-SPP box]
+
+> **CAUTION** [black change bar in left margin]
+>
+> Do not use engine anti-ice when TAT is above 10°C
+>
+> Engine anti-ice must be turned off when not in actual or anticipated icing conditions. Failure to follow recommended anti-ice procedures can result in engine inlet cowl damage and parts departing the airplane, especially for 737-8 aircraft.
+
+When engine anti-ice is needed:
+
+| Item | Action |
+|---|---|
+| ENGINE START switches | CONT - PM |
+| [next item cut off — see IMG_1251] | |
+
+## IMG_1251
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.11 Engine Anti-Ice Opera... | section bar: "...i-Ice Operation - In Flight"
+
+(Overlaps IMG_1250 — top shows end of CAUTION: "...inlet cowl damage and parts departing the airplane, especially for 737-8 aircraft.")
+
+When engine anti-ice is needed:
+
+| Item | Action |
+|---|---|
+| ENGINE START switches | CONT - PM |
+| ENGINE ANTI-ICE switches | ON - PM |
+
+[Dashed box — applicability tags (RED labels):]
+TC-SEI, TC-SEJ, TC-SEK, TC-SEM, TC-SEN, TC-SEO, TC-SEP, TC-SEU, TC-SEY, TC-SEZ, TC-SNN, TC-SNR, TC-SNT, TC-SNU, TC-SNV, TC-SOA, TC-SOB, TC-SOC, TC-SOD, TC-SOE, TC-SOF, TC-SOG, TC-SOH, TC-SON, TC-SOO, TC-SOP, TC-SOR, TC-SOV, TC-SOY, TC-SOZ, TC-SPA, TC-SPB, TC-SPC, TC-SPD, TC-SPE, TC-SPF, TC-SPH, TC-SPI, TC-SPJ, TC-SPK, TC-SPM, TC-SPN, TC-SPO, TC-SPP, TC-SPR, TC-SPS, TC-SPT, TC-SPU, TC-SPV, TC-SPY, TC-SPZ, TC-SRB, TC-SRC, TC-SRE, TC-SRF, TC-SRG, TC-SRI, TC-SUU
+
+Verify that the COWL VALVE OPEN lights illuminate bright, then dim.
+
+[End of red-tag box]
+
+Verify that the COWL ANTI-ICE lights are extinguished.
+
+> **NOTE**
+>
+> [Dashed box — RED tags:] TC-SEI, TC-SEJ, TC-SEK, TC-SEM, TC-SEN, TC-SEO, TC-SEP, TC-SEU, TC-SEY, TC-SEZ, TC-SNN, TC-SNR, TC-SNT, TC-SNU, TC-SNV, TC-SOA, TC-SOB, TC-SOC, TC-SOD, TC-SOE, TC-SOF, TC-SOG, TC-SOH, TC-SON, TC-SOO, TC-SOP, TC-SOR, TC-SOV, TC-SOY, TC-SOZ, TC-SPA, TC-SPB, TC-SPC, TC-SPD, TC-SPE, TC-SPF, TC-SPH, TC-SPI, TC-SPJ, TC-SPK [cut off — continues in IMG_1252]
+
+## IMG_1252
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.11 Engine Anti-Ice Opera... | section bar: "...i-Ice Operation - In Flight"
+
+(Overlaps IMG_1251)
+
+Verify that the COWL ANTI-ICE lights are extinguished.
+
+> **NOTE**
+>
+> [Dashed box — RED tags:] TC-SEI, TC-SEJ, TC-SEK, TC-SEM, TC-SEN, TC-SEO, TC-SEP, TC-SEU, TC-SEY, TC-SEZ, TC-SNN, TC-SNR, TC-SNT, TC-SNU, TC-SNV, TC-SOA, TC-SOB, TC-SOC, TC-SOD, TC-SOE, TC-SOF, TC-SOG, TC-SOH, TC-SON, TC-SOO, TC-SOP, TC-SOR, TC-SOV, TC-SOY, TC-SOZ, TC-SPA, TC-SPB, TC-SPC, TC-SPD, TC-SPE, TC-SPF, TC-SPH, TC-SPI, TC-SPJ, TC-SPK, TC-SPM, TC-SPN, TC-SPO, TC-SPP, TC-SPR, TC-SPS, TC-SPT, TC-SPU, TC-SPV, TC-SPY, TC-SPZ, TC-SRB, TC-SRC, TC-SRE, TC-SRF, TC-SRG, TC-SRI, TC-SUU
+>
+> If the COWL VALVE OPEN lights remain illuminated bright with engines at IDLE, do the following:
+>
+> [Dashed box — ORANGE tags:] TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM
+>
+> If the COWL VALVE lights remain illuminated amber with engines at IDLE, do the following:
+>
+> - verify APU BLEED air switch is in the OFF position,
+> - verify ISOLATION VALVE switch is in the AUTO position, and
+> - increase thrust slightly (up to a minimum of 30% N1).
+
+[...]n engine anti-ice is no longer needed: [left edge obscured by back button — presumably "When engine anti-ice is no longer needed:"]
+
+| Item | Action |
+|---|---|
+| ENGINE ANTI-ICE [cut off] | OFF - PM [cut off] |
+

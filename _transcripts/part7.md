@@ -10,7 +10,7 @@ Below, this list is written as "[Applicability box: standard TC-SEI … TC-SUU l
 
 **App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.11 Engine Anti-Ice Opera... | Section bar: "...i-Ice Operation - In Flight"
 
-(Continued from the previous page. The whole block sits inside a cyan-bordered NOTE-style box whose heading is cut off above. Inside it is a red dashed applicability box with its top cut off; the only visible tag is an orange **TC-SOM**, and it contains the following text:)
+(Continued from the previous page. The whole block sits inside a cyan-bordered NOTE-style box whose heading is cut off above. Inside it is a red dashed applicability box with its top cut off; the only visible tag is an orange **TC-SOM**, which is most likely the last tag of the orange TC-SLA … TC-SOM group seen in IMG_1268–1272. It contains the following text:)
 
 > If the COWL VALVE lights remain illuminated amber with engines at IDLE, do the following:
 
@@ -397,3 +397,102 @@ Verify that the COWL ANTI-ICE lights are extinguished.
 >
 > [Second applicability box, with orange tags: TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM] [its content is cut off below; continues in IMG_1269]
 
+## IMG_1269
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.16 After Landing Proced... | Section bar: "After Landing Procedure"
+
+(Continues from IMG_1268, inside the cyan NOTE box. The first line is cut off: "...bright with engines at IDLE, do the following:", which is the end of the red-list text from IMG_1268.)
+
+> [Applicability box, orange tags: TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM]
+> If the COWL VALVE lights remain illuminated amber with engines at IDLE, do the following:
+>
+> (Below both applicability boxes, still inside the NOTE:)
+> - verify APU BLEED air switch is in the OFF position,
+> - verify ISOLATION VALVE switch is in the AUTO position, and
+> - increase thrust slightly (up to a maximum of 30% N1).
+
+*(Transcriber's note: this page says "up to a **maximum** of 30% N1". The in-flight section, IMG_1253, says "up to a **minimum** of 30% N1". Both are transcribed as written.)*
+
+When engine anti-ice is no longer needed:
+
+| Item | Action |
+|---|---|
+| ENGINE ANTI-ICE switches | OFF - PM |
+
+[Applicability box: standard TC-SEI … TC-SUU list]
+> Verify that the COWL VALVE OPEN lights illuminate bright, then extinguish.
+
+## IMG_1270
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.16 After Landing Proced... | Section bar: "After Landing Procedure"
+
+(Overlaps IMG_1269.)
+
+[Applicability box: standard TC-SEI … TC-SUU list; top rows cut off]
+> Verify that the COWL VALVE OPEN lights illuminate bright, then extinguish.
+
+| Item | Action |
+|---|---|
+| ENGINE START switches | OFF - PM |
+
+[Large red dashed applicability box: standard TC-SEI … TC-SUU list (tags wrapped 7–8 per row). It contains:]
+
+> | Item | Action |
+> |---|---|
+> | When engine anti-ice is required and the OAT is 3°C or below, an engine run up is recommended to minimize ice build-up. Use the following procedure: | PF |
+>
+> Check that the area behind the airplane is clear.
+>
+> Run-up to a minimum of 70% N1 for approximately 30 seconds duration at intervals no greater than 30 minutes.
+>
+> If airport surface conditions and the concentration of aircraft do not allow the engine thrust level to be increased to 70% N1, then set a thrust level as high as practical and [tim]e at that thrust level. (partly hidden by the back button)
+>
+> **NOTE** [cut off — continues in IMG_1271]
+
+## IMG_1271
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.16 After Landing Proced... | Section bar: "After Landing Procedure"
+
+(Overlaps IMG_1270. Still inside the red TC-SEI … TC-SUU applicability box.)
+
+> | Item | Action |
+> |---|---|
+> | When engine anti-ice is required and the OAT is 3°C or below, an engine run up is recommended to minimize ice build-up. Use the following procedure: | PF |
+>
+> Check that the area behind the airplane is clear.
+>
+> Run-up to a minimum of 70% N1 for approximately 30 seconds duration at intervals no greater than 30 minutes.
+>
+> If airport surface conditions and the concentration of aircraft do not allow the engine thrust level to be increased to 70% N1, then set a thrust level as high as practical and time at that thrust level.
+>
+> **NOTE**
+> When operating in conditions of freezing rain, freezing drizzle, freezing fog or heavy snow, run-ups to a minimum of 70% N1 for approximately 1 second duration at intervals no greater than 10 minutes should be considered.
+
+(End of the red box.)
+
+[Applicability box, orange tags: TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM]
+> When engine anti-ice is required and the OAT is 3°C or below, or if increased fan vibration due to fan ice accumulation is present, do an engine run up to minimize ice build-up. Use the following procedure:
+>
+> | Item | Action |
+> |---|---|
+> | Check that the area behind the airplane is [c]lear. | PF |
+> | Increase thrust to a [cut off — see IMG_1272] | PF |
+
+## IMG_1272
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.16 After Landing Proced... | Section bar: "After Landing Procedure"
+
+(Overlaps IMG_1271. The top shows the end of the NOTE from the TC-SEI group: "...drizzle, freezing fog or heavy snow, run-ups to a minimum of 70% N1 for approximately 1 second duration at intervals no greater than 10 minutes should be considered.")
+
+[Applicability box, orange tags: TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM]
+> When engine anti-ice is required and the OAT is 3°C or below, or if increased fan vibration due to fan ice accumulation is present, do an engine run up to minimize ice build-up. Use the following procedure:
+>
+> | Item | Action |
+> |---|---|
+> | Check that the area behind the airplane is clear. | PF |
+> | Increase thrust to a minimum of 50% N1 then decrease thrust to idle. Repeat as necessary or at intervals no greater than 60 minutes. | PF |
+>
+> **NOTE**
+> Engine vibration may indicate above the normal operating range up to the maximum display value during ice shedding, however, this will have no adverse effect on the engine.
+
+(End of the orange-group box. The rest of the page is blank.)
