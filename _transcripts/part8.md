@@ -426,3 +426,99 @@ SunExpress (logo) — 1.5.2 Non-AFM Operational Information — Page Revision Da
 \# Do not use LVL CHG on final approach below 1000 feet AFE.
 
 (Rest of page blank.)
+
+## IMG_1289
+
+**App header:** SXS-OMB - Operations Manual Part B - 1.5.3.1 Low Weather Minima Opera[tions]
+
+SunExpress (logo) — [1.5.3.1 Low Weather] Minima Operations — Page Revision Date: 27/Dec/2024 [top line partly cut off]
+
+### 1.5.3.1. Low Weather Minima Operations
+
+In the case of an EFIS control panel failure, CAT II and III approaches are prohibited.
+
+The airplane is approved for the following types of ILS approach and landing:
+
+- DH 200 feet or more (Category I) (Flaps 15 for approach, 30 and 40 for approach and landing).
+
+  Manual approach with or without flight director.
+
+  Single or, dual channel automatic approach and manual landing.
+
+  Dual channel automatic approach and landing.
+
+- DH below 200 feet but not less than 100 feet (Category II) (Flaps 30 and 40) into airports at or below 8400 feet pressure altitude.
+
+  Dual channel automatic approach and landing.
+
+- DH below 100 feet but not less than 50 feet (Category III) (Flaps 30 and 40) into airports at or below 8400 feet pressure altitude.
+
+  Dual channel automatic approach and landing.
+
+(End of visible content; scrollbar suggests page may continue.)
+
+## IMG_1290
+
+**App header:** SXS-OMB - Operations Manual Part B - 1.6.1 AFM Limitations
+
+### 1.6.1. AFM Limitations
+
+(Red dashed effectivity box; red tags: TC-SOO, TC-SOP, TC-SOR, TC-SPC, TC-SPD)
+
+> Do not use VHF-3 (if installed for voice communication) for ATC communications with ACARS operational.
+
+(Red dashed effectivity box; red tags: TC-SPB, TC-SPF, TC-SPM, TC-SPO, TC-SPP, TC-SPR, TC-SPT, TC-SPU, TC-SPV, TC-SRB, TC-SRC, TC-SUU)
+
+> Flights predicated on the use of the following HF frequencies are prohibited: 29.489 and 29.490 (MHz).
+
+**Aircraft Communications Addressing and Reporting System (ACARS)**
+
+The ACARS is limited to the transmission and receipt of messages that will not create an unsafe condition if the message is improperly received, such as the following:
+
+- The message or parts of the message are delayed or not received,
+- The message is delivered to the wrong recipient, or
+- The message content may be frequently corrupted.
+
+However, Pre-Departure Clearance, Digital Automatic Terminal Information Service, Oceanic Clearances, Weight and Balance, and Takeoff Data messages can be transmitted and received over ACARS if they are verified [per a]pproved operational procedures. [partly behind back button]
+
+**Controller Pilot Data Link Communications (CPDLC)** [heading, cut off at bottom]
+
+## IMG_1291
+
+**App header:** SXS-OMB - Operations Manual Part B - 1.6.1 AFM Limitations
+
+(Continuation of IMG_1290; overlaps from "The ACARS is limited..." through CPDLC heading.)
+
+The ACARS is limited to the transmission and receipt of messages that will not create an unsafe condition if the message is improperly received, such as the following:
+
+- The message or parts of the message are delayed or not received,
+- The message is delivered to the wrong recipient, or
+- The message content may be frequently corrupted.
+
+However, Pre-Departure Clearance, Digital Automatic Terminal Information Service, Oceanic Clearances, Weight and Balance, and Takeoff Data messages can be transmitted and received over ACARS if they are verified per approved operational procedures.
+
+#### Controller Pilot Data Link Communications (CPDLC)
+
+With Protected Mode – Controller Pilot Datalink Communications (PM-CPDLC): The PM-CPDLC installation is only intended to be used in the cruise flight phase and for non-critical messaging.
+
+> **NOTE**
+>
+> Boeing has confirmed with SNS-SNS-25-0061-03B that "Boeing believes that rather than referring to a specific phase in a flight profile, the reference to cruise flight phase is intended to refer to flight phases outside of high flight crew workload, such as takeoff, climb-out, approach, and landing, or any other terminal maneuvering in a high traffic environment. In general, [the]se phases are the critical phases and require more [fli]ght crew attention." As a result, this is not a limitation but an indication that "PM-CPDLC messages are used [cut off at bottom]
+
+## IMG_1292
+
+**App header:** SXS-OMB - Operations Manual Part B - 1.6.1 AFM Limitations
+
+(Continuation of IMG_1291; overlaps from "However, Pre-Departure Clearance..." — completes the NOTE.)
+
+However, Pre-Departure Clearance, Digital Automatic Terminal Information Service, Oceanic Clearances, Weight and Balance, and Takeoff Data messages can be transmitted and received over ACARS if they are verified per approved operational procedures.
+
+#### Controller Pilot Data Link Communications (CPDLC)
+
+With Protected Mode – Controller Pilot Datalink Communications (PM-CPDLC): The PM-CPDLC installation is only intended to be used in the cruise flight phase and for non-critical messaging.
+
+> **NOTE**
+>
+> Boeing has confirmed with SNS-SNS-25-0061-03B that "Boeing believes that rather than referring to a specific phase in a flight profile, the reference to cruise flight phase is intended to refer to flight phases outside of high flight crew workload, such as takeoff, climb-out, approach, and landing, or any other terminal maneuvering in a high traffic environment. In general, these phases are the critical phases and require more flight crew attention." As a result, this is not a limitation but an indication that "PM-CPDLC messages are used as a supplemental means of communication with Air Traffic Control (ATC) centers and are for strategic flight and not used for tactical reasons. In emergency conditions, the expectations are that VOICE will be used as the primary means of communication."
+
+(End of visible content.)

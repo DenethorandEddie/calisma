@@ -320,3 +320,80 @@ Bottom-right box: **RNP APPROACHES** (with a thermometer icon)
 > *1. LNAV/VNAV minima not authorized -> revert to LNAV minima. No corrections.*
 > *2. RNP-AR Approaches are not authorized.*
 
+## IMG_1265
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.15 Approach and Landing | Section bar: "...5 Approach and Landing"
+
+Page header: SunExpress logo | **2.30.16.3.15 Approach and Landing** | **Page Revision Date:** 27/Dec/2024
+
+### 2.30.16.3.15. Approach and Landing
+
+Use normal procedures and reference speeds.
+
+(The rest of the page is blank.)
+
+## IMG_1266
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.16 After Landing Proced... | Section bar: "After Landing Procedure"
+
+### 2.30.16.3.16. After Landing Procedure
+
+> **CAUTION**
+> Taxi at a reduced speed. Use smaller nose wheel steering wheel and rudder inputs and apply minimum thrust smoothly. Differential thrust may be used to help maintain airplane momentum during turns. At all other times, apply thrust evenly. Taxiing on slippery taxiways or runways at excessive speed or with high crosswinds may start a skid.
+
+> **CAUTION**
+> When operating the engines over significant amounts of standing de-icing or anti-icing fluid, limit thrust to the minimum required. Excessive ingestion of de-icing or anti-icing fluid can cause the fluid to build up on the engine compressor blades resulting in compressor stalls and engine surges.
+
+Do the normal After Landing Procedure with the following modifications:
+
+> After prolonged operation in icing conditions with the flaps extended, or when an accumulation of airframe ice is observed, or when operating on a runway or taxiway contaminated with ice, snow, slush or standing water:
+>
+> > Do not retract the flaps to less than flaps 15 until the flap areas have been checked to be free of contaminants.
+
+Engine anti-ice must be selected ON and remain on during all [grou]nd operations when icing conditions exist or are [antici]pated. (partly hidden by the back button; full text in IMG_1267)
+
+(The top edge of a red WARNING box is visible at the bottom and cut off.)
+
+## IMG_1267
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.16 After Landing Proced... | Section bar: "After Landing Procedure"
+
+(Overlaps IMG_1266.)
+
+> Do not retract the flaps to less than flaps 15 until the flap areas have been checked to be free of contaminants.
+
+Engine anti-ice must be selected ON and remain on during all ground operations when icing conditions exist or are anticipated.
+
+> **WARNING**
+> Do not rely on airframe visual icing cues before activating engine anti-ice. Use the temperature and visible moisture criteria because late activation of engine anti-ice may allow excessive ingestion of ice and result in engine damage or failure.
+
+> **CAUTION**
+> Do not use engine anti-ice when OAT is above 10°C.
+
+When engine anti-ice is needed:
+
+| Item | Action |
+|---|---|
+| ENGINE START switches | CONT - PM |
+| ENGINE ANTI-ICE switches | ON - PM |
+
+[Applicability box begins with the standard TC-SEI … TC-SUU list (tags wrapped 6 per row). Cut off at TC-SPV TC-SPY TC-SPZ TC-SRB TC-SRC TC-SRE …; continues in IMG_1268]
+
+## IMG_1268
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.16 After Landing Proced... | Section bar: "After Landing Procedure"
+
+(Continues from IMG_1267.)
+
+[Applicability box: standard TC-SEI … TC-SUU list; the top rows are cut off and the list ends TC-SRF TC-SRG TC-SRI TC-SUU]
+> Verify that the COWL VALVE OPEN lights illuminate bright, then dim.
+
+Verify that the COWL ANTI-ICE lights are extinguished.
+
+> **NOTE** (cyan box)
+>
+> [Red applicability box: standard TC-SEI … TC-SUU list]
+> If the COWL VALVE OPEN lights remain illuminated bright with engines at IDLE, do the following:
+>
+> [Second applicability box, with orange tags: TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM] [its content is cut off below; continues in IMG_1269]
+
