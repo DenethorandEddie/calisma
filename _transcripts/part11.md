@@ -180,3 +180,246 @@ Footer: OPS.3.6 — November 25, 2025
 Footer: November 25, 2025 — OPS.3.7
 
 ---
+
+## IMG_1038
+
+QRH page 448 — Breadcrumb: Fluids by SunExpress > Table 56: Type II Fluids Tested for Anti-icing Performance andAerodynamic Acceptance. Two-page spread.
+
+**Left page** (Operational Information — SunExpress 737 Quick Reference Handbook)
+
+**Table 56: Type II Fluids Tested for Anti-icing Performance and Aerodynamic Acceptance**
+
+Note:
+- **NT:** NOT TESTED
+- **ND:** Dilution Not Applicable
+- **PG:** Conventional Glycol (Propylene Glycol);
+- **EG:** Conventional Glycol (Ethylene Glycol);
+- **NCG:** non-conventional glycol (organic non-ionic diols and triols) and mixtures of non-conventional glycol and conventional glycol.
+
+TABLE 56 TYPE II FLUIDS TESTED FOR ANTI-ICING PERFORMANCE AND AERODYNAMIC ACCEPTANCE De-icing/Anti-icing Approved Fluids by SunExpress
+
+| Company Name | Fluid Name | Type of Glycol | Dilution | LOUT °C |
+|---|---|---|---|---|
+| ABAX Industries | Ecowing AD-2 | PG | 100/0 | -27,0 |
+| | | | 75/25 | -15,0 |
+| | | | 50/50 | -3,0 |
+| Aviation Shaanxi Hi-Tech Physical Chemical Co. Ltd. | Cleanwing II | PG | 100/0 | -25,0 |
+| | | | 75/25 | -15,0 |
+| | | | 50/50 | -4,5 |
+| Clariant Produkte (Deutschland) GmbH | Safewing MP II Flight | PG | 100/0 | -29,0 |
+| | | | 75/25 | -14,0 |
+| | | | 50/50 | -3,5 |
+| Cryotech Deicing Technology | Polar Guard® II | PG | 100/0 | -30,5 |
+| | | | 75/25 | -14,0 |
+| | | | 50/50 | -3,5 |
+| Kilfrost Limited | ABC-K Plus | PG | 100/0 | -29,0 |
+| | | | 75/25 | -14,5 |
+| | | | 50/50 | -3,5 |
+| MKS DEVO KIMYA SANAYI TIC AS. | COREICEPHOB Type II | PG | 100/0 | -27,0 |
+| | | | 75/25 | ND |
+| | | | 50/50 | -3,5 |
+| Newawe Aerochemical Co. Ltd. | FCY-2 | PG | 100/0 | -28,0 |
+| | | | 75/25 | -14,5 |
+| | | | 50/50 | -4,5 |
+
+Footer: OPS.3.8 — November 25, 2025
+
+**Right page** (SunExpress 737 Quick Reference Handbook — Operational Information)
+
+TABLE 56 (cont.) TYPE II FLUIDS TESTED FOR ANTI-ICING PERFORMANCE AND AERODYNAMIC ACCEPTANCE De-icing/Anti-icing Approved Fluids by SunExpress
+
+| Company Name | Fluid Name | Type of Glycol | Dilution | LOUT °C |
+|---|---|---|---|---|
+| Romchim Protect SRL | ADD-Protect Type II | PG | 100/0 | -28,0 |
+| | | | 75/25 | -14,0 |
+| | | | 50/50 | -3,0 |
+
+**Table 58: Type IV Fluids Tested for Anti-icing Performance and Aerodynamic Acceptance**
+
+**CAUTION: Type IV fluids marked with an "\*" must not be used diluted for Anti-Icing. Fluid water mixtures 75/25 and 50/50 may be used for De-Icing but not for Anti-Icing.**
+
+Note:
+- **NT:** NOT TESTED
+- **ND:** Dilution Not Applicable
+- **PG:** Conventional Glycol (Propylene Glycol);
+- **EG:** Conventional Glycol (Ethylene Glycol);
+- **NCG:** non-conventional glycol (organic non-ionic diols and triols) and mixtures of non-conventional glycol and conventional glycol.
+
+Type IV Fluids
+
+| Company Name | Fluid Name | Type of Glycol | Dilution | LOUT °C |
+|---|---|---|---|---|
+| ABAX Industries | Ecowing AD-49* | PG | 100/0 | -26,0 |
+| | | | 75/25 | ND |
+| | | | 50/50 | ND |
+| ASGlobal | 4Flite EG* | PG | 100/0 | -26,0 |
+| | | | 75/25 | ND |
+| | | | 50/50 | ND |
+| Clariant Produkte (Deutschland) GmbH | Safewing MP IV Launch | PG | 100/0 | -28,5 |
+| | | | 75/25 | -14,0 |
+| | | | 50/50 | -3,5 |
+| Clariant Produkte (Deutschland) GmbH | Safewing MP IV Launch Plus | PG | 100/0 | -29,0 |
+| | | | 75/25 | -14,0 |
+| | | | 50/50 | -3,5 |
+
+(continued on next page)
+
+Footer: November 25, 2025 — OPS.3.9
+
+---
+
+## IMG_1039
+
+QRH page 450 — Breadcrumb: Fluids by SunExpress > Table 58: Type IV Fluids Tested for Anti-icing Performance andAerodynamic Acceptance. Two-page spread.
+
+**Left page** — Type IV Fluids (continuation of Table 58)
+
+| Company Name | Fluid Name | Type of Glycol | Dilution | LOUT °C |
+|---|---|---|---|---|
+| Cryotech Deicing Technology | Polar Guard® Advance | PG | 100/0 | -30,5 |
+| | | | 75/25 | -14,0 |
+| | | | 50/50 | -3,5 |
+| Dow Inc. | UCAR™ Endurance EG106 ADF/AAF* | EG | 100/0 | -29,0 |
+| | | | 75/25 | ND |
+| | | | 50/50 | ND |
+| Dow Inc. | UCAR™ FlightGuard AD-49* | PG | 100/0 | -26,0 |
+| | | | 75/25 | ND |
+| | | | 50/50 | ND |
+| Inland Technologies | ECO-SHIELD®* | PG | 100/0 | -25,5 |
+| | | | 75/25 | ND |
+| | | | 50/50 | ND |
+| JSC RCP Nordix (Formerly Oksayd Co. Ltd.) | Defrost ECO 4* | PG | 100/0 | -25,5 |
+| | | | 75/25 | ND |
+| | | | 50/50 | ND |
+| Kilfrost Limited | ABC-S Plus | PG | 100/0 | -28,0 |
+| | | | 75/25 | -14,5 |
+| | | | 50/50 | -3,5 |
+| Newawe Aerochemical Co. Ltd. | FCY 9311* | PG | 100/0 | -29,5 |
+| | | | 75/25 | ND |
+| | | | 50/50 | ND |
+
+Footer: OPS.3.10 — November 25, 2025
+
+**Right page — Permissible Deicing and Permissible Anti-Icing Diagrams**
+
+Two diagrams (graphics; description + all legible labels):
+
+1. **BOEING B737 — PERMISSIBLE DEICING FLUID APPLICATION DIAGRAM**
+   - Aircraft shown in side views (two) and top view, deicing application areas coloured **orange** (fuselage, wings, empennage — essentially whole airframe surfaces).
+   - Left column of prohibition icons (engine openings, engine exhaust, windows/windscreen, cabin windows/doors, pitot/probes, static ports, etc. — explained on next page).
+   - Blue triangle placards on diagram: "① HOAR FROST ALLOWED" (on upper fuselage, top view), "② 1/8" FUEL FROST ALLOWED" (lower wing, side view); green triangle "ENGINE INSPECTION" (at engine, top view).
+   - Red "no spray" circle icons at nose/radome, engines, APU/tail, wheels.
+   - Legend: [orange] Deicing Fluid Application Areas; [white] Deicing Fluid Non-Application Areas; [red circle-slash] No Direct Application of Deicing/Anti-icing Fluid Allowed. Small swatch at right: "Deicing Fluid Mix" (orange).
+
+2. **BOEING B737 — PERMISSIBLE ANTI-ICING FLUID APPLICATION DIAGRAM**
+   - Same views; anti-icing application areas coloured **green** — wings, horizontal and vertical stabilizer; fuselage NOT green (white) except per PIC request.
+   - Yellow triangle placard "ANTI-ICING FUSELAGE APPLICATION" near forward fuselage (top view).
+   - Red asterisks (*) on fuselage = fuselage anti-icing on PIC request.
+   - Legend: [green] Anti-icing Fluid Application Areas; [white] Anti-icing Fluid Non-Application Areas; [red circle-slash] No Direct Application of Deicing/Anti-icing Fluid Allowed; [red asterisk] Fuselage Anti-icing Application on PIC Request. Small swatch at right: "Anti-icing Fluid" (green).
+
+Footer: November 25, 2025 — OPS.3.11
+
+---
+
+## IMG_1040
+
+QRH page 452 — Breadcrumb: Deicing / Anti-Icing Approved Fluids by SunExpress > Permissible Deicing and Permissible Anti-Icing Diagrams. Two-page spread (legend/symbol explanations for the diagrams). Outline additionally shows: SNOWTAM, RNP Approach Operations.
+
+**Left page** (Operational Information — SunExpress 737 Quick Reference Handbook) — placard symbols:
+
+| Symbol | Meaning |
+|---|---|
+| Blue triangle "① HOAR FROST ALLOWED" | Thin hoarfrost is acceptable on the upper surface of the fuselage proved all vents and ports are clear. Thin hoarfrost is thin enough to distinguish paint lines, markings or lettering. |
+| Blue triangle "② 1/8" FUEL FROST ALLOWED" | Coating of frost up to 1/8th inch (3 mm) in thickness on the lower wing surfaces caused by cold fuel in the wing tank areas between the front and rear spar is permissible. However, all leading edge devices, control surfaces, tab surfaces, upper wing surfaces and balance bay cavities **MUST** be free of ice, snow, slush or frost. |
+| Green triangle "① ENGINE INSPECTION" | Engine intake **MUST** be free of all contaminants and engine fan blades **MUST** freely rotate. |
+| Green triangle "② ENGINE INSPECTION" | Engine intake **MUST** be free of all contaminants and engine fan blades **MUST** freely rotate. Fuselage **MUST** be inspected prior to engine start when conditions warrant. |
+| Yellow triangle "ANTI-ICING FUSELAGE APPLICATION" | Do not apply undiluted Type II, III or IV fluids forward of the front cabin entry door. Do not apply to windshields or windscreens. |
+| Red triangle "① WING INSPECTION" | Check upper wing surface to confirm that ice is not present. A physical check (tactile inspection) **MUST** be conducted on the wings upper surfaces at inboard end of wing fuel tank and/or other areas as specified by the aircraft manufacturer. Specific Airworthiness Directive requirements may apply. |
+
+Footer: OPS.3.12 — November 25, 2025
+
+**Right page** (SunExpress 737 Quick Reference Handbook — Operational Information) — red prohibition icons:
+
+| Icon | Meaning |
+|---|---|
+| Engine fan | Do not spray into engine openings. |
+| Engine exhaust | Do not spray into engine exhaust. |
+| Radome (D shape) | Do not apply Type II, Type III or Type IV to radome. |
+| Flight deck windows | Do not spray directly at flight deck windows/windscreen. |
+| Cabin window/door | Do not spray directly at main deck cabin windows or doors. |
+| Pitot probe | Do not spray directly at or into pitot tubes, TAT probes, angle of attack vanes or other data sensing devices/probes/tubes. |
+| Static port | Do not spray directly at static ports. |
+| Intake/vent | Do not spray directly at or into aircraft intake or exhaust vents, ram air inlets, scoops, drains, outlets or pressurized outflow valves. |
+| <45° | Apply deicing fluids at angles below 45 degrees. |
+| Avionics vent | Do not spray into avionics vents. |
+| Wheel | Do not spray directly at aircraft wheels, brakes, oleo struts, mechanisms and switches. |
+| APU inlet | Do not spray into APU inlet. |
+| APU exhaust | Do not spray into APU exhaust. |
+| Pylon grid | Do not spray onto heat exchanger ventilation grid located on engine pylons. |
+| Propeller | Do not spray onto propeller blades. |
+| Hand (tactile) | Clear Ice Check (Tactile Check) required prior to deicing and may be required as part of post deicing Check. |
+| Folding wing | Do not direct fluid spray onto the hinges or bushings of folding wing devices, as this can cause lubricants to be washed away. Overspray is allowed |
+
+Footer: November 25, 2025 — OPS.3.13
+
+---
+
+## IMG_1041
+
+QRH page 454 — Breadcrumb: Operational Information > De-Icing/Anti-Icing > Stations for Brand Name Holdover Time Tables. Two-page spread. Outline additionally shows: SNOWTAM, RNP Approach Operations, Dangerous Goods Incidents [cut off].
+
+**Left page** (Operational Information — SunExpress 737 Quick Reference Handbook)
+
+### Stations for Brand Name Holdover Time Tables
+
+Stations for Brand Name Holdover Time Tables are published to related departments on OG Form 322 Holdover Time Tables Form.
+
+- Currently the procedures, in this paragraph, are approved for below stations only! Do not use the Brand Name Tables at other stations than listed!
+- The approval of the stations will only be granted when;
+  - the quality assurance requirements can be ensured by the De- and Anti-icing Company on a continuous basis, for all mixture rates offered locally
+  - the De- and Anti-icing Company implements a procedure to directly inform all Cockpit Crew s during the de-icing communication in case that the brand name quality is not available at short notice
+  - use of Brand Name Table of the fluid in question provides a reasonable gain in holdover time or is without alternative due to long taxi times
+
+  **WARNING! Risk of aerodynamic problems during take-off! If the required Brand Name quality cannot be achieved continuously: Holdover Time as assessed by the Commander during the Pre-take-off Check may not be achieved.**
+- The use of Brand Name Tables is based on stricter viscosity limits and requires stricter control and monitoring of the fluid quality.
+- Only as long as the applied fluids fulfill the stricter quality requirements they may be used with the applicable Brand Name Table.
+
+**Note: To Cockpit Crew:**
+A list of approved stations and applicable Brand Name Tables are provided to the Cockpit Crew in their QRH.
+The Commander may only use the Brand Name Tables at the stations and for the fluids as listed on below table.
+Information that the Brand Name Table may be used is indicated in the Anti-icing Code by reporting the Brand Name of the fluid (see SXS-DAM "Anti-Icing Code" for details)
+
+In case the quality of the fluid does not meet the high quality required for application of the Brand Name Table:
+- Do not use the Brand Name Table.
+- Immediately inform every Cockpit Crew receiving this fluid to use the Generic Table instead of the Brand Name table.
+- Inform SunExpress Ground Operations Control Center (GOCC) or sxs.oga@sunexpress.com without delay
+
+Footer: OPS.3.14 — November 25, 2025
+
+**Right page** (SunExpress 737 Quick Reference Handbook — Operational Information)
+
+**CAUTION: Please be aware that Stations for Brand Name Holdover Time Tables are only valid for listed stations! For other stations Generic Holdover Time Tables shall be used.**
+
+| Station | Country | Service Provider | Fluid Brand | Fluid Type | Holdover Time Table |
+|---|---|---|---|---|---|
+| ADB | Turkey | TGS | Kilfrost ABC-K Plus | Type II | Table 10 |
+| AJI | Turkey | Havas | Cryotech Polar Guard II | Type II | Table 8 |
+| AMS | Netherland | Menzies | Kilfrost ABC-K Plus | Type II | Table 10 |
+| AOE | Turkey | TGS | Kilfrost ABC-K Plus | Type II | Table 10 |
+| ARN | Sweeden | Aviator | Clariant Safewing MP II Flight | Type II | Table 7 |
+| ASR | Turkey | Celebi | Kilfrost ABC-K Plus | Type II | Table 10 |
+| BAL | Turkey | Havas | (blank) | Check Anti-icing Code | Generic Table |
+| BCN | Spain | GroundForce | (blank) | Check Anti-icing Code | Generic Table |
+| BER | Germany | Wisag | Clariant Safewing MP IV Launch Plus | Type IV | Table 34 |
+| BHX | UK | Swissport | Kilfrost ABC-K Plus | Type II | Table 10 |
+| BLL | Denmark | Billund Airport | Clariant Safewing MP II Flight | Type II | Table 7 |
+| BRE | Germany | Bremen Airport | Kilfrost ABC-K Plus | Type II | Table 10 |
+| BRS | UK | Swissport | Kilfrost ABC-K Plus | Type II | Table 10 |
+| BRU | Belgium | Aviapartner | Kilfrost ABC-S Plus | Type IV | Table 43 |
+| BSL | Switzerland | Swissport | Kilfrost ABC-S Plus | Type IV | Table 43 |
+
+(continued on next page)
+
+Footer: November 25, 2025 — OPS.3.15
+
+---

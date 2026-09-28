@@ -378,3 +378,343 @@ Flights DEST EHRD and EHLE are exempted from flying SIDs within EHAM TMA.
 
 ---
 
+## IMG_1029
+
+**Chart:** Jeppesen-style EFB chart, **"AGC Overview" – EHAM - AMS** (Aerodrome Ground Chart overview for Amsterdam Schiphol). Note on screen: "Chart not georeferenced." Bottom navigation: ← AGC East | Tempo AGC SUP 30/... →. Status bar: 21:19, 28 Eyl Pzt, battery 87%.
+
+**Description:** Diagram of the whole airport. It is split into two dashed-outline regions, **AGC West** (runway 18R/36L, the Polderbaan) and **AGC East** (the main runway complex). The top border shows longitudes E004°40', E004°45', E004°50'. The left border shows latitudes N52°21' and N52°19'.
+
+**Frequency box (top right):**
+| Service | Freq | Use | Freq | Use |
+|---|---|---|---|---|
+| D-ATIS | 132.980 | ARR | 122.205 | DEP |
+| Schiphol TWR | 119.230 | RWYs 04/22, 18L/36R | 118.105 | RWY 18C/36C |
+| | 118.280 | RWY 18R/36L | 135.110 | RWY 06/24 |
+| Schiphol GND | 121.705 | RWY 06/24 | 121.560 | RWY 18R/36L |
+| | 121.805 | RWYs 04/22, 09/27, 18L/36R | | |
+| | 121.590 | by ATC (ALTN for DLV and Planner) | | |
+| | 121.905 | RWY 18C/36C | | |
+| Schiphol Planner | 121.655 | Outbound Planner | | |
+| APN | 121.880 | J - Apron | 121.930 | K - Apron |
+| Schiphol DLV | 121.980 | | 131.355 | Operational Info |
+| DCL | – | | | |
+| Schiphol AOM | 130.480 | Airside OPS Manager | | |
+| Padcontrol | 121.605 | | | |
+| Snowdesk | 121.305 | De-Icing | | |
+
+**Runways (circle label: magnetic heading, elevation):**
+| RWY end | MAG HDG | Elev (ft) | Dimensions |
+|---|---|---|---|
+| 18R | 181° | -13 | 3800 x 60 (18R/36L) |
+| 36L | 001° | -12 | |
+| 18C | 181° | -12 | 3300 x 45 (18C/36C) |
+| 36C | 001° | -12 | |
+| 18L | 181° | -12 | 3400 x 45 (18L/36R) |
+| 36R | 001° | -11 | |
+| 09 | 084° | -12 | 3453 G 45 (09/27) |
+| 27 | 264° | -12 | |
+| 06 | 055° | -11 | 3439 G 45 (06/24) |
+| 24 | 235° | -12 | |
+| 04 | 039° | -13 | 2020 G 45 (04/22) |
+| 22 | 219° | -14 | |
+
+**AGC West labels:** 18R "Turn around area available"; taxiways V1, V2, V3, V4, V; FIRE STATION; TWR West 183; AMSTERDAM VOR/DME **113.95 AMS**; CAUTION: "Do not mistake highway for runway." (Highway labels run along the west side of 18C/36C.)
+
+**AGC East labels:**
+- SCHIPHOL **D 108.4 SPL** (DME)
+- Remark: Hotspots: see APC Hotspots
+- Taxiways W1–W13 (W1, W2, W3, W4, W5, W6, W7, W8, W9, W10, W11, W12, W13), Y, C, D, Z, B, A
+- U APRON; "See APC APN J, U, Y" (shown twice); J APRON; De-Icing; HS (hotspot) boxes; Y
+- 09: "See APC Main Terminal"; FIRE STATION
+- N5, N4, N3, N9, N2, N1; G-pier, H-pier, F-pier, E-pier; E; D; TWR Center 320; TERMINAL; B-pier / C-pier
+- ARP N 52 18.5 E 004 45.9
+- CARGO (several); A APRON; R APRON; S APRON; II & III; WIP; S1, S2, S3, S4, S5I, S6, S7, S8, S9, S10; VIII; "See APC APN A/R"; "See APC APN S"; FIRE STATION (near S8)
+- E1, E2, E3, E4, E5, E6, E7, E8, E9, E10; N; G, G1, G2, G3, G4, G5, G6, G7, G8; M; H
+- "Engine run up area" (near 27 / N1); GA TERMINAL; K APRON; HANGARS (two); "See APC APN K/M"
+- 06: "Turn around area available"
+- Scale: m 0 / 500 / 1000; ft 0 / 1000 / 2000 / 3000
+- Bottom-left: VAR 2° E, MAG UP; AD ELEV -11
+
+---
+
+## IMG_1030
+
+**Chart:** Jeppesen-style EFB chart, **"APC Main Terminal" – EHAM - AMS** (Apron Chart). Note on screen: "Chart not georeferenced." Bottom navigation: ← APC Apron S | Stand Coordinates →. Status bar: 21:19, 28 Eyl Pzt, battery 86%.
+
+**Description:** Detailed apron chart of the main terminal area between the 18C/36C side (west) and runway **36R/18L** (east). It shows taxiways, piers, stand numbers, ATC service boundaries (dashed purple lines) and standard taxi flow arrows. Runway **24** is at the bottom right. "Not to scale."
+
+**Frequency box (bottom left):** same as in IMG_1029: D-ATIS 132.980 ARR / 122.205 DEP; Schiphol TWR 119.230 RWYs 04/22, 18L/36R, 118.105 RWY 18C/36C, 118.280 RWY 18R/36L, 135.110 RWY 06/24; Schiphol GND 121.705 RWY 06/24, 121.560 RWY 18R/36L, 121.805 RWYs 04/22, 09/27, 18L/36R, 121.590 by ATC (ALTN for DLV and Planner), 121.905 RWY 18C/36C; Schiphol Planner 121.655 Outbound Planner; APN 121.880 J - Apron, 121.930 K - Apron; Schiphol DLV 121.980, 131.355 Operational Info; DCL; Schiphol AOM 130.480 Airside OPS Manager; Padcontrol 121.605; Snowdesk 121.305 De-Icing.
+
+**Taxiway / area labels:**
+- Northern taxiways: B (outer), A (inner), N4 (x2), N3 (marked ③), N9, N2 (x2), E5, E7
+- Connectors: A19C, A19W, A19E, A18, A17, A16, A15, A14, A13, A12, A11, A10, A9, A9C, A8, A7, A6, A5, A4, A3
+- East side: P HOLD with remote holding positions PD, P3, PC, P2, PB, P1, PA (drawn twice for the alternative layouts); E8, E9, E4, E3, E2, E1, E10; N; L; H; S7, S7W (marked ②), S7E, S6, S5, S8
+- G APRON with lead-in centre lines coloured **Blue / Yellow / Orange**; H APRON; HN
+- G-PIER stands: G79, G76, G73, G71, G9, G8, G7, G6, G5, G4, G3, G2
+- H-PIER stands: H1, H2, H3, H4, H5, H6, H7
+- F-PIER stands: F3, F4, F5, F6, F7, F8, F9
+- E-PIER stands: E3, E4, E5, E6, E7, E8, E9, E17, E18, E19, E20, E22, E24
+- E APRON stands: E72, E75, E77; D APRON: D88, D90, D92, D93, D94, D95
+- D-PIER stands: D2, D3, D4, D5, D7, D10, D12, D14, D16, D18, D22, D24, D26, D28, D23, D25, D27, D29, D31, D41, D43, D44, D47, D48, D49, D51, D52, D53, D54, D55, D56, D57; EXTENSION 1; EXTENSION 2
+- C-PIER stands: C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15, C16, C18
+- B-PIER stands: B15, B17, B23, B27, B31, B35; A4E, A4W
+- TERMINAL; ARP N 52 18.5 E 004 45.9; TWR Center 320; CARGO I; WIP; "see APC APN A/R/S"
+- Bottom-left: VAR 2° E, MAG UP; AD ELEV -11; Not to scale
+
+**Notes:**
+- ① CAUTION: Avoid HLDG on the upslope BTW A19 and A20 to prevent backward movement of the ACFT.
+- Remarks: Hotspots: see APC Hotspots
+- Caution:
+  - ② TWY S7W shall only be used for crossing RWY 06/24.
+  - ③ When vacating RWY 27 N3 for TWY A take the first left turn on N3 to enter TWY A14, then turn left onto TWY A.
+  - ④ Displaced RWY 36R end is indicated by red lights across the RWY. Do not cross displaced RWY 36R end.
+- CAUTION: Do not mistake E1 (RWY 36R) for S7 (RWY 24)!
+- Legend:
+  - dashed purple line = ATC Service Boundary
+  - Blue = TWY center line colour
+  - arrow = Standard taxi routing, unless otherwise instructed by ATC. All other routes may be used two-way at ATC discretion only.
+  - turn symbol = Turn prohibited for wingspan > 36m/ 118ft
+
+---
+
+## IMG_1031
+
+**Document:** EFB "Chart NOTAM" – EHAM - AMS (Airport Chart NOTAM Bulletin), page 1 of the scroll. Status bar: 21:20, 28 Eyl Pzt, battery 86%.
+
+**Left panel:** EHAM Amsterdam - AMS; APT Info; Clipboard / All Charts (selected); runway buttons 04, 06, 09, 18C, **18L (selected)**, 18R, 22, 24, 27, 36C, 36L, 36R; ☑ Effective Charts Only; Hide Filters; NOTAMs (expanded) > Chart NOTAM; General; Ground Charts; SID; STAR.
+
+**Content:**
+
+Airport Chart NOTAM Bulletin
+# EHAM Amsterdam / Schiphol
+
+**Airport**
+- AGC, APC Apron A/R Tempo charts
+  ```
+  Check tempo charts distributed for this AD:
+  Tempo AGC SUP 30/25 Phase 26.0, 26.1, 26.2
+  ```
+- AOI TWY Restrictions
+  ```
+  Amend
+  Oversteering is required for A346, A351, A380, B773 and larger.
+
+  to read:
+  Oversteering is required for A346, A35K, A380, B773 and larger.
+  ```
+
+**Navaids**
+- NIL
+
+**Runway**
+- NIL
+
+**SID**
+- SID, SIDPT RNAV SIDs RWY 04
+  ```
+  REF AIP SUP 11/26
+
+  ANDIK 3F, BERGI 2F, VOLLA 2F changed due to crane.
+  No turns allowed before 600 FT.
+  Crane 275ft AMSL, 3540m / 11614ft beyond RWY 04 TORA and
+  690m / 2264ft left of EXTD RCL.
+
+  Any changes will be promulgated by NOTAM.
+  ```
+- SID, SIDPT RNAV SID RWY 09
+  ```
+  REF AIP SUP 30/2026
+  FM 17 SEP 2026 to UFN
+  VALKO 5M MNM climb gradient of 3.6% due to crane.
+  Crane N52 18.3 E004 52.0, 299ft AMSL, 311ft AGL
+  ```
+
+**STAR**
+- NIL
+
+**Procedures**
+- NIL
+
+**Minima**
+- IAC/ AFC Minima RNP 04
+  ```
+  TEMPO minima REF SUP 14/26:
+  MON-SAT 0500-1900 (-1)
+
+  RNP LPV CAT 1 04
+  Cat B: C 900ft, DA 280ft, V 3.6km
+  Cat C: C 900ft, DA 290ft, V 3.6km
+  Cat D: C 900ft, DA 300ft, V 3.6km
+  ```
+- IAC/ AFC Minima ILS or LOC 27
+  ```
+  TEMPO Minima REF NOTAM A2027/26:
+
+  ILS CAT 2 DME 27
+  Cat B: DH 100ft, RA 100ft, R 300m
+  Cat C: DH 104ft, RA 104ft, R 300m
+  Cat D: DH 118ft, RA 117ft, R 300m
+
+  ILS CAT 2 DME Delta Large 27
+  Cat C: DH 118ft, RA 117ft, R 300m
+  Cat D: DH 118ft, RA 117ft, R 300m
+  ```
+- IAC/AFC Minima Minima [continues in IMG_1032]
+
+---
+
+## IMG_1032
+
+**Document:** EHAM Chart NOTAM bulletin, continued (scrolled). The same left panel as IMG_1031. The top overlaps with the end of IMG_1031 (ILS CAT 2 DME Delta Large 27).
+
+```
+ILS CAT 2 DME Delta Large 27
+Cat C: DH 118ft, RA 117ft, R 300m
+Cat D: DH 118ft, RA 117ft, R 300m
+```
+
+**IAC/AFC Minima Minima**
+```
+TEMPO Minima REF NOTAM A2264/26:
+27 SEP 2200-2359
+28-29 SEP 0000-2359
+30 SEP 0000-2200
+01 OCT 2200-2359
+02 OCT 0000-2200
+
+CIRCLING RNP 04
+Cat B: MDH  930ft, MDA  920ft, V 3.6km
+Cat C: MDH 1030ft, MDA 1020ft, V 3.6km
+Cat D: MDH 1030ft, MDA 1020ft, V 3.6km
+
+CIRCLING RNP 09
+Cat B:  C 1000ft,  MDA  920ft, V 3.6km
+Cat C: MDH 1030ft, MDA 1020ft, V 3.6km
+Cat D: MDH 1030ft, MDA 1020ft, V 3.6km
+
+CIRCLING RNP 24
+Cat B: C 1100ft, MDA  920ft, V 6.0km
+Cat C: C 1100ft, MDA 1020ft, V 6.0km
+Cat D: C 1100ft, MDA 1020ft, V 6.0km
+
+CIRCLING all approaches (except RNP 04, RNP 09, RNP 24)
+Cat B: MDH  930ft, MDA  920ft, V 1.6km
+Cat C: MDH 1030ft, MDA 1020ft, V 2.4km
+Cat D: MDH 1030ft, MDA 1020ft, V 3.6km
+```
+
+**IAC/AFC Minima ILS or LOC 36R**
+```
+TEMPO Minima REF NOTAM A2259/26:
+MON-FRI 0400-1300
+
+ILS CAT 2 DME 36R
+Cat B: DH 100ft, RA 101ft, R 300m
+Cat C: DH 100ft, RA 101ft, R 300m
+Cat D: DH 108ft, RA 110ft, R 300m
+
+ILS CAT 2 DME Delta Large 36R
+Cat C: DH 108ft, RA 110ft, R 300m
+Cat D: DH 108ft, RA 110ft, R 300m
+```
+
+**Others**
+- NIL
+
+**AMDB/AMM**
+- AMDB/AMM WIP WIP
+  ```
+  REF SUP 30 2025
+  WIP in Phases FM JAN 2026 till SEP 2027
+
+  PHASE 26
+  PRKG Stands on APN R U/S
+  Access to PRKG Stand P23, P22 FM TWU Q U/S
+
+  PHASE 26.1
+  PRKG Stands on APN R U/S
+  Access to PRKG Stand P23, P22 FM TWU Q U/S
+  TWY B BTN TWY A28 and TWY Q CLSD
+
+  PHASE 26.2
+  TWY A BTN TWY A28 and TWY Q CLSD
+  TWY Q CLSD
+  TWY A BTN TWY Q and TWY A1A CLSD
+  Remote HP P20-P26 AVBL
+  PRKG Stands R71-R77 AVBL
+  ```
+  (continues in IMG_1033)
+
+---
+
+## IMG_1033
+
+**Document:** EHAM Chart NOTAM bulletin, end of the scroll. The same left panel. It overlaps with IMG_1032 from "IAC/AFC Minima ILS or LOC 36R" through AMDB/AMM PHASE 26.2.
+
+**IAC/AFC Minima ILS or LOC 36R:** same as in IMG_1032 (TEMPO Minima REF NOTAM A2259/26, MON-FRI 0400-1300; ILS CAT 2 DME 36R Cat B DH 100ft/RA 101ft/R 300m, Cat C DH 100ft/RA 101ft/R 300m, Cat D DH 108ft/RA 110ft/R 300m; Delta Large 36R Cat C/D DH 108ft/RA 110ft/R 300m).
+
+**Others**
+- NIL
+
+**AMDB/AMM**
+- AMDB/AMM WIP WIP
+  ```
+  REF SUP 30 2025
+  WIP in Phases FM JAN 2026 till SEP 2027
+
+  PHASE 26
+  PRKG Stands on APN R U/S
+  Access to PRKG Stand P23, P22 FM TWU Q U/S
+
+  PHASE 26.1
+  PRKG Stands on APN R U/S
+  Access to PRKG Stand P23, P22 FM TWU Q U/S
+  TWY B BTN TWY A28 and TWY Q CLSD
+
+  PHASE 26.2
+  TWY A BTN TWY A28 and TWY Q CLSD
+  TWY Q CLSD
+  TWY A BTN TWY Q and TWY A1A CLSD
+  Remote HP P20-P26 AVBL
+  PRKG Stands R71-R77 AVBL
+
+  The actual date and time will be promulgated by NOTAM.
+  ```
+- AMM WIP WIP
+  ```
+  Applicable for mPilot
+
+  REF SUP 30 2025
+  WIP in Phases FM JAN 2026 till SEP 2027
+
+  PHASE 26
+  PRKG Stands on APN R U/S
+  TWY R MAX wingspan 69M
+  Access to PRKG Stand P23, P22 FM TWU Q U/S
+
+  PHASE 26.1
+  PRKG Stands on APN R U/S
+  Access to PRKG Stand P23, P22 FM TWU Q U/S
+  TWY R MAX wingspan 69M
+  TWY B BTN TWY A28 and TWY Q CLSD
+
+  PHASE 26.2
+  TWY A BTN TWY A28 and TWY Q CLSD
+  TWY Q CLSD
+  TWY A BTN TWY Q and TWY A1A CLSD
+  Remote HP P20-P26 AVBL
+  PRKG Stands R71-R77 AVBL
+
+  The actual date and time will be promulgated by NOTAM.
+  ```
+
+Footer: 28-09-2026
+
+---
+
+**Overlap notes:**
+- IMG_1014 and IMG_1015 show the same takeoff calculation (Rwy Graphic ON vs OFF).
+- IMG_1017, 1018, 1020, 1021 and 1022 are consecutive EHAM AOI pages 17 to 21 of 25, with small overlaps at the page edges.
+- IMG_1031, 1032 and 1033 are one Chart NOTAM bulletin scrolled in three parts, with overlaps (the ILS 27 Delta Large block, and the ILS/LOC 36R through AMDB/AMM PHASE 26.2 blocks).
+- The frequency box is the same on IMG_1029 and IMG_1030.
+- "TWU Q" appears as written in the source (likely a typo for TWY Q).
