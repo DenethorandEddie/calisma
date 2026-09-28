@@ -396,3 +396,275 @@ Accomplish the following maneuver for either of the following:
 
 MAN.1.20 — June 20, 2026
 
+## IMG_1165
+
+*(App view: SXS-QRH-NG - 737NG - Quick Reference, Page 945; breadcrumb: "...rrun Warnings (ORW)")*
+
+SunExpress
+737 Quick Reference Handbook
+Maneuvers -
+Non-Normal Maneuvers
+
+*(On-Ground Overrun Warning, continued)*
+
+| Pilot Flying | Pilot Monitoring |
+|---|---|
+| Without delay:<br>Simultaneously close the thrust levers and apply maximum manual wheel brakes.<br>Verify speed brakes are deployed or raise the SPEED BRAKE lever.<br>Apply reverse thrust up to the maximum amount consistent with conditions.<br>Continue maximum braking until certain the airplane will stop on the runway. | Verify actions as follows:<br>Thrust levers closed.<br>Maximum brakes applied.<br>Verify SPEED BRAKE lever UP and call "SPEEDBRAKES UP." If SPEED BRAKE lever is not UP, call "SPEEDBRAKES NOT UP."<br>Reverse thrust applied. When both REV indications are green, call "REVERSERS NORMAL."<br>If there is no REV indication(s) or the indication(s) stays amber, call "NO REVERSER ENGINE NUMBER 1", or "NO REVERSER ENGINE NUMBER 2", or "NO REVERSERS".<br>Call out omitted action items. |
+| When stopping is assured:<br>Start movement of the reverse thrust levers to reach the reverse idle detent before taxi speed.<br>After the engines are at reverse idle, move the reverse thrust levers to full down. | Call out 60 knots. |
+
+*(remainder of page blank)*
+
+April 20, 2025 — MAN.1.21
+
+## IMG_1166
+
+*(App view: SXS-QRH-NG - 737NG - Quick Reference, Page 957; breadcrumb: "...ng Approach (Company)")*
+
+SunExpress
+737 Quick Reference Handbook
+Maneuvers -
+Flight Patterns
+
+### Circling Approach (Company)
+
+*(Diagram printed rotated 90° on the page; transcribed with it turned upright.)*
+
+**45 / 45 Circling Procedure**
+
+Diagram description: Runway with final approach course (dashed line) from DA. At DA the aircraft turns 45° off the runway heading (to either side, both depicted), flies a timed level leg, then a 180° turn onto a downwind parallel to the runway at ≅ 2 NM spacing, a downwind leg with "Time Check" abeam the runway threshold, then a 180° turn to final. WIND arrow shown. Distances labelled: "≅ 2 NM" (from DA/turn point to runway), "≅ 2 NM" (lateral spacing downwind to runway, each side), "≅ 2 NM" (final segment after the base turn).
+
+Diagram labels (verbatim):
+
+- WIND
+- DA
+- 45° (turn off the approach course, upper side) / 45° (lower side)
+- Time Check (at start of 45° leg, each side)
+- Heading Correction / 2 DA (dashed arrow on upper side)
+- Time During Level Flight (45 seconds)
+- Time Correction (seconds) (lower side leg)
+- Start 25° Bank (at end of 45° leg, into turn to downwind)
+- ≅ 2 NM
+- Time Check (abeam runway end on downwind, each side)
+- 3 seconds / 100 FT AGL - 2 seconds per 10 knots tailwind
+- 3 seconds / 100 FT AGL + 2 seconds per 10 knots headwind
+  (the two lines above appear on both the upper and lower downwind legs)
+
+Callout box at DA:
+> Select ALT HOLD (as needed)
+> Set missed approach altitude
+> Select HDG SEL and start 25° bank
+> Gear down (Gear up if 1 engine)
+> Flaps 15 (Flaps 10 if 1 engine)
+> Flaps 15 speed (Flaps 10 speed if 1 engine)
+> Speedbrake armed
+
+Callout box at start of base turn (end of downwind):
+> Gear Down (if one engine)
+> Landing Flaps
+> Start Descent (when appropriate)
+> Do the Landing checklist
+
+Callout box at final:
+> Disengage autopilot and autothrottle latest when intercepting landing profile
+
+Box (appears twice, upper-left and lower-right of the diagram):
+> - Drift Angle (DA) is found according to crosswind component
+> - When only tailwind, increase magnetic heading correction by 2° per 10 knots and decrease level flight time 2 seconds per 10 knots.
+
+Box:
+> If a missed approach is needed at any time while circling, make an initial climbing turn toward the landing runway and intercept the missed approach course.
+
+Table:
+
+**RADIUS OF TURN IN METER (NM)**
+**(LOW SPEED, 737-700/700W/800W/800WSFP)**
+
+| TRUE AIRSPEED* (KNOTS) | ANGLE OF BANK 15 | ANGLE OF BANK 25 | ANGLE OF BANK 30 |
+|---|---|---|---|
+| 140 (134 KIAS) | 1982 (1.07NM) | 1128 (0.61NM) | 915 (0.5NM) |
+| 160 (153 KIAS) | 2576 (1.4NM) | 1479 (0.8NM) | 1189 (0.65NM) |
+| 180 (172 KIAS) | 3262 (1.77NM) | 1875 (1.02NM) | 1524 (0.83NM) |
+
+\* At 1500 feet, ISA + 15
+
+March 30, 2026 — MAN.2.11
+
+## IMG_1167
+
+*(App view: SXS-QRH-NG - 737NG - Quick Reference, Page 988; breadcrumb: "...ation > "Confirm" Step")*
+
+Checklist Instructions -
+Non-Normal Checklists
+
+SunExpress
+737 Flight Crew Operations Manual
+
+### "Confirm" Step
+
+The word "Confirm" is added to checklist items when both flight crewmembers must verbally agree before action is taken. During an inflight non-normal situation, verbal confirmation is required for:
+
+- an engine thrust lever
+- an engine start lever
+- an engine or APU fire switch, or a cargo fire arm switch
+- a generator drive disconnect switch
+- an IRS mode selector, when only one IRS is failed
+- a flight control switch
+
+This does not apply to the Loss of Thrust on Both Engines checklist.
+
+Confirmation is not needed for completion of non-normal checklist items when on the ground.
+
+There is no requirement for specific words to say during a confirm step or for physical actions such as touching or pointing to a control.
+
+### Areas of Responsibility: Ground vs. In Flight
+
+With the airplane stationary on the ground:
+
+- the captain and the first officer take action based on preflight and postflight areas of responsibility
+- during an evacuation, the first officer sets the flap lever to 40.
+
+With the airplane in flight or in motion on the ground:
+
+- the pilot flying and the pilot monitoring take action based on each crewmember's Areas of Responsibility.
+
+After moving the control, the flight crewmember taking the action also states the checklist response.
+
+### Inoperative Items
+
+Checklists include an Inoperative Items table only when the condition of the items is needed for planning the rest of the flight. The inoperative items, including the consequences (if any), are read aloud by the pilot monitoring. The pilot flying does not need to repeat this information but must acknowledge that the information was heard and understood.
+
+### Deferred Items
+
+After completion of the non–normal checklist, normal procedures are used to configure the airplane for each phase of flight.
+
+CI.2.4 — D6-27370-86N-SNS — April 20, 2025
+
+## IMG_1168
+
+*(App view: SXS-QRH-NG - 737NG - Quick Reference, Page 989; breadcrumb: "> Checklist Complete")*
+
+SunExpress
+737 Flight Crew Operations Manual
+Checklist Instructions -
+Non-Normal Checklists
+
+When there are no deferred items, the DESCENT, APPROACH and LANDING normal checklists are used to verify that the configuration is correct for each phase of flight.
+
+When there are deferred items, the non-normal checklist will include the item "**Checklist Complete Except Deferred Items.**" The pilot flying is to be made aware when there are deferred items. These items are included in the Deferred Items section of the checklist and may be delayed until the usual point during descent, approach, or landing.
+
+The deferred items are read aloud by the pilot monitoring. The pilot flying or the pilot monitoring takes action based on each crewmember's area of responsibility. After moving the control, the flight crewmember taking the action also states the response.
+
+The Deferred Items section of the non-normal checklist includes the Descent, Approach and Landing normal checklists if one or more of the following occur:
+
+- an item is deferred until after the Descent Checklist
+- a normal checklist response is changed as a result of the non-normal situation. (The changed response is printed in **bold** type.)
+
+Use these checklists instead of the usual DESCENT, APPROACH and LANDING normal checklists. The pilot flying or the pilot monitoring responds to the deferred normal checklist items based on each crewmember's area of responsibility. However, during the deferred Landing normal checklist, the pilot flying responds to all deferred normal checklist items.
+
+### Checklist Complete
+
+Each checklist has a checklist complete symbol at the end.
+
+The checklist complete symbol can also be in the body of the checklist. This only occurs when a checklist divides into two or more paths. Each path can have a checklist complete symbol at the end. The flight crew does not need to continue reading the checklist after the checklist complete symbol.
+
+After completion of each non–normal checklist, the pilot monitoring states "___ CHECKLIST COMPLETE."
+
+March 30, 2024 — D6-27370-86N-SNS — CI.2.5
+
+## IMG_1169
+
+*(App view: SXS-QRH-NG - 737NG - Quick Reference, Page 990; breadcrumb: "...on > Special Situations")*
+
+Checklist Instructions -
+Non-Normal Checklists
+
+SunExpress
+737 Flight Crew Operations Manual
+
+### Special Situations
+
+While every attempt is made to supply needed non–normal checklists, it is not possible to develop checklists for all conceivable situations. In some smoke, fire or fumes situations, the flight crew may need to move between the Smoke, Fire or Fumes checklist and the Smoke or Fumes Removal checklist. In some multiple failure situations, the flight crew may need to perform several checklists or combine the elements of more than one checklist. Consider doing memory items first followed by reference steps. Upon completion of a non-normal checklist, review all warning lights, caution lights and other alerts to determine the need to do other non-normal checklists. In all situations, the captain must assess the situation and use good judgment to determine the safest course of action.
+
+### Troubleshooting
+
+It should be noted that, in determining the safest course of action, troubleshooting (taking steps beyond published non-normal checklist steps) may cause further loss of system function or system failure. Troubleshooting should only be considered when completion of the published non-normal checklist results in an unacceptable situation.
+
+### Land At Nearest Suitable Airport
+
+There are some situations where the flight crew must land at the nearest suitable airport. These situations include, but are not limited to, conditions where:
+
+- the non–normal checklist includes the item "Plan to land at the nearest suitable airport."
+- fire or smoke continues
+- only one AC power source remains (engine or APU generator)
+- only one hydraulic system remains (the standby system is considered a hydraulic system)
+- any other situation determined by the flight crew to have a significant adverse effect on safety if the flight is continued.
+
+### Immediate Landing
+
+It must be stressed that for smoke that continues or a fire that cannot be positively confirmed to be completely extinguished, the earliest possible descent, landing, and evacuation must be done.
+
+If a smoke, fire or fumes situation becomes uncontrollable, the flight crew should consider an immediate landing. Immediate landing implies immediate diversion to a runway. However, in a severe situation, the flight crew should consider an overweight landing, a tailwind landing, an off-airport landing, or a ditching.
+
+CI.2.6 — D6-27370-86N-SNS — March 31, 2023
+
+## IMG_1170
+
+*(App view: SXS-QRH-NG - 737NG - Quick Reference, Page 991; breadcrumb: "...on > Engine Shutdown")*
+
+SunExpress
+737 Flight Crew Operations Manual
+Checklist Instructions -
+Non-Normal Checklists
+
+### Engine Shutdown
+
+Checklists directing an engine shutdown must be evaluated by the captain to determine whether an actual shutdown or operation at reduced thrust is the safest course of action. Consideration must be given to the probable effects of running the engine at reduced thrust.
+
+### Loss of Indications
+
+There are no non–normal checklists for the loss of engine indications or automatic display of the secondary engine indications. Automatic display of secondary engine parameters due to engine oil quantity is for flight crew awareness and does not require pilot action. Continue normal system or engine operation unless a limit is exceeded or a non-normal situation occurs.
+
+### Assumptions
+
+Non–normal checklists also assume:
+
+- During engine start and before takeoff, the associated non–normal checklist is done if a non-normal situation is identified. After completion of the checklist, the Dispatch Deviations Guide (DDG) or operator equivalent is consulted to determine if Minimum Equipment List (MEL) dispatch relief is available.
+- System controls are in the normal configuration for the phase of flight before the start of the non–normal checklist.
+- If the MASTER CAUTION and system annunciator lights illuminate, all related amber lights are reviewed to assist in recognizing the cause(s) of the alert.
+- Aural alerts are silenced and the master caution system is reset by the flight crew as soon as the cause of the alert is recognized.
+- The EMERGENCY position of the oxygen regulator is used when needed to supply positive pressure in the masks and goggles to remove contaminants. The 100% position of the oxygen regulator is used when positive pressure is not needed but contamination of the flight deck air exists. The Normal position of the oxygen regulator is used if prolonged use is needed and the situation allows. Normal boom microphone operation is restored when oxygen is no longer in use.
+- Indicator lights are tested to verify suspected faults.
+- Non-normal checklists must not be used to:
+  - Allow operations into situations where a non-normal condition is predicted.
+  - Disable systems in anticipation of a non-normal event.
+
+October 20, 2025 — D6-27370-86N-SNS — CI.2.7
+
+## IMG_1171
+
+*(App view: SXS-QRH-NG - 737NG - Quick Reference, Page 992; breadcrumb: "> Configuration Check")*
+
+Checklist Instructions -
+Non-Normal Checklists
+
+SunExpress
+737 Flight Crew Operations Manual
+
+| (change bar) **TC-SRB, TC-SRI**
+
+- In flight, reset of a tripped circuit breaker is not recommended. However, a tripped circuit breaker may be reset once, after a short cooling period (approximately 2 minutes), if in the judgment of the captain, continued safe flight and landing could be compromised by the inoperative system. On the ground, flight crew reset of a tripped circuit breaker should only be done after maintenance has determined that it is safe to reset the circuit breaker.
+
+| (change bar) **TC-SEI - TC-SPZ, TC-SRC - TC-SRG, TC-SUU**
+
+- In flight, reset of a tripped circuit breaker is not recommended unless directed by a non-normal checklist. However, a tripped circuit breaker may be reset once, after a short cooling period (approximately 2 minutes), if in the judgment of the captain, continued safe flight and landing could be compromised by the inoperative system. On the ground, flight crew reset of a tripped circuit breaker should only be done after maintenance has determined that it is safe to reset the circuit breaker.
+- Flight crew cycling (pulling and resetting) of a circuit breaker to clear a non-normal condition is not recommended, unless directed by maintenance.
+
+### Configuration Check
+
+After engine start and before takeoff, illumination of a red warning light, an amber caution light, an alert or other indication requires completion of the associated checklist. In certain cases, amber caution lights illuminate during MASTER CAUTION recall to inform the flight crew of the failure of one element in a system with redundant elements. If system operation is maintained by a second element, the amber caution light will extinguish when MASTER CAUTION is reset. In these situations, the amber caution light alerts the flight crew that normal system operation will be affected if another element fails. If an amber caution light illuminates during MASTER CAUTION recall, but extinguishes after MASTER CAUTION reset, completion of the associated checklist is not required.
+
+### Use of Captain's Discretion
+
+The flight crew must be aware that checklists cannot be created for all conceivable situations and are not intended to replace good judgment. In some situations, at the captain's discretion, deviation from a checklist can be needed.
+
+CI.2.8 — D6-27370-86N-SNS — June 20, 2026
