@@ -111,3 +111,346 @@ If taxi route is through ice, snow, slush or standing water in low temperatures 
 | Call "FLAPS ___" as needed. | C |
 | Flap lever | Set flaps, as needed - F/O |
 
+## IMG_1237
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.7 Taxi–Out | section bar: "> 2.30.16.3.7 Taxi–Out"
+
+### 2.30.16.3.7. Taxi–Out
+
+> **CAUTION**
+>
+> Taxi at a reduced speed. Use smaller nose wheel steering wheel and rudder inputs and apply minimum thrust smoothly. Differential thrust may be used to help maintain airplane momentum during turns. At all other times, apply thrust evenly. Taxiing on slippery taxiways or runways at excessive speed or with high crosswinds may start a skid.
+
+> **CAUTION**
+>
+> When operating the engines over significant amounts of standing de-icing or anti-icing fluid, limit thrust to the minimum required. Excessive ingestion of de-icing or anti-icing fluid can cause the fluid to build up on the engine compressor blades resulting in compressor stalls and engine surges.
+
+[Red dashed box — applicability tags (red labels):]
+TC-SEI, TC-SEJ, TC-SEK, TC-SEM, TC-SEN, TC-SEO, TC-SEP, TC-SEU, TC-SEY, TC-SEZ, TC-SNN, TC-SNR, TC-SNT, TC-SNU, TC-SNV, TC-SOA, TC-SOB, TC-SOC, TC-SOD, TC-SOE, TC-SOF, TC-SOG, TC-SOH, TC-SON, TC-SOO, TC-SOP, TC-SOR, TC-SOV, TC-SOY, TC-SOZ, TC-SPA, TC-SPB, TC-SPC, TC-SPD, TC-SPE, TC-SPF, TC-SPH, TC-SPI, TC-SPJ, TC-SPK, TC-SPM, TC-SPN, TC-SPO, TC-SPP, TC-SPR, TC-SPS, TC-SPT, TC-SPU, TC-SPV, TC-SPY, TC-SPZ, TC-SRB, TC-SRC, TC-SRE, TC-SRF, TC-SRG, TC-SRI, TC-SUU
+
+When engine anti-ice is required and the OAT is 3°C or below, an engine run up is recommended to minimize ice build-up. Use the following procedure:
+
+| Action | Pilot |
+|---|---|
+| Check that the area behind the airplane is [cut off — continues in IMG_1238] | PF |
+
+## IMG_1238
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.7 Taxi–Out | section bar: "> 2.30.16.3.7 Taxi–Out"
+
+(Overlaps bottom of IMG_1237; still inside red dashed box for the red-tagged tail numbers)
+
+When engine anti-ice is required and the OAT is 3°C or below, an engine run up is recommended to minimize ice build-up. Use the following procedure:
+
+| Action | Pilot |
+|---|---|
+| Check that the area behind the airplane is clear. | PF |
+| Run-up to a minimum of 70% N1 for approximately 30 seconds duration at intervals no greater than 30 minutes. | PF |
+
+> **NOTE**
+>
+> Fan blade ice build-up is cumulative. If the fan spinner and fan blades were not deiced prior to taxi out, the time the engines were operating during the taxi in should be included in the 30 minute interval.
+
+| Action | Pilot |
+|---|---|
+| If airport surface conditions and the concentration of aircraft do not allow the engine thrust level to be increased to 70% N1, then set a thrust level as high as practical and time at that thrust level. | PF |
+
+> **NOTE**
+>
+> When operating in conditions of freezing rain, freezing drizzle, freezing fog or heavy snow, run-ups to a [cut off — continues in IMG_1239]
+
+## IMG_1239
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.7 Taxi–Out | section bar: "> 2.30.16.3.7 Taxi–Out"
+
+(Continuation of IMG_1238; end of red-tag box)
+
+> **NOTE**
+>
+> When operating in conditions of freezing rain, freezing drizzle, freezing fog or heavy snow, run-ups to a minimum of 70% N1 for approximately 1 second duration at intervals no greater than 10 minutes enhance ice shedding.
+
+[End of red dashed box. New dashed box — applicability tags (ORANGE labels):]
+TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM
+
+When engine anti-ice is required and the OAT is 3°C or below, or if increased fan vibration due to fan ice accumulation is present, do an engine run up to minimize ice build-up. Use the following procedure:
+
+| Action | Pilot |
+|---|---|
+| Check that the area behind the airplane is clear. | PF |
+| Increase thrust to a minimum of 50% N1 and then decrease thrust to idle. Repeat as necessary or at intervals no greater than 60 minutes. | PF |
+
+> **NOTE**
+>
+> Fan blade ice build-up is cumulative. If the fan spinner and fan blades were not deiced prior to taxi out, the time the engines were operating during the taxi in should be included in the 60 minute interval.
+
+> **NOTE**
+>
+> [cut off — continues in IMG_1240]
+
+## IMG_1240
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.7 Taxi–Out | section bar: "> 2.30.16.3.7 Taxi–Out"
+
+(Continuation of IMG_1239, orange-tagged aircraft box; first NOTE repeats from IMG_1239)
+
+> **NOTE**
+>
+> Fan blade ice build-up is cumulative. If the fan spinner and fan blades were not deiced prior to taxi out, the time the engines were operating during the taxi in should be included in the 60 minute interval.
+
+> **NOTE**
+>
+> Engine vibration may indicate above the normal operating range up to the maximum display value during ice shedding, however, this will have no adverse effect on the engine.
+
+Within 5 minutes of or in conjunction with the takeoff
+
+| Action | Pilot |
+|---|---|
+| Check that the area behind the airplane is clear. | PF |
+| Run-up to a minimum of 50% N1 for a minimum of 5 seconds. | PF |
+| Confirm stable engine operation prior to setting takeoff thrust. | PF, PM |
+
+> **NOTE**
+>
+> Engine vibration may indicate above the normal operating range up to the maximum display value during ice shedding, however, this will have no adverse effect on the engine.
+
+## IMG_1241
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.7 Taxi–Out | section bar: "> 2.30.16.3.7 Taxi–Out"
+
+(Near-duplicate of IMG_1240, scrolled slightly further; shows the end of the orange-tagged dashed box. No new content except the box closing.)
+
+> **NOTE** [top cut off]
+>
+> ...and fan blades were not deiced prior to taxi out, the time the engines were operating during the taxi in should be included in the 60 minute interval.
+
+> **NOTE**
+>
+> Engine vibration may indicate above the normal operating range up to the maximum display value during ice shedding, however, this will have no adverse effect on the engine.
+
+Within 5 minutes of or in conjunction with the takeoff
+
+| Action | Pilot |
+|---|---|
+| Check that the area behind the airplane is clear. | PF |
+| Run-up to a minimum of 50% N1 for a minimum of 5 seconds. | PF |
+| Confirm stable engine operation prior to setting takeoff thrust. | PF, PM |
+
+> **NOTE**
+>
+> Engine vibration may indicate above the normal operating range up to the maximum display value during ice shedding, however, this will have no adverse effect on the engine.
+
+[End of orange-tagged dashed box]
+
+## IMG_1242
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.8 De-icing/Anti-icing | section bar: "6.3.8 De-icing/Anti-icing"
+
+### 2.30.16.3.8. De-icing/Anti-icing
+
+Testing of undiluted de-icing/anti-icing fluids has shown that some of the fluid remains on the wing during takeoff rotation and initial climb. The residual fluid causes a temporary decrease in lift and increase in drag, however, the effects are temporary. Use the normal takeoff rotation rate.
+
+> **CAUTION**
+>
+> Operate the APU during de-icing only if necessary. If the APU is running, ingestion of de-icing fluid causes objectionable fumes and odors to enter the airplane. Ingestion of snow, slush, ice, or de-icing/anti-icing fluid can also cause damage to the APU.
+
+If de-icing/anti-icing is needed:
+
+| Item | Action |
+|---|---|
+| APU | As needed - F/O |
+
+The APU should be shut down unless APU operation is necessary.
+
+| Item | Action |
+|---|---|
+| Call "FLAPS UP." | C |
+| Flaps | UP - F/O |
+
+Prevents ice and slush from accumulating in flap cavities during de-icing.
+
+| Item | Action |
+|---|---|
+| Thrust levers | Idle - C |
+
+## IMG_1243
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.8 De-icing/Anti-icing | section bar: "6.3.8 De-icing/Anti-icing"
+
+(Continuation of IMG_1242; "Thrust levers" row repeats)
+
+| Item | Action |
+|---|---|
+| Thrust levers | Idle - C |
+
+Reduces the possibility of injury to personnel at inlet or exhaust areas.
+
+> **WARNING**
+>
+> Ensure that the stabilizer trim wheel handles are stowed before using electric trim to avoid personal injury.
+
+| Item | Action |
+|---|---|
+| Stabilizer trim | ___ UNITS - C |
+
+Set the trim for takeoff.
+
+Verify that the trim is in the green band.
+
+| Item | Action |
+|---|---|
+| Engine BLEED air switches | OFF - F/O |
+
+Reduces the possibility of fumes entering the air conditioning system.
+
+| Item | Action |
+|---|---|
+| APU BLEED air switch | OFF - F/O |
+
+Reduces the possibility of fumes entering the air conditioning system.
+
+After de-icing/anti-icing is completed:
+
+| Item | Action |
+|---|---|
+| APU | As needed - F/O |
+
+> **CAUTION**
+>
+> After de-icing, the use of APU bleed air during takeoff can cause smoke in the airplane. [box bottom cut off]
+
+## IMG_1244
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.8 De-icing/Anti-icing | section bar: "6.3.8 De-icing/Anti-icing"
+
+(Overlaps IMG_1243 — top shows end of "Engine BLEED air switches" box [cut off], then repeats.)
+
+Reduces the possibility of fumes entering the air conditioning system.
+
+| Item | Action |
+|---|---|
+| APU BLEED air switch | OFF - F/O |
+
+Reduces the possibility of fumes entering the air conditioning system.
+
+After de-icing/anti-icing is completed:
+
+| Item | Action |
+|---|---|
+| APU | As needed - F/O |
+
+> **CAUTION**
+>
+> After de-icing, the use of APU bleed air during takeoff can cause smoke in the airplane.
+
+| Item | Action |
+|---|---|
+| APU BLEED air switch | As needed - F/O |
+
+Wait approximately one minute after de-icing is completed to turn engine BLEED air switches on to ensure all de-icing fluid has been cleared from the engines:
+
+| Item | Action |
+|---|---|
+| Engine BLEED air switches | ON - F/O |
+| Flight controls | Check, as needed - C |
+
+An increase in control forces can be expected at low temperatures.
+
+## IMG_1245
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.9 Before Takeoff Proced... | section bar: "...efore Takeoff Procedure"
+
+### 2.30.16.3.9. Before Takeoff Procedure
+
+Do the normal Before Takeoff Procedure with the following modifications:
+
+| Item | Action |
+|---|---|
+| Call "FLAPS ___" as needed for takeoff. | PF |
+| Flap lever | Set takeoff flaps, as needed - PM |
+
+Extend the flaps to the takeoff setting at this time if they have been held because of slush, or standing water, or icing conditions, or because of exterior de-icing/anti-icing.
+
+Verify that the LE FLAPS EXT green light is illuminated.
+
+[Dashed box — applicability tags (ORANGE labels):]
+TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM
+
+Before setting takeoff thrust, verify that the engine oil temperature is at or above 31°C. The table below provides the approximate time needed for a cold soaked engine to reach an oil temperature of 31°C with engines operating at idle thrust.
+
+| Ambient Temperature | Approximate Idle Time |
+|---|---|
+| 0°C | 3 minutes |
+| [cut off — table continues in IMG_1246] | |
+
+## IMG_1246
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.9 Before Takeoff Proced... | section bar: "...efore Takeoff Procedure"
+
+(Continuation/overlap of IMG_1245; top shows last row of orange tags: TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM)
+
+Before setting takeoff thrust, verify that the engine oil temperature is at or above 31°C. The table below provides the approximate time needed for a cold soaked engine to reach an oil temperature of 31°C with engines operating at idle thrust.
+
+| Ambient Temperature | Approximate Idle Time |
+|---|---|
+| 0°C | 3 minutes |
+| -7°C | 4 minutes |
+| -18°C | 6 minutes |
+| -32°C | 8 minutes |
+| -40°C | 9 minutes |
+| -54°C | 10 minutes |
+
+[End of orange-tagged dashed box]
+
+## IMG_1247
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.10 Takeoff Procedure | section bar: "6.3.10 Takeoff Procedure"
+
+### 2.30.16.3.10. Takeoff Procedure
+
+[Dashed box — applicability tags (RED labels):]
+TC-SEI, TC-SEJ, TC-SEK, TC-SEM, TC-SEN, TC-SEO, TC-SEP, TC-SEU, TC-SEY, TC-SEZ, TC-SNN, TC-SNR, TC-SNT, TC-SNU, TC-SNV, TC-SOA, TC-SOB, TC-SOC, TC-SOD, TC-SOE, TC-SOF, TC-SOG, TC-SOH, TC-SON, TC-SOO, TC-SOP, TC-SOR, TC-SOV, TC-SOY, TC-SOZ, TC-SPA, TC-SPB, TC-SPC, TC-SPD, TC-SPE, TC-SPF, TC-SPH, TC-SPI, TC-SPJ, TC-SPK, TC-SPM, TC-SPN, TC-SPO, TC-SPP, TC-SPR, TC-SPS, TC-SPT, TC-SPU, TC-SPV, TC-SPY, TC-SPZ, TC-SRB, TC-SRC, TC-SRE, TC-SRF, TC-SRG, TC-SRI, TC-SUU
+
+Do the normal Takeoff Procedure with the following modification:
+
+> When engine anti-ice is required and the OAT is 3°C or below, the takeoff must be preceded by a static engine run-up. Use the following procedure:
+>
+> > Run-up to a minimum of 70% N1 and confirm stable engine operation before the start of the takeoff roll. A 30-second run-up is highly recommended whenever possible.
+
+[End of red-tagged box]
+
+[Dashed box — applicability tags (ORANGE labels):]
+TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM
+
+Do the normal Takeoff Procedure with the following modification when engine anti-ice is needed and the OAT is 3°C or below:
+
+Within 5 minutes of or in conjunction with the takeoff
+
+| Action | Pilot |
+|---|---|
+| Check that the area [cut off — continues in IMG_1248] | C |
+
+## IMG_1248
+
+**App header:** SXS-OMB - Operations Manual Part B - 2.30.16.3.10 Takeoff Procedure | section bar: "6.3.10 Takeoff Procedure"
+
+(Continuation/overlap of IMG_1247, orange-tagged box repeated)
+
+[Dashed box — applicability tags (ORANGE labels):]
+TC-SLA, TC-SLB, TC-SLC, TC-SLD, TC-SLE, TC-SLF, TC-SMA, TC-SMB, TC-SMD, TC-SME, TC-SMF, TC-SMI, TC-SMJ, TC-SMK, TC-SML, TC-SMN, TC-SMP, TC-SMR, TC-SMS, TC-SMT, TC-SMU, TC-SMV, TC-SMZ, TC-SOI, TC-SOJ, TC-SOK, TC-SOL, TC-SOM
+
+Do the normal Takeoff Procedure with the following modification when engine anti-ice is needed and the OAT is 3°C or below:
+
+Within 5 minutes of or in conjunction with the takeoff
+
+| Action | Pilot (C = Captain, F/O = First Officer) |
+|---|---|
+| Check that the area behind the airplane is clear. | C |
+| Run-up to a minimum of 50% N1 for a minimum of 5 seconds. | C |
+| Confirm stable engine operation prior to the final advance to takeoff thrust. | C, F/O |
+
+> **NOTE**
+>
+> Engine vibration may indicate above the normal operating range up to the maximum display value during ice shedding, however, this will have no adverse effect on the engine.
+
+[End of orange-tagged box]
+
