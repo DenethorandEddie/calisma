@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>FORDEC · EHAM Engine Fire after V1</title>
+<style>
+@page{size:A4;margin:14mm 13mm 14mm 13mm}
+*{box-sizing:border-box}
+body{font:9.4pt/1.38 "DejaVu Sans","Liberation Sans",Arial,sans-serif;color:#15202B;margin:0}
+h1{font-size:17pt;margin:0;letter-spacing:.01em}
+h2{font-size:11pt;margin:0;color:#fff;background:#1F3A5A;padding:4px 8px;border-radius:3px;letter-spacing:.06em}
+h2 .l{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;background:#fff;color:#1F3A5A;border-radius:3px;margin-right:7px;font-weight:700}
+h3{font-size:9.6pt;margin:8px 0 3px;color:#1F3A5A;text-transform:uppercase;letter-spacing:.06em}
+p{margin:3px 0}
+ul{margin:3px 0 3px 16px;padding:0}li{margin:1px 0}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2.5px solid #1F3A5A;padding-bottom:6px;margin-bottom:8px}
+.hdr .meta{font-size:8.2pt;color:#4A5A6A;text-align:right;line-height:1.35}
+.sub{font-size:9pt;color:#4A5A6A;margin-top:2px}
+.sec{margin-top:9px;break-inside:avoid}
+.tc{border:2px solid #C62828;background:#FDECEA;border-radius:4px;padding:6px 9px;margin:6px 0;display:flex;gap:10px;align-items:center}
+.tc b.big{font-size:12pt;color:#C62828;white-space:nowrap}
+table{border-collapse:collapse;width:100%;margin:4px 0;font-size:8.6pt}
+th,td{border:1px solid #B9C4CF;padding:3px 5px;vertical-align:top;text-align:left}
+th{background:#E6ECF2;font-weight:700;color:#1F3A5A}
+td.mono,.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:8.3pt}
+.ok{background:#E3F4E8}.no{background:#FBE3E1}.mid{background:#FFF4D6}
+.tag{display:inline-block;font-size:7.6pt;font-weight:700;padding:0 5px;border-radius:2px;color:#fff}
+.tag.g{background:#2E7D32}.tag.r{background:#C62828}.tag.a{background:#B26A00}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.box{border:1px solid #B9C4CF;border-radius:4px;padding:6px 8px;break-inside:avoid}
+.dec{border:2.5px solid #2E7D32;background:#EEF8F0;border-radius:5px;padding:8px 10px;margin-top:5px}
+.dec .d{font-size:12.5pt;font-weight:700;color:#1B5E20}
+.say{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:8.3pt;background:#F2F5F8;border-left:3px solid #1F3A5A;padding:4px 7px;margin:3px 0;white-space:pre-wrap}
+.note{font-size:7.8pt;color:#5A6875;margin-top:8px;border-top:1px solid #C9D2DA;padding-top:4px}
+.pb{break-before:page}
+.check td:first-child{width:28%;font-weight:700}
+</style></head><body>
+
+<div class="hdr">
+ <div><h1>FORDEC · Engine Fire after V1, Fire Continues</h1>
+  <div class="sub">SXS2UM (XQ945) · B737-800 · EHAM RWY 18L → LTBJ · OPC-6 · SunExpress FORDEC model (OF/Standardization, rev. 00)</div></div>
+ <div class="meta">Point of decision: EOSID AMSX4, 3000 ft, clean, MCT<br>Engine Fire checklist and After Takeoff checklist complete<br>Commander retains full authority</div>
+</div>
+
+<div class="sec"><h2><span class="l">F</span>FACTS · What's the matter?</h2>
+ <div class="tc"><b class="big">TIME CRITICAL: YES</b><span>Inextinguishable engine fire. Company model: gather options that <b>minimise in-flight time</b> with an acceptable degree of safety, <b>choose the first acceptable option</b>, focus on execution and land as soon as possible.</span></div>
+ <div class="grid2">
+  <div class="box"><h3 style="margin-top:0">Aircraft</h3><ul>
+   <li>ENG 2 fire warning at 137 kt (V1 132). Takeoff continued (OM-B 3.10).</li>
+   <li>Memory items done. Bottle 1 and bottle 2 discharged. <b>Fire switch 2 still illuminated.</b></li>
+   <li>ENG 2 shut down. ENG 1 at MCT, set by hand: <b>A/T INOP (MEL 22-04)</b>.</li>
+   <li>Weight ≈ <b>69.3 t</b> vs MLW <b>66,360 kg</b> → overweight ≈ 3 t. Fuel is not a limit.</li>
+   <li>OEI: <b>CAT I only</b>. Autoland needs both engines (OM-B 1.5.1). OEI landing <b>flaps 15</b> (no EO flaps 30 planned, OM-B 1.9.3.2).</li>
+   <li>Engine anti-ice ON, OAT −4 °C: <b>cold temperature corrections</b> on own-navigation altitudes.</li></ul></div>
+  <div class="box"><h3 style="margin-top:0">EHAM weather and runways</h3>
+   <div class="say" style="margin:2px 0 4px">METAR EHAM 151325Z 12022KT 1000 R18C/0250N R18L/0200N R06/1000N SN BLSN BKN005 OVC020 M04/M05 Q1025 BECMG 0700 +SN BLSN</div>
+   <ul><li>Trend <b>deteriorating</b>: 0700 +SN BLSN. TAF keeps 0700 +SN until about 17Z.</li>
+   <li>RWY 06 RWYCC 4 (arrival runway) · 18L RWYCC 4 · 18C RWYCC 2 · <b>all other runways closed</b> (snow).</li>
+   <li>Company crosswind limits (OM-B 1.2.4.6.1): RWYCC 4 <b>20 kt</b> incl. gust · RWYCC 2 <b>5 kt</b>. Minus <b>5 kt</b> when asymmetric reverse is used on a contaminated runway (note 7).</li></ul></div>
+ </div>
+ <h3>Wind components, 120/22</h3>
+ <table><tr><th>Runway (QFU)</th><th>Angle</th><th>Crosswind</th><th>Head / tail</th><th>Limit</th><th>Result</th></tr>
+  <tr><td class="mono">06 (055°)</td><td class="mono">65°</td><td class="mono">22 × sin 65° ≈ 19.9 kt</td><td class="mono">+9 kt head</td><td class="mono">20 kt · 15 kt with asym. reverse</td><td class="mid">At the limit → <b>no reverse</b></td></tr>
+  <tr><td class="mono">18L (181°)</td><td class="mono">61°</td><td class="mono">≈ 19.2 kt</td><td class="mono">+11 kt head</td><td class="mono">20 kt</td><td class="no">RVR 200 m below CAT I</td></tr>
+  <tr><td class="mono">18C (181°)</td><td class="mono">61°</td><td class="mono">≈ 19.2 kt</td><td class="mono">+11 kt head</td><td class="mono">5 kt (RWYCC 2)</td><td class="no">Crosswind 4× the limit</td></tr></table>
+</div>
+
+<div class="sec"><h2><span class="l">O</span>OPTIONS · What kind of possibilities do we have?</h2>
+ <table><tr><th>Option</th><th>Distance</th><th>Approach / minima</th><th>Weather / runway</th><th>Status</th></tr>
+  <tr class="ok"><td><b>EHAM RWY 06</b></td><td class="mono">≈ 10 min<br>radar vectors</td><td>ILS 06 · <b>CAT I</b> (RVR 550 m)</td><td>RVR 1000 m · RWYCC 4 · 3,439 m (LDA ≈ 3,190 m) · crosswind ≈ 20 kt</td><td><span class="tag g">ACCEPTABLE</span></td></tr>
+  <tr class="no"><td>EHAM RWY 18L</td><td class="mono">≈ 10 min</td><td>ILS · OEI = CAT I only</td><td>RVR <b>200 m</b></td><td><span class="tag r">NOT POSSIBLE</span></td></tr>
+  <tr class="no"><td>EHAM RWY 18C</td><td class="mono">≈ 10 min</td><td>ILS · CAT I</td><td>RWYCC 2 · RVR 250 m</td><td><span class="tag r">NOT POSSIBLE</span></td></tr>
+  <tr class="mid"><td>EHRD Rotterdam 24</td><td class="mono">24 NM</td><td>ILS CAT I</td><td>2,200 m · weather unknown, same snow system likely</td><td><span class="tag a">MARGINAL</span></td></tr>
+  <tr class="mid"><td>EHEH Eindhoven 03/21</td><td class="mono">56 NM</td><td>ILS</td><td>3,000 m · weather unknown · RFFS and hours to check</td><td><span class="tag a">TOO FAR</span></td></tr>
+  <tr class="mid"><td>EBBR Brussels 25L/R</td><td class="mono">85 NM ≈ 20+ min</td><td>OEI = CAT I only</td><td>Long runways · weather unknown</td><td><span class="tag a">TOO FAR</span></td></tr>
+  <tr class="no"><td>Hold to reduce weight</td><td colspan="3">Burning fuel to MLW takes far too long with a fire that does not go out.</td><td><span class="tag r">REJECT</span></td></tr></table>
+ <p style="font-size:8.2pt">Before deciding: ask ATC for the latest RVR 06, wind and runway condition for 06; run the landing performance tool for flaps 15, RWYCC 4, actual weight, <b>no reverse</b>, crosswind.</p>
+</div>
+
+<div class="sec"><h2><span class="l">R</span>RISKS / BENEFITS · Which option mitigates the threats best?</h2>
+ <table><tr><th style="width:17%">Option</th><th>Benefits</th><th>Risks → mitigation</th></tr>
+  <tr><td><b>EHAM 06</b></td><td>Closest. Shortest time in the air with the fire. Runway, ILS and minima meet CAT I. Full rescue and fire service on scene, company handling and maintenance. Crew and ATC know the area.</td>
+   <td>Crosswind ≈ 20 kt at the RWYCC 4 limit → <b>no reverse</b> (keeps the 20 kt limit), crab/de-crab technique, abort if gusts exceed. <br>Contaminated runway, overweight, flaps 15 (higher Vref) → landing distance from the tool with no reverse, autobrake per result or max manual braking, full length, no hold-off. <br>Visibility falling (+SN) → keep checking RVR ≥ 550 m. <br>Manual thrust (A/T INOP) + OEI → brief speed control and the OEI go-around.</td></tr>
+  <tr><td>EHRD</td><td>Close, CAT I.</td><td>Short runway for an overweight flaps 15 landing on a probably contaminated runway. Weather unknown. Smaller rescue cover.</td></tr>
+  <tr><td>EHEH / EBBR</td><td>Longer runways, possibly better weather.</td><td>Unknown weather. 15–25 more minutes with an inextinguishable fire: <b>not acceptable</b> in a time-critical case.</td></tr></table>
+</div>
+
+<div class="sec"><h2><span class="l">D</span>DECISION · What are we going to do?</h2>
+ <div class="dec"><div class="d">Return and land EHAM RWY 06 · ILS CAT I · flaps 15 · no reverse · overweight landing</div>
+  <p>1. First priority, safety: EHAM 06 is the <b>first acceptable option</b> and the one with the least time in the air. &nbsp;2. It is also the most efficient: home of the handling, maintenance and passenger solutions.</p>
+  <p><b>Go-around plan:</b> if not stabilised by 1000 ft or no visual reference at DA → OEI go-around, then re-assess (RVR / wind); next option EHEH only if 06 becomes unusable.</p></div>
+</div>
+
+<div class="sec pb"><h2><span class="l">E</span>EXECUTE · Who does what, when, and how?</h2>
+ <div class="grid2">
+ <div class="box"><h3 style="margin-top:0">Inform</h3>
+  <p><b>ATC</b> (MAYDAY already declared):</p>
+  <div class="say">SXS2UM, engine fire, fire continues. Request immediate return, vectors ILS 06.
+Overweight landing, possible evacuation on the runway.
+Request fire services at the runway. POB ___, fuel ___ tonnes.</div>
+  <p><b>SCCM · TTRR</b></p>
+  <table style="margin-top:2px"><tr><td style="width:24%"><b>Type</b></td><td>Engine fire, not extinguished. Emergency landing at Amsterdam, evacuation possible.</td></tr>
+   <tr><td><b>Time</b></td><td>About 10 minutes. Synchronise watches.</td></tr>
+   <tr><td><b>Risks</b></td><td>Fire on the right side: do not use right exits if fire is seen. Wait for the command. Standby signal / "EVACUATE" or "ATTENTION CREW AT STATIONS" / "CANCEL ALERT".</td></tr>
+   <tr><td><b>Re-seating</b></td><td>As required for the exits; passengers away from the right overwing area if possible. Cabin secure in ___ min.</td></tr></table>
+  <p><b>PAX</b> PA per SXS-OF-GUI-006. <b>IOCC</b> via ACARS or ATC if time allows.</p></div>
+ <div class="box"><h3 style="margin-top:0">Prepare</h3><ul>
+  <li><b>FMC:</b> ILS 06, flaps 15 Vref (+ wind additive within the flap placard), missed approach, EO acceleration.</li>
+  <li><b>Charts / navaids:</b> ILS 06, missed approach, MSA. Identify the ILS.</li>
+  <li><b>Cold temperature correction</b> at −4 °C on DA and own-navigation altitudes (not under radar vectors).</li>
+  <li><b>Landing performance tool:</b> actual weight, flaps 15, RWYCC 4, crosswind, no reverse, autobrake setting.</li>
+  <li><b>Overweight:</b> normal profile, no high sink rate, land in the touchdown zone, full length, no early turn-off, <b>no autoland</b> (OM-A 8.3.1.19.1, FCTM).</li></ul>
+  <h3>Briefing (TEM)</h3><ul>
+  <li>Threats: fire, crosswind at the limit, contaminated runway, overweight, flaps 15, manual thrust, falling visibility, snow on the windshield.</li>
+  <li>Who lands (Commander decides), callouts, stabilised criteria, OEI go-around, <b>evacuation plan</b> after stop.</li></ul></div>
+ </div>
+ <h3>Checklists</h3>
+ <table><tr><th style="width:36%">When</th><th>What</th></tr>
+  <tr><td>Now</td><td>ONE ENGINE INOPERATIVE LANDING checklist. <b>All deferred items answered by the PF</b> (OM-B 3.10).</td></tr>
+  <tr><td>Descent / approach</td><td>Deferred items: ONE ENGINE INOPERATIVE LANDING DEFERRED DESCENT / APPROACH / LANDING checklists (name them, OM-B 3.12.1).</td></tr>
+  <tr><td>After stop</td><td>Parking brake, assess with fire services → <b>EVACUATION checklist</b> if needed (FO: flaps 40, pressurization MAN, outflow valve OPEN, advise ATC, all fire switches override and pull) or PA "CANCEL ALERT".</td></tr></table>
+ <p style="font-size:8.2pt">Time critical: only essential steps. Skip anything that does not help you land sooner or safer.</p>
+</div>
+
+<div class="sec"><h2><span class="l">C</span>CHECK · Is everything still OK?</h2>
+ <table class="check">
+  <tr><td>Fire</td><td>Still burning? Spreading (other warnings, smoke)? If the situation worsens, the plan does not change: land as soon as possible.</td></tr>
+  <tr><td>Weather at 06</td><td>RVR 06 ≥ 550 m, crosswind ≤ 20 kt incl. gust. Ask ATC on every frequency change. Below minima → go-around and re-plan.</td></tr>
+  <tr><td>Engine 1 / systems</td><td>N1, EGT, oil at MCT. Anti-ice ON. Electrical: one generator, APU if started per checklist.</td></tr>
+  <tr><td>Approach</td><td>Stabilised by 1000 ft (landing flaps 15, speed +10/−5, 1 dot, ≤ 1000 fpm or the briefed rate). Otherwise go around.</td></tr>
+  <tr><td>Information</td><td>ATC, SCCM and IOCC updated with any change in time or plan. Fire services briefed on the right-engine fire.</td></tr>
+ </table>
+ <p style="font-size:8.2pt;background:#FFF4D6;padding:4px 7px;border-radius:3px;margin-top:5px">The situation can change at any time. If RWY 06 becomes unusable, the next option is the nearest acceptable airfield with known weather. Ask ATC for EHEH / EBBR weather early so the fallback is ready.</p>
+</div>
+
+<div class="note">Sources: SunExpress FORDEC model (IMG_1058–1059), OM-B 3.10, 1.2.4.6.1 incl. note 7, 1.5.1, 1.5.3.1, 1.9.3.2, 3.12.1; OM-A 8.3.1.16.6, 8.3.1.19.1; OPC-6 data sheet and EHAM AOI. Distances are great-circle from EHAM. Alternate runway lengths and RFFS categories come from public sources and are not verified against the AIP. Alternate weather is not given in the scenario: ask for it. Weight after takeoff and times are estimates.</div>
+</body></html>
