@@ -3,13 +3,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612+Mono:wght@400;700&family=Saira+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* One visual world on purpose: a 737NG flight deck at dusk. Grey Boeing panels, black display units,
-   white panel legends, red/amber annunciators. Layout: briefing → glareshield → displays + callouts → pedestal → debrief. */
+/* One visual world on purpose: a 737NG flight deck. Black display units, grey Boeing panel, red/amber annunciators.
+   Layout: header → [PFD | engines | NOW decision card] → flight-deck strip (every lever that moves lights up) → log → debrief. */
 :root{
   color-scheme:dark;
-  --room:#15191D; --panel:#56616B; --panel-hi:#6B7780; --panel-lo:#3C454D; --bezel:#23292F; --du:#050708;
-  --legend:#F2F4F5; --dim:#AEB8C0; --ink:#E8EDF1; --muted:#9AA6B1;
-  --red:#FF3B30; --red-dim:#4A1512; --amber:#FFB21E; --amber-dim:#4A3408; --green:#39E27B; --mag:#F25BE3; --cyan:#48D3F0;
+  --room:#14181C; --card:#1C2227; --line:#2E373F; --panel:#4E5963; --panel-hi:#65717B; --panel-lo:#39424A; --du:#050708; --bezel:#22282E;
+  --legend:#F1F4F6; --dim:#A9B4BD; --ink:#E7ECF0; --muted:#94A1AC;
+  --red:#FF3B30; --amber:#FFB21E; --green:#39E27B; --mag:#F25BE3; --cyan:#48D3F0;
   --ok:#43C97F; --bad:#FF7468; --warn:#F0B040;
   --f-disp:"Saira Condensed","Arial Narrow",sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -18,526 +18,449 @@
 *{box-sizing:border-box}
 body{background:var(--room);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:14px 40px}
-h1,h2,h3{font-family:var(--f-disp);margin:0;letter-spacing:.02em;text-wrap:balance}
+h1{font-family:var(--f-disp);margin:0;letter-spacing:.02em;text-wrap:balance}
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 .lbl{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;font-weight:600;color:var(--dim)}
-
-.top{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:end;border-bottom:1px solid #2C343B;padding-bottom:10px}
-.top h1{font-size:1.9rem;line-height:1}
-.top p{margin:4px 0 0;color:var(--muted);font-size:.9rem;max-width:70ch}
-.btn{border:1px solid #3A444C;background:#232A31;border-radius:6px;padding:8px 14px;font-weight:600}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid #3A444C;background:#232A31;border-radius:6px;padding:7px 13px;font-weight:600}
 .btn:hover{border-color:var(--dim)}
 .btn.pri{background:var(--legend);color:#111;border-color:var(--legend)}
 .btn[aria-pressed="true"]{border-color:var(--cyan);color:var(--cyan)}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-
-/* briefing */
-.brief{margin-top:12px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px}
-@media (max-width:900px){.brief{grid-template-columns:minmax(0,1fr)}}
-.card{background:#1E2429;border:1px solid #2E373F;border-radius:10px;padding:12px 14px;min-width:0}
-.metar{font-family:var(--f-mono);font-size:.78rem;background:#0E1114;border-radius:6px;padding:7px 9px;overflow-x:auto;white-space:nowrap;margin-top:4px}
-.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px 12px;margin-top:8px}
-.kv div{display:grid}.kv b{font-family:var(--f-mono);font-size:.9rem}
-.note{font-size:.84rem;color:var(--muted);margin:8px 0 0}
-
-/* cockpit */
-.deck{margin-top:14px;background:linear-gradient(#2A3137,#1F252A);border-radius:14px;padding:12px;display:grid;gap:10px;border:1px solid #333D45}
-.panel{background:linear-gradient(180deg,var(--panel-hi),var(--panel) 30%,var(--panel-lo));border-radius:8px;border:1px solid #2A3137;box-shadow:inset 0 1px 0 rgba(255,255,255,.12);padding:8px 10px;min-width:0}
-.plab{font-family:var(--f-disp);font-weight:600;letter-spacing:.12em;font-size:.66rem;color:var(--legend);text-transform:uppercase;opacity:.85}
-
-/* glareshield */
-.glare{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:stretch}
-@media (max-width:760px){.glare{grid-template-columns:minmax(0,1fr)}}
-.mw{display:flex;gap:6px;align-items:center}
-.ann{font-family:var(--f-disp);font-weight:700;font-size:.68rem;line-height:1.05;letter-spacing:.04em;text-align:center;width:72px;height:44px;border-radius:5px;border:1px solid #111;display:grid;place-items:center;background:#2A1C1B;color:#5E3A37}
-.ann.caut{background:#2E2718;color:#6B5A34}
-.ann.on{background:var(--red);color:#fff;box-shadow:0 0 14px rgba(255,59,48,.7);animation:pulse 1s steps(2) infinite}
-.ann.caut.on{background:var(--amber);color:#1A1200;box-shadow:0 0 12px rgba(255,178,30,.6);animation:none}
-@keyframes pulse{50%{filter:brightness(.7)}}
-.mcp{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center}
-.mcpw{display:grid;justify-items:center;gap:3px}
-.win{font-family:var(--f-mono);background:#0B0D0F;color:#FFD9A0;padding:3px 8px;border-radius:3px;min-width:58px;text-align:center;font-size:1rem;border:1px solid #000}
-.key{font-family:var(--f-disp);font-weight:700;font-size:.72rem;letter-spacing:.06em;background:#2A3036;border:1px solid #15191C;border-radius:4px;padding:5px 8px;color:var(--legend);position:relative}
-.key.lit::after{content:"";position:absolute;left:6px;right:6px;top:2px;height:3px;border-radius:2px;background:var(--green);box-shadow:0 0 6px var(--green)}
-.key.inop{opacity:.5}
-.bank{display:flex;gap:2px}
-.bank button{font-family:var(--f-mono);font-size:.7rem;padding:3px 5px;background:#2A3036;border:1px solid #15191C;border-radius:3px;color:var(--dim)}
-.bank button[aria-pressed="true"]{color:#111;background:var(--legend)}
-
-/* displays + callouts */
-.mid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.8fr) minmax(0,1fr);gap:10px}
-@media (max-width:1050px){.mid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.calls{grid-column:1/-1}}
-@media (max-width:640px){.mid{grid-template-columns:minmax(0,1fr)}}
-.du{background:var(--bezel);border-radius:10px;padding:8px;border:1px solid #111}
+.top{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:10px}
+.top h1{font-size:1.85rem;line-height:1}
+.top p{margin:4px 0 0;color:var(--muted);font-size:.9rem;max-width:72ch}
+.brief{margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;display:grid;gap:6px}
+.metar{font-family:var(--f-mono);font-size:.76rem;background:#0E1114;border-radius:6px;padding:6px 9px;overflow-x:auto;white-space:nowrap}
+.kv{display:flex;flex-wrap:wrap;gap:4px 20px}
+.kv span{font-family:var(--f-mono);font-size:.82rem}.kv b{color:var(--legend)}
+.note{font-size:.82rem;color:var(--muted);margin:0}
+.hud{margin-top:12px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.72fr) minmax(0,1.05fr);gap:12px;align-items:start}
+@media (max-width:1020px){.hud{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.now{grid-column:1/-1;order:-1}}
+@media (max-width:600px){.hud{grid-template-columns:minmax(0,1fr)}}
+.du{background:var(--bezel);border-radius:10px;padding:7px;border:1px solid #0C0E10}
 .du svg{display:block;width:100%;height:auto;background:var(--du);border-radius:4px}
-.calls{display:grid;gap:8px;grid-template-rows:auto 1fr;min-width:0}
-.log{background:#0A0C0E;border:1px solid #2A3137;border-radius:8px;height:170px;overflow-y:auto;padding:6px 9px;font-family:var(--f-mono);font-size:.76rem;display:flex;flex-direction:column-reverse;gap:2px}
-.log p{margin:0}.log .w{display:inline-block;min-width:48px;font-weight:700}
-.log .PF .w{color:var(--green)}.log .PM .w{color:var(--cyan)}.log .ATC .w{color:#C9A7FF}.log .AUR .w{color:var(--amber)}.log .SYS .w{color:var(--red)}.log .ERR{color:var(--bad)}.log .ERR .w{color:var(--bad)}
-.log .you{background:#16211A}
-.pal{background:#1B2126;border:1px solid #2E373F;border-radius:8px;padding:8px;display:grid;gap:6px;max-height:330px;overflow-y:auto}
-.pal .grid{display:flex;flex-wrap:wrap;gap:5px}
-.say{font-family:var(--f-mono);font-size:.72rem;font-weight:700;text-align:left;background:#11161A;border:1px solid #37414A;border-radius:5px;padding:5px 7px;color:var(--legend);max-width:100%}
-.say:hover{border-color:var(--green)}
-.hint{font-size:.8rem;color:var(--amber);min-height:1.2em;font-family:var(--f-mono)}
-
-/* pedestal */
-.ped{display:grid;grid-template-columns:auto auto auto minmax(0,1fr) auto;gap:10px;align-items:stretch}
-@media (max-width:1050px){.ped{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}}
-.tls{display:flex;gap:10px;justify-content:center}
-.tl{display:grid;gap:3px;justify-items:center}
-.tl .knob{width:46px;height:22px;border-radius:5px;background:linear-gradient(#E9EDF0,#A9B2B9);border:1px solid #222;color:#111;font-family:var(--f-disp);font-weight:700;font-size:.8rem;display:grid;place-items:center}
-.tl .pos{display:grid;gap:2px}
-.tl .pos button{font-family:var(--f-disp);font-size:.68rem;letter-spacing:.06em;padding:2px 6px;border-radius:3px;background:#2A3036;border:1px solid #15191C;color:var(--dim)}
-.tl .pos button[aria-pressed="true"]{background:var(--legend);color:#111}
-.sl button{width:54px;height:30px;border-radius:5px;border:1px solid #111;font-family:var(--f-disp);font-weight:700;font-size:.72rem;background:#1C2126;color:var(--legend)}
-.sl button.cut{background:#6F1612;color:#fff}
-.fire{display:flex;gap:8px;justify-content:center;align-items:flex-start}
-.fh{display:grid;gap:4px;justify-items:center}
-.fh .h{width:58px;height:40px;border-radius:6px 6px 14px 14px;border:1px solid #111;background:#3B2322;color:#8E5B57;font-family:var(--f-disp);font-weight:700;font-size:.72rem;line-height:1;display:grid;place-items:center;text-align:center;transition:transform .15s}
-.fh .h.lit{background:var(--red);color:#fff;box-shadow:0 0 16px rgba(255,59,48,.75)}
-.fh .h.pulled{transform:translateY(8px)}
-.fh .rot{display:flex;gap:3px}
-.fh .rot button{font-family:var(--f-disp);font-size:.66rem;padding:2px 6px;border-radius:3px;background:#2A3036;border:1px solid #15191C;color:var(--dim)}
-.bd{font-family:var(--f-disp);font-weight:700;font-size:.6rem;letter-spacing:.04em;padding:2px 5px;border-radius:3px;background:#2E2718;color:#6B5A34;text-align:center;line-height:1.1}
+.now{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:10px;min-height:360px;align-content:start}
+.now.due{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+.nowHead{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.nowHead .tag{font-family:var(--f-disp);font-weight:700;letter-spacing:.1em;font-size:.9rem;color:var(--amber)}
+.cue{font-family:var(--f-mono);font-size:.85rem;color:var(--legend);background:#0E1114;border-radius:8px;padding:8px 11px;min-height:40px}
+.cue small{display:block;color:var(--muted);font-size:.7rem;letter-spacing:.04em}
+.q{font-weight:600;margin:0}
+.opts{display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:center;text-align:left;border:1px solid #3A444C;background:#141A1F;border-radius:9px;padding:10px 12px;font-size:.95rem;line-height:1.3}
+.opt:hover:not(:disabled){border-color:var(--legend)}
+.opt .n{font-family:var(--f-mono);font-weight:700;display:grid;place-items:center;width:26px;height:26px;border-radius:5px;background:#2A3238;color:var(--legend)}
+.opt .c{font-family:var(--f-mono);font-weight:700}
+.opt:disabled{opacity:.45;cursor:not-allowed}
+.opt.wrong{border-color:var(--bad);background:#2B1513}
+.timer{height:5px;background:#2A3238;border-radius:3px;overflow:hidden}
+.timer i{display:block;height:100%;background:var(--amber);width:100%}
+.fb{font-size:.88rem;min-height:1.3em}.fb.bad{color:var(--bad)}
+.idle{color:var(--muted);font-size:.92rem;margin:0}
+.deck{margin-top:12px;background:linear-gradient(180deg,var(--panel-hi),var(--panel) 25%,var(--panel-lo));border-radius:12px;border:1px solid #20262B;padding:10px 12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.grp{background:rgba(0,0,0,.18);border-radius:8px;padding:7px 9px;display:grid;gap:5px;align-content:start;transition:box-shadow .2s}
+.grp.flash{box-shadow:0 0 0 2px var(--cyan),0 0 18px rgba(72,211,240,.55)}
+.plab{font-family:var(--f-disp);font-weight:600;letter-spacing:.12em;font-size:.66rem;color:var(--legend);text-transform:uppercase;opacity:.9}
+.lights{display:flex;gap:5px;flex-wrap:wrap}
+.ann{font-family:var(--f-disp);font-weight:700;font-size:.68rem;line-height:1.05;letter-spacing:.04em;text-align:center;width:70px;height:36px;border-radius:5px;border:1px solid #111;display:grid;place-items:center;background:#2A1C1B;color:#6A4440}
+.ann.caut{background:#2E2718;color:#6B5A34}
+.ann.on{background:var(--red);color:#fff;box-shadow:0 0 12px rgba(255,59,48,.7);animation:pulse 1s steps(2) infinite}
+.ann.caut.on{background:var(--amber);color:#1A1200;animation:none}
+@keyframes pulse{50%{filter:brightness(.7)}}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.chip{font-family:var(--f-mono);font-size:.7rem;padding:3px 6px;border-radius:3px;background:#1E2328;border:1px solid #111;color:var(--dim)}
+.chip.on{color:#111;background:var(--green)}
+.chip.win{background:#0B0D0F;color:#FFD9A0}
+.levers{display:flex;gap:12px}
+.lever{display:grid;gap:2px;justify-items:center}
+.lever .track{width:34px;height:74px;border-radius:5px;background:#1A1E22;border:1px solid #0C0E10;position:relative}
+.lever .knob{position:absolute;left:3px;right:3px;top:4px;height:18px;border-radius:4px;background:linear-gradient(#EEF1F3,#A8B1B8);color:#111;font-family:var(--f-disp);font-weight:700;font-size:.72rem;display:grid;place-items:center;transition:top .5s}
+.lever small{font-family:var(--f-mono);font-size:.64rem;color:var(--legend)}
+.sl{width:44px;height:26px;border-radius:5px;border:1px solid #111;display:grid;place-items:center;font-family:var(--f-disp);font-weight:700;font-size:.7rem;background:#1C2126;color:var(--legend)}
+.sl.cut{background:#7A1712;color:#fff}
+.fire{display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap}
+.fh{width:52px;height:34px;border-radius:6px 6px 12px 12px;border:1px solid #111;background:#3B2322;color:#8E5B57;font-family:var(--f-disp);font-weight:700;font-size:.7rem;display:grid;place-items:center;transition:transform .2s}
+.fh.lit{background:var(--red);color:#fff;box-shadow:0 0 14px rgba(255,59,48,.75)}
+.fh.pulled{transform:translateY(7px)}
+.bd{font-family:var(--f-disp);font-weight:700;font-size:.6rem;padding:2px 4px;border-radius:3px;background:#2E2718;color:#6B5A34;text-align:center;line-height:1.1}
 .bd.on{background:var(--amber);color:#1A1200}
-.levers{display:flex;gap:12px;justify-content:center;align-items:flex-start}
-.lev{display:grid;gap:3px;justify-items:center}
-.lev .opts{display:grid;gap:2px}
-.lev .opts button{font-family:var(--f-disp);font-size:.7rem;padding:2px 8px;border-radius:3px;background:#2A3036;border:1px solid #15191C;color:var(--dim);min-width:40px}
-.lev .opts button[aria-pressed="true"]{background:var(--legend);color:#111}
-.gearl{display:flex;gap:4px;margin-top:4px}
-.gl{width:14px;height:14px;border-radius:2px;background:#1B3A25;border:1px solid #111}
-.gl.g{background:var(--green)}.gl.r{background:var(--red)}
-.yoke{display:grid;gap:6px;justify-items:center}
-.yoke button{width:110px;height:48px;border-radius:24px;border:2px solid #111;background:linear-gradient(#3A4047,#23282D);font-family:var(--f-disp);font-weight:700;letter-spacing:.08em;color:var(--legend)}
-.clock{font-family:var(--f-mono);background:#0B0D0F;color:var(--green);padding:3px 8px;border-radius:3px;font-size:.95rem}
-
-/* debrief */
-.deb{margin-top:14px}
-.deb .card{display:grid;gap:10px}
-.big{font-family:var(--f-disp);font-size:2.2rem;line-height:1}
+.gl{display:flex;gap:3px}.gl i{width:12px;height:12px;border-radius:2px;background:#1B2A20;border:1px solid #111}.gl i.g{background:var(--green)}
+.clock{font-family:var(--f-mono);background:#0B0D0F;color:var(--green);padding:2px 7px;border-radius:3px;font-size:.9rem;display:inline-block}
+.log{margin-top:12px;background:#0A0C0E;border:1px solid var(--line);border-radius:8px;height:150px;overflow-y:auto;padding:6px 10px;font-family:var(--f-mono);font-size:.76rem;display:flex;flex-direction:column-reverse;gap:2px}
+.log p{margin:0}.log .w{display:inline-block;min-width:44px;font-weight:700}
+.log .PF .w{color:var(--green)}.log .PM .w{color:var(--cyan)}.log .ATC .w{color:#C9A7FF}.log .AUR .w{color:var(--amber)}.log .SYS .w{color:var(--red)}.log .ERR,.log .ERR .w{color:var(--bad)}
+.log .you{background:#15211A}
+.deb{margin-top:14px;display:grid;gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:8px;min-width:0}
+.big{font-family:var(--f-disp);font-size:2.1rem;line-height:1}
 .tw{overflow-x:auto}
 table.t{border-collapse:collapse;width:100%;min-width:600px;font-size:.84rem}
-table.t td,table.t th{border-bottom:1px solid #2E373F;padding:5px 8px;text-align:left;vertical-align:top}
+table.t td,table.t th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
 table.t th{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem;color:var(--dim)}
 .ok{color:var(--ok);font-weight:700}.late{color:var(--warn);font-weight:700}.miss{color:var(--bad);font-weight:700}
-.opt{display:grid;gap:6px}
-.opt button{text-align:left;border:1px solid #37414A;background:#161B20;border-radius:8px;padding:9px 12px}
-.opt button:hover{border-color:var(--dim)}
-.opt button.right{border-color:var(--ok);background:#12281B}.opt button.wrong{border-color:var(--bad);background:#2C1614}
-.expl{font-size:.9rem;max-width:85ch}
-.expl p{margin:4px 0}
-.foot{color:var(--muted);font-size:.78rem;margin-top:16px;max-width:90ch}
-@media (prefers-reduced-motion:reduce){.ann.on{animation:none}.fh .h{transition:none}}
+.fopt{display:grid;gap:6px}
+.fopt button{text-align:left;border:1px solid #37414A;background:#161B20;border-radius:8px;padding:9px 12px}
+.fopt button.right{border-color:var(--ok);background:#12281B}.fopt button.wrong{border-color:var(--bad);background:#2C1614}
+.expl{font-size:.9rem;max-width:88ch}.expl p{margin:4px 0}
+.foot{color:var(--muted);font-size:.78rem;margin-top:14px;max-width:92ch}
+@media (prefers-reduced-motion:reduce){.ann.on{animation:none}.fh,.lever .knob,.grp{transition:none}}
 </style>
 
 <div class="wrap">
   <header class="top">
     <div>
       <h1>EHAM 18L · Engine Fire after V1</h1>
-      <p>737-800 · OPC-6 data · A/T INOP · OM-B 3.10 flow. The fire does not go out. Fly or monitor from the right seat, make every call from the palette and move every control yourself.</p>
+      <p>737-800 · OPC-6 weather · A/T INOP · OM-B 3.10. The fire does not go out. Whenever it is your turn, the NOW card asks what you say or do. Pick with the mouse or keys 1–4; the sim slows down while you decide.</p>
     </div>
     <div class="row">
-      <span class="lbl">Your role</span>
-      <button class="btn" data-role="PF" aria-pressed="true">FO = PF</button>
-      <button class="btn" data-role="PM" aria-pressed="false">FO = PM</button>
-      <span class="lbl" style="margin-left:8px">Hints</span>
-      <button class="btn" id="hintBtn" aria-pressed="true">On</button>
-      <span class="lbl" style="margin-left:8px">Speed</span>
-      <button class="btn" data-rate="1" aria-pressed="true">1×</button><button class="btn" data-rate="2" aria-pressed="false">2×</button>
+      <span class="lbl">You are</span>
+      <button class="btn" data-role="PF" aria-pressed="true">FO · PF</button>
+      <button class="btn" data-role="PM" aria-pressed="false">FO · PM</button>
+      <button class="btn pri" id="startBtn">Start takeoff</button>
     </div>
   </header>
 
   <section class="brief">
-    <div class="card">
-      <span class="lbl">ATIS / METAR · TAF</span>
-      <div class="metar">METAR EHAM 151325Z 12022KT 1000 R18C/0250N R18L/0200N R06/1000N SN BLSN BKN005 OVC020 M04/M05 Q1025 BECMG 0700 +SN BLSN=</div>
-      <div class="metar">TAF EHAM 151120Z 1512/1618 12022KT 1000 SN BLSN BKN005 OVC020 BECMG 1514/1517 0700 +SN BLSN BECMG 1519/1522 12015KT 3000 -SN BKN010 …</div>
-      <div class="kv">
-        <div><span class="lbl">RWY</span><b>18L · RWYCC 4</b></div><div><span class="lbl">SID</span><b>RENDI3E</b></div><div><span class="lbl">EOSID</span><b>AMSX4</b></div>
-        <div><span class="lbl">Flap / thrust</span><b>5 · TO-2 N1 88.2</b></div><div><span class="lbl">V1 · VR · V2</span><b>132 · 143 · 148</b></div><div><span class="lbl">EO accel</span><b>1610 ft</b></div>
-        <div><span class="lbl">TOW</span><b>69,500 kg</b></div><div><span class="lbl">MLW</span><b>66,360 kg</b></div><div><span class="lbl">Callsign</span><b>SXS2UM</b></div>
-      </div>
-    </div>
-    <div class="card">
-      <span class="lbl">Who flies</span>
-      <p class="note" style="margin-top:4px">OM-A 5.1.4.5.2: the FO is PM for takeoff when RVR is <b>less than</b> 200 m. R18L/0200N is exactly 200 m, so the FO may fly. If the RVR drops below 200 m before takeoff, the Captain takes it. Pick your role above.</p>
-      <p class="note">Controls are split as in OM-B 3.10. <b>PF</b>: control column, thrust levers, CMD A, the calls. <b>PM</b>: gear, flaps, start levers, fire switches, MCP HDG SEL / bank / LVL CHG, fire warning cancel, stopwatch, ATC. Touching the other pilot's control counts as an error.</p>
-      <p class="note">Flap bugs used here for 69.5 t: flaps 5 → 1 at <b>180 kt</b>, 1 → UP at <b>200 kt</b>, flaps-up speed <b>220 kt</b> (approximate, read your own FMC).</p>
-      <div class="row" style="margin-top:10px"><button class="btn pri" id="startBtn">Line up and start the takeoff</button><button class="btn" id="resetBtn">Reset</button></div>
-    </div>
+    <div class="metar">METAR EHAM 151325Z 12022KT 1000 R18C/0250N R18L/0200N R06/1000N SN BLSN BKN005 OVC020 M04/M05 Q1025 BECMG 0700 +SN BLSN=</div>
+    <div class="metar">TAF EHAM 151120Z 1512/1618 12022KT 1000 SN BLSN BKN005 OVC020 BECMG 1514/1517 0700 +SN BLSN BECMG 1519/1522 12015KT 3000 -SN BKN010 …</div>
+    <div class="kv"><span>RWY <b>18L RWYCC 4</b></span><span>SID <b>RENDI3E</b> · EOSID <b>AMSX4</b></span><span>Flap <b>5</b> · <b>TO-2 N1 88.2</b></span><span>V1/VR/V2 <b>132/143/148</b></span><span>EO accel <b>1610 ft</b></span><span>TOW <b>69.5 t</b> · MLW <b>66.4 t</b></span><span>Flap bugs ≈ <b>180 / 200 / UP 220</b></span></div>
+    <p class="note">R18L/0200N is not <i>less than</i> 200 m, so the FO may be PF (OM-A 5.1.4.5.2). Pick either role; the sim flies the other pilot.</p>
   </section>
 
-  <section class="deck" aria-label="Flight deck">
-    <div class="glare">
-      <div class="panel mw"><button class="ann" id="fwL" aria-label="Fire warning">FIRE<br>WARN</button><button class="ann caut" id="mcL" aria-label="Master caution">MASTER<br>CAUTION</button></div>
-      <div class="panel mcp" aria-label="Mode control panel">
-        <div class="mcpw"><span class="plab">A/T arm</span><span class="key inop">INOP</span></div>
-        <div class="mcpw"><span class="plab">IAS</span><span class="win" id="mIas">148</span></div>
-        <div class="mcpw"><span class="plab">Heading</span><span class="win" id="mHdg">181</span></div>
-        <div class="mcpw"><span class="plab">Bank</span><div class="bank" id="bank"></div></div>
-        <div class="mcpw"><span class="plab">&nbsp;</span><button class="key" id="kHdg">HDG SEL</button></div>
-        <div class="mcpw"><span class="plab">&nbsp;</span><button class="key" id="kLvl">LVL CHG</button></div>
-        <div class="mcpw"><span class="plab">Altitude</span><span class="win">3000</span></div>
-        <div class="mcpw"><span class="plab">&nbsp;</span><button class="key" id="kCmdA">CMD A</button></div>
-      </div>
-      <div class="panel mw"><span class="ann caut" id="mcR">MASTER<br>CAUTION</span><span class="ann" id="fwR">FIRE<br>WARN</span></div>
-    </div>
-
-    <div class="mid">
-      <div class="du"><svg id="pfd" viewBox="0 0 360 300" role="img" aria-label="Primary flight display"></svg></div>
-      <div class="du"><svg id="eng" viewBox="0 0 260 300" role="img" aria-label="Engine display"></svg></div>
-      <div class="calls">
-        <div class="log" id="log" aria-live="polite"></div>
-        <div class="pal"><div class="row" style="justify-content:space-between"><span class="lbl" id="palTitle">Your calls (PF)</span><span class="hint" id="hint"></span></div><div class="grid" id="pal"></div></div>
-      </div>
-    </div>
-
-    <div class="ped">
-      <div class="panel yoke"><span class="plab">Control column</span><button id="rot">ROTATE</button><span class="plab" id="pitchLab">Pitch 0°</span></div>
-      <div class="panel"><span class="plab">Thrust levers</span><div class="tls">
-        <div class="tl"><span class="knob">1</span><div class="pos" id="tl1"></div></div>
-        <div class="tl"><span class="knob">2</span><div class="pos" id="tl2"></div></div></div></div>
-      <div class="panel"><span class="plab">Start levers</span><div class="tls sl" style="margin-top:6px">
-        <div class="tl"><span class="plab">1</span><button id="sl1">IDLE</button></div><div class="tl"><span class="plab">2</span><button id="sl2">IDLE</button></div></div></div>
-      <div class="panel"><span class="plab">Fire protection · aft pedestal</span><div class="fire" style="margin-top:6px">
-        <div class="fh"><button class="h" id="fh1">ENG 1</button><div class="rot"><button data-rot="1L">◀ L</button><button data-rot="1R">R ▶</button></div></div>
-        <div class="fh"><span class="h" style="opacity:.5">APU</span><span class="bd" id="bdL">L BOTTLE<br>DISCH</span></div>
-        <div class="fh"><button class="h" id="fh2">ENG 2</button><div class="rot"><button data-rot="2L">◀ L</button><button data-rot="2R">R ▶</button></div></div>
-        <div class="fh"><span class="plab">&nbsp;</span><span class="bd" id="bdR">R BOTTLE<br>DISCH</span></div>
-      </div></div>
-      <div class="panel levers">
-        <div class="lev"><span class="plab">Gear</span><div class="opts" id="gear"></div><div class="gearl"><span class="gl" id="g1"></span><span class="gl" id="g2"></span><span class="gl" id="g3"></span></div></div>
-        <div class="lev"><span class="plab">Flaps</span><div class="opts" id="flap"></div></div>
-        <div class="lev"><span class="plab">Clock</span><button class="key" id="clk">CHR</button><span class="clock" id="clkT">--:--</span></div>
-      </div>
-    </div>
+  <section class="hud">
+    <div class="du"><svg id="pfd" viewBox="0 0 360 300" role="img" aria-label="Primary flight display"></svg></div>
+    <div class="du"><svg id="eng" viewBox="0 0 260 300" role="img" aria-label="Engine display"></svg></div>
+    <div class="now" id="now" aria-live="polite"></div>
   </section>
 
+  <section class="deck" aria-label="Flight deck controls">
+    <div class="grp" id="gWarn"><span class="plab">Glareshield</span><div class="lights"><span class="ann" id="fw">FIRE<br>WARN</span><span class="ann caut" id="mc">MASTER<br>CAUTION</span></div></div>
+    <div class="grp" id="gMcp"><span class="plab">MCP</span><div class="chips"><span class="chip win" id="mIas">IAS 148</span><span class="chip" id="mHdg">HDG SEL</span><span class="chip" id="mLvl">LVL CHG</span><span class="chip win" id="mBank">BANK 25</span><span class="chip">A/T INOP</span></div></div>
+    <div class="grp" id="gTl"><span class="plab">Thrust levers</span><div class="levers"><div class="lever"><div class="track"><div class="knob" id="k1">1</div></div><small id="t1">TO</small></div><div class="lever"><div class="track"><div class="knob" id="k2">2</div></div><small id="t2">TO</small></div></div></div>
+    <div class="grp" id="gSl"><span class="plab">Start levers</span><div class="levers"><div class="lever"><span class="sl">IDLE</span><small>1</small></div><div class="lever"><span class="sl" id="sl2">IDLE</span><small>2</small></div></div></div>
+    <div class="grp" id="gFire"><span class="plab">Fire panel · aft pedestal</span><div class="fire"><span class="fh">ENG 1</span><span class="fh" style="opacity:.55">APU</span><span class="fh" id="fh2">ENG 2</span></div><div class="fire"><span class="bd" id="bdL">L BOTTLE DISCH</span><span class="bd" id="bdR">R BOTTLE DISCH</span></div></div>
+    <div class="grp" id="gGear"><span class="plab">Gear · Flaps</span><div class="chips"><span class="chip win" id="gearT">GEAR DN</span><span class="chip win" id="flapT">FLAPS 5</span></div><div class="gl"><i id="g1"></i><i id="g2"></i><i id="g3"></i></div></div>
+    <div class="grp" id="gClk"><span class="plab">Clock</span><span class="clock" id="clk">--:--</span></div>
+  </section>
+
+  <div class="log" id="log"></div>
   <section class="deb" id="deb"></section>
-  <p class="foot">Built from OM-B 3.10 (SunExpress), QRH 8.2 Engine Fire memory items, OM-A 5.1.4.5.2 and the OPC-6 data. The “second bottle by memory” rule and its 30 s timing are OM-B 3.10. The exact wording for directing the second bottle is not in OM-B; this sim uses “DISCHARGE SECOND BOTTLE”. The MAYDAY wording is standard phraseology, not a company text. The flight model is simplified: timings, not aerodynamics.</p>
+  <p class="foot">Built from OM-B 3.10, QRH 8.2 Engine Fire memory items, OM-A 5.1.4.5.2 and the OPC-6 data. The second bottle by memory after ≥ 30 s is OM-B 3.10; the wording “DISCHARGE SECOND BOTTLE” is this sim's, not OM-B's. The MAYDAY is standard phraseology. Rotation technique lines are FCTM technique. The flight model is simplified: timing and sequence, not aerodynamics.</p>
 </div>
 
 <script>
-/* ======================= data ======================= */
 const V1=132,VR=143,V2=148,ACC=1610,F5=180,F1=200,FUP=220,FIRE_AT=137;
-const CALLS={
- PF:['GEAR UP','AUTOPILOT A COMMAND','SELECT HEADING, SET BANK ANGLE FIFTEEN','ENGINE FIRE MEMORY ITEMS','ENGINE FAILURE MEMORY ITEMS','AUTOTHROTTLE DISENGAGE','THRUST LEVER NUMBER TWO – CONFIRM – CLOSE','THRUST LEVER NUMBER ONE – CONFIRM – CLOSE','NUMBER TWO CONFIRMED','NUMBER ONE CONFIRMED','SPEED UP','FLAPS ONE','FLAPS UP','FLAPS FIFTEEN','SELECT LEVEL CHANGE, SET BANK ANGLE TWENTY-FIVE, SELECT MAX CONTINUOUS THRUST','DISCHARGE SECOND BOTTLE','ENGINE FIRE CHECKLIST','ENGINE FAILURE CHECKLIST','AFTER TAKEOFF CHECKLIST','STOP','CONTINUE'],
- PM:['ENGINE FIRE','ENGINE FAILURE','V ONE','ROTATE','POSITIVE RATE','GEAR UP','FOUR HUNDRED','ENGINE NUMBER TWO FIRE','ENGINE NUMBER ONE FIRE','NUMBER TWO CONFIRMED','ENGINE START LEVER NUMBER TWO – CONFIRM – CUTOFF','ENGINE FIRE SWITCH NUMBER TWO – CONFIRM – PULL','ROTATE TO THE STOP AND HOLD FOR ONE SECOND','BOTTLE DISCHARGED','MEMORY ITEMS COMPLETE','FIRE CONTINUES','NO FIRE, NO OVERHEAT','MAYDAY MAYDAY MAYDAY, SCHIPHOL DEPARTURE, SUNEXPRESS 2UM, ENGINE FIRE, FOLLOWING EOSID','ACCELERATION ALTITUDE','FLAPS UP SPEED','FLAPS ONE','FLAPS UP','ENGINE FIRE CHECKLIST COMPLETE','AFTER TAKEOFF CHECKLIST COMPLETE']
-};
-/* Steps in OM-B 3.10 order. type: call | act | state. act keys: rotate, gear:UP, tl2:CLOSE, tl1:MCT, sl2:CUTOFF, fs2:PULL, fs2:ROT1, fw:CANCEL, clk:START, flap:1, flap:UP
-   cond(S) = when the step becomes due; check(S) for state steps. */
+/* step: who, type (call|act|state), key (calls) or txt (actions), cond, q (question), traps [label, why, critical?] */
 const STEPS=[
- {id:'fire',  who:'PM',type:'call',key:'ENGINE FIRE', cond:S=>S.fire, ref:'OM-B 3.10: PM calls "ENGINE FIRE", no further details'},
- {id:'fwc',   who:'PM',type:'act', key:'fw:CANCEL', txt:'Cancel the fire warning', ref:'OM-B 3.10: PM cancels Master Caution / Fire Warning'},
- {id:'rot',   who:'PM',type:'call',key:'ROTATE', cond:S=>S.ias>=VR, late:1.5, max:3, ref:'OM-B 3.10: at VR the PM calls "ROTATE"'},
- {id:'rotA',  who:'PF',type:'act', key:'rotate', late:2, max:4, txt:'Rotate', ref:'OM-B 3.10: PF establishes a positive rate of climb'},
- {id:'pos',   who:'PM',type:'call',key:'POSITIVE RATE', cond:S=>S.alt>=35&&S.vs>0, ref:'OM-B 3.10'},
- {id:'gearC', who:'PF',type:'call',key:'GEAR UP', ref:'OM-B 3.10: PF verifies positive rate on the altimeter and calls "GEAR UP"'},
- {id:'gearA', who:'PM',type:'act', key:'gear:UP', txt:'Gear lever UP', say:'GEAR UP', ref:'OM-B 3.10: PM calls "GEAR UP" and sets the lever UP'},
- {id:'400',   who:'PM',type:'call',key:'FOUR HUNDRED', cond:S=>S.alt>=400, ref:'OM-B 3.10: at 400 ft RA'},
- {id:'hdgC',  who:'PF',type:'call',key:'SELECT HEADING, SET BANK ANGLE FIFTEEN', ref:'OM-B 3.10'},
- {id:'hdgA',  who:'PM',type:'state',check:S=>S.hdgSel&&S.bank===15, txt:'HDG SEL on, bank angle 15', auto:S=>{S.hdgSel=true;S.bank=15}, ref:'OM-B 3.10: PM selects HDG SEL, sets bank angle selector 15'},
- {id:'ident', who:'PM',type:'call',key:'ENGINE NUMBER TWO FIRE', ref:'OM-B 3.10: PM identifies the failure'},
- {id:'mem',   who:'PF',type:'call',key:'ENGINE FIRE MEMORY ITEMS', ref:'OM-B 3.10: PF verifies identification and calls for the memory items'},
- {id:'at',    who:'PF',type:'call',key:'AUTOTHROTTLE DISENGAGE', ref:'OM-B 3.10 (A/T INOP: verify disengaged)'},
- {id:'tlC',   who:'PF',type:'call',key:'THRUST LEVER NUMBER TWO – CONFIRM – CLOSE', ref:'OM-B 3.10: hand on the lever, then the call'},
- {id:'tlCf',  who:'PM',type:'call',key:'NUMBER TWO CONFIRMED', ref:'OM-B 3.10'},
- {id:'tlA',   who:'PF',type:'act', key:'tl2:CLOSE', txt:'Thrust lever 2 CLOSE', say:'CLOSE', ref:'OM-B 3.10: PF closes the lever and calls "CLOSE"'},
- {id:'slC',   who:'PM',type:'call',key:'ENGINE START LEVER NUMBER TWO – CONFIRM – CUTOFF', ref:'OM-B 3.10'},
- {id:'slCf',  who:'PF',type:'call',key:'NUMBER TWO CONFIRMED', ref:'OM-B 3.10: PF checks the correct start lever'},
- {id:'slA',   who:'PM',type:'act', key:'sl2:CUTOFF', txt:'Start lever 2 CUTOFF', say:'CUTOFF', ref:'OM-B 3.10'},
- {id:'fsC',   who:'PM',type:'call',key:'ENGINE FIRE SWITCH NUMBER TWO – CONFIRM – PULL', ref:'OM-B 3.10'},
- {id:'fsCf',  who:'PF',type:'call',key:'NUMBER TWO CONFIRMED', ref:'OM-B 3.10: PF checks the correct fire switch'},
- {id:'fsA',   who:'PM',type:'act', key:'fs2:PULL', txt:'Fire switch 2 PULL', say:'PULL', ref:'OM-B 3.10'},
- {id:'rotC',  who:'PM',type:'call',key:'ROTATE TO THE STOP AND HOLD FOR ONE SECOND', cond:S=>S.fire, ref:'OM-B 3.10: fire switch still illuminated'},
- {id:'rotF',  who:'PM',type:'act', key:'fs2:ROT1', txt:'Rotate fire switch 2 to a stop, hold 1 s', ref:'QRH 8.2 step 5'},
- {id:'bd',    who:'PM',type:'call',key:'BOTTLE DISCHARGED', ref:'OM-B 3.10'},
- {id:'clk',   who:'PM',type:'act', key:'clk:START', txt:'Start the stopwatch', ref:'OM-B 3.10'},
- {id:'mic',   who:'PM',type:'call',key:'MEMORY ITEMS COMPLETE', ref:'OM-B 3.10'},
- {id:'fc',    who:'PM',type:'call',key:'FIRE CONTINUES', ref:'OM-B 3.10: fire switch light still on'},
- {id:'mayday',who:'PM',type:'call',key:'MAYDAY MAYDAY MAYDAY, SCHIPHOL DEPARTURE, SUNEXPRESS 2UM, ENGINE FIRE, FOLLOWING EOSID', ref:'OM-B 3.10 CAUTION: tell ATC by distress call before leaving the assigned track'},
- {id:'acc',   who:'PM',type:'call',key:'ACCELERATION ALTITUDE', cond:S=>S.alt>=ACC, ref:'OM-B 3.10: EO acceleration height 1610 ft'},
- {id:'spd',   who:'PF',type:'call',key:'SPEED UP', ref:'OM-B 3.10: PF calls/sets SPEED UP and verifies acceleration'},
- {id:'f1C',   who:'PF',type:'call',key:'FLAPS ONE', cond:S=>S.ias>=F5-1, ref:'OM-B 3.10: flaps on the retraction schedule'},
- {id:'f1A',   who:'PM',type:'act', key:'flap:1', txt:'Flap lever 1', say:'FLAPS ONE', ref:'OM-B 3.10'},
- {id:'fuC',   who:'PF',type:'call',key:'FLAPS UP', cond:S=>S.ias>=F1-1, ref:'OM-B 3.10'},
- {id:'fuA',   who:'PM',type:'act', key:'flap:UP', txt:'Flap lever UP', say:'FLAPS UP', ref:'OM-B 3.10'},
- {id:'fus',   who:'PM',type:'call',key:'FLAPS UP SPEED', cond:S=>S.ias>=FUP-1&&S.flap===0, ref:'OM-B 3.10'},
- {id:'lvlC',  who:'PF',type:'call',key:'SELECT LEVEL CHANGE, SET BANK ANGLE TWENTY-FIVE, SELECT MAX CONTINUOUS THRUST', ref:'OM-B 3.10'},
- {id:'mct',   who:'PF',type:'act', key:'tl1:MCT', txt:'Thrust lever 1 to MCT by hand', ref:'OM-B 3.10: PF manually sets MCT'},
- {id:'lvlA',  who:'PM',type:'state',check:S=>S.lvl&&S.bank===25, txt:'LVL CHG on, bank angle 25, CON on N1 LIMIT', auto:S=>{S.lvl=true;S.bank=25}, ref:'OM-B 3.10'},
- {id:'nnc',   who:'PF',type:'call',key:'ENGINE FIRE CHECKLIST', ref:'OM-B 3.10: at a safe altitude'},
- {id:'nncD',  who:'PM',type:'call',key:'ENGINE FIRE CHECKLIST COMPLETE', ref:'OM-B 3.10: PM reads, verifies memory items, reads reference items'},
- {id:'atc',   who:'PF',type:'call',key:'AFTER TAKEOFF CHECKLIST', ref:'OM-B 3.10'},
- {id:'atcD',  who:'PM',type:'call',key:'AFTER TAKEOFF CHECKLIST COMPLETE', ref:'OM-B 3.10'}
+ {id:'fire',who:'PM',type:'call',key:'ENGINE FIRE',cond:S=>S.fire,ref:'OM-B 3.10',q:'Fire bell above V1. What do you call?',
+  traps:[['"ENGINE NUMBER TWO FIRE"','OM-B: "ENGINE FIRE" only, no further details on the runway.'],['"STOP"','Above V1, and the reject call is the Captain\'s.'],['"ENGINE FAILURE"','It is a fire warning: "ENGINE FIRE".']]},
+ {id:'fwc',who:'PM',type:'act',txt:'Cancel the fire warning',ref:'OM-B 3.10',q:'Bell still ringing. Your action?',
+  traps:[['Pull the ENG 2 fire switch now','Nothing below 400 ft except gear. Memory items come at 400 ft RA.'],['Close thrust lever 2','Not your lever, and not below 400 ft.'],['Call "ROTATE"','Not at VR yet.']]},
+ {id:'cont',who:'PF',type:'act',txt:'Continue: rudder on the centreline, wait for "ROTATE"',ref:'OM-B 3.9 / 3.10 · FCTM',q:'Fire warning at 137 kt; V1 was 132. What do you do?',
+  traps:[['Reject: close thrust levers, max braking','Above V1 you continue. The reject decision is the Captain\'s and must start by V1.'],['Rotate now','VR is 143. Rotate on the "ROTATE" call.'],['Close thrust lever 2','No engine action below 400 ft RA.',1]]},
+ {id:'rot',who:'PM',type:'call',key:'ROTATE',cond:S=>S.ias>=VR,late:3,max:6,ref:'OM-B 3.10',q:'Speed 143. What do you call?',
+  traps:[['"V TWO"','Not an OM-B 3.10 call.'],['"POSITIVE RATE"','Still on the ground.'],['"GEAR UP"','That is the PF\'s call after positive rate.']]},
+ {id:'rotA',who:'PF',type:'act',txt:'Rotate at a slightly slower rate to about 12–13°, then follow the FD',late:3,max:6,ref:'OM-B 3.10 · FCTM',q:'PM: "ROTATE". Your action?',
+  traps:[['Rotate briskly to 15° as on a normal takeoff','15° is the all-engine target. With one engine: slower rate, about 2–3° less, then the FD (V2 to V2+20).'],['Wait for V2 148','Rotate at VR.'],['Call "ENGINE FIRE MEMORY ITEMS"','Nothing but gear below 400 ft.']]},
+ {id:'pos',who:'PM',type:'call',key:'POSITIVE RATE',cond:S=>S.alt>=35&&S.vs>0,ref:'OM-B 3.10',q:'Altimeter increasing. What do you call?',
+  traps:[['"GEAR UP"','The PF calls "GEAR UP". You call "POSITIVE RATE".'],['"FOUR HUNDRED"','Not yet.'],['"ENGINE NUMBER TWO FIRE"','Identification comes at 400 ft.']]},
+ {id:'gearC',who:'PF',type:'call',key:'GEAR UP',ref:'OM-B 3.10',q:'PM: "POSITIVE RATE". You check the altimeter. Your call?',
+  traps:[['"ENGINE FIRE MEMORY ITEMS"','Below 400 ft only the gear.'],['"SELECT HEADING, SET BANK ANGLE FIFTEEN"','That is at 400 ft.'],['"FLAPS ONE"','Flaps at acceleration altitude.']]},
+ {id:'gearA',who:'PM',type:'act',txt:'Gear lever UP and call "GEAR UP"',say:'GEAR UP',ref:'OM-B 3.10',q:'PF: "GEAR UP". Your action?',
+  traps:[['Gear lever OFF','UP first; OFF comes later in the After Takeoff checklist.'],['Flap lever 1','Flaps at acceleration altitude.'],['Call "FOUR HUNDRED"','Not yet.']]},
+ {id:'400',who:'PM',type:'call',key:'FOUR HUNDRED',cond:S=>S.alt>=400,ref:'OM-B 3.10',q:'Radio altitude 400. What do you call?',
+  traps:[['"ENGINE NUMBER TWO FIRE"','First "FOUR HUNDRED"; identification follows the heading and bank selection.'],['"ACCELERATION ALTITUDE"','That is 1610 ft.'],['"FIVE HUNDRED"','OM-B uses "FOUR HUNDRED".']]},
+ {id:'hdgC',who:'PF',type:'call',key:'SELECT HEADING, SET BANK ANGLE FIFTEEN',ref:'OM-B 3.10',q:'PM: "FOUR HUNDRED". Your call?',
+  traps:[['"SELECT LEVEL CHANGE, SET BANK ANGLE TWENTY-FIVE, SELECT MAX CONTINUOUS THRUST"','That is at flaps up speed.'],['"ENGINE FIRE MEMORY ITEMS"','First heading and bank 15, then the PM identifies, then you call the memory items.'],['"SELECT HEADING, SET BANK ANGLE TWENTY-FIVE"','Bank 15 until flaps up speed.']]},
+ {id:'hdgA',who:'PM',type:'state',txt:'Select HDG SEL, set the bank angle selector to 15',ref:'OM-B 3.10',q:'PF: "SELECT HEADING, SET BANK ANGLE FIFTEEN". Your action?',
+  traps:[['Select HDG SEL, bank 25','Bank 15 now; 25 at flaps up speed.'],['Select LVL CHG, bank 15','LVL CHG only at flaps up speed.'],['Engage CMD A','The autopilot is the PF\'s choice.']]},
+ {id:'ident',who:'PM',type:'call',key:'ENGINE NUMBER TWO FIRE',ref:'OM-B 3.10',q:'Heading and bank set. What do you call?',
+  traps:[['"ENGINE NUMBER ONE FIRE"','Check the lit fire switch and the EGT: it is engine 2.',1],['"ENGINE FIRE"','Now you identify it: "ENGINE NUMBER TWO FIRE".'],['"MEMORY ITEMS COMPLETE"','Not started yet.']]},
+ {id:'mem',who:'PF',type:'call',key:'ENGINE FIRE MEMORY ITEMS',ref:'OM-B 3.10',q:'PM: "ENGINE NUMBER TWO FIRE". You verify. Your call?',
+  traps:[['"ENGINE FAILURE MEMORY ITEMS"','It is a fire: "ENGINE FIRE MEMORY ITEMS".'],['"ENGINE FIRE CHECKLIST"','The checklist comes at flaps up; now the memory items.'],['"THRUST LEVER NUMBER TWO – CONFIRM – CLOSE"','Call for the memory items first.']]},
+ {id:'at',who:'PF',type:'call',key:'AUTOTHROTTLE DISENGAGE',ref:'OM-B 3.10 · A/T INOP: verify',q:'Memory item 1. Your call?',
+  traps:[['"THRUST LEVER NUMBER TWO – CONFIRM – CLOSE"','Item 1 is the autothrottle (INOP today: verify disengaged and say it).'],['"AUTOPILOT DISENGAGE"','Item 1 is the autothrottle.'],['Skip it, the A/T is INOP','Still say it and verify; the flow is fixed.']]},
+ {id:'tlC',who:'PF',type:'call',key:'THRUST LEVER NUMBER TWO – CONFIRM – CLOSE',ref:'OM-B 3.10',q:'Hand on the lever. Your call?',
+  traps:[['"THRUST LEVER NUMBER ONE – CONFIRM – CLOSE"','Engine 1 is your only good engine.',1],['"ENGINE START LEVER NUMBER TWO – CONFIRM – CUTOFF"','That is the PM\'s call, after the thrust lever.'],['Close thrust lever 2 without a call','OM-B: hand on, "CONFIRM", PM confirms, then close.']]},
+ {id:'tlCf',who:'PM',type:'call',key:'NUMBER TWO CONFIRMED',ref:'OM-B 3.10',q:'PF: "THRUST LEVER NUMBER TWO – CONFIRM – CLOSE". The PF\'s hand is on lever 2. Your call?',
+  traps:[['"NUMBER ONE CONFIRMED"','The hand is on lever 2 and the fire is engine 2.',1],['"CLOSE"','The PF says "CLOSE" after closing it.'],['"ENGINE START LEVER NUMBER TWO – CONFIRM – CUTOFF"','Confirm the thrust lever first.']]},
+ {id:'tlA',who:'PF',type:'act',txt:'Close thrust lever 2 and call "CLOSE"',say:'CLOSE',ref:'OM-B 3.10',q:'PM: "NUMBER TWO CONFIRMED". Your action?',
+  traps:[['Close thrust lever 1','That is the good engine.',1],['Pull thrust lever 2 to idle reverse','Close it; nothing else.'],['Call "SPEED UP"','Not at acceleration altitude.']]},
+ {id:'slC',who:'PM',type:'call',key:'ENGINE START LEVER NUMBER TWO – CONFIRM – CUTOFF',ref:'OM-B 3.10',q:'Thrust lever 2 closed. Hand on the start lever. Your call?',
+  traps:[['"ENGINE FIRE SWITCH NUMBER TWO – CONFIRM – PULL"','Start lever first, then the fire switch.'],['"ENGINE START LEVER NUMBER ONE – CONFIRM – CUTOFF"','Engine 1 is the good one.',1],['Move start lever 2 to CUTOFF without a call','OM-B: hand on, "CONFIRM", PF confirms, then CUTOFF.']]},
+ {id:'slCf',who:'PF',type:'call',key:'NUMBER TWO CONFIRMED',ref:'OM-B 3.10',q:'PM: "ENGINE START LEVER NUMBER TWO – CONFIRM – CUTOFF". You look at the PM\'s hand. Your call?',
+  traps:[['"NUMBER ONE CONFIRMED"','The PM\'s hand must be on start lever 2.',1],['"CUTOFF"','The PM says "CUTOFF" after moving it.'],['"CHECKED"','OM-B wording is "NUMBER TWO CONFIRMED".']]},
+ {id:'slA',who:'PM',type:'act',txt:'Start lever 2 to CUTOFF and call "CUTOFF"',say:'CUTOFF',ref:'OM-B 3.10',q:'PF: "NUMBER TWO CONFIRMED". Your action?',
+  traps:[['Start lever 1 to CUTOFF','Both engines lost.',1],['Pull the ENG 2 fire switch','Start lever first.'],['Rotate the ENG 2 fire switch','Not pulled yet.']]},
+ {id:'fsC',who:'PM',type:'call',key:'ENGINE FIRE SWITCH NUMBER TWO – CONFIRM – PULL',ref:'OM-B 3.10',q:'Start lever 2 at CUTOFF. Hand on the fire switch. Your call?',
+  traps:[['"ENGINE FIRE SWITCH NUMBER ONE – CONFIRM – PULL"','The fire is on engine 2.',1],['"ROTATE TO THE STOP AND HOLD FOR ONE SECOND"','Pull first.'],['"MEMORY ITEMS COMPLETE"','Not yet.']]},
+ {id:'fsCf',who:'PF',type:'call',key:'NUMBER TWO CONFIRMED',ref:'OM-B 3.10',q:'PM: "ENGINE FIRE SWITCH NUMBER TWO – CONFIRM – PULL". Your call?',
+  traps:[['"NUMBER ONE CONFIRMED"','The PM\'s hand must be on switch 2, the lit one.',1],['"PULL"','The PM says "PULL".'],['Stay silent','OM-B requires "NUMBER TWO CONFIRMED".']]},
+ {id:'fsA',who:'PM',type:'act',txt:'Pull fire switch 2 and call "PULL"',say:'PULL',ref:'OM-B 3.10',q:'PF: "NUMBER TWO CONFIRMED". Your action?',
+  traps:[['Pull fire switch 1','Wrong engine.',1],['Rotate fire switch 2 without pulling','Pull first, then rotate.'],['Discharge the APU bottle','Not the APU.']]},
+ {id:'rotC',who:'PM',type:'call',key:'ROTATE TO THE STOP AND HOLD FOR ONE SECOND',ref:'OM-B 3.10',q:'Fire switch 2 pulled, still lit. What do you call?',
+  traps:[['"NO FIRE, NO OVERHEAT"','The light is still on.'],['"MEMORY ITEMS COMPLETE"','Step 5 is not done: the switch is lit, so rotate.'],['"DISCHARGE SECOND BOTTLE"','First bottle first.']]},
+ {id:'rotF',who:'PM',type:'act',txt:'Rotate fire switch 2 to the stop, hold 1 second',ref:'QRH 8.2 step 5',q:'Your action?',
+  traps:[['Rotate fire switch 1','Wrong engine.',1],['Rotate and release at once','Hold for 1 second.'],['Push the switch back in','Leave it pulled.']]},
+ {id:'bd',who:'PM',type:'call',key:'BOTTLE DISCHARGED',ref:'OM-B 3.10',q:'The amber light comes on. What do you call?',
+  traps:[['"FIRE CONTINUES"','First "BOTTLE DISCHARGED", then the stopwatch, then "MEMORY ITEMS COMPLETE".'],['"NO FIRE, NO OVERHEAT"','Not yet.'],['"MEMORY ITEMS COMPLETE"','Call the bottle first.']]},
+ {id:'clk',who:'PM',type:'act',txt:'Start the stopwatch',ref:'OM-B 3.10',q:'Bottle discharged. Your action?',
+  traps:[['Rotate to the other stop now','At least 30 s, and only when the PF directs it.'],['Push fire switch 2 back in','Leave it pulled.'],['Call ATC first','Finish the memory items: stopwatch, then "MEMORY ITEMS COMPLETE".']]},
+ {id:'mic',who:'PM',type:'call',key:'MEMORY ITEMS COMPLETE',ref:'OM-B 3.10',q:'Stopwatch running. What do you call?',
+  traps:[['"ENGINE FIRE CHECKLIST COMPLETE"','The checklist has not been called.'],['"FIRE CONTINUES"','First "MEMORY ITEMS COMPLETE", then the fire status.'],['"ACCELERATION ALTITUDE"','Not there yet.']]},
+ {id:'fc',who:'PM',type:'call',key:'FIRE CONTINUES',ref:'OM-B 3.10',q:'Fire switch 2 still lit. What do you call?',
+  traps:[['"NO FIRE, NO OVERHEAT"','The switch is still lit.'],['"DISCHARGE SECOND BOTTLE"','The PF directs the second bottle, after at least 30 s.'],['Say nothing','OM-B requires the fire status call.']]},
+ {id:'mayday',who:'PM',type:'call',key:'MAYDAY MAYDAY MAYDAY, SCHIPHOL DEPARTURE, SUNEXPRESS 2UM, ENGINE FIRE, FOLLOWING EOSID',ref:'OM-B 3.10 CAUTION',q:'Memory items done, airplane under control. Your next job?',
+  traps:[['"PAN PAN … ENGINE FIRE"','An engine fire that does not go out is distress: MAYDAY.'],['Turn off the SID first, then tell ATC','OM-B: tell ATC by distress call before turning away from the assigned track.'],['Wait until the checklists are done','ATC must know before you leave the SID.']]},
+ {id:'acc',who:'PM',type:'call',key:'ACCELERATION ALTITUDE',cond:S=>S.alt>=ACC,ref:'OM-B 3.10 · EO accel 1610 ft',q:'Passing 1610 ft. What do you call?',
+  traps:[['"FLAPS UP SPEED"','First the acceleration altitude.'],['"ONE THOUSAND"','Not an OM-B 3.10 call.'],['"FLAPS ONE"','The PF calls flaps.']]},
+ {id:'spd',who:'PF',type:'call',key:'SPEED UP',ref:'OM-B 3.10',q:'PM: "ACCELERATION ALTITUDE". Your call?',
+  traps:[['"FLAPS UP"','Accelerate first; flaps on the schedule.'],['"SELECT LEVEL CHANGE, SET BANK ANGLE TWENTY-FIVE, SELECT MAX CONTINUOUS THRUST"','That is at flaps up speed.'],['Keep climbing at V2','At 1610 ft you accelerate.']]},
+ {id:'f1C',who:'PF',type:'call',key:'FLAPS ONE',cond:S=>S.ias>=F5-1,ref:'OM-B 3.10',q:'Speed reaching the flap 5 bug (≈180). Your call?',
+  traps:[['"FLAPS UP"','One step at a time: 5 → 1 → UP.'],['"FLAPS FIFTEEN"','Wrong direction.'],['"FLAPS UP SPEED"','That is the PM\'s call, later.']]},
+ {id:'f1A',who:'PM',type:'act',txt:'Flap lever to 1 and call "FLAPS ONE"',say:'FLAPS ONE',ref:'OM-B 3.10',q:'PF: "FLAPS ONE". Your action?',
+  traps:[['Flap lever UP','The PF asked for 1.'],['Flap lever 2','The PF asked for 1.'],['Call "FLAPS UP SPEED"','Not yet.']]},
+ {id:'fuC',who:'PF',type:'call',key:'FLAPS UP',cond:S=>S.ias>=F1-1,ref:'OM-B 3.10',q:'Speed reaching the flap 1 bug (≈200). Your call?',
+  traps:[['"SELECT LEVEL CHANGE, SET BANK ANGLE TWENTY-FIVE, SELECT MAX CONTINUOUS THRUST"','At flaps up speed, after the flaps are up.'],['"FLAPS FIVE"','Wrong direction.'],['Wait for the PM','You call the flaps.']]},
+ {id:'fuA',who:'PM',type:'act',txt:'Flap lever UP and call "FLAPS UP"',say:'FLAPS UP',ref:'OM-B 3.10',q:'PF: "FLAPS UP". Your action?',
+  traps:[['Flap lever 5','The PF asked for UP.'],['Select LVL CHG','At flaps up speed.'],['Call "FLAPS UP SPEED"','Wait for the speed.']]},
+ {id:'fus',who:'PM',type:'call',key:'FLAPS UP SPEED',cond:S=>S.ias>=FUP-1&&S.flap===0,ref:'OM-B 3.10',q:'Flaps and slats up, speed ≈220. What do you call?',
+  traps:[['"ACCELERATION ALTITUDE"','Already called.'],['"CLEAN"','OM-B wording is "FLAPS UP SPEED".'],['"ENGINE FIRE CHECKLIST"','The PF calls the checklist.']]},
+ {id:'lvlC',who:'PF',type:'call',key:'SELECT LEVEL CHANGE, SET BANK ANGLE TWENTY-FIVE, SELECT MAX CONTINUOUS THRUST',ref:'OM-B 3.10',q:'PM: "FLAPS UP SPEED". Your call?',
+  traps:[['"SELECT LEVEL CHANGE, SET BANK ANGLE FIFTEEN, SELECT MAX CONTINUOUS THRUST"','Bank goes to 25 now.'],['"SELECT VERTICAL SPEED, SET BANK ANGLE TWENTY-FIVE"','OM-B says LEVEL CHANGE.'],['"ENGINE FIRE CHECKLIST"','First LVL CHG, bank 25, MCT.']]},
+ {id:'mct',who:'PF',type:'act',txt:'Thrust lever 1 to MCT by hand',ref:'OM-B 3.10 · A/T INOP',q:'Your hands?',
+  traps:[['Leave thrust lever 1 at TO','Set MCT by hand; the A/T is INOP.'],['Thrust lever 2 to MCT','Engine 2 is shut down.',1],['Engage CMD A and let it set thrust','The autopilot does not move the thrust levers.']]},
+ {id:'lvlA',who:'PM',type:'state',txt:'Select LVL CHG, bank 25, CON on the N1 LIMIT page',ref:'OM-B 3.10',q:'PF: "SELECT LEVEL CHANGE, SET BANK ANGLE TWENTY-FIVE, SELECT MAX CONTINUOUS THRUST". Your action?',
+  traps:[['Select LVL CHG, bank 15, CON','Bank 25.'],['Select V/S 1000, bank 25','OM-B says LVL CHG.'],['Select CON only','All three: LVL CHG, bank 25, CON.']]},
+ {id:'nnc',who:'PF',type:'call',key:'ENGINE FIRE CHECKLIST',ref:'OM-B 3.10',q:'Clean, MCT, safe altitude. Your call?',
+  traps:[['"ENGINE FAILURE CHECKLIST"','It is the Engine Fire checklist.'],['"ONE ENGINE INOPERATIVE LANDING CHECKLIST"','After the NNC, the After Takeoff checklist and FORDEC.'],['"AFTER TAKEOFF CHECKLIST"','NNC first, then After Takeoff.']]},
+ {id:'nncD',who:'PM',type:'call',key:'ENGINE FIRE CHECKLIST COMPLETE',ref:'OM-B 3.10',q:'Checklist read: memory items verified, reference items done. Your call?',
+  traps:[['"AFTER TAKEOFF CHECKLIST COMPLETE"','Not called yet.'],['"CHECKLIST COMPLETE"','Name it: "ENGINE FIRE CHECKLIST COMPLETE".'],['"MEMORY ITEMS COMPLETE"','Already done.']]},
+ {id:'atc',who:'PF',type:'call',key:'AFTER TAKEOFF CHECKLIST',ref:'OM-B 3.10',q:'PM: "ENGINE FIRE CHECKLIST COMPLETE". Your call?',
+  traps:[['"ONE ENGINE INOPERATIVE LANDING CHECKLIST"','After Takeoff first, then FORDEC.'],['"DESCENT CHECKLIST"','Not yet.'],['Nothing, go straight to FORDEC','OM-B: the PF calls the After Takeoff checklist.']]},
+ {id:'atcD',who:'PM',type:'call',key:'AFTER TAKEOFF CHECKLIST COMPLETE',ref:'OM-B 3.10',q:'After Takeoff checklist read. Your call?',
+  traps:[['"ENGINE FIRE CHECKLIST COMPLETE"','Already said.'],['"GEAR UP, FLAPS UP"','Close with "AFTER TAKEOFF CHECKLIST COMPLETE".'],['"ONE ENGINE INOPERATIVE LANDING CHECKLIST"','The PF calls that, after FORDEC.']]}
 ];
-/* parallel: second bottle, due 30 s after the first discharge while the fire continues */
-const SB=[{id:'sbC',who:'PF',type:'call',key:'DISCHARGE SECOND BOTTLE',ref:'OM-B 3.10: PF may direct the second bottle by memory, ≥ 30 s after the first'},
-          {id:'sbA',who:'PM',type:'act',key:'fs2:ROT2',txt:'Rotate fire switch 2 to the other stop, hold 1 s',ref:'OM-B 3.10 · QRH 8.2 reference item'}];
-const PF_CTRL=['rotate','tl1','tl2','cmdA'], PM_CTRL=['gear','flap','sl1','sl2','fs1','fs2','hdg','lvl','bank','fw','clk'];
+const SB=[
+ {id:'sbC',who:'PF',type:'call',key:'DISCHARGE SECOND BOTTLE',ref:'OM-B 3.10: PF may direct it by memory, ≥ 30 s after the first',q:'30 s since the first bottle, fire switch 2 still lit. Your call?',
+  traps:[['Wait for the checklist','OM-B lets the PF direct the second bottle by memory now.'],['"ENGINE FIRE SWITCH NUMBER ONE – CONFIRM – PULL"','Wrong engine.',1],['"NO FIRE, NO OVERHEAT"','It is still burning.']]},
+ {id:'sbA',who:'PM',type:'act',txt:'Rotate fire switch 2 to the other stop, hold 1 second',ref:'OM-B 3.10',q:'PF: "DISCHARGE SECOND BOTTLE". Your action?',
+  traps:[['Rotate fire switch 2 to the same stop again','That bottle is empty: the other stop.'],['Rotate fire switch 1','Wrong engine.',1],['Push fire switch 2 in and pull it again','Just rotate to the other stop.']]}
+];
 
-/* ======================= state ======================= */
-let role='PF', hints=true, rate=1, S=null, raf=null;
+let role='PF',S=null,raf=null;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-function fresh(){return {t:0,run:false,done:false,ias:0,alt:0,vs:0,pitch:0,air:false,rotAt:null,gear:'DN',flap:5,tl1:'TO',tl2:'TO',sl1:'IDLE',sl2:'IDLE',fs2:'IN',fs1:'IN',bL:false,bR:false,firstBottle:null,fire:false,fw:false,mc:false,
-  hdgSel:false,lvl:false,bank:25,cmdA:false,spdUp:false,clk:null,n1:[88.2,88.2],egt:[780,780],
-  i:0,due:null,autoAt:null,res:{},errors:[],sbI:0,sbDue:null,sbAuto:null,crit:null,fordec:null}}
-function reset(){cancelAnimationFrame(raf);S=fresh();$('#log').innerHTML='';$('#deb').innerHTML='';render();palette();$('#hint').textContent=''}
-
-/* ======================= logging & scoring ======================= */
-function log(w,t,cls=''){const p=document.createElement('p');p.className=w+' '+cls;p.innerHTML=`<span class="w">${w}</span>${esc(t)}`;$('#log').prepend(p)}
+function fresh(){return {t:0,run:false,done:false,ias:0,alt:0,vs:0,pitch:0,air:false,rotAt:null,gear:'DN',flap:5,tl1:'TO',tl2:'TO',sl2:'IDLE',fs2:'IN',bL:false,bR:false,firstBottle:null,fire:false,fw:false,mc:false,
+  hdgSel:false,lvl:false,bank:25,spdUp:false,clk:null,n1:[88.2,88.2],egt:[780,780],i:0,due:null,autoAt:null,res:{},errors:[],sbI:0,sbDue:null,sbAuto:null,crit:null,pend:null,last:0}}
+function reset(){cancelAnimationFrame(raf);S=fresh();$('#log').innerHTML='';$('#deb').innerHTML='';render();idle('Press “Start takeoff”. The NOW card only asks when it is your turn.')}
+function log(w,t,cls=''){const p=document.createElement('p');p.className=w+' '+cls;p.innerHTML=`<span class="w">${w}</span>${esc(t)}`;p.dataset.t=w+': '+t;$('#log').prepend(p)}
 function err(t){S.errors.push({t:Math.round(S.t),msg:t});log('ERR','✗ '+t,'ERR')}
-function mark(step,status){if(!S.res[step.id])S.res[step.id]={status,late:0};else S.res[step.id].status=status}
+function flash(id){const g=$(id);if(!g)return;g.classList.remove('flash');void g.offsetWidth;g.classList.add('flash');setTimeout(()=>g.classList.remove('flash'),1600)}
 
-/* ======================= step engine ======================= */
-function cur(){return STEPS[S.i]}
-function complete(step,byUser){
-  if(step.type==='call')log(step.who,step.key,byUser?'you':'');
-  else if(step.say)log(step.who,step.say,byUser?'you':'');
-  if(byUser){const lateBy=S.t-S.due;mark(step,lateBy>(step.late||9)?'late':'ok')}
-  S.i++;S.due=null;S.autoAt=null;
-  if(S.i>=STEPS.length)finish();
-}
-function perform(step){ /* the sim does the other pilot's action, or covers a missed user step */
-  if(step.type==='act')doAct(step.key,step.who,true);
-  if(step.type==='state')step.auto(S);
-}
-function engine(){
-  const st=cur();if(!st||S.done)return;
-  if(S.due===null){if(st.cond&&!st.cond(S))return;S.due=S.t;if(st.who!==role)S.autoAt=S.t+1.3}
-  if(st.who!==role){if(S.t>=S.autoAt){perform(st);complete(st,false)}return}
-  if(st.type==='state'&&st.check(S)){complete(st,true);return}
-  const wait=S.t-S.due;
-  if(hints)$('#hint').textContent=wait>4?`→ ${st.type==='call'?'"'+st.key+'"':st.txt}`:'';
-  if(wait>(st.max||18)){mark(st,'missed');log('SYS',`(instructor: you missed "${st.type==='call'?st.key:st.txt}")`);perform(st);complete(st,false)}
-}
-function engineSB(){
-  if(!S.firstBottle||!S.fire||S.sbI>=SB.length||S.done)return;
-  if(S.t-S.firstBottle<30)return;
-  const st=SB[S.sbI];
-  if(S.sbDue===null){S.sbDue=S.t;if(st.who!==role)S.sbAuto=S.t+(st.who==='PF'?2:1.3)}
-  if(st.who!==role){if(S.t>=S.sbAuto){perform(st);sbDone(st,false)}return}
-  if(S.t-S.sbDue>40){mark(st,'missed');log('SYS','(instructor: second bottle not used)');perform(st);sbDone(st,false)}
-}
-function sbDone(st,byUser){if(st.type==='call')log(st.who,st.key,byUser?'you':'');if(byUser)mark(st,S.t-S.sbDue>15?'late':'ok');S.sbI++;S.sbDue=null;S.sbAuto=null;
-  if(S.sbI>=SB.length)setTimeout(()=>{if(!S.done)log(role==='PM'?'PM':'PM','BOTTLE DISCHARGED … FIRE CONTINUES')},1200)}
-
-/* user call */
-function userCall(k){
-  if(!S.run||S.done)return;
-  const st=cur(), sb=SB[S.sbI];
-  if(st&&S.due!==null&&st.who===role&&st.type==='call'&&st.key===k){complete(st,true);return}
-  if(sb&&S.sbDue!==null&&sb.who===role&&sb.type==='call'&&sb.key===k){sbDone(sb,true);return}
-  log(role,k,'you');
-  if(k==='DISCHARGE SECOND BOTTLE'){err(S.firstBottle&&S.t-S.firstBottle<30?'Second bottle before 30 s since the first discharge.':'Second bottle not available yet (first bottle not discharged, or already used).');return}
-  if(/NUMBER ONE|ENGINE FAILURE/.test(k)){err(`Wrong call: "${k}". It is the ENGINE FIRE on engine NUMBER TWO.`);return}
-  const later=STEPS.slice(S.i+1).find(s=>s.who===role&&s.key===k);
-  if(later&&S.alt<400&&S.air&&STEPS.indexOf(later)>STEPS.findIndex(s=>s.id==='400')){err(`"${k}" below 400 ft RA. Nothing but gear up before 400 ft.`);return}
-  if(later){err(`"${k}" out of sequence.`);return}
-  err(`"${k}" not expected now.`);
-}
-/* user / sim control action */
-function owner(key){const c=key.split(':')[0];return PF_CTRL.includes(c)?'PF':'PM'}
-function userAct(key){
-  if(!S.run||S.done)return;
-  const own=owner(key);
-  if(own!==role){err(`That is the ${own}'s control (${key.split(':')[0]}). Call for it instead.`);return}
-  if(['tl1:CLOSE','sl1:CUTOFF','fs1:PULL'].includes(key)||key.startsWith('fs1:ROT')){S.crit=`You shut down the good engine (${key}). Both engines lost.`;doAct(key,role,false);err(S.crit);return finish()}
-  const st=cur(), sb=SB[S.sbI];
-  if(st&&S.due!==null&&st.who===role&&st.type==='act'&&st.key===key){doAct(key,role,false);complete(st,true);return}
-  if(sb&&S.sbDue!==null&&sb.who===role&&sb.type==='act'&&sb.key===key){doAct(key,role,false);sbDone(sb,true);return}
-  if(['hdg','lvl','bank','cmdA'].includes(key.split(':')[0])){
-    if(key==='cmdA'&&S.alt<400){err('Autopilot below 400 ft.');return}
-    if(key==='hdg'&&S.alt<400){err('No MCP selections below 400 ft RA; wait for the PF\'s call.');return}
-    if(key==='lvl'&&S.flap!==0){err('LVL CHG before flaps up speed.');return}
-    doAct(key,role,false);return}
-  if(key==='fs2:ROT2'){err(S.firstBottle?'Second bottle before 30 s / before it was called.':'Second bottle before the first.');return}
-  if(key==='tl1:MCT'&&!(st&&st.id==='mct')){err('MCT is set at flaps up speed, after the call.');return}
-  const later=STEPS.slice(S.i+1).find(s=>s.who===role&&s.key===key);
-  err(later?`${later.txt} — out of sequence (wait for the calls).`:`${key} not expected now.`);
-}
-function doAct(key,who,auto){
-  const [c,v]=key.split(':');
-  if(c==='rotate'){S.rotAt=S.t;}
-  if(c==='gear')S.gear=v;
-  if(c==='flap')S.flap=v==='UP'?0:+v;
-  if(c==='tl1')S.tl1=v; if(c==='tl2')S.tl2=v;
-  if(c==='sl1')S.sl1=v; if(c==='sl2')S.sl2=v;
-  if(c==='fs2'&&v==='PULL')S.fs2='PULL'; if(c==='fs1'&&v==='PULL')S.fs1='PULL';
-  if(c==='fs2'&&v==='ROT1'){S.bL=true;S.firstBottle=S.t}
-  if(c==='fs2'&&v==='ROT2'){S.bR=true}
-  if(c==='fw'){S.fw=false;S.mc=false}
-  if(c==='clk')S.clk=S.t;
-  if(c==='hdg')S.hdgSel=!S.hdgSel;
-  if(c==='lvl')S.lvl=!S.lvl;
-  if(c==='bank')S.bank=+v;
-  if(c==='cmdA'){S.cmdA=!S.cmdA;if(S.cmdA)log('PF','AUTOPILOT A COMMAND',auto?'':'you')}
+function effect(step){
+  switch(step.id){
+    case 'fwc':S.fw=false;S.mc=false;flash('#gWarn');break;
+    case 'rotA':S.rotAt=S.t;break;
+    case 'gearA':S.gear='UP';flash('#gGear');break;
+    case 'hdgA':S.hdgSel=true;S.bank=15;flash('#gMcp');break;
+    case 'tlA':S.tl2='CLOSE';flash('#gTl');break;
+    case 'slA':S.sl2='CUTOFF';flash('#gSl');break;
+    case 'fsA':S.fs2='PULL';flash('#gFire');break;
+    case 'rotF':S.bL=true;S.firstBottle=S.t;flash('#gFire');break;
+    case 'clk':S.clk=S.t;flash('#gClk');break;
+    case 'spd':S.spdUp=true;flash('#gMcp');break;
+    case 'f1A':S.flap=1;flash('#gGear');break;
+    case 'fuA':S.flap=0;flash('#gGear');break;
+    case 'mct':S.tl1='MCT';flash('#gTl');break;
+    case 'lvlA':S.lvl=true;S.bank=25;flash('#gMcp');break;
+    case 'sbA':S.bR=true;flash('#gFire');break;
+    case 'mayday':setTimeout(()=>{if(S&&!S.done)log('ATC','SunExpress 2UM, roger MAYDAY. Continue EOSID, climb 3000 ft. Runway 06 available, wind 120/22, RVR 06 1000 m.')},1800);break;
+    case 'nncD':log('PM','(Engine Fire checklist read: memory items verified, reference items done)');break;
+  }
   render();
 }
+function say(step,who,you){if(step.type==='call')log(who,step.key,you?'you':'');else if(step.say)log(who,step.say,you?'you':'');else log(who,'('+step.txt+')',you?'you':'')}
 
-/* ======================= flight model ======================= */
-function physics(dt){
-  S.t+=dt;
-  const eng2=S.tl2==='TO'&&S.sl2==='IDLE';
-  if(!S.air){
-    const acc=S.ias<60?3.6:4.2;S.ias+=acc*dt*(eng2?1:0.55);
-    if(S.ias>=80&&!S.c80){S.c80=1;log(role==='PM'?'AUR':'PM','EIGHTY');}
-    if(S.ias>=V1&&!S.cV1){S.cV1=1;log(role==='PM'?'AUR':'PM','V ONE')}
-    if(S.ias>=FIRE_AT&&!S.fire){S.fire=true;S.fw=true;S.mc=true;log('SYS','FIRE BELL · ENG 2 fire switch illuminated')}
-    if(S.rotAt!==null){S.pitch=Math.min(12.5,S.pitch+3*dt);if(S.t-S.rotAt>2.6){S.air=true;log('SYS','Liftoff')}}
-    if(S.ias>VR+12&&S.rotAt===null){S.pitch=0}
-  }else{
-    const oneEng=!eng2;
-    let tgt=V2+8;
-    if(S.spdUp){tgt=S.flap===5?F5:S.flap===1?F1:FUP}
-    const dv=tgt-S.ias;S.ias+=Math.max(-1.5,Math.min(1.8,dv))*dt*(Math.abs(dv)>0.2?1:0);
-    let vs;
-    if(!S.spdUp)vs=oneEng?1100:2600; else if(!S.lvl)vs=Math.abs(dv)>1?250:300; else vs=S.alt<3000?850:0;
-    if(S.gear==='DN'&&S.air)vs-=250;
-    S.vs=vs;S.alt=Math.min(3000,S.alt+vs/60*dt);
-    S.pitch=S.spdUp&&!S.lvl?4:oneEng?9:14;
+function engine(){
+  if(S.done||S.pend)return;
+  if(S.firstBottle!==null&&S.fire&&S.sbI<SB.length&&S.t-S.firstBottle>=30){
+    const st=SB[S.sbI];
+    if(st.who===role){ask(st,true);return}
+    if(S.sbDue===null){S.sbDue=S.t;S.sbAuto=S.t+(st.who==='PF'?2:1.3)}
+    if(S.t>=S.sbAuto){say(st,st.who,false);effect(st);sbNext()}
   }
-  if(S.fire){S.egt[1]=Math.min(1100,S.egt[1]+ (S.sl2==='CUTOFF'?-20:15)*dt)}
+  const st=STEPS[S.i];if(!st)return;
+  if(st.id==='cont'&&st.who!==role){next();return}
+  if(S.due===null){if(st.cond&&!st.cond(S))return;S.due=S.t;S.autoAt=S.t+1.3}
+  if(st.who!==role){if(S.t>=S.autoAt){say(st,st.who,false);effect(st);next()}return}
+  ask(st,false);
+}
+function next(){S.i++;S.due=null;S.autoAt=null;if(S.i>=STEPS.length)finish()}
+function sbNext(){S.sbI++;S.sbDue=null;S.sbAuto=null;if(S.sbI>=SB.length)setTimeout(()=>{if(S&&!S.done)log('PM','BOTTLE DISCHARGED … FIRE CONTINUES')},1000)}
+
+function ask(st,parallel){
+  const correct=st.type==='call'?'"'+st.key+'"':st.txt;
+  const opts=[{l:correct,ok:true}].concat(st.traps.map(t=>({l:t[0],why:t[1],crit:!!t[2]})));
+  for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]]}
+  S.pend={st,parallel,t0:performance.now(),wrong:new Set(),opts};
+  const last=[...$('#log').children].slice(0,2).map(p=>p.dataset.t).reverse();
+  $('#now').className='now due';
+  $('#now').innerHTML=`<div class="nowHead"><span class="tag">NOW · YOUR TURN (${role})</span><span class="lbl">${S.air?Math.round(S.alt)+' ft RA':Math.round(S.ias)+' kt'}</span></div>
+   <div class="cue"><small>JUST HAPPENED</small>${esc(last.join('   ·   '))||'&nbsp;'}</div>
+   <p class="q">${esc(st.q)}</p>
+   <div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="n">${i+1}</span><span class="${o.l.startsWith('"')?'c':''}">${esc(o.l)}</span></button>`).join('')}</div>
+   <div class="timer"><i id="tbar"></i></div><div class="fb" id="fb"></div>`;
+}
+function choose(i){
+  const P=S.pend;if(!P)return;const o=P.opts[i];if(!o||P.wrong.has(i))return;const st=P.st;
+  if(o.ok){
+    const secs=(performance.now()-P.t0)/1000;
+    S.res[st.id]={status:P.wrong.size?'errors':secs>(st.late||7)?'late':'ok'};
+    say(st,role,true);S.pend=null;effect(st);
+    if(P.parallel)sbNext();else next();
+    if(!S.done)idle();return;
+  }
+  P.wrong.add(i);err(`${o.l} — ${o.why}`);
+  const b=document.querySelector(`.opt[data-i="${i}"]`);if(b){b.disabled=true;b.classList.add('wrong')}
+  const fb=$('#fb');fb.className='fb bad';fb.textContent=o.why;
+  if(o.crit){S.crit=`${o.l}. ${o.why}`;finish()}
+}
+function timeoutCheck(){
+  const P=S.pend;if(!P)return;const st=P.st;const secs=(performance.now()-P.t0)/1000;const max=st.max||15;
+  const bar=$('#tbar');if(bar)bar.style.width=Math.max(0,100-secs/max*100)+'%';
+  if(secs>max){S.res[st.id]={status:'missed'};log('SYS',`(instructor: missed — ${st.type==='call'?st.key:st.txt})`);S.pend=null;say(st,st.who,false);effect(st);
+    if(P.parallel)sbNext();else next();if(!S.done)idle()}
+}
+function idle(msg){
+  $('#now').className='now';
+  $('#now').innerHTML=`<div class="nowHead"><span class="tag" style="color:var(--dim)">MONITOR</span><span class="lbl">${S&&S.run?(S.air?Math.round(S.alt)+' ft RA':Math.round(S.ias)+' kt'):''}</span></div>
+   <p class="idle">${esc(msg||'The other pilot is working. Watch the displays and the flight deck strip below: every lever that moves lights up. Your next decision appears here.')}</p>`;
+}
+
+function physics(dt){
+  S.t+=dt;const eng2=S.tl2==='TO'&&S.sl2==='IDLE';
+  if(!S.air){
+    S.ias+=(S.ias<60?3.6:4.2)*dt;
+    if(S.ias>=80&&!S.c80){S.c80=1;log(role==='PM'?'AUR':'PM','EIGHTY')}
+    if(S.ias>=V1&&!S.cV1){S.cV1=1;log(role==='PM'?'AUR':'PM','V ONE')}
+    if(S.ias>=FIRE_AT&&!S.fire){S.fire=true;S.fw=true;S.mc=true;log('SYS','FIRE BELL · ENG 2 FIRE');if(role==='PM')log('PF','(continues, rudder on the centreline)');render()}
+    if(S.rotAt!==null){S.pitch=Math.min(12.5,S.pitch+2.5*dt);if(S.t-S.rotAt>2.8){S.air=true;log('SYS','Liftoff')}}
+  }else{
+    const oneEng=!eng2;let tgt=V2+8;if(S.spdUp)tgt=S.flap===5?F5:S.flap===1?F1:FUP;
+    const dv=tgt-S.ias;S.ias+=Math.max(-1.5,Math.min(1.8,dv))*dt;
+    let vs=!S.spdUp?(oneEng?1100:2600):!S.lvl?260:(S.alt<3000?850:0);if(S.gear==='DN')vs-=250;
+    S.vs=vs;S.alt=Math.min(3000,S.alt+vs/60*dt);S.pitch=S.spdUp&&!S.lvl?4:oneEng?9:12.5;
+  }
+  if(S.fire&&S.sl2!=='CUTOFF')S.egt[1]=Math.min(1080,S.egt[1]+14*dt);
+  if(S.sl2==='CUTOFF')S.egt[1]=Math.max(150,S.egt[1]-60*dt);
   const n2=S.sl2==='CUTOFF'?8:S.tl2==='CLOSE'?24:88.2;S.n1[1]+=(n2-S.n1[1])*Math.min(1,dt*.8);
   const n1t=S.tl1==='MCT'?92.5:88.2;S.n1[0]+=(n1t-S.n1[0])*Math.min(1,dt*.8);
-  if(S.sl2==='CUTOFF')S.egt[1]=Math.max(150,S.egt[1]-60*dt);
-  if(S.acc===undefined&&S.alt>=ACC)S.acc=1;
 }
-/* SPEED UP is the PF's call; the PM sets the speed */
-const _complete=complete;
-complete=function(step,byUser){if(step.id==='spd')S.spdUp=true;if(step.id==='mayday')setTimeout(()=>{if(S&&!S.done)log('ATC','SunExpress 2UM, roger MAYDAY. Continue EOSID, climb 3000 ft. Runway 06 available, wind 120/22, RVR 06 1000 m.')},1800);
-  if(step.id==='nncD')log('PM','(reads Engine Fire checklist: memory items verified, reference items read)');_complete(step,byUser)};
-
 function tick(now){
   if(!S.run||S.done)return;
-  const dt=Math.min(.1,(now-(S.last||now))/1000)*rate;S.last=now;
-  physics(dt);engine();engineSB();renderDu();
+  let dt=Math.min(.1,(now-S.last)/1000);S.last=now;
+  if(S.pend)dt*=0.2;
+  physics(dt);engine();timeoutCheck();renderDu();
   raf=requestAnimationFrame(tick);
 }
 
-/* ======================= rendering ======================= */
-function pos(id,opts,val,key){$(id).innerHTML=opts.map(o=>`<button data-act="${key}:${o}" aria-pressed="${String(val)===String(o)}">${o}</button>`).join('')}
-function render(){
-  if(!S)return;renderCtl();renderDu();}
+function render(){renderCtl();renderDu()}
+function renderCtl(){
+  $('#fw').classList.toggle('on',S.fw);$('#mc').classList.toggle('on',S.mc);
+  $('#mHdg').classList.toggle('on',S.hdgSel);$('#mLvl').classList.toggle('on',S.lvl);$('#mBank').textContent='BANK '+S.bank;
+  const top=v=>v==='TO'?4:v==='MCT'?16:52;$('#k1').style.top=top(S.tl1)+'px';$('#k2').style.top=top(S.tl2)+'px';$('#t1').textContent=S.tl1;$('#t2').textContent=S.tl2;
+  const sl=$('#sl2');sl.textContent=S.sl2;sl.classList.toggle('cut',S.sl2==='CUTOFF');
+  $('#fh2').className='fh'+(S.fire?' lit':'')+(S.fs2==='PULL'?' pulled':'');
+  $('#bdL').classList.toggle('on',S.bL);$('#bdR').classList.toggle('on',S.bR);
+  $('#gearT').textContent='GEAR '+S.gear;$('#flapT').textContent='FLAPS '+(S.flap===0?'UP':S.flap);
+  ['#g1','#g2','#g3'].forEach(x=>$(x).className=S.gear==='DN'?'g':'');
+}
 function renderDu(){
-  $('#fwL').classList.toggle('on',S.fw);$('#fwR').classList.toggle('on',S.fw);$('#mcL').classList.toggle('on',S.mc);$('#mcR').classList.toggle('on',S.mc);
-  $('#clkT').textContent=S.clk===null?'--:--':(()=>{const s=Math.floor(S.t-S.clk);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')})();
-  $('#pitchLab').textContent=`Pitch ${S.pitch.toFixed(1)}°`;
-  $('#mIas').textContent=S.spdUp?(S.flap===5?F5:S.flap===1?F1:FUP):V2;
-  $('#fh2').className='h'+(S.fire?' lit':'')+(S.fs2==='PULL'?' pulled':'');
+  $('#mIas').textContent='IAS '+(S.spdUp?(S.flap===5?F5:S.flap===1?F1:FUP):V2);
+  $('#clk').textContent=S.clk===null?'--:--':(()=>{const s=Math.floor(S.t-S.clk);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')})();
   pfd();eng();
 }
-function renderCtl(){
-  $('#bank').innerHTML=[10,15,20,25,30].map(b=>`<button data-act="bank:${b}" aria-pressed="${S.bank===b}">${b}</button>`).join('');
-  $('#kHdg').classList.toggle('lit',S.hdgSel);$('#kLvl').classList.toggle('lit',S.lvl);$('#kCmdA').classList.toggle('lit',S.cmdA);
-  $('#mIas').textContent=S.spdUp?(S.flap===5?F5:S.flap===1?F1:FUP):V2;
-  pos('#tl1',['TO','MCT','CLOSE'],S.tl1,'tl1');pos('#tl2',['TO','MCT','CLOSE'],S.tl2,'tl2');
-  const sl=(id,v)=>{const b=$(id);b.textContent=v;b.classList.toggle('cut',v==='CUTOFF')};sl('#sl1',S.sl1);sl('#sl2',S.sl2);
-  $('#fh1').className='h'+(S.fs1==='PULL'?' pulled':'');$('#fh2').className='h'+(S.fire?' lit':'')+(S.fs2==='PULL'?' pulled':'');
-  $('#bdL').classList.toggle('on',S.bL);$('#bdR').classList.toggle('on',S.bR);
-  pos('#gear',['UP','OFF','DN'],S.gear,'gear');
-['#g1','#g2','#g3'].forEach(x=>$(x).className='gl'+(S.gear==='DN'?' g':''));
-  pos('#flap',['UP',1,2,5,10,15],S.flap===0?'UP':S.flap,'flap');
-}
 function pfd(){
-  const ias=S.ias,alt=S.alt;const sc=3.2;/* px per kt */
-  const tick=[];for(let v=Math.floor((ias-40)/10)*10;v<=ias+40;v+=10){if(v<0)continue;const y=150-(v-ias)*sc;tick.push(`<line x1="58" x2="66" y1="${y}" y2="${y}" stroke="#fff"/>${v%20===0?`<text x="52" y="${y+4}" text-anchor="end" fill="#fff" font-size="11">${v}</text>`:''}`)}
-  const bug=(v,l,c)=>{const y=150-(v-ias)*sc;return y<20||y>280?'':`<line x1="66" x2="76" y1="${y}" y2="${y}" stroke="${c}" stroke-width="2"/><text x="78" y="${y+4}" fill="${c}" font-size="10">${l}</text>`};
+  const ias=S.ias,alt=S.alt,sc=3.2,tk=[];
+  for(let v=Math.floor((ias-40)/10)*10;v<=ias+40;v+=10){if(v<0)continue;const y=150-(v-ias)*sc;tk.push(`<line x1="58" x2="66" y1="${y}" y2="${y}" stroke="#fff"/>${v%20===0?`<text x="52" y="${y+4}" text-anchor="end" fill="#fff" font-size="11">${v}</text>`:''}`)}
+  const bug=(v,l,c)=>{const y=150-(v-ias)*sc;return y<34||y>268?'':`<line x1="66" x2="76" y1="${y}" y2="${y}" stroke="${c}" stroke-width="2"/><text x="78" y="${y+4}" fill="${c}" font-size="10">${l}</text>`};
   const hy=150+S.pitch*5;
-  const fmaSpd=S.lvl?'':(S.air?'':''),fmaRoll=S.hdgSel?'HDG SEL':'TO/GA',fmaPitch=S.lvl?'LVL CHG':S.air?'TO/GA':'TO/GA';
-  $('#pfd').innerHTML=`<g font-family="B612 Mono,monospace">
-   <rect x="0" y="0" width="360" height="300" fill="#050708"/>
+  $('#pfd').innerHTML=`<g font-family="B612 Mono,monospace"><rect width="360" height="300" fill="#050708"/>
    <rect x="80" y="4" width="240" height="30" fill="none" stroke="#333"/><line x1="160" x2="160" y1="4" y2="34" stroke="#333"/><line x1="240" x2="240" y1="4" y2="34" stroke="#333"/>
-   <text x="120" y="24" text-anchor="middle" fill="#FFB21E" font-size="10">A/T INOP</text><text x="200" y="24" text-anchor="middle" fill="#39E27B" font-size="12">${fmaRoll}</text><text x="280" y="24" text-anchor="middle" fill="#39E27B" font-size="12">${fmaPitch}</text>
-   <text x="200" y="50" text-anchor="middle" fill="#39E27B" font-size="13" font-weight="700">${S.cmdA?'CMD':'FD'}</text>
+   <text x="120" y="24" text-anchor="middle" fill="#FFB21E" font-size="10">A/T INOP</text><text x="200" y="24" text-anchor="middle" fill="#39E27B" font-size="12">${S.hdgSel?'HDG SEL':'TO/GA'}</text><text x="280" y="24" text-anchor="middle" fill="#39E27B" font-size="12">${S.lvl?'LVL CHG':'TO/GA'}</text>
+   <text x="200" y="50" text-anchor="middle" fill="#39E27B" font-size="13" font-weight="700">FD</text>
    <defs><clipPath id="a"><rect x="110" y="60" width="180" height="180" rx="12"/></clipPath></defs>
    <g clip-path="url(#a)"><rect x="100" y="-400" width="200" height="${hy+400}" fill="#2A6FB0"/><rect x="100" y="${hy}" width="200" height="500" fill="#7B4B22"/><line x1="100" x2="300" y1="${hy}" y2="${hy}" stroke="#fff"/>
     ${[5,10,15,20].map(p=>`<line x1="185" x2="215" y1="${hy-p*5}" y2="${hy-p*5}" stroke="#fff"/><text x="222" y="${hy-p*5+4}" fill="#fff" font-size="9">${p}</text>`).join('')}</g>
    <path d="M150 150 h28 v6 M250 150 h-28 v6" stroke="#fff" stroke-width="3" fill="none"/><rect x="197" y="147" width="6" height="6" fill="#fff"/>
-   <rect x="8" y="30" width="72" height="240" fill="#1A1D20"/>${tick.join('')}
+   <text x="118" y="232" fill="#fff" font-size="10">PITCH ${S.pitch.toFixed(1)}°</text>
+   <rect x="8" y="30" width="72" height="240" fill="#1A1D20"/>${tk.join('')}
    ${bug(V1,'V1','#F25BE3')}${bug(VR,'R','#48D3F0')}${bug(V2,'V2','#F25BE3')}${bug(F5,'5','#48D3F0')}${bug(F1,'1','#48D3F0')}${bug(FUP,'UP','#48D3F0')}
    <rect x="8" y="138" width="56" height="24" fill="#000" stroke="#fff"/><text x="36" y="156" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">${Math.round(ias)}</text>
-   <rect x="296" y="30" width="60" height="240" fill="#1A1D20"/>
-   <rect x="296" y="138" width="60" height="24" fill="#000" stroke="#fff"/><text x="326" y="156" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">${Math.round(alt-11)}</text>
-   <text x="326" y="130" text-anchor="middle" fill="#9AA6B1" font-size="9">${S.vs>0?'+'+Math.round(S.vs):Math.round(S.vs)} fpm</text>
-   <text x="200" y="232" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">${S.air?Math.round(alt):''}</text>
-   <text x="200" y="262" text-anchor="middle" fill="#9AA6B1" font-size="10">HDG 181 · ${S.air?'AIRBORNE':'GROUND ROLL'}</text>
-   <text x="200" y="285" text-anchor="middle" fill="#FFB21E" font-size="10">T+${Math.round(S.t)} s${S.firstBottle?` · bottle 1: ${Math.floor(S.t-S.firstBottle)} s`:''}</text></g>`;
+   <rect x="296" y="30" width="60" height="240" fill="#1A1D20"/><rect x="296" y="138" width="60" height="24" fill="#000" stroke="#fff"/>
+   <text x="326" y="156" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">${Math.round(alt-11)}</text>
+   <text x="326" y="130" text-anchor="middle" fill="#9AA6B1" font-size="9">${S.vs>0?'+':''}${Math.round(S.vs)} fpm</text>
+   <text x="250" y="232" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">${S.air?Math.round(alt):''}</text>
+   <text x="200" y="262" text-anchor="middle" fill="#9AA6B1" font-size="10">HDG 181 · ${S.air?'AIRBORNE':S.run?'TAKEOFF ROLL':'LINED UP 18L'}</text>
+   <text x="200" y="285" text-anchor="middle" fill="#FFB21E" font-size="10">${S.firstBottle!==null?`bottle 1 + ${Math.floor(S.t-S.firstBottle)} s`:''}</text></g>`;
 }
 function eng(){
-  const dial=(cx,cy,v,lab,warn)=>{const a=-210+Math.min(110,v)/110*240;const r=34;const x=cx+r*Math.cos(a*Math.PI/180),y=cy+r*Math.sin(a*Math.PI/180);
+  const dial=(cx,cy,v,warn)=>{const a=-210+Math.min(110,v)/110*240,r=34,x=cx+r*Math.cos(a*Math.PI/180),y=cy+r*Math.sin(a*Math.PI/180);
     return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="160 60" transform="rotate(150 ${cx} ${cy})"/><line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${warn?'#FF3B30':'#fff'}" stroke-width="3"/>
     <rect x="${cx-4}" y="${cy-44}" width="44" height="18" fill="#000" stroke="#fff"/><text x="${cx+18}" y="${cy-31}" text-anchor="middle" fill="${warn?'#FF3B30':'#fff'}" font-size="12">${v.toFixed(1)}</text>`};
   const egt=(cx,cy,v)=>{const w=v>950;return `<rect x="${cx-26}" y="${cy-10}" width="52" height="20" fill="#000" stroke="${w?'#FF3B30':'#fff'}"/><text x="${cx}" y="${cy+5}" text-anchor="middle" fill="${w?'#FF3B30':'#fff'}" font-size="12">${Math.round(v)}</text>`};
   $('#eng').innerHTML=`<g font-family="B612 Mono,monospace"><rect width="260" height="300" fill="#050708"/>
    <text x="130" y="18" text-anchor="middle" fill="#48D3F0" font-size="11">TO-2 · N1 88.2${S.tl1==='MCT'?' · CON':''}</text>
-   ${dial(70,80,S.n1[0],'1',false)}${dial(190,80,S.n1[1],'2',S.fire)}
-   <text x="130" y="84" text-anchor="middle" fill="#9AA6B1" font-size="10">N1</text>
+   ${dial(70,80,S.n1[0],false)}${dial(190,80,S.n1[1],S.fire)}<text x="130" y="84" text-anchor="middle" fill="#9AA6B1" font-size="10">N1</text>
    ${egt(70,160,S.egt[0])}${egt(190,160,S.egt[1])}<text x="130" y="164" text-anchor="middle" fill="#9AA6B1" font-size="10">EGT</text>
    ${S.fire?'<rect x="150" y="185" width="80" height="22" fill="#FF3B30"/><text x="190" y="200" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">ENG 2 FIRE</text>':''}
    ${S.sl2==='CUTOFF'?'<text x="190" y="228" text-anchor="middle" fill="#FFB21E" font-size="10">ENG 2 SHUTDOWN</text>':''}
    <text x="130" y="262" text-anchor="middle" fill="#9AA6B1" font-size="10">FLAPS ${S.flap===0?'UP':S.flap} · GEAR ${S.gear}</text>
    <text x="130" y="282" text-anchor="middle" fill="#9AA6B1" font-size="10">ENG A/I ON · OAT −4 °C</text></g>`;
 }
-function palette(){
-  $('#palTitle').textContent=`Your calls (${role})`;
-  $('#pal').innerHTML=CALLS[role].slice().sort().map(c=>`<button class="say" data-call="${esc(c)}">${esc(c)}</button>`).join('');
-}
 
-/* ======================= debrief & FORDEC ======================= */
 function finish(){
-  if(S.done)return;S.done=true;S.run=false;cancelAnimationFrame(raf);$('#hint').textContent='';
+  if(S.done)return;S.done=true;S.run=false;S.pend=null;cancelAnimationFrame(raf);
+  idle(S.crit?'Run stopped: critical error. See the debrief below.':'Airborne, clean, MCT, checklists done. Debrief and FORDEC below.');
   const mine=STEPS.concat(SB).filter(s=>s.who===role);
-  const rows=mine.map(s=>{const r=S.res[s.id];const st=r?r.status:(S.crit?'—':'missed');return `<tr><td>${s.type==='call'?`<b>"${esc(s.key)}"</b>`:esc(s.txt||s.key)}</td><td class="${st==='ok'?'ok':st==='late'?'late':'miss'}">${st==='ok'?'On time':st==='late'?'Late':st==='—'?'—':'Missed'}</td><td>${esc(s.ref)}</td></tr>`}).join('');
-  const ok=mine.filter(s=>S.res[s.id]&&S.res[s.id].status==='ok').length;
-  $('#deb').innerHTML=`<div class="card">
-   <span class="lbl">Debrief · you were ${role}</span>
-   <div class="big" style="color:${S.crit?'var(--bad)':'var(--ink)'}">${S.crit?'Critical error':`${ok}/${mine.length} on time · ${S.errors.length} error${S.errors.length===1?'':'s'}`}</div>
-   ${S.crit?`<p class="expl">${esc(S.crit)} OM-B 3.10 exists for exactly this: hand on the lever, "CONFIRM", the other pilot checks the number, then the action.</p>`:''}
-   ${S.errors.length?`<div><span class="lbl">Errors</span><ul>${S.errors.map(e=>`<li>T+${e.t} s · ${esc(e.msg)}</li>`).join('')}</ul></div>`:''}
+  const lab={ok:['ok','Right, first pick'],late:['late','Right, but slow'],errors:['late','Right after a wrong pick'],missed:['miss','Missed']};
+  const rows=mine.map(s=>{const r=S.res[s.id];const k=r?r.status:(S.crit?null:'missed');const L=k?lab[k]:['','—'];return `<tr><td>${s.type==='call'?`<b>"${esc(s.key)}"</b>`:esc(s.txt)}</td><td class="${L[0]}">${L[1]}</td><td>${esc(s.ref)}</td></tr>`}).join('');
+  const clean=mine.filter(s=>S.res[s.id]&&S.res[s.id].status==='ok').length;
+  $('#deb').innerHTML=`<div class="card"><span class="lbl">Debrief · you were ${role}</span>
+   <div class="big" style="color:${S.crit?'var(--bad)':'var(--ink)'}">${S.crit?'Critical error':`${clean}/${mine.length} clean · ${S.errors.length} wrong pick${S.errors.length===1?'':'s'}`}</div>
+   ${S.crit?`<p class="expl">${esc(S.crit)} This is why OM-B 3.10 has hand on the control, "CONFIRM", the other pilot checks the number, then the action.</p>`:''}
+   ${S.errors.length?`<div><span class="lbl">Wrong picks</span><ul>${S.errors.map(e=>`<li>${esc(e.msg)}</li>`).join('')}</ul></div>`:''}
    <div class="tw"><table class="t"><tr><th>Your item</th><th>Result</th><th>Reference</th></tr>${rows}</table></div>
-  </div>
-  ${S.crit?'':`<div class="card" style="margin-top:12px" id="fordec">
-   <span class="lbl">FORDEC · time critical</span>
-   <p class="expl"><b>F:</b> Engine 2 fire, both bottles discharged, <b>fire continues</b>. OEI, 3000 ft on the EOSID, ~69 t (MLW 66,360 kg), A/T INOP. EHAM: 12022KT, SN BLSN, M04. RWY 06 RWYCC 4, RVR 1000 m · 18L RVR 200 m · 18C RWYCC 2. All other runways closed.<br>An inextinguishable fire is the textbook time-critical case: pick the <b>first acceptable option</b> and land as soon as possible.</p>
-   <p class="lbl">Where do you land?</p>
-   <div class="opt" id="opts">
+   <div class="row"><button class="btn pri" id="again">Fly it again</button><button class="btn" id="swap">Fly it as ${role==='PF'?'PM':'PF'}</button></div></div>
+  ${S.crit?'':`<div class="card"><span class="lbl">FORDEC · time critical</span>
+   <p class="expl"><b>F:</b> ENG 2 fire, both bottles discharged, <b>fire continues</b>. One engine, 3000 ft on the EOSID, ≈69 t (MLW 66.4 t), A/T INOP. EHAM 12022KT SN BLSN M04. RWY 06 RWYCC 4 RVR 1000 m · 18L RVR 200 m · 18C RWYCC 2. Other runways closed. An inextinguishable fire is the time-critical case: take the <b>first acceptable option</b> and land as soon as possible.</p>
+   <p class="lbl">Where do you land?</p><div class="fopt" id="fopt">
     <button data-o="06">EHAM 06 · ILS CAT I, RVR 1000 m, now, overweight, flaps 15, no reverse planned</button>
     <button data-o="18L">EHAM 18L · ILS, RVR 200 m, autoland</button>
     <button data-o="18C">EHAM 18C · RWYCC 2, RVR 250 m</button>
     <button data-o="EBBR">EBBR Brussels · CAT III runways, about 25 min away</button>
-    <button data-o="hold">Hold at AMSX4 to burn fuel down to MLW first</button>
-   </div><div class="expl" id="fexp"></div></div>`}`;
+    <button data-o="hold">Hold at AMSX4 and burn fuel down to MLW first</button></div><div class="expl" id="fexp"></div></div>`}`;
   $('#deb').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
 }
 const FEXP={
- '06':[true,'Correct. RWY 06 is the only EHAM runway you can legally land on: RVR 1000 m meets CAT I, and CAT I is all you have on one engine (autoland needs both engines, OM-B 1.5.1). Crosswind is about 20 kt against the RWYCC 4 limit of 20 kt. The limit drops to 15 kt only when asymmetric reverse is used, so brief <b>no reverse</b> (or idle only) and take the QRH landing distance without reverse. Overweight landing is accepted in an emergency (OM-A 8.3.1.19.1): flaps 15 OEI (no EO flaps 30 is planned, OM-B), no autoland, full length, max manual braking. Execute: MAYDAY is already out; brief SCCM with TTRR (Type, Time, Risks, Re-seating), PA to passengers, IOCC; ONE ENGINE INOPERATIVE LANDING checklist; cold temperature corrections at −4 °C on own-navigation altitudes. Check: re-assess on the way (RVR, wind, fire).'],
- '18L':[false,'Not possible. RVR 200 m needs CAT II/III, and CAT II/III needs a dual-channel autoland with both engines operating (OM-B 1.5.1, 1.5.3.1). On one engine you are CAT I, and 200 m is far below CAT I.'],
- '18C':[false,'Not possible. RWYCC 2 has a 5 kt crosswind limit (OM-B RCAM table); 120/22 gives about 20 kt. RVR 250 m is also below CAT I.'],
- 'EBBR':[false,'Acceptable weather and long runways maybe, but about 25 more minutes with a fire that does not go out. Time critical means you minimise in-flight time and choose the first acceptable option. EHAM 06 is acceptable and is right below you.'],
- 'hold':[false,'Never with a fire that continues. Overweight landing is exactly the case OM-A allows when continuing the flight is less safe. Burning fuel buys nothing and costs the airplane.']
+ '06':[1,'Correct. RWY 06 is the only EHAM runway you can use: RVR 1000 m meets CAT I, and CAT I is all you have on one engine (autoland needs both engines, OM-B 1.5.1). Crosswind is about 20 kt against the RWYCC 4 limit of 20 kt; the limit drops to 15 kt only when asymmetric reverse is used, so brief <b>no reverse</b> and use the QRH landing distance without it. Overweight landing is accepted in an emergency (OM-A 8.3.1.19.1). Flaps 15 OEI (no EO flaps 30 is planned, OM-B), no autoland, full length, max manual braking. <b>Execute:</b> SCCM with TTRR (Type, Time, Risks, Re-seating), PA, IOCC, ONE ENGINE INOPERATIVE LANDING checklist, cold temperature corrections at −4 °C on own-navigation altitudes. <b>Check:</b> keep re-assessing RVR, wind and the fire.'],
+ '18L':[0,'Not possible. RVR 200 m needs CAT II/III, which needs a dual-channel autoland with both engines (OM-B 1.5.1, 1.5.3.1). On one engine you are CAT I, and 200 m is far below it.'],
+ '18C':[0,'Not possible. RWYCC 2 allows 5 kt of crosswind; 120/22 gives about 20 kt. RVR 250 m is also below CAT I.'],
+ 'EBBR':[0,'About 25 more minutes with a fire that does not go out. Time critical means minimum time in the air and the first acceptable option. EHAM 06 is acceptable and right below you.'],
+ 'hold':[0,'Never with a fire that continues. Overweight landing is exactly what OM-A allows when staying airborne is less safe.']
 };
-document.addEventListener('click',e=>{const o=e.target.closest('[data-o]');if(!o)return;const [ok,t]=FEXP[o.dataset.o];
-  document.querySelectorAll('#opts button').forEach(b=>b.classList.remove('right','wrong'));o.classList.add(ok?'right':'wrong');
-  $('#fexp').innerHTML=`<p style="margin-top:10px">${t}</p>`});
 
-/* ======================= wiring ======================= */
-function start(){reset();S.run=true;log('ATC','SunExpress 2UM, wind 120 degrees 22 knots, runway 18L cleared for takeoff');log(role==='PF'?'PF':'PF','(thrust set manually N1 88.2, A/T INOP)');S.last=performance.now();raf=requestAnimationFrame(tick)}
-$('#startBtn').onclick=start;$('#resetBtn').onclick=reset;
+function start(){reset();S.run=true;S.last=performance.now();log('ATC','SunExpress 2UM, wind 120 degrees 22 knots, runway 18L cleared for takeoff');log('PF','(thrust set by hand, N1 88.2, A/T INOP)');idle();raf=requestAnimationFrame(tick)}
+$('#startBtn').onclick=start;
 document.addEventListener('click',e=>{
-  const r=e.target.closest('[data-role]');if(r){role=r.dataset.role;document.querySelectorAll('[data-role]').forEach(b=>b.setAttribute('aria-pressed',b===r));palette();reset();return}
-  const rt=e.target.closest('[data-rate]');if(rt){rate=+rt.dataset.rate;document.querySelectorAll('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',b===rt));return}
-  if(e.target.id==='hintBtn'){hints=!hints;e.target.setAttribute('aria-pressed',hints);e.target.textContent=hints?'On':'Off';$('#hint').textContent='';return}
-  const c=e.target.closest('[data-call]');if(c){userCall(c.dataset.call);return}
-  const a=e.target.closest('[data-act]');if(a){userAct(a.dataset.act);return}
-  const id=e.target.closest('button')?.id;
-  const map={rot:'rotate',sl1:S&&S.sl1==='IDLE'?'sl1:CUTOFF':'sl1:IDLE',sl2:'sl2:CUTOFF',fh1:'fs1:PULL',fh2:'fs2:PULL',fwL:'fw:CANCEL',kHdg:'hdg',kLvl:'lvl',kCmdA:'cmdA',clk:'clk:START'};
-  if(id&&map[id]){userAct(map[id]);return}
-  const ro=e.target.closest('[data-rot]');if(ro){const k=ro.dataset.rot;if(k[0]==='1'){userAct('fs1:ROT')}else{userAct(S.bL?'fs2:ROT2':'fs2:ROT1')}}
+  const r=e.target.closest('[data-role]');if(r){role=r.dataset.role;document.querySelectorAll('[data-role]').forEach(b=>b.setAttribute('aria-pressed',b===r));reset();return}
+  const o=e.target.closest('.opt');if(o){choose(+o.dataset.i);return}
+  if(e.target.id==='again'){start();window.scrollTo({top:0});return}
+  if(e.target.id==='swap'){const nr=role==='PF'?'PM':'PF';role=nr;document.querySelectorAll('[data-role]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.role===nr));start();window.scrollTo({top:0});return}
+  const f=e.target.closest('[data-o]');if(f){const [ok,t]=FEXP[f.dataset.o];document.querySelectorAll('#fopt button').forEach(b=>b.classList.remove('right','wrong'));f.classList.add(ok?'right':'wrong');$('#fexp').innerHTML=`<p style="margin-top:10px">${t}</p>`}
 });
-palette();reset();
+document.addEventListener('keydown',e=>{if(S&&S.pend&&/^Digit[1-4]$/.test(e.code)){e.preventDefault();choose(+e.code.slice(-1)-1)}});
+reset();
 </script>
