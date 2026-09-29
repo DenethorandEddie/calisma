@@ -110,7 +110,7 @@ canvas.win{width:100%;height:auto;border-radius:8px;border:1px solid var(--deck-
   <header class="top">
     <div>
       <h1>LVO Decision Trainer</h1>
-      <p>737-800 · right seat · SunExpress CAT I / II / III. Fly the approach down to minimums. Press GO AROUND only when the procedure requires it. Pressing it when it is not needed also fails the run.</p>
+      <p>737-800 · right seat · SunExpress CAT I / II / III. The Captain flies; you are PM down to minimums. Press GO AROUND only when the procedure requires it. Pressing it when it is not needed also fails the run.</p>
     </div>
     <div class="score">
       <div><span class="lbl">Runs</span><b id="sRuns">0</b></div>
@@ -154,7 +154,7 @@ canvas.win{width:100%;height:auto;border-radius:8px;border:1px solid var(--deck-
   <section class="rules">
     <span class="lbl">Rules the scenarios test</span>
     <ul>
-      <li><b>FO role:</b> in CAT II/III you are PM (OM-A 5.1.4.5.2). You watch head-down to roll-out, call deviations and failures, and if the Captain does not respond you initiate the go-around. Any malfunction after the Captain goes head-up: you call <span class="say">"GO AROUND"</span> (OM-A 8.4.1.4).</li>
+      <li><b>FO role:</b> in LVO the Captain is PF and you are PM (OM-A 5.1.4.5.2). You watch head-down to roll-out, call deviations and failures, and if the Captain does not respond you initiate the go-around. Any malfunction after the Captain goes head-up: you call <span class="say">"GO AROUND"</span> (OM-A 8.4.1.4).</li>
       <li><b>CAT II and III</b> need a dual-channel automatic approach and landing, flaps 30 or 40, both engines operating, an operative EFIS control panel, and a runway at least 45 m wide (OM-B 1.5.1, 1.5.3.1).</li>
       <li><b>Autoland wind limits</b>, gusts included: headwind 25 kt, crosswind 10 kt, tailwind 10 kt (OM-B 1.5.1).</li>
       <li><b>Stabilized approach</b> (OM-A 8.3.1.16.6): stable by 1000 ft, landing flaps set, speed within target +10 / −5 kt. Deviation limits: CAT I 1 dot, CAT II/III ½ dot on the localizer and the glideslope.</li>
@@ -171,7 +171,7 @@ canvas.win{width:100%;height:auto;border-radius:8px;border:1px solid var(--deck-
 /* ---------------- scenarios ----------------
  need: go-around required · trig: RA (ft) where the reason appears · dl: last RA to press
  ev: timed events {at, who, t, set}  · vis: RA where lights become visible (0 = never)
- cat: 'I' (you PF, manual) | 'II' | 'IIIA' (you PM, autoland) */
+ cat: 'I' (manual landing) | 'II' | 'IIIA' (autoland). In every scenario the Captain is PF and you are PM. */
 const S = [
 {id:'c3ok', cat:'IIIA', elev:-11, rwy:'EHAM 06', dh:50, rvr:'R06/0250N', wx:'EHAM 101520Z 05006KT 0200 R06/0250N FG VV001 01/01 Q1022', wind:[50,6], need:false, vis:75,
  title:'Normal CAT IIIA autoland', ev:[],
@@ -223,13 +223,13 @@ const S = [
  why:'120/22 on runway 06 (055°): the angle is 65°, so crosswind is about 20 kt. The autoland limit is 10 kt, so no CAT III. RVR 250 m is below CAT I. It is a go-around, and really a diversion decision (FORDEC) that should have been made before the approach.', say:'"CROSSWIND ABOVE AUTOLAND LIMIT — GO AROUND"', ref:'OM-B 1.5.1 · OPC-6 data sheet', src:'company'},
 {id:'c1vis', cat:'I', elev:412, rwy:'LTBJ 34L', dh:200, rvr:'R34L/0700N', wx:'LTBJ 151320Z 33008KT 0700 R34L/0700N BR OVC002 03/03 Q1023', wind:[330,8], need:false, vis:260,
  title:'CAT I: approach lights at DA', ev:[],
- why:'You were PF on a CAT I with RVR 700 m. The approach lights came through above DA, so you have the visual reference. Continue and land manually.', say:'"LANDING" (PF)', ref:'OM-B 1.5.3.1 (CAT I: manual or automatic approach, manual landing)', src:'company'},
+ why:'CAT I with RVR 700 m. The approach lights came through above DA and the Captain called "LANDING". The PF had the required visual reference, so you keep monitoring head-down and let the Captain land.', say:'(monitor; no call needed)', ref:'OM-B 1.5.3.1 (CAT I: manual or automatic approach, manual landing)', src:'company'},
 {id:'c1novis', cat:'I', elev:412, rwy:'LTBJ 34L', dh:200, rvr:'R34L/0600N', wx:'LTBJ 151320Z 33006KT 0600 R34L/0600N FG VV002 02/02 Q1024', wind:[330,6], need:true, trig:200, dl:170, vis:0,
  title:'CAT I: nothing at DA', ev:[],
- why:'At DA 200 ft there was nothing outside. Without the required visual reference at DA you go around: TO/GA, thrust (manually, A/T INOP), "GO AROUND, FLAPS 15".', say:'"GO AROUND, FLAPS 15"', ref:'OM-B 1.5.3.1 · Boeing go-around (not in the screenshots)', src:'Boeing'},
+ why:'At DA there was nothing outside and the Captain did not call "LANDING". Without the required visual reference at DA a go-around is mandatory. If the PF does not respond, the PM initiates the go-around. The Captain then flies it: TO/GA, thrust by hand (A/T INOP), "GO AROUND, FLAPS 15".', say:'"GO AROUND"', ref:'OM-A 8.4.1.4 (PM initiates if no response from PF) · OM-B 1.5.3.1', src:'company'},
 {id:'c1speed', cat:'I', elev:412, rwy:'LTBJ 34L', dh:200, rvr:'R34L/0800N', wx:'LTBJ 151320Z 34012G22KT 0800 R34L/0800N BR OVC003 04/03 Q1023', wind:[340,12], need:true, trig:450, dl:200, vis:280,
- title:'CAT I: speed Vref+15 below 500 ft', ev:[{at:450,who:'CAPT',t:'"SPEED plus fifteen"',set:{spdTo:15}}],
- why:'Stable means speed within target +10 / −5 kt. At 450 ft you were +15 and not coming back. That is an unstable approach, so it is a go-around even though the lights would have come.', say:'"GO AROUND, FLAPS 15"', ref:'OM-A 8.3.1.16.6 (speed +10/−5)', src:'company'},
+ title:'CAT I: speed Vref+15 below 500 ft', ev:[{at:450,who:'SYS',t:'IAS rising: Vref +15',set:{spdTo:15}}],
+ why:'Stable means speed within target +10 / −5 kt. At 450 ft the Captain was +15 and not correcting. That is an unstable approach, so it is a go-around even though the lights would have come. As PM you call the deviation, then the go-around.', say:'"SPEED" … "GO AROUND"', ref:'OM-A 8.3.1.16.6 (speed +10/−5)', src:'company'},
 {id:'c1gust', cat:'I', elev:412, rwy:'LTBJ 34L', dh:200, rvr:'R34L/0800N', wx:'LTBJ 151320Z 34012G20KT 0800 R34L/0800N BR OVC003 04/03 Q1023', wind:[340,12], need:false, vis:280,
  title:'CAT I: short gust +7 kt', ev:[{at:420,who:'SYS',t:'',set:{spdTo:7}},{at:330,who:'SYS',t:'',set:{spdTo:2}}],
  why:'The gust took the speed to +7 kt for a moment. That is inside +10 / −5, and OM-A accepts brief fluctuations in gusty conditions. The approach stayed stable, so land.', say:'(continue)', ref:'OM-A 8.3.1.16.6', src:'company'}
@@ -255,16 +255,16 @@ function score(){
 }
 
 /* ---------------- briefing ---------------- */
-function role(s){return s.cat==='I'?'You: PF (Captain PM)':'You: PM (OM-A 5.1.4.5.2)'}
+function role(s){return 'Captain PF · You PM'}
 function minima(s){return s.cat==='I'?'DA 200 ft · RVR 550 m':s.cat==='II'?'DH 100 ft RA · RVR 300 m':'DH 50 ft RA · RVR 200 m'}
 function brief(s){
   const i=S.indexOf(s)+1;
   $('#brief').innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><h2>Scenario ${String(i).padStart(2,'0')} · ILS ${s.rwy.split(' ')[1]} · CAT ${s.cat}</h2><span class="role">${role(s)}</span></div>
   <div class="metar">${esc(s.wx)}</div>
   <div class="kv"><div><span class="lbl">Airport / runway</span><b>${s.rwy}</b></div><div><span class="lbl">Minima (drill)</span><b>${minima(s)}</b></div>
-   <div><span class="lbl">Automation</span><b>${s.cat==='I'?'Manual landing':'CMD A + B · autoland'}</b></div><div><span class="lbl">Landing flaps</span><b>30</b></div>
+   <div><span class="lbl">Automation</span><b>${s.cat==='I'?'Captain: manual landing':'CMD A + B · autoland'}</b></div><div><span class="lbl">Landing flaps</span><b>30</b></div>
    <div><span class="lbl">LVP</span><b>${s.cat==='I'?'n/a':'In force'}</b></div><div><span class="lbl">Aircraft</span><b>737-800 · both engines</b></div></div>
-  <p class="task">${s.cat==='I'?'You fly. Decide at DA: visual reference → land, nothing → go around. Watch speed and deviations on the way down.':'The Captain flies and looks out from 100 ft above DH. You stay head-down: FMA, deviations, warnings, radio. Press GO AROUND only when you must call it.'}</p>
+  <p class="task">${s.cat==='I'?'The Captain flies and lands manually. You monitor speed, deviations and the FMA and make the PM calls. At DA he calls "LANDING" if he has the visual reference; if he says nothing, you call the go-around.':'The Captain flies and looks out from 100 ft above DH. You stay head-down: FMA, deviations, warnings, radio. Press GO AROUND only when you must call it.'}</p>
   <div><button class="btn pri" id="startBtn">Start approach · 1500 ft RA</button></div>`;
 }
 
@@ -273,7 +273,8 @@ function base(s){
   const e=[{at:1000,who:'AURAL',t:'"ONE THOUSAND"'},{at:500,who:'AURAL',t:'"FIVE HUNDRED"'},{at:s.dh+100,who:'AURAL',t:'"APPROACHING MINIMUMS"'},{at:s.dh,who:'AURAL',t:'"MINIMUMS"',set:{mins:1}}];
   if(s.cat!=='I'){[40,30,20,10].forEach(a=>{if(a<s.dh)e.push({at:a,who:'AURAL',t:`"${a===40?'FORTY':a===30?'THIRTY':a===20?'TWENTY':'TEN'}"`})});
     e.push({at:1450,who:'CAPT',t:'"FLARE armed, dual channel"'});e.push({at:50,who:'SYS',t:'FMA: FLARE',set:{flare:1}});e.push({at:27,who:'SYS',t:'FMA: RETARD',set:{retard:1}});
-    if(s.vis)e.push({at:s.dh,who:'CAPT',t:'"LANDING"'});}
+  }
+  if(s.vis)e.push({at:s.dh,who:'CAPT',t:'"LANDING"'});
   return e;
 }
 function start(){
@@ -282,7 +283,7 @@ function start(){
     evs:base(s).concat(s.ev).sort((a,b)=>b.at-a.at),fired:new Set(),pressed:null,reasonSeen:false,ended:false,last:performance.now(),touch:null};
   $('#log').innerHTML='';$('#result').innerHTML='';
   log('ATC',`"SunExpress 2UM, cleared ILS ${s.rwy.split(' ')[1]}${s.cat==='I'?'':', LVP in force'}"`);
-  $('#gaBtn').disabled=false;$('#gaSub').textContent=s.cat==='I'?'TO/GA · you are PF · Space':'Call "GO AROUND" · you are PM · Space';
+  $('#gaBtn').disabled=false;$('#gaSub').textContent='Call "GO AROUND" · you are PM · Space';
   $('#deck').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   raf=requestAnimationFrame(tick);
 }
@@ -302,7 +303,7 @@ function tick(now){
 }
 function press(){
   const r=run;if(!r||r.ended)return;
-  r.pressed=Math.round(r.ra);log('YOU',sc.cat==='I'?'"GO AROUND, FLAPS 15" — TO/GA, thrust':'"GO AROUND"');
+  r.pressed=Math.round(r.ra);log('YOU','"GO AROUND"');
   if(!sc.need)return finish(false,'false');
   if(!r.reasonSeen)return finish(false,'early');
   finish(true,'ga');
