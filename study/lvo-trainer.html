@@ -193,7 +193,7 @@ const S = [
  why:'CAT II needs RVR 300 m. The drop to 250 m came at 1350 ft, above 1000 ft above the aerodrome, so the approach ban applies and you may not continue. Discontinue the approach with a go-around.', say:'"RVR BELOW MINIMA — GO AROUND"', ref:'EASA CAT.OP.MPA.305 approach ban (OM-A page not in the screenshots)', src:'EASA'},
 {id:'banAfter', cat:'II', elev:-11, rwy:'EHAM 18C', dh:100, rvr:'R18C/0400N', wx:'EHAM 101520Z 17005KT 0400 R18C/0400N FG VV002 02/02 Q1020', wind:[170,5], need:false, vis:135,
  title:'RVR falls below minima after 1000 ft', ev:[{at:700,who:'ATC',t:'"SunExpress 2UM, RVR touchdown now 250 metres"',set:{}}],
- why:'The RVR drop came at 700 ft, below 1000 ft above the aerodrome. The approach ban no longer applies: you may continue to DH and land if the Captain has the visual reference, which he did ("LANDING").', say:'(continue; acknowledge the RVR)', ref:'EASA CAT.OP.MPA.305 (OM-A page not in the screenshots)', src:'EASA'},
+ why:'The RVR drop came at 700 ft, below 1000 ft above the aerodrome. The approach ban no longer applies: you may continue to DH and land if the Captain has the visual reference, and the Captain called "LANDING".', say:'(continue; acknowledge the RVR)', ref:'EASA CAT.OP.MPA.305 (OM-A page not in the screenshots)', src:'EASA'},
 {id:'gsDev', cat:'II', elev:-11, rwy:'EHAM 06', dh:100, rvr:'R06/0400N', wx:'EHAM 101520Z 05008KT 0400 R06/0400N FG OVC001 01/01 Q1021', wind:[50,8], need:true, trig:640, dl:100, vis:0,
  title:'Glideslope deviation beyond ½ dot', ev:[{at:700,who:'SYS',t:'',set:{gsTo:0.85}}],
  why:'The glideslope deviation passed ½ dot at about 640 ft. For CAT II/III the stabilized-approach limit is ½ dot. The approach is no longer stable, so it is a go-around, and as PM you call the deviation.', say:'"GLIDESLOPE — GO AROUND"', ref:'OM-A 8.3.1.16.6 (CAT II/III ½ dot)', src:'company'},
@@ -264,7 +264,7 @@ function brief(s){
   <div class="kv"><div><span class="lbl">Airport / runway</span><b>${s.rwy}</b></div><div><span class="lbl">Minima (drill)</span><b>${minima(s)}</b></div>
    <div><span class="lbl">Automation</span><b>${s.cat==='I'?'Captain: manual landing':'CMD A + B · autoland'}</b></div><div><span class="lbl">Landing flaps</span><b>30</b></div>
    <div><span class="lbl">LVP</span><b>${s.cat==='I'?'n/a':'In force'}</b></div><div><span class="lbl">Aircraft</span><b>737-800 · both engines</b></div></div>
-  <p class="task">${s.cat==='I'?'The Captain flies and lands manually. You monitor speed, deviations and the FMA and make the PM calls. At DA he calls "LANDING" if he has the visual reference; if he says nothing, you call the go-around.':'The Captain flies and looks out from 100 ft above DH. You stay head-down: FMA, deviations, warnings, radio. Press GO AROUND only when you must call it.'}</p>
+  <p class="task">${s.cat==='I'?'The Captain flies and lands manually. You monitor speed, deviations and the FMA and make the PM calls. At DA the Captain calls "LANDING" with the visual reference; if there is no call, you call the go-around.':'The Captain flies and looks out from 100 ft above DH. You stay head-down: FMA, deviations, warnings, radio. Press GO AROUND only when you must call it.'}</p>
   <div><button class="btn pri" id="startBtn">Start approach · 1500 ft RA</button></div>`;
 }
 
