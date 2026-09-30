@@ -1,0 +1,639 @@
+[
+ {
+  "module": "limits",
+  "after": "Runway condition & crosswind (RCAM)",
+  "ref": "FCOM L.10.1 (PDF p174)",
+  "title": "How to read the FCOM limitations chapter",
+  "html": "<p>FCOM chapter L holds AFM limitations, AFM operational information and non-AFM operational information. Items that must be memorised are marked <b>(#)</b>: \"flight crew access by reference cannot assure timely compliance, e.g., Maximum Takeoff and Landing Tailwind Component.\"</p><p>\"They need only be memorized to the extent that compliance is assured. Knowing the exact wording of the limitation is not required.\"</p><p>The FCOM gives no RWYCC crosswind table in chapter L. The OM-B crosswind values above are company limits and are <i>more restrictive</i> than Boeing's.</p>"
+ },
+ {
+  "module": "limits",
+  "after": "Tailwind · contamination · damp runways",
+  "ref": "FCOM L.10.2 (PDF p175)",
+  "title": "Boeing baseline: tailwind, slope, altitudes",
+  "html": "<ul><li><b># Maximum takeoff and landing tailwind component:</b> 15 kt on most tails, 10 kt on TC-SPM and TC-SPO (effectivity: some tails). Note: \"The capability of the airplane(s) has been satisfactorily demonstrated for takeoff and manual landing with tailwinds up to 15 knots.\"</li><li>Runway slope: <b>+/– 2%</b></li><li>Maximum takeoff and landing altitude: <b>8,400 ft</b> pressure altitude</li><li>Maximum operating altitude: <b>41,000 ft</b> pressure altitude</li><li>Maximum speeds: \"Observe gear and flap placards\"</li></ul><p>The OM-B tailwind limits (10 kt when the runway is not dry or shorter than 2,500 m, none below medium braking) are stricter and apply.</p>"
+ },
+ {
+  "module": "limits",
+  "after": "Weights (NG)",
+  "ref": "FCOM L.10.3–L.10.6 (PDF p176–179)",
+  "title": "FCOM structural weights",
+  "html": "<p>The FCOM gives <b>per-tail</b> maximum weights (effectivity: some tails). Taxi weights run from 77,226 to 79,242 kg, and takeoff weights from 77,000 to 79,015 kg. For every tail it lists <b>Maximum Landing Weight 66,360 kg</b> and <b>Maximum Zero Fuel Weight 62,731 kg</b>.</p><p>Some tails also have lower <b>alternate</b> maximum weights (for example alternate takeoff weights of 72,000–77,000 kg). \"Alternate weights are applicable only when operating under Alternate Weights appendices specified in the AFM ... and are placarded on the flight deck.\"</p><p>\"In the event of a conflict between the FCOM and the AFM, the AFM shall govern.\" For planning, use the OM-B and loadsheet figure for your tail.</p>"
+ },
+ {
+  "module": "limits",
+  "after": "Airplane general",
+  "ref": "FCOM L.10.2 (PDF p175)",
+  "title": "FCOM airplane-general AFM items",
+  "html": "<ul><li>\"Installation of handle covers on the overwing exits must be verified prior to departure whenever passengers are carried.\"</li><li>\"Verify that an operational check of the flight deck door access system has been accomplished according to approved procedures once each flight day.\"</li><li>Maximum flight operating latitude depends on the ADIRU MagVar tables: 82° N/S, with 70° N (or 73° N) and 60° S limits in certain longitude bands (effectivity: some tails).</li><li>ADIRU alignment \"must not be attempted at latitudes greater than 78 degrees 15 minutes\" (L.10.11).</li></ul>"
+ },
+ {
+  "module": "limits",
+  "after": "Air systems · Engines · APU",
+  "ref": "FCOM L.10.7 (PDF p180)",
+  "title": "Pressurization limit",
+  "html": "<p><b>AFM limitation:</b> \"The maximum cabin differential pressure (relief valves) is 9.1 psi.\"</p><p>The FCOM also lists the non-AFM rule that is already on this page: no packs in HIGH for takeoff, approach or landing with engine bleeds ON, unless a fire-protection NNC (CARGO FIRE, SMOKE/FUMES REMOVAL) requires HIGH.</p><p>The engine and APU items in FCOM L.10.9–L.10.10 match the OM-B list above in substance: ignition, no assumed temperature with anti-skid inoperative, no reverse in flight, APU altitude limits, bleed valve rules, and a 15-minute cooling period after three aborted APU starts.</p>"
+ },
+ {
+  "module": "limits",
+  "after": "Autoflight & low minima",
+  "ref": "FCOM L.10.7–L.10.8 (PDF p180–181)",
+  "title": "AFM autoland wind limits vs OM-B",
+  "html": "<p>\"# Airplanes operating with EASA Certification – Maximum allowable wind speeds, when conducting a dual channel Cat II or Cat III landing predicated on autoland operations\":</p><ul><li>Headwind <b>25 kt</b></li><li>Crosswind <b>20 kt</b> or <b>25 kt</b> (effectivity: some tails)</li><li>Tailwind 10 kt (TC-SPM, TC-SPO), or <b>15 kt flaps 40 / 12 kt flaps 30</b> on most tails (effectivity: some tails)</li></ul><p>The OM-B company limit (25 / 10 / 10 kt) is much tighter and applies.</p><p>On some tails with EASA certification: \"Autoland capability may only be used with flaps 30 with one engine operative and only for DH at or above 50 feet\" (effectivity: some tails).</p>"
+ },
+ {
+  "module": "limits",
+  "after": "Speeds · misc",
+  "ref": "FCOM L.10.12 (PDF p185)",
+  "title": "Fuel system limits",
+  "html": "<ul><li>\"Maximum tank fuel temperature is 49°C.\"</li><li>\"Minimum tank fuel temperature prior to takeoff and inflight is –43°C, or 3°C above the fuel freezing point temperature, whichever is higher.\" Fuel System Icing Inhibitor does not change this.</li><li>\"Intentional dry running of a center tank fuel pump (low pressure light illuminated) is prohibited\" (effectivity: some tails).</li><li>Fuel balance: \"Random fuel imbalance must not exceed 453 kgs for taxi, takeoff, flight or landing.\"</li><li>Fuel loading: \"Main tanks 1 and 2 must be full if center tank contains more than 453 kgs.\"</li></ul><p>At FL370 on a long cruise, keep an eye on fuel temperature.</p>"
+ },
+ {
+  "module": "limits",
+  "after": "Speeds · misc",
+  "ref": "FCOM L.10.11–L.10.13 (PDF p184–186)",
+  "title": "Navigation, GPWS and landing gear items",
+  "html": "<ul><li>\"All flight operations based on magnetic heading or magnetic track angle are prohibited in geographic areas where the installed IRS MagVar table errors are greater than 5 degrees.\"</li><li>GPWS: \"Do not use the terrain display for navigation.\" Do not use look-ahead terrain alerting and the terrain display within 15 nm of an airport or runway that is not in the GPWS terrain database.</li><li>Landing gear (non-AFM): \"Do not apply brakes until after touchdown.\"</li></ul>"
+ },
+ {
+  "module": "brief",
+  "after": "Weather",
+  "ref": "FCOM SP.16.2 · SP.16.9 (PDF p391, p398)",
+  "title": "Icing conditions and static run-up",
+  "html": "<p>\"Icing conditions exist when OAT (on the ground) or TAT (in flight) is 10°C or below and\" there is visible moisture (including snow, or fog with visibility of 1,600 m or less), \"or ice, snow, slush or standing water is present on the ramps, taxiways, or runways.\" EHAM at −4 °C with SN/BLSN meets both conditions.</p><p>Takeoff: \"When engine anti-ice is required and the OAT is 3°C or below, the takeoff must be preceded by a static engine run-up ... Run-up to a minimum of 70% N1 and confirm stable engine operation before the start of the takeoff roll. A 30-second run-up is highly recommended whenever possible.\"</p><p>With the A/T INOP, the thrust set after the run-up is fully manual.</p>"
+ },
+ {
+  "module": "brief",
+  "after": "Runway data · EHAM",
+  "ref": "FCOM SP.16.1 (PDF p390)",
+  "title": "Boeing: takeoff on contaminated 18L",
+  "html": "<p>For 18L (RWYCC 4, snow):</p><ul><li>\"Reduced thrust using assumed temperature method, whether alone or in combination with a fixed derate, is not allowed.\" A fixed derate is allowed only if performance accounts for the surface.</li><li>\"V1 may be reduced to minimum V1 to provide increased stopping margin\", as long as continued-takeoff distance and obstacle clearance still meet the regulations.</li><li>\"Takeoffs are not recommended when slush, wet snow, or standing water depth is more than 1/2 inch (13 mm) or dry snow depth is more than 4 inches (102 mm).\"</li></ul>"
+ },
+ {
+  "module": "brief",
+  "after": "Threat analysis — work these out before the sim",
+  "ref": "FCOM SP.16.28 (PDF p417)",
+  "title": "Approach speed additive with A/T off",
+  "html": "<p>From the windshear approach and landing precautions:</p><p>\"If the autothrottle is disengaged, or is planned to be disengaged prior to landing, add an appropriate airspeed correction (correction applied in the same manner as gust), up to a maximum of 15 knots.\"</p><ul><li>\"Avoid large thrust reductions or trim changes in response to sudden airspeed increases as these may be followed by airspeed decreases.\"</li><li>\"Use of the autopilot and autothrottle for the approach may provide more monitoring and recognition time.\" You will not have the autothrottle, so brief PM callouts.</li></ul>"
+ },
+ {
+  "module": "brief",
+  "after": "Manual thrust technique (A/T INOP) — background",
+  "ref": "FCOM 4.20.11–4.20.12 (PDF p1330–1331)",
+  "title": "What the A/T normally does for you",
+  "html": "<p>\"The A/T system provides automatic thrust control from the start of takeoff through climb, cruise, descent, approach and go–around or landing.\" With MEL 22-04, none of the following A/T engagements happen:</p><ul><li>\"engaging LVL CHG or VNAV climb modes automatically engages the A/T N1 mode\"</li><li>\"engaging LVL CHG or VNAV descent modes automatically engages the A/T in RETARD and then ARM when thrust is at idle\"</li><li>ALT ACQ / ALT HOLD (not in VNAV) and G/S capture engage A/T MCP SPD</li><li>\"alpha floor automatically engages the A/T when armed\"</li></ul><p>Every level-off, descent and glideslope capture needs a thrust action from the PF.</p>"
+ },
+ {
+  "module": "brief",
+  "after": "Manual thrust technique (A/T INOP) — background",
+  "ref": "FCOM 4.20.6 · 4.20.40–4.20.42 (PDF p1325, p1359–1361)",
+  "title": "Speed protection you lose",
+  "html": "<ul><li>A/T ARM mode: \"the pilot can set thrust levers manually. Minimum speed protection is provided.\" Without the A/T, that protection is not there.</li><li>\"Minimum speed reversion is not available when the A/T is OFF and the AFDS is in ALT HOLD or after G/S capture.\"</li><li>\"if the A/T is not available, no reversion response to gear or flap placard speeds is available. The AFDS reverts to speed control for Vmo/Mmo speed limiting.\" (effectivity: some tails)</li><li>At minimum speed, \"The AFDS commands nose down pitch to increase airspeed if the thrust levers are not advanced.\"</li></ul><p>In ALT HOLD or on the glideslope, you are the only speed protection.</p>"
+ },
+ {
+  "module": "brief",
+  "after": "Manual thrust technique (A/T INOP) — background",
+  "ref": "FCOM 4.20.13 · NP.21.43–44 · 4.10.27 (PDF p1332, p242–243, p1316)",
+  "title": "Takeoff thrust by hand",
+  "html": "<ul><li>\"Takeoff is a flight director only function of the TO/GA mode.\" Normally \"pushing a TO/GA switch engages the autothrottle in the N1 mode\". With the A/T INOP, TO/GA gives F/D guidance only.</li><li>Normal procedure: advance to about 40% N1, let the engines stabilise, then \"Verify that the correct takeoff thrust is set.\" \"Adjust takeoff thrust before 60 knots as needed.\"</li><li>\"After takeoff thrust is set, the captain's hand must be on the thrust levers until V1.\"</li><li>\"N1 limit reference is the active N1 limit for autothrottle and manual thrust control.\" With N1 SET in AUTO, the reference N1 bugs show the FMC limit, so set the needles to the bugs.</li></ul>"
+ },
+ {
+  "module": "brief",
+  "after": "Manual thrust technique (A/T INOP) — background",
+  "ref": "FCOM 4.20.31 · 4.20.33 (PDF p1350, p1352)",
+  "title": "Go-around without A/T",
+  "html": "<p>\"An A/P go–around requires dual A/P operation ... If both A/Ps are not operating, a manual F/D go–around is available.\"</p><p>First TO/GA push below 2000 ft RA: \"A/T (if armed) engages in GA ... thrust advances toward the reduced go–around N1 to produce 1000 to 2000 fpm rate of climb\". The second push gives \"the full go–around N1 limit\". F/D pitch \"commands 15 degrees nose up until reaching programmed rate of climb\".</p><p>With the A/T INOP, only the F/D part happens. The PF sets thrust by hand, aiming for the same 1,000–2,000 fpm climb.</p>"
+ },
+ {
+  "module": "winter",
+  "after": "Icing conditions & anti-ice logic",
+  "ref": "FCOM L.10.9 / L.10.10 (PDF p182–183)",
+  "title": "Limitations tied to anti-ice",
+  "html": "<p>Two AFM limitations sit behind the SP.16 anti-ice procedures:</p><ul><li><b>Engine Ignition:</b> \"Engine ignition must be on for: takeoff, landing, operation in heavy rain, anti-ice operation.\" This is why ENGINE START goes to CONT before ENGINE ANTI-ICE ON.</li><li><b>Flight Controls:</b> \"Holding in icing conditions with flaps extended is prohibited.\"</li></ul><p>SP.3.1 adds that the requirements for engine and wing anti-ice use \"are contained in Supplementary Procedures, Adverse Weather Section SP.16\". The icing-conditions definition and the 10 °C caution in SP.16.2 are the same as the OM-B text above.</p>"
+ },
+ {
+  "module": "winter",
+  "after": "Icing conditions & anti-ice logic",
+  "ref": "FCOM 3.20.12–3.20.13, 3.10.4–3.10.5 (PDF p1281–1282, p1265–1266)",
+  "title": "Engine anti-ice system and lights",
+  "html": "<p>\"Engine bleed air thermal anti–icing prevents the formation of ice on the engine cowl lip.\" It can be used on the ground and in flight. ENG ANTI-ICE ON opens the cowl anti-ice valve and \"sets stall warning logic for icing conditions\". <i>FMC displayed VREF is not adjusted automatically.</i></p><ul><li><b>COWL VALVE OPEN</b> (blue): bright means the valve is in transit or disagrees with the switch; dim means open (switch ON); extinguished means closed.</li><li><b>COWL ANTI-ICE</b> (amber): overpressure in the duct downstream of the cowl valve.</li><li><b>TAI</b> on the engine display: green means the valve is open with the switch ON; amber means the valve is not where the switch says. The amber TAI comes \"after a short delay\".</li></ul>"
+ },
+ {
+  "module": "winter",
+  "after": "Exterior inspection additions",
+  "ref": "FCOM SP.3.1–SP.3.2 (PDF p314–315)",
+  "title": "Cold-soaked fuel frost (CSFF)",
+  "html": "<p>SP.3 has more detail than the OM-B line on frost under the wing. Takeoff with CSFF on the <b>lower</b> wing without a thickness limit requires <b>all</b> of these: ambient temperature \"at or above +4°C\", no precipitation or visible moisture, and tank fuel at or above −16 °C. The leading edges and control surfaces must also be clean.</p><p>\"If all of the above conditions are not met, takeoff with light coatings of frost, up to 1/8 inch (3 mm) in thickness, on lower wing surfaces due to cold fuel is allowable\". Thicker frost must be removed by de-icing/anti-icing. Upper-wing CSFF is allowed only inside a painted CSFF area, and the FCOM notes this \"do[es] not constitute operational approval\".</p><p><i>OPC-6 (−4 °C, SN): only the 3 mm lower-surface allowance can apply.</i></p>"
+ },
+ {
+  "module": "winter",
+  "after": "Preflight · engine start · anti-ice on the ground",
+  "ref": "FCOM SP.16.4–SP.16.5 (PDF p393–394)",
+  "title": "If COWL VALVE OPEN stays bright",
+  "html": "<p>After ENGINE ANTI-ICE ON, the FCOM says to verify that the COWL VALVE OPEN lights go bright then dim and that the COWL ANTI-ICE lights are out. If they \"remain illuminated bright with engines at IDLE\":</p><ul><li>verify the APU BLEED air switch is OFF,</li><li>verify the ISOLATION VALVE switch is in AUTO,</li><li>check that the area around the airplane is clear, and</li><li>\"increase thrust slightly (up to a maximum of 30% N1)\".</li></ul><p>The OM-B text above leaves out this note. <b>Effectivity:</b> the step ENGINE START switches CONT (F/O) is printed only for TC-SEI – TC-SPP and TC-SPS – TC-SUU. The ignition limitation (L.10.9) applies to all tails.</p>"
+ },
+ {
+  "module": "winter",
+  "after": "Preflight · engine start · anti-ice on the ground",
+  "ref": "FCOM 3.20.14–3.20.15 (PDF p1283–1284)",
+  "title": "Wing anti-ice: how it works on the ground",
+  "html": "<p>Wing anti-ice uses bleed air to heat \"the three inboard leading edge slats\". It does not heat the LE flaps or the outboard slats.</p><p>On the ground, the switch opens both valves only if thrust on both engines is below the takeoff warning setting and both duct temperatures are below the thermal switch setting. \"Both valves close if either engine thrust is above the takeoff warning setting or either temperature sensor senses a duct overtemperature.\" They reopen automatically. This explains the bright/dim cycling note.</p><p>\"The WING ANTI–ICE switch automatically trips OFF at lift–off\". SP.16.5 WARNING: \"Do not use wing anti-ice as an alternative for ground de-icing/anti-icing.\"</p>"
+ },
+ {
+  "module": "winter",
+  "after": "Before taxi · de-icing / anti-icing",
+  "ref": "FCOM SP.16.7–SP.16.9 (PDF p396–398)",
+  "title": "Why each de-icing step",
+  "html": "<p>The FCOM gives a reason for each step:</p><ul><li>APU: \"should be shut down unless APU operation is necessary\". Ingested fluid gives \"objectionable fumes and odors\" and snow, ice or fluid \"can also cause damage to the APU\".</li><li>Flaps UP: \"Prevents ice and slush from accumulating in flap cavities during de-icing.\"</li><li>Thrust idle: \"Reduces the possibility of injury to personnel at inlet or exhaust areas.\"</li><li>Engine and APU BLEEDs OFF: \"Reduces the possibility of fumes entering the air conditioning system.\"</li><li>Engine BLEEDs back ON after about one minute \"to ensure all de-icing fluid has been cleared from the engines\".</li></ul><p>Some undiluted fluid stays on the wing during rotation and initial climb. The effect is temporary, so \"Use the normal takeoff rotation rate.\"</p>"
+ },
+ {
+  "module": "winter",
+  "after": "Taxi-out · before takeoff · takeoff (NG)",
+  "ref": "FCOM SP.16.1 (PDF p390)",
+  "title": "Takeoff on a contaminated runway",
+  "html": "<ul><li>Wet runway: fixed derate, assumed temperature, or both, if performance accounts for the longer stopping distance.</li><li>Slush, snow, standing water or ice: \"reduced thrust (fixed derate) is allowed provided takeoff performance accounts for the runway surface condition. Reduced thrust using assumed temperature method, whether alone or in combination with a fixed derate, is not allowed\".</li><li>V1 may be reduced to minimum V1 for more stopping margin if continued-takeoff field length and obstacle clearance still meet requirements.</li><li>\"Takeoffs are not recommended when slush, wet snow, or standing water depth is more than 1/2 inch (13 mm) or dry snow depth is more than 4 inches (102 mm).\"</li></ul><p><i>This matches the OPC-6 OPT result: TO-2 fixed derate with no assumed temperature.</i></p>"
+ },
+ {
+  "module": "winter",
+  "after": "In flight: engine & wing anti-ice · fan ice removal",
+  "ref": "FCOM 3.20.15 · SP.16.10–SP.16.12 (PDF p1284, p399–401)",
+  "title": "Stall warning logic and in-flight details",
+  "html": "<ul><li>Wing anti-ice ON in flight \"sets stall warning logic for icing conditions\". The logic \"remains set for icing conditions for the remainder of the flight, regardless of subsequent WING ANTI–ICE switch position.\" FMC VREF is not adjusted automatically.</li><li>After engine anti-ice only, the logic and speeds return to normal when the switches go OFF \"if wing anti–ice has not been used in flight\".</li><li>In flight, the duct temperature and thrust logic are disabled.</li><li>Fan ice removal: continue the thrust increase to at least 80% N1 even if vibration drops earlier. Vibration \"can indicate full scale before shedding ice, however, this has no adverse effect on the engine.\" At 4.0 units or more after thrust is reduced, do the Engine High Vibration NNC.</li><li>The ice detector and ICING/NO ICE lights are fitted only on TC-SPN and TC-SPP, and the WARNING there adds \"or illumination of the ICING light\".</li></ul>"
+ },
+ {
+  "module": "winter",
+  "after": "Cold temperature altitude corrections",
+  "ref": "FCOM SP.16.12–SP.16.14 (PDF p401–403)",
+  "title": "FCOM version of the rules",
+  "html": "<p>\"Altimeter errors become significantly larger when the surface temperature approaches -30°C or colder\". The error also grows with height above the reference source.</p><ul><li>Corrections \"apply to QNH and QFE operations.\"</li><li>\"The corrected altitude must always be greater than the published minimum altitude\". For 6000 ft, use twice the 3000 ft correction.</li><li>Not needed under radar vectors, at an ATC-assigned FL, or \"When the reported airport temperature is above 0°C <b>or if the airport temperature is at or above the minimum published temperature for the procedure being flown</b>.\"</li><li>\"Regulatory authorities may have other requirements\".</li></ul><p><b>Differences from OM-B:</b> the FCOM has no \"corrected MSA\" limit, no RNP/LNAV-VNAV rules and no mPilot CTC tool. Those come from the company text. The FCOM feet table has full columns up to 3000 ft (e.g. at −10 °C: 1000 ft → 100, 2000 ft → 200).</p>"
+ },
+ {
+  "module": "walk",
+  "after": "_end",
+  "ref": "FCOM SP.16.8–SP.16.9 (PDF p397–398)",
+  "title": "De-icing configuration: FCOM sequence",
+  "html": "<p>\"If de-icing/anti-icing is needed\":</p><ul><li>APU: as needed (F/O). It \"should be shut down unless APU operation is necessary.\"</li><li>\"FLAPS UP\" (C), Flaps UP (F/O).</li><li>Thrust levers: idle (C).</li><li>Stabilizer trim: ___ units (C), green band. Stow the trim wheel handles first.</li><li>Engine BLEED air switches OFF, APU BLEED air switch OFF (F/O).</li></ul><p>After de-icing: APU and APU BLEED as needed. Caution: \"After de-icing, the use of APU bleed air during takeoff can cause smoke in the airplane.\" Wait about one minute, then engine BLEEDs ON. Flight controls check as needed (C). The FCOM de-icing steps do not mention engine anti-ice.</p>"
+ },
+ {
+  "module": "walk",
+  "after": "_end",
+  "ref": "FCOM SP.16.4–SP.16.5 · L.10.9 · 3.10.5 (PDF p393–394, p182, p1266)",
+  "title": "Engine anti-ice ON after start",
+  "html": "<p>\"Engine anti-ice must be selected ON immediately after both engines are started and remain on during all ground operations when icing conditions exist or are anticipated.\"</p><p>WARNING: \"Do not rely on airframe visual icing cues before activating engine anti-ice.\" Use the temperature and visible moisture criteria instead.</p><ul><li>ENGINE START switches CONT (F/O). This step is printed for TC-SEI – TC-SPP and TC-SPS – TC-SUU. On all tails, \"Engine ignition must be on for … anti-ice operation\" (L.10.9).</li><li>ENGINE ANTI-ICE switches ON (F/O). COWL VALVE OPEN goes bright then dim, COWL ANTI-ICE stays out, and a green TAI shows on the engine display.</li><li>If a light stays bright at idle: APU BLEED OFF, ISOLATION AUTO, area clear, thrust up slightly (max 30% N1).</li></ul>"
+ },
+ {
+  "module": "walk",
+  "after": "_end",
+  "ref": "FCOM SP.16.7 · SP.16.9 (PDF p396, p398)",
+  "title": "Run-ups in taxi and static run-up",
+  "html": "<p>\"When engine anti-ice is required and the OAT is 3°C or below, an engine run up is recommended to minimize ice build-up.\" The PF checks the area behind is clear, then runs up to at least 70% N1 for about 30 seconds \"at intervals no greater than 30 minutes\". Fan ice build-up is cumulative, so taxi-in time counts if the fan was not de-iced.</p><p>In freezing rain, freezing drizzle, freezing fog or heavy snow, run-ups to 70% N1 for about 1 second at intervals no greater than 10 minutes \"enhance ice shedding\".</p><p>Takeoff: \"the takeoff must be preceded by a static engine run-up\" to at least 70% N1, with stable operation confirmed before the roll. \"A 30-second run-up is highly recommended whenever possible.\"</p><p>Over standing de-icing fluid, limit thrust to the minimum required, because of the risk of compressor stall.</p>"
+ },
+ {
+  "module": "walk",
+  "after": "_end",
+  "ref": "FCOM SP.16.5 · 3.20.14–3.20.15 (PDF p394, p1283–1284)",
+  "title": "Wing anti-ice on the ground: not with Type II/IV",
+  "html": "<p>\"Use wing anti-ice during all ground operations between engine start and takeoff when icing conditions exist or are anticipated, unless the airplane is, or will be protected by the application of Type II or Type IV fluid in compliance with an approved ground de-icing program.\"</p><p>WARNING: it is not \"an alternative for ground de-icing/anti-icing\". Do not use it with OAT above 10 °C.</p><p>If you do use it (for example, Type I only): the valves close above takeoff-warning thrust or on duct overtemperature, and \"The WING ANTI–ICE switch automatically trips OFF at lift–off\".</p><p><i>OPC-6 with Type II fluid: wing anti-ice stays OFF.</i></p>"
+ },
+ {
+  "module": "walk",
+  "after": "_end",
+  "ref": "FCOM SP.16.1 · SP.16.6–SP.16.9 (PDF p390, p395–398)",
+  "title": "Flaps, takeoff thrust and fluid on the wing",
+  "html": "<ul><li>Taxi with the flaps up through ice, snow, slush or standing water, or when precipitation is falling below freezing: \"Taxiing with the flaps extended subjects the flaps and flap drives to contamination.\"</li><li>Before takeoff, set the takeoff flaps if they were held, and verify the LE FLAPS EXT green light. If the flaps stop, put the lever at the indicated position.</li><li>Contaminated runway: fixed derate allowed, assumed temperature \"is not allowed\". Takeoff is not recommended above 13 mm of slush, wet snow or water, or 102 mm of dry snow.</li><li>Residual fluid causes \"a temporary decrease in lift and increase in drag\", so \"Use the normal takeoff rotation rate.\"</li></ul>"
+ },
+ {
+  "module": "lvo",
+  "after": "Crew coordination CAT II / III approach",
+  "ref": "FCOM 4.20.21–4.20.23 (PDF p1340–1342)",
+  "title": "Dual A/P ILS: what happens below 1500 ft RA",
+  "html": "<p>Pushing APP \"permits selecting the second A/P to engage in CMD. This arms the second A/P for automatic engagement after LOC and G/S capture and when descent below 1500 RA occurs.\"</p><ul><li><b>Below 1500 ft RA:</b> second A/P couples, ILS deviation monitor test (G/S and LOC scales flash amber), FLARE armed, SINGLE CH extinguishes, A/P go-around arms (not annunciated).</li><li><b>800 ft RA:</b> \"The second A/P must be engaged in CMD by 800 feet RA to execute a dual channel A/P approach.\"</li><li><b>400 ft RA:</b> stabilizer trimmed additional nose up; if the A/Ps then disengage, forward column force may be needed.</li><li>\"If FLARE is not armed by approximately 350 feet RA, both A/Ps automatically disengage.\"</li><li><b>~50 ft:</b> FLARE engages · <b>~27 ft:</b> A/T RETARD · A/T disengages ~2 s after touchdown.</li></ul><p><i>Note:</i> after FLARE armed, \"any attempted manual override of the autopilots may result in an autopilot disengage.\"</p>"
+ },
+ {
+  "module": "lvo",
+  "after": "Crew coordination CAT II / III approach",
+  "ref": "FCOM 4.20.20 · 4.20.5–4.20.6 (PDF p1339, p1324–1325)",
+  "title": "Fail-passive vs fail-operational autoland",
+  "html": "<p><b>Most tails (fail-passive):</b> dual A/P gives \"fail–passive operation through landing flare and touchdown or an automatic go–around.\" There is no ROLLOUT mode: \"the A/P must be manually disengaged after touchdown. Landing roll-out is executed manually after disengaging the A/P.\"</p><p><b>Fail-operational tails (TC-SEI–SEZ, TC-SOA–SOH, TC-SPF–SPI, TC-SPP):</b></p><ul><li><b>LAND 3</b>: \"two autopilots, three inertial sources, and the associated sensors are operating normally for an automatic landing and rollout.\"</li><li><b>LAND 2</b>: \"a failure has occurred above Alert Height and redundancy is reduced\"; autoland and rollout still possible.</li><li><b>NO AUTOLAND</b>: \"FLARE and ROLLOUT will not arm\".</li></ul><p>At 500 ft RA on these tails, \"the pilot is required to check for the presence of LAND 3 or LAND 2 in order to continue the autoland.\" ROLLOUT activates at about 2 ft RA and tracks the localizer centerline.</p>"
+ },
+ {
+  "module": "lvo",
+  "after": "First Officer role in LVO",
+  "ref": "FCOM NP.21.65 · 4.20.5 · NP.21.76–77 (PDF p264, p1324, p275–276)",
+  "title": "PM checks: 500 ft, SINGLE CH, after touchdown",
+  "html": "<ul><li>Landing Procedure – ILS: \"If an autoland is planned, verify the AFDS status at 500 feet AGL\" (fail-operational tails: \"verify the autoland status\").</li><li><b>SINGLE CH</b> on a dual approach \"annunciates after localizer capture and extinguishes after pitch monitor confidence test is successfully completed.\" On a single A/P approach it stays on for the whole approach.</li><li>\"For a single channel approach, disengage the autopilot and autothrottle no later than the minimum use height for single autopilot operation. For a dual channel approach, disengage the autopilot after touchdown.\"</li><li>Landing roll, PM: verify SPEED BRAKE lever UP and call \"SPEED BRAKES UP\", then \"REVERSERS NORMAL\" and \"60 KNOTS\".</li><li>Fail-operational tails: \"If an autoland was accomplished, disengage the autopilot before turning off the runway.\"</li></ul>"
+ },
+ {
+  "module": "lvo",
+  "after": "First Officer role in LVO",
+  "ref": "FCOM 4.20.31–4.20.33 (PDF p1350–1352)",
+  "title": "Go-around from a dual A/P approach",
+  "html": "<p>\"An A/P go–around requires dual A/P operation and is armed when FLARE armed is annunciated. If both A/Ps are not operating, a manual F/D go–around is available.\"</p><ul><li>First TO/GA push below 2000 ft RA: A/T engages in <b>GA</b>; thrust goes toward reduced go-around N1 \"to produce 1000 to 2000 fpm rate of climb\". Pitch engages in TO/GA and the F/D commands 15° nose up.</li><li>Second push: \"the A/T advances to the full go–around N1 limit.\"</li><li>\"below 400 feet RA, the AFDS remains in the go–around mode unless both A/Ps and F/Ds are disengaged\". Above 400 ft RA, select a new pitch or roll mode.</li><li>If the pitch mode is changed first, \"the second A/P disengages\" and roll goes to CWS R.</li><li>Fail-passive tails: TO/GA pressed after touchdown disengages the A/P, and the A/T may command GA thrust.</li></ul>"
+ },
+ {
+  "module": "lvo",
+  "after": "Aircraft limits that matter for LVO",
+  "ref": "FCOM L.10.7–L.10.8 (PDF p180–181)",
+  "title": "Boeing AFM autopilot / autoland limits",
+  "html": "<ul><li>\"Use of aileron trim with the autopilot engaged is prohibited.\"</li><li>EASA: \"The Minimum Use Height (MUH) for single channel autopilot operation is defined as 158 feet AGL.\"</li><li>EASA max winds for a dual channel Cat II/III autoland: <b>headwind 25 kt</b>. Crosswind is <b>20 or 25 kt</b> and tailwind <b>10, 12 or 15 kt</b>, depending on tail and flaps (per-tail effectivity in L.10.7–8).</li><li>\"Maximum and minimum glideslope angles for autoland are 3.25 degrees and 2.5 degrees respectively.\"</li><li>\"Autoland capability may only be used with flaps 30 or 40 and both engines operative.\"</li><li>\"Do not use LVL CHG on final approach below 1000 feet AFE.\"</li></ul><p><i>The company OM-B wind limits above are lower than the Boeing figures. Apply the more restrictive limit.</i></p>"
+ },
+ {
+  "module": "lvo",
+  "after": "Aircraft limits that matter for LVO",
+  "ref": "FCOM 4.20.24–4.20.25 · 4.10.26 (PDF p1343–1344, p1315)",
+  "title": "Single A/P ILS limits, beam anomaly, AUTOLAND light",
+  "html": "<p><b>Single A/P ILS</b> (one A/P in CMD): \"full automatic flare and touchdown capability is not available. FLARE is not annunciated and stabilizer trim bias is not applied\". SINGLE CH shows for the whole approach and \"an A/P go–around is not available\".</p><p><b>Beam anomaly:</b> on a single channel or F/D-only approach, \"the autopilot will disengage and/or the F/D bars will be removed if a persistent localizer/glideslope beam anomaly or ground station failure is detected.\" Fail-operational tails after LAND 3/LAND 2: the scale flashes amber, an amber line crosses the FMA mode (\"mode fail\"), and the A/P stays engaged until manually disengaged.</p><p><b>AUTOLAND light</b> (TC-SPM, TC-SPO only): armed below 500 ft on a dual A/P ILS. It flashes red if the A/P disengages, a stab trim warning occurs, or an \"ILS deviation occurs below 200 feet.\"</p>"
+ },
+ {
+  "module": "app",
+  "after": "Circling Approach (Company) — 45/45",
+  "ref": "FCOM SP.4.6–SP.4.7 (PDF p325–326)",
+  "title": "Boeing circling approach procedure",
+  "html": "<p>\"If a missed approach is needed at any time while circling, make an initial climbing turn toward the landing runway and intercept the missed approach course.\"</p><ul><li>Configuration at MDA(H): <b>gear down, flaps 15, speedbrake armed</b>.</li><li>\"Set the MCP altitude to the nearest 100 foot increment at or above the MDA(H).\" Establish visual reference and level off at MCP altitude. Verify ALT HLD.</li><li>Set the missed approach altitude on the MCP, push HDG SEL.</li><li>Before starting the turn to base: landing flaps (if not selected) and do the LANDING checklist.</li><li>Intercepting the landing profile: push the autopilot and autothrottle disengage switches.</li></ul>"
+ },
+ {
+  "module": "app",
+  "after": "Stabilised approach (SAP)",
+  "ref": "FCOM L.10.8 · L.10.10 · L.10.13 · SP.16.28 (PDF p181, p183, p186, p417)",
+  "title": "FCOM items for the final approach",
+  "html": "<ul><li>\"Do not use LVL CHG on final approach below 1000 feet AFE.\"</li><li>\"Do not deploy the speedbrakes in flight at radio altitudes less than 1,000 feet.\"</li><li>If windshear is suspected: \"Establish a stabilized approach no lower than 1000 feet above the airport to improve windshear recognition capability\" and use flaps 30.</li><li>If the A/T is disengaged or will be disengaged before landing, add an airspeed correction \"up to a maximum of 15 knots\" (applied like a gust).</li><li>Landing gear limitation: \"Do not apply brakes until after touchdown.\" (L.10.13)</li></ul>"
+ },
+ {
+  "module": "app",
+  "after": "Stabilised approach (SAP)",
+  "ref": "FCOM NP.21.74–NP.21.75 (PDF p273–274)",
+  "title": "Go-around and missed approach, PF/PM",
+  "html": "<ul><li><b>PF:</b> push TO/GA, call \"FLAPS 15\" (or as needed), verify rotation to go-around attitude and that thrust is sufficient.</li><li><b>PM:</b> verify thrust increases, set the flaps, verify positive rate on the altimeter and call \"POSITIVE RATE\". PF calls \"GEAR UP\" and PM sets the gear lever UP.</li><li>\"If the airspeed is within the amber band, limit bank angle to 15°.\"</li><li>Above 400 ft RA, verify LNAV or select HDG SEL. Verify the missed approach route is tracked.</li><li>At acceleration height, retract flaps on schedule. At or above flap maneuvering speed, select LVL CHG or VNAV and verify climb thrust.</li><li>Gear lever OFF after retraction, then the AFTER TAKEOFF checklist.</li></ul>"
+ },
+ {
+  "module": "app",
+  "after": "Overweight landing",
+  "ref": "FCOM PD.14.6 · PI.17.9–17.10 (PDF p475, p744–745)",
+  "title": "Landing weight and hot brakes",
+  "html": "<p>\"Maximum landing weight is the lowest of the field length limit weight, climb limit weight, or maximum certified landing weight.\" The certified value is in Limitations L.10.5 and differs by tail.</p><p>\"If the landing weight exceeds the maximum quick turnaround weight, wait the specified time and then check that the wheel thermal plugs have not melted before executing a subsequent takeoff.\"</p><p>Recommended Brake Cooling Schedule: \"Use of the recommended cooling schedule will help avoid brake overheat and fuse plug problems\". With BTMS, \"use the hottest brake indication 10 to 15 minutes after the airplane has come to a complete stop\". Times are given for ground cooling and in-flight gear-down cooling.</p><p><i>The FCOM has no separate overweight landing procedure. Use the QRH.</i></p>"
+ },
+ {
+  "module": "app",
+  "after": "OEI landing & deferred items",
+  "ref": "FCOM L.10.10 · L.10.8 · 4.20.25 · PI.17.12 (PDF p183, p181, p1344, p747)",
+  "title": "OEI landing: FCOM limits and automation",
+  "html": "<ul><li>EASA: \"Flaps 15 normal landings are prohibited. A Flaps 15 landing may be performed when required by a non-normal procedure.\"</li><li>Autoland limitation: \"flaps 30 or 40 and both engines operative\". On the fail-operational tails (TC-SEI–SEZ, TC-SOA–SOH, TC-SPF–SPI, TC-SPP), EASA allows OEI autoland \"with flaps 30 ... and only for DH at or above 50 feet.\"</li><li>\"Automatic engine out rudder compensation is provided during A/P approach and landing.\" After an A/P go-around it continues \"until another roll mode is selected.\"</li><li>PI: \"Gear Down Landing Rate of Climb Available\" tables (flaps 15 and 30) are provided \"in the event an engine inoperative landing (manual or autoland) is planned.\"</li><li>Some tails show a white VREF bug that gives \"sufficient tail clearance margin during a one engine inoperative flaps 15° landing\" (10.31.2).</li></ul>"
+ },
+ {
+  "module": "app",
+  "after": "Landing Configuration warning",
+  "ref": "FCOM 15.20.6–15.20.7 (PDF p2499–2500)",
+  "title": "Landing gear configuration warnings",
+  "html": "<p><b>Red gear light:</b> gear disagrees with the lever, or \"landing gear is not down and locked (with either or both forward thrust levers retarded to idle, and below 800 feet AGL)\".</p><p><b>Steady horn</b> (any gear not down and locked):</p><ul><li><b>Flaps up–10:</b> below 800 ft RA with a thrust lever between idle and about 20° (or one engine out and the other lever below 34°). The horn can be silenced with HORN CUTOUT, but \"if the airplane descends below 200 feet RA, the warning horn cannot be silenced\".</li><li><b>Flaps 15–25:</b> thrust lever below about 20° (or OEI below 34°). It cannot be silenced.</li><li><b>Flaps greater than 25:</b> \"regardless of forward thrust lever position\". It cannot be silenced.</li></ul><p>\"The warning indication is cancelled when the configuration error is corrected.\"</p>"
+ },
+ {
+  "module": "ws",
+  "after": "Windshear Caution & Warning",
+  "ref": "FCOM 15.20.24–15.20.26 (PDF p2517–2519)",
+  "title": "Reactive vs predictive windshear alerts",
+  "html": "<ul><li><b>GPWS (airplane in windshear):</b> two-tone siren and \"WINDSHEAR\" ×3, red WINDSHEAR on both PFDs. \"Enabled below 1,500 feet RA. GPWS Windshear detection begins at rotation.\"</li><li><b>WINDSHEAR AHEAD</b> (takeoff), red: windshear \"close to and directly ahead\", below 1,200 ft RA.</li><li><b>GO AROUND, WINDSHEAR AHEAD</b> (approach), red: \"Windshear within 1.5 miles and directly ahead\", below 1,200 ft RA.</li><li><b>MONITOR RADAR DISPLAY</b>, amber: \"Windshear within 3 miles and ahead\", takeoff and approach, below 1,200 ft RA.</li></ul><p>\"Predictive windshear alerts are inhibited by an actual windshear warning (airplane in windshear), look-ahead terrain alerts, or radio altitude based alerts.\" The radar \"does not provide alerting for all types of windshear.\"</p>"
+ },
+ {
+  "module": "ws",
+  "after": "Windshear Caution & Warning",
+  "ref": "FCOM 15.20.27–15.20.30 · 15.10.18 (PDF p2520–2523, p2489)",
+  "title": "PWS activation, inhibits and ND display",
+  "html": "<ul><li>Radar starts windshear scanning when the thrust levers are set for takeoff, or in flight below 2,300 ft or 1,800 ft RA depending on the radar fit. Alerts are only issued below 1,200 ft RA.</li><li>\"Alerts are available approximately 12 seconds after the weather radar begins scanning for windshear.\"</li><li>Inhibits (TC-SEI–SEZ, TC-SOA–SOH, TC-SPH–SPJ, TC-SPM–SPO, TC-SPS–SPU): new cautions are inhibited \"between 80 knots and 400 feet RA, and new warning alerts between 100 knots and 50 feet RA. These inhibits do not remove existing predictive windshear alerts.\"</li><li>On the ND, the red/black windshear symbol and amber radials show automatically in expanded MAP, center MAP, expanded VOR or expanded APP. The WINDSHEAR text (amber caution / red warning) \"Shows in all navigation display modes.\"</li></ul>"
+ },
+ {
+  "module": "ws",
+  "after": "Windshear Caution & Warning",
+  "ref": "FCOM SP.16.26–SP.16.28 (PDF p415–417)",
+  "title": "Windshear avoidance and precautions",
+  "html": "<p>\"If the presence of windshear is confirmed, delay takeoff or do not continue an approach.\" Clues include thunderstorms, virga, PIREPs and LLWAS warnings.</p><p><b>Takeoff:</b> full rated thrust recommended. Use the longest suitable runway. Consider raising Vr \"not to exceed actual gross weight Vr + 20 knots\". \"If stick shaker is encountered, reduce pitch attitude. Do not exceed the Pitch Limit Indication.\"</p><p><b>Approach:</b> flaps 30, stabilized by 1000 ft. Add a speed correction up to 15 kt if the A/T is off. Avoid large thrust reductions on sudden speed gains. \"The pilot monitoring should call out any deviations from normal.\"</p>"
+ },
+ {
+  "module": "ws",
+  "after": "Windshear Escape Maneuver",
+  "ref": "FCOM 4.20.39 (PDF p1358)",
+  "title": "How the AFDS behaves in windshear",
+  "html": "<p><b>TO/GA (F/D or A/P):</b> the F/D holds target speed until vertical speed drops to about +600 fpm, then \"commands a 15 degree nose–up pitch attitude\". If needed, it commands \"pitch attitudes which result in intermittent activation of the stick shaker.\"</p><p><b>ILS approach:</b> F/D and A/P hold altitude or glideslope \"without regard to angle of attack or stick shaker limitations. Airspeed could decrease below stick shaker and into a stall if the pilot does not intervene by pushing the TO/GA switch or disengaging the A/P\".</p><p><b>WARNING:</b> the crew \"must, if necessary to avoid ground contact, be prepared to disengage the autothrottle, advance thrust levers to the forward stop, disengage the autopilot and manually fly the airplane.\"</p>"
+ },
+ {
+  "module": "ws",
+  "after": "Overrun Warnings (ORW)",
+  "ref": "FCOM Bulletin SNS-98 R3, B-98 p5 · NP.21.76 (PDF p135, p275)",
+  "title": "ORW in the FCOM",
+  "html": "<p>The FCOM Warning Systems chapter has <b>no ORW system description</b>. The only FCOM mention is in the 5G bulletin: \"In-Air Overrun, On-Ground Overrun and SPEEDBRAKE warnings may not be available or may be erroneous (as installed)\". The same bulletin says windshear detection (predictive and reactive) may be inoperative.</p><p>The normal Landing Roll Procedure has the same stopping actions and calls: PM verifies the SPEED BRAKE lever UP and calls \"SPEED BRAKES UP\" / \"SPEED BRAKES NOT UP\", then \"REVERSERS NORMAL\" and \"60 KNOTS\".</p><p><b>WARNING:</b> \"After the reverse thrust levers are moved, only a full stop landing can be made.\"</p>"
+ },
+ {
+  "module": "stall",
+  "after": "Approach to Stall or Stall Recovery",
+  "ref": "FCOM 15.20.8–15.20.9 · 15.10.5 (PDF p2501–2502, p2476)",
+  "title": "Stall warning system (stick shaker)",
+  "html": "<p>\"Natural stall warning (buffet) usually occurs at a speed prior to stall. In some configurations the margin between stall and natural stall warning is less than desired.\" A stick shaker is therefore used.</p><ul><li>Two eccentric-weight motors, one on each column. \"The system is armed in flight at all times. The system is deactivated on the ground.\"</li><li>Two SMYD computers use AOA vanes, ADIRU, anti-ice, wing configuration, air/ground and thrust inputs. They drive the stick shaker, the pitch limit indicator, the airspeed display bands, and the GPWS windshear alert.</li><li>Test (on ground only): No.1 shakes the Captain's column and No.2 the F/O's. \"Either stick shaker vibrates both columns through column interconnects.\"</li></ul>"
+ },
+ {
+  "module": "stall",
+  "after": "Approach to Stall or Stall Recovery",
+  "ref": "FCOM 10.31.2 · 10.11.18 (PDF p1743, p1593)",
+  "title": "Pitch Limit Indication (PLI)",
+  "html": "<p>PLI (amber) \"Indicates pitch limit (stick shaker activation for existing flight conditions).\"</p><p>\"A pitch limit indication is displayed at all times when the flaps are not up, or when flaps are up and airspeed approaches stick shaker activation for existing flight conditions.\" (On TC-SNV it shows only when the flaps are not up.)</p><p>Escape maneuver and windshear precautions: \"Do not exceed the Pitch Limit Indication.\"</p>"
+ },
+ {
+  "module": "stall",
+  "after": "Approach to Stall or Stall Recovery",
+  "ref": "FCOM 9.20.11 (PDF p1554)",
+  "title": "Stall identification: EFS and speed trim",
+  "html": "<ul><li>\"The EFS module increases hydraulic system A pressure to the elevator feel and centering unit during a stall. This approximately doubles control column forces.\"</li><li>EFS is inhibited on the ground, below 100 ft RA, or with the autopilot engaged. \"There are no flight deck indications that the system is properly armed or activated.\"</li><li>\"As airspeed decreases towards stall speed, the speed trim system trims the stabilizer nose down ... With this trim schedule the pilot must pull more aft column to stall the airplane.\"</li><li>At high AOA, the SMYD reduces rudder movement commanded by the yaw damper.</li></ul>"
+ },
+ {
+  "module": "stall",
+  "after": "Approach to Stall or Stall Recovery",
+  "ref": "FCOM 4.20.40–4.20.42 · 15.20.31 (PDF p1359–1361, p2524)",
+  "title": "Minimum speed reversion and AIRSPEED LOW",
+  "html": "<p>Minimum speed \"is approximately 1.3 Vs for the current flap configuration.\" At or slightly below it, the underspeed symbol shows and V/S (or CWS P) reverts to LVL CHG, or VNAV PTH reverts except on a level segment. On most tails there is no reversion from vertical speed modes when the flaps are greater than 12.5.</p><p>\"Minimum speed reversion is not available when the A/T is OFF and the AFDS is in ALT HOLD or after G/S capture.\"</p><p>\"The A/P disengages and the F/D command bars retract when in a LVL CHG climb with a command speed equal to minimum speed and a minimum rate of climb cannot be maintained\".</p><p>\"AIRSPEED LOW, AIRSPEED LOW\" sounds \"when the current airspeed decreases into the minimum maneuver speed amber bar.\"</p>"
+ },
+ {
+  "module": "stall",
+  "after": "Upset Recovery — definitions",
+  "ref": "FCOM 15.20.30–15.20.31 (PDF p2523–2524)",
+  "title": "BANK ANGLE alert",
+  "html": "<p>GPWS aural \"BANK ANGLE, BANK ANGLE\":</p><ul><li>Some tails: at 35°, 40° and 45° of bank.</li><li>Other tails, based on radio altitude: 5–30 ft AGL above 10° of bank; 30–130 ft varies linearly from 10° to 35°; above 130 ft at 35°, 40° or 45°.</li><li>\"Once sounded, the alert is silent for that bank angle until the system is reset by decreasing the bank angle to 30 degrees or less.\"</li></ul>"
+ },
+ {
+  "module": "gpws",
+  "after": "GPWS Caution",
+  "ref": "FCOM 15.20.13–15.20.14 (PDF p2506–2507)",
+  "title": "Two families of GPWS alerts",
+  "html": "<p><b>Radio altitude based alerts</b> cover \"excessive descent rate · excessive terrain closure rate · altitude loss after takeoff or go-around · unsafe terrain clearance when not in the landing configuration · excessive deviation below the ILS or GLS glideslope\".</p><p><b>Look-ahead terrain alerts</b> come from the EGPWS worldwide terrain database, \"based on estimated time to impact.\" Terrain within 2,000 ft of barometric altitude shows on the ND. \"The terrain data is not designed to be an independent navigation aid.\"</p><p><b>Note:</b> \"Terrain ahead of the airplane may exceed available climb performance. A ground proximity alert does not guarantee terrain clearance.\" Both families \"are inhibited by an actual windshear warning.\"</p>"
+ },
+ {
+  "module": "gpws",
+  "after": "GPWS Caution",
+  "ref": "FCOM 15.20.15 · 15.20.17 (PDF p2508, p2510)",
+  "title": "Look-ahead terrain and obstacle alerts",
+  "html": "<ul><li><b>CAUTION TERRAIN</b>: amber TERRAIN, solid amber terrain on the ND, \"40 to 60 seconds from projected impact\".</li><li><b>TERRAIN TERRAIN, PULL UP</b>: PULL UP on both attitude indicators, red TERRAIN, solid red terrain, \"20 to 30 seconds from projected impact\".</li><li><b>TOO LOW, TERRAIN</b> (look-ahead): \"Descent below unsafe altitude while too far from any airport in the terrain database.\"</li><li>Obstacles (most tails): \"CAUTION OBSTACLE\" at 40 to 60 s and \"OBSTACLE OBSTACLE, PULL UP\" at 20 to 30 s, for man-made obstacles 100 ft and higher.</li><li>All of these are inhibited by the TERR INHIBIT switch.</li></ul>"
+ },
+ {
+  "module": "gpws",
+  "after": "GPWS Warning (PULL UP)",
+  "ref": "FCOM 15.20.16–15.20.17 (PDF p2509–2510)",
+  "title": "Radio altitude based alerts",
+  "html": "<ul><li><b>SINK RATE</b>: excessive descent rate. <b>PULL UP</b> \"Follows SINK RATE alert if excessive descent rate continues or increases\".</li><li><b>TERRAIN</b>: excessive terrain closure rate. Followed by PULL UP if it continues and gear and/or flaps are not in landing configuration.</li><li><b>DON'T SINK</b>: \"Excessive altitude loss after takeoff or go–around.\"</li><li><b>TOO LOW, GEAR</b> / <b>TOO LOW, FLAPS</b>: unsafe terrain clearance at low airspeed with the gear not down or the flaps not in landing position.</li><li><b>TOO LOW, TERRAIN</b> (radio altitude): high airspeed and not in landing configuration.</li><li><b>GLIDESLOPE</b> (BELOW G/S light): the BELOW G/S P-INHIBIT light \"cancels or inhibits the alert below 1,000 feet RA.\"</li></ul>"
+ },
+ {
+  "module": "gpws",
+  "after": "GPWS Response — company procedure",
+  "ref": "FCOM 15.10.9–15.10.12 (PDF p2480–2483)",
+  "title": "GPWS panel: INOP, test and inhibit switches",
+  "html": "<ul><li><b>GPWS INOP</b> (amber): computer malfunction or power loss, or invalid inputs (RA, ADIRU, ILS, IRS, FMC, stall management computers, EFIS panel).</li><li><b>SYS TEST</b>: full test on the ground. \"system test inhibited in-flight\".</li><li><b>FLAP INHIBIT</b>: inhibits TOO LOW FLAPS. <b>GEAR INHIBIT</b>: inhibits TOO LOW GEAR.</li><li><b>TERR INHIBIT</b>: \"inhibits look–ahead terrain alerts and terrain display.\" Radio altitude based alerts are not affected.</li><li><b>RUNWAY INHIBIT</b> / RUNWAY INOP: RAAS tails only (TC-SPH–SPJ, TC-SPN, TC-SPP, TC-SPS).</li></ul>"
+ },
+ {
+  "module": "gpws",
+  "after": "GPWS Response — company procedure",
+  "ref": "FCOM 15.10.15–15.10.17 (PDF p2486–2488)",
+  "title": "Terrain display colours",
+  "html": "<ul><li>Solid red / solid amber: look-ahead warning / caution active.</li><li>Dotted red: terrain \"more than 2,000 feet above airplane's current altitude\".</li><li>Dotted amber: \"Terrain 500 feet (250 feet with gear down) below to 2,000 feet above\".</li><li>Dotted green: 2,000 ft below to 500 ft (250 ft gear down) below. Dotted magenta: no terrain data.</li><li>It shows automatically on a look-ahead alert if neither pilot has terrain selected (expanded MAP, center MAP, expanded VOR, expanded APP).</li></ul><p>\"In areas without terrain data, look-ahead terrain alerting and display functions are not available. Radio altitude based terrain alerts function normally.\"</p>"
+ },
+ {
+  "module": "gpws",
+  "after": "Traffic Avoidance (TCAS)",
+  "ref": "FCOM 15.20.35–15.20.36 · 15.10.20 (PDF p2528–2529, p2491)",
+  "title": "TCAS TA and RA",
+  "html": "<ul><li>\"A traffic advisory (TA) is generated when the other airplane is approximately 40 seconds from the point of closest approach.\" Aural \"TRAFFIC, TRAFFIC\" sounds once.</li><li>\"a resolution advisory (RA) is generated when the other airplane is approximately 25 seconds from the point of closest approach.\"</li><li>\"If altitude data from the traffic aircraft's transponder is not available, no RA can be provided.\" No display at all for aircraft without an operating transponder.</li><li>Proximate traffic: \"within six miles and 1200 feet vertically\".</li><li>Transponder selector: TA (or TA ONLY) shows TA targets only. TA/RA enables both.</li><li>RAs show in the PFD attitude area, plus the V/S area on some tails (10.31.6).</li></ul>"
+ },
+ {
+  "module": "gpws",
+  "after": "Traffic Avoidance (TCAS)",
+  "ref": "FCOM 15.20.36–15.20.38 (PDF p2529–2531)",
+  "title": "TCAS inhibits and RA aurals",
+  "html": "<ul><li>\"INCREASE DESCENT RAs are inhibited below approximately 1,500 feet radio altitude.\"</li><li>\"DESCEND RAs are inhibited below approximately 1,100 feet radio altitude.\"</li><li>\"RAs are inhibited below approximately 1,000 feet radio altitude.\" With TA/RA selected, TA only is enabled automatically and TA ONLY shows on the ND.</li><li>\"All TCAS voice annunciations are inhibited below approximately 500 feet radio altitude.\"</li><li>\"All TCAS alerts are inhibited by GPWS and windshear warnings.\"</li></ul><p>RA aurals include CLIMB, DESCEND, crossing and INCREASE versions, reversals \"CLIMB – CLIMB NOW\" / \"DESCEND – DESCEND NOW\", and LEVEL OFF (ADJUST VERTICAL SPEED on TC-SPC/SPD). They end with \"CLEAR OF CONFLICT\".</p>"
+ },
+ {
+  "module": "rto",
+  "after": "Decision authority",
+  "ref": "FCOM NP.21.43–44 (PDF p242–243)",
+  "title": "Takeoff Procedure: thrust set, 80 kt, V1",
+  "html": "<p>Normal Procedures, Takeoff Procedure:</p><ul><li>\"Advance the thrust levers to approximately 40% N1. Allow the engines to stabilize. Push the TO/GA switch.\" \"Verify that the correct takeoff thrust is set.\"</li><li>\"Adjust takeoff thrust before 60 knots as needed.\" Then call \"THRUST SET\".</li><li><b>\"After takeoff thrust is set, the captain's hand must be on the thrust levers until V1.\"</b></li><li>PM: \"Call '80 KNOTS'.\" PF: \"Verify 80 knots and call 'CHECK'.\"</li><li>\"Monitor the engine instruments during the takeoff. Call out any abnormal indications.\" \"Monitor airspeed and call out any abnormal indications.\"</li></ul><p><i>V1 callout: automatic V1 callout or \"V1\" call, by tail.</i></p>"
+ },
+ {
+  "module": "rto",
+  "after": "RTO maneuver",
+  "ref": "FCOM 14.20.4–14.20.5, 14.10.4 (PDF p2463–2464, p2453)",
+  "title": "Autobrake RTO mode",
+  "html": "<p>The F/O Preflight Procedure sets the AUTO BRAKE select switch to <b>RTO</b> and verifies \"that the AUTO BRAKE DISARM light is extinguished\" (NP.21.22).</p><ul><li>On selection, the AUTO BRAKE DISARM light \"illuminates for one to two seconds and then extinguishes\" (self-test passed).</li><li>Arming needs: airplane on the ground, antiskid and autobrake operational, RTO selected, \"wheel speed less than 60 knots\", forward thrust levers at IDLE.</li><li>\"If the takeoff is rejected prior to wheel speed reaching 88 knots autobraking is not initiated.\" Above 88 knots, \"maximum braking is applied automatically when the forward thrust levers are retarded to IDLE.\"</li><li>After braking has started, it disarms (DISARM light on) if the SPEED BRAKE lever is moved to the down detent, a thrust lever is advanced, or manual brakes are applied.</li><li>The autobrake uses hydraulic system B and \"operates only when the normal brake system is functioning.\"</li></ul>"
+ },
+ {
+  "module": "rto",
+  "after": "RTO maneuver",
+  "ref": "FCOM 9.20.17, 7.20.15, 7.11.7 (PDF p1560, p1488, p1446)",
+  "title": "Auto speedbrake and reversers during the RTO",
+  "html": "<p><b>Speedbrake:</b> \"If the SPEED BRAKE lever is in the DOWN position during landing or rejected takeoff, the auto speed brake system operates\" when the main wheels spin up (more than 60 kts), both thrust levers are at IDLE and the reverse thrust levers are positioned for reverse thrust. \"After an RTO or landing, if either thrust lever is advanced, the SPEED BRAKE lever automatically moves to the DOWN detent and all spoiler panels retract.\"</p><p><b>Reversers:</b> REV is amber when the reverser leaves the stowed position and green when it is deployed. Only then can the reverse thrust lever be raised to detent No. 2. \"When necessary, the reverse thrust lever can be pulled beyond detent No. 2, providing maximum reverse thrust.\" Reversers 1 and 2 use hydraulic systems A and B. On the standby system they deploy more slowly and \"some thrust asymmetry can be anticipated.\"</p>"
+ },
+ {
+  "module": "rto",
+  "after": "If the RTO was due to ENGINE FIRE or Severe Damage or Separation",
+  "ref": "FCOM 8.20.2, 8.10.3 (PDF p1513, p1500)",
+  "title": "Engine fire switch: what PULL and ROTATE do",
+  "html": "<p>\"Illumination of an engine fire switch or ENG OVERHEAT light unlocks the engine fire switch. The switches may also be unlocked manually\" (fire switch override: \"Push – unlocks fire switch\").</p><p>Pulling the engine fire switch up:</p><ul><li>closes the engine and spar fuel shutoff valves</li><li>closes the engine bleed air valve (loss of wing anti-ice on that side; the pack valve powered by that bleed closes)</li><li>trips the generator control relay and breaker</li><li>closes the hydraulic fluid shutoff valve</li><li>disables the thrust reverser for that engine</li><li>arms one discharge squib on each bottle</li></ul><p>\"Rotating the switch the other way discharges the remaining bottle.\" \"Either or both bottles can be discharged into either engine.\" The BOTTLE DISCHARGED light \"illuminates a few seconds after the engine fire switch is rotated.\"</p>"
+ },
+ {
+  "module": "rto",
+  "after": "If the RTO was due to APU FIRE · any other reason · evacuation",
+  "ref": "FCOM 8.20.4–8.20.5, 8.10.8 (PDF p1515–1516, p1505)",
+  "title": "APU fire detection and extinguishing",
+  "html": "<p>The APU has a <b>single</b> fire detection loop. If it fails, the APU DET INOP light illuminates. APU fire indications: the fire bell, both master FIRE WARN lights, the APU fire switch illuminated, and \"the APU automatically shuts down.\" On the ground only, the horn sounds and the APU fire warning light flashes in the main wheel well.</p><p>Pulling the APU fire switch \"provides backup for the automatic shutdown feature\". It closes the APU fuel shutoff valve, bleed air valve and air inlet door, trips the APU generator and arms the squib. Rotating it \"in either direction\" discharges the single APU bottle. The APU BOTTLE DISCHARGED light illuminates \"after a few seconds.\"</p><p><i>TC-SPK, TC-SPP only: on the ground with engines shut down, the bottle discharges automatically \"10 seconds after detection.\"</i></p>"
+ },
+ {
+  "module": "rto",
+  "after": "Evacuation",
+  "ref": "FCOM 1.40.74 (PDF p1209)",
+  "title": "Overwing exit flight locks",
+  "html": "<p>The four overwing exits have a 28 V DC flight lock. They lock when all of these are true:</p><ul><li>\"three of the four Entry/Service doors are closed and\"</li><li>\"either engine is running and\"</li><li>\"the airplane air/ground logic indicates that the airplane is in the air or both thrust levers are advanced.\"</li></ul><p>\"The overwing emergency exits unlock when any one of the above conditions is not met or DC power is lost.\"</p><p><i>The FCOM gives the lock logic only. The QRH Evacuation checklist moves both engine start levers to CUTOFF before the cabin is told to evacuate.</i></p>"
+ },
+ {
+  "module": "rto",
+  "after": "Takeoff Configuration warning",
+  "ref": "FCOM 15.20.5–15.20.6 (PDF p2498–2499)",
+  "title": "Takeoff configuration warning: triggers",
+  "html": "<p>The warning is armed \"when the airplane is on the ground and either or both forward thrust levers are advanced for takeoff.\" It activates if:</p><ul><li>trailing edge flaps are not in the flaps 1 through 25 takeoff range, or have skew, asymmetry or uncommanded motion</li><li>leading edge devices are not configured for takeoff or have uncommanded motion</li><li>the speed brake lever is not in the DOWN position</li><li>the spoiler control valve is open to the ground spoiler interlock valve</li><li><b>the parking brake is set</b></li><li>the stabilizer trim is not set in the takeoff range</li></ul><p>An intermittent horn sounds and the TAKEOFF CONFIG light illuminates. <b>\"WARNING: The Cabin Altitude and Takeoff Configuration Warnings use the same intermittent tone when activated.\"</b></p>"
+ },
+ {
+  "module": "eftko",
+  "after": "Key rules",
+  "ref": "FCOM 8.20.2 (PDF p1513)",
+  "title": "Engine fire switch in flight: side effects and the 2nd bottle",
+  "html": "<p>Pulling the engine fire switch in flight also:</p><ul><li>\"closes the engine bleed air valve resulting in loss of wing anti–ice to the affected wing and closure of bleed air operated pack valve\"</li><li>\"trips the generator control relay and breaker\"</li><li>closes the hydraulic fluid shutoff valve. \"The engine driven hydraulic pump LOW PRESSURE light is deactivated\"</li><li>disables the thrust reverser</li></ul><p><b>Two bottles, two squibs per engine:</b> \"Rotating the engine fire switch electrically 'fires' a squib, discharging the extinguishing agent into the related engine. Rotating the switch the other way discharges the remaining bottle.\" This is the second bottle that OM-B lets the PF call for by memory after at least 30 seconds.</p>"
+ },
+ {
+  "module": "eftko",
+  "after": "Engine Fire / Severe Damage / Separation during takeoff",
+  "ref": "FCOM 8.20.1–8.20.2 (PDF p1512–1513)",
+  "title": "Fire vs overheat detection: the 'NO FIRE, NO OVERHEAT' check",
+  "html": "<p>\"Each engine contains two overheat/fire detector loops. Each loop provides both fire and overheat detection.\" \"Normally, both detector loops must sense a fire or overheat condition to cause an engine overheat or fire alert.\"</p><ul><li><b>Overheat:</b> both MASTER CAUTION lights, the OVHT/DET annunciator and the related ENG OVERHEAT light.</li><li><b>Fire:</b> the fire bell, both master FIRE WARN lights and the related engine fire switch, plus all related overheat indications.</li></ul><p>\"The ENG OVERHEAT light or engine fire switch remains illuminated until the temperature drops below the onset temperature.\" Checking these lights is the basis of the PM's \"NO FIRE, NO OVERHEAT\" or \"FIRE…\" call after the bottle.</p><p><i>Illuminated start lever with an engine fire: TC-SEO–SEZ, TC-SOA–SOH, TC-SPN only.</i></p>"
+ },
+ {
+  "module": "eftko",
+  "after": "Engine Fire / Severe Damage / Separation during takeoff",
+  "ref": "FCOM 7.11.9, 7.20.11 (PDF p1448, p1484)",
+  "title": "ENG FAIL alert and auto-relight",
+  "html": "<p><b>ENG FAIL</b> (amber, upper DU) is displayed when the \"engine operating below sustainable idle (less than 50% N2); and engine start lever in IDLE position.\"</p><p>It remains until the \"engine recovers; or start lever moved to CUTOFF; or engine fire switch pulled\", so it goes out during the memory items.</p><p><b>Auto-relight:</b> \"Whenever the EEC detects an engine flameout, both igniters are activated. A flameout is detected when an uncommanded rapid decrease in N2 occurs, or N2 is below idle RPM.\"</p><p>Correct identification (PM calls it, PF verifies) comes before any thrust lever, start lever or fire switch is touched.</p>"
+ },
+ {
+  "module": "eftko",
+  "after": "PF flying technique for the V1 cut — background",
+  "ref": "FCOM 7.11.9, 7.20.6 (PDF p1448, p1479)",
+  "title": "Live engine: EGT limits during a V1 cut",
+  "html": "<p>EGT amber (maximum continuous limit exceeded) color change is inhibited:</p><ul><li>\"for up to 5 minutes during takeoff or go–around (normal operation)\"</li><li>\"for up to 10 minutes during takeoff or go–around (when an engine out condition occurs within the first 5 minutes of the inhibit)\"</li></ul><p>Red means the \"maximum takeoff limit or start limit exceeded.\"</p><p><b>Structural protection:</b> \"The EEC provides N1 and N2 redline overspeed protection in both normal and alternate modes. The EGT limit must be observed by the crew because the EEC does not provide EGT redline exceedance protection.\" Keep this in mind while takeoff thrust is held on the live engine.</p>"
+ },
+ {
+  "module": "depress",
+  "after": "Crew coordination — Cabin Altitude Warning / Rapid Depressurization",
+  "ref": "FCOM 15.20.6, 15.10.3, 2.10.8 (PDF p2499, p2474, p1231)",
+  "title": "Cabin altitude warning: horn and light",
+  "html": "<p>\"Cabin altitude warning activates when cabin altitude exceeds 10,000 feet. An intermittent warning horn sounds and the CABIN ALTITUDE warning light illuminates.\"</p><ul><li>The horn \"may be silenced by momentarily pressing the ALT HORN CUTOUT switch on the Cabin Altitude Panel.\"</li><li>\"The warning light remains illuminated until the cabin altitude descends below 10,000 feet.\"</li><li><b>\"WARNING: The Cabin Altitude and Takeoff Configuration Warnings use the same intermittent tone when activated.\"</b> In flight, treat the horn as a cabin altitude warning.</li></ul><p><i>CABIN ALTITUDE / TAKEOFF CONFIG lights are marked \"if installed and operative\" in the preflight procedure.</i></p>"
+ },
+ {
+  "module": "depress",
+  "after": "Crew coordination — Cabin Altitude Warning / Rapid Depressurization",
+  "ref": "FCOM NP.21.29–30 (PDF p228–229)",
+  "title": "Takeoff briefing: airplanes without the CABIN ALTITUDE light",
+  "html": "<p>For the first flight of the day and after any crew change, the cabin altitude warning and its memory items \"must be briefed on airplanes in which the CABIN ALTITUDE and TAKEOFF CONFIG lights are not installed, or are installed but not activated.\"</p><p>\"Whenever the intermittent warning horn sounds in flight at an airplane flight altitude above 10,000 feet MSL:</p><ul><li>1. Immediately, don oxygen masks and set regulators to 100%.</li><li>2. Establish crew communications.</li><li>3. Do the CABIN ALTITUDE WARNING or Rapid Depressurization non-normal checklist.\"</li></ul><p><b>\"Both pilots must verify on the overhead Cabin Altitude Panel that the cabin altitude is stabilized at or below 10,000 feet before removing oxygen masks.\"</b></p>"
+ },
+ {
+  "module": "depress",
+  "after": "Crew coordination — Cabin Altitude Warning / Rapid Depressurization",
+  "ref": "FCOM 2.40.1, 2.40.5–2.40.6 (PDF p1252, p1256–1257)",
+  "title": "Pressurization: relief valves and AUTO FAIL triggers",
+  "html": "<p>\"Two pressure relief valves provide safety pressure relief by limiting the differential pressure to a maximum of 9.1 psi.\" \"Cabin altitude is normally rate–controlled by the cabin pressure controller up to a cabin altitude of 8,000 feet at the airplane maximum certified ceiling of 41,000 feet.\"</p><p>An amber <b>AUTO FAIL</b> light illuminates for loss of DC power, a controller fault or an outflow valve control fault. When the controller is not responding properly, it also illuminates for:</p><ul><li>\"Excessive differential pressure (&gt; 8.75 psi)\"</li><li>\"Excessive rate of cabin pressure change (±2000 sea level feet/minute)\"</li><li>\"High cabin altitude (above 15,800 feet)\"</li></ul><p>\"With illumination of the AUTO FAIL light, the pressure control automatically transfers to the other auto controller (ALTN mode).\"</p>"
+ },
+ {
+  "module": "depress",
+  "after": "QRH memory items (recap)",
+  "ref": "FCOM 2.40.7, 2.10.11 (PDF p1258, p1234)",
+  "title": "MAN mode: why the outflow valve closes fast",
+  "html": "<p>MAN: \"pressurization system controlled manually by outflow valve switch; both auto controllers bypassed.\" The Outflow Valve switch (spring-loaded to center) opens or closes the valve electrically only \"with pressurization mode selector in MAN position.\"</p><p>\"In MAN mode, a separate DC motor, powered by the DC standby system, drives the outflow valve at a faster rate than during AUTO or ALTN modes. In MAN mode, the outflow valve full range of motion takes up to 20 seconds.\"</p><p>The crew checks the valve on the cabin altitude panel and on the outflow VALVE position indicator.</p><p><b>CAUTION:</b> \"A small movement of the outflow valve can cause a large change in cabin rate of climb or descent.\"</p>"
+ },
+ {
+  "module": "depress",
+  "after": "QRH memory items (recap)",
+  "ref": "FCOM 1.30.28, 1.40.27 (PDF p1127, p1162)",
+  "title": "Crew oxygen mask regulator",
+  "html": "<ul><li><b>N (normal):</b> \"supplies air/oxygen mixture on demand (ratio depends on cabin altitude).\"</li><li><b>100%:</b> \"supplies 100% oxygen on demand\" (memory item setting).</li><li><b>EMERGENCY:</b> \"supplies 100% oxygen under positive pressure at all cabin altitudes (protects against smoke and harmful vapors).\"</li></ul><p>CAUTION: \"Use of EMER mode depletes oxygen supply at higher rate than 100% or NORM mode.\" Note: \"Communications in EMER mode may be difficult.\"</p><p>Crew oxygen comes from a single cylinder. <i>TC-SNN–SNU, TC-SON–SUU:</i> automatic pressure-breathing masks, \"Pressure breathing occurs above 27,000 feet.\"</p><p><i>Regulator layout (rotary selector or separate switch) varies by tail.</i></p>"
+ },
+ {
+  "module": "depress",
+  "after": "QRH memory items (recap)",
+  "ref": "FCOM 1.30.23, 1.40.39–1.40.40 (PDF p1122, p1174–1175)",
+  "title": "Passenger oxygen: auto at 14,000 ft, PASS OXYGEN ON",
+  "html": "<p>PASS OXYGEN switch: <b>NORMAL</b> (guarded) means masks drop and the system activates automatically \"if cabin altitude climbs to 14,000 feet\". <b>ON</b> \"activates system and drops masks if automatic function fails.\" The PASS OXY ON light and the OVERHEAD master caution then illuminate.</p><p>The oxygen generators are chemical, one per PSU. Pulling one mask starts that unit. \"Oxygen flows for approximately 12 minutes and cannot be shut off\" (TC-SPN: approximately 22 minutes).</p><p>WARNING: \"Do not use passenger oxygen with cabin altitude below 14,000 feet when smoke or an abnormal heat source is present.\"</p>"
+ },
+ {
+  "module": "depress",
+  "after": "Technique — background",
+  "ref": "FCOM 9.20.16, L.10.10 (PDF p1559, p183)",
+  "title": "Speedbrake in the emergency descent",
+  "html": "<p>\"Moving the SPEED BRAKE lever beyond the FLIGHT DETENT causes buffeting and is prohibited in flight.\" Limitation: \"In flight, do not extend the SPEED BRAKE lever beyond the FLIGHT DETENT.\"</p><p>Most tails have a <b>lever stop</b>. It \"prevents the SPEED BRAKE lever from being moved beyond the FLIGHT DETENT when the airplane is in flight with the flaps up.\"</p><p><i>TC-SNV, TC-SOT instead have load alleviation. At high weight or speed it retracts the speedbrakes \"to 50 percent of the FLIGHT DETENT\".</i></p><p>\"Caution should be exercised when deploying flight spoilers during a turn, as they greatly increase roll rate.\"</p><p>Non-AFM: \"Do not deploy the speedbrakes in flight at radio altitudes less than 1,000 feet.\"</p>"
+ },
+ {
+  "module": "inflight",
+  "after": "Engine Driftdown Procedure",
+  "ref": "FCOM 11.31.43, 11.42.33 (PDF p1926, p2294)",
+  "title": "FMC ENG OUT CRZ page and drift down execution",
+  "html": "<p>Select ENG OUT on the CRZ page, then the LT or RT ENG OUT prompt. The page shows:</p><ul><li><b>ENG OUT SPD</b>: \"the optimum speed based on minimum drag\"</li><li><b>CON N1</b>: N1 for maximum continuous thrust</li><li><b>MAX ALT</b>: the altitude with one engine at MCT for the default 100 ft/min climb rate</li></ul><p>FCOM drift down execution: \"disengage A/T; set maximum continuous thrust on operating engine (N1 line); set MCP speed to ENG OUT SPD; set MCP altitude to MAX ALT or lower altitude as required; select LVL CHG.\"</p><p>\"As the driftdown proceeds and airplane gross weight decreases, the maximum altitude may increase.\" The ENG OUT CRZ page is advisory, \"information only\".</p>"
+ },
+ {
+  "module": "inflight",
+  "after": "Memory NNCs to recall here",
+  "ref": "FCOM 7.15.1–7.15.2, 7.20.11 (PDF p1464–1465, p1484)",
+  "title": "ENGINE START switch FLT and in-flight starts",
+  "html": "<ul><li><b>FLT</b>: \"provides ignition to both igniters when engine start lever is in IDLE\". This is used in the Loss of Thrust on Both Engines memory item.</li><li><b>CONT</b>: \"in flight – provides ignition to both igniters when N2 is below idle and engine start lever is in IDLE\". This is used in the Emergency Descent memory item.</li><li><b>GRD</b> in flight: opens the start valve and \"arms both igniters\".</li></ul><p>\"Two methods of starting an engine inflight are available, windmill and crossbleed. None of the ground start protection features are functional during inflight start.\" When a crossbleed start is required, X–BLD (XB in the compact display) shows above N2.</p><p><i>TC-SPR has AUTO in place of OFF.</i></p>"
+ },
+ {
+  "module": "inflight",
+  "after": "Memory NNCs to recall here",
+  "ref": "FCOM 7.20.6 (PDF p1479)",
+  "title": "EEC protects N1/N2 but not EGT",
+  "html": "<p>\"The EEC provides N1 and N2 redline overspeed protection in both normal and alternate modes. <b>The EGT limit must be observed by the crew because the EEC does not provide EGT redline exceedance protection.</b>\"</p><p>This supports the Engine Limit or Surge or Stall memory items: \"Retard until engine indications stay within limits or the thrust lever is closed.\"</p><p>Idle: the EEC selects <b>approach idle</b> when cowl anti-ice is ON, or below 19,000 ft MSL with gear down or flaps 15 or more. \"This higher% RPM improves engine acceleration time in the event of a go–around.\"</p><p>In hard alternate mode, \"EEC limiting is not provided\" and maximum rated thrust may be reached before the lever is full forward.</p>"
+ },
+ {
+  "module": "inflight",
+  "after": "Memory NNCs to recall here",
+  "ref": "FCOM 8.20.1, 8.10.4 (PDF p1512, p1501)",
+  "title": "Engine overheat detection and loop faults",
+  "html": "<p>\"As the temperature of a detector increases to a predetermined limit, the detector senses an overheat condition. At higher temperatures, the detector senses a fire condition.\"</p><p>ENG OVERHEAT (amber) comes with MASTER CAUTION and OVHT/DET. The ENG OVERHEAT light also unlocks the engine fire switch.</p><p>With OVHT DET in NORMAL, a failed loop is deselected automatically. \"There is no flight deck indication of single loop failure. If both loops fail on an engine, the FAULT light illuminates and the system is inoperative.\"</p><p>The FAULT light does <b>not</b> trigger MASTER CAUTION.</p><p>Detection is powered by the battery bus and extinguishing by the hot battery bus.</p>"
+ },
+ {
+  "module": "inflight",
+  "after": "Memory NNCs to recall here",
+  "ref": "FCOM 9.10.6, 9.20.7 (PDF p1531, p1550)",
+  "title": "Stabilizer trim: cutout switches and manual trim",
+  "html": "<ul><li><b>MAIN ELECT CUTOUT</b>: \"deactivates stabilizer trim switch operation.\"</li><li><b>AUTOPILOT CUTOUT</b>: \"deactivates autopilot stabilizer trim operation; autopilot disengages if engaged.\"</li><li>The stabilizer trim wheel \"overrides any other stabilizer trim inputs.\"</li></ul><p>The column cutout switches \"stop operation of the main electric and autopilot trim when the control column movement opposes trim direction.\" STAB TRIM OVERRIDE bypasses them.</p><p>\"The stabilizer is held in position by two independent brake systems.\" \"The effort required to manually rotate the stabilizer trim wheels may be higher under certain flight conditions. <b>Grasping the stabilizer trim wheel will stop stabilizer motion.</b>\"</p>"
+ },
+ {
+  "module": "inflight",
+  "after": "Memory NNCs to recall here",
+  "ref": "FCOM 10.21.14, 10.21.15–16 (PDF p1727–1729)",
+  "title": "Air data sources behind Airspeed Unreliable",
+  "html": "<p>\"The pitot static system is comprised of three separate pitot probes and six flush static ports.\"</p><ul><li>\"Each pitot air data module is connected to its on–side pitot probe; <b>there is no cross connection</b>.\" The Captain's probe feeds the left ADIRU and the F/O's probe feeds the right ADIRU.</li><li>\"The remaining auxiliary pitot probe and alternate static ports provide pitot and static pressure to the standby instruments.\" The auxiliary probe is on the F/O side.</li><li>ISFD: airspeed and altitude come from \"direct connections to the auxiliary pitot and alternate static sources\". Attitude comes from its own internal inertial sensors.</li></ul><p><i>A standby airspeed/altimeter and attitude indicator replace the ISFD on TC-SNV, TC-SOO–SOT, TC-SPB, TC-SUU.</i></p>"
+ },
+ {
+  "module": "nnc",
+  "after": "Non-Normal Situation Guidelines Overview",
+  "ref": "FCOM NP.11.2–11.3 (PDF p193–194)",
+  "title": "Crew duties: PF / PM split",
+  "html": "<p>\"Phase of flight duties are divided between the Pilot Flying (PF) and the Pilot Monitoring (PM).\" \"Each crewmember is responsible for moving the controls and switches in their area of responsibility\", both for normal and for non-normal procedures.</p><ul><li><b>PF:</b> \"taxiing; flight path and airspeed control; airplane configuration; navigation.\"</li><li><b>PM:</b> \"checklist reading; communications; tasks asked for by the PF; monitoring taxiing, flight path, airspeed, airplane configuration and navigation.\"</li></ul><p>\"The captain may direct actions outside of the crewmember's area of responsibility.\" <b>\"The captain is the final authority for all tasks directed and done.\"</b></p>"
+ },
+ {
+  "module": "nnc",
+  "after": "Areas of responsibility · Inoperative items",
+  "ref": "FCOM NP.11.3–11.4 (PDF p194–195)",
+  "title": "MCP, CDU and FMA discipline",
+  "html": "<ul><li>\"The mode control panel is the PF's responsibility. When flying manually, the PF directs the PM to make the changes on the mode control panel.\"</li><li>\"In flight, the PM usually makes the CDU entries.\" \"The pilot making the entries executes the change only after the other pilot verifies the entries.\"</li><li>\"During high workload times, for example departure or arrival, try to reduce the need for CDU entries. Do this by using the MCP heading, altitude, and speed control modes.\"</li><li>\"When selecting a value on the MCP, verify that the respective value changes on the flight instruments.\" Use the FMA to verify autopilot, flight director and autothrottle mode changes.</li></ul>"
+ },
+ {
+  "module": "nnc",
+  "after": "Circuit breakers · Configuration check · Captain\\'s discretion",
+  "ref": "FCOM NP.11.1–11.2 (PDF p192–193)",
+  "title": "Configuration check: when an NNC is required",
+  "html": "<p>\"It is the crew member's responsibility to verify correct system response.\"</p><ul><li>Before engine start: use individual system lights. If a light shows an improper condition, \"check the Dispatch Deviations Guide (DDG) or the operator equivalent to decide if the condition has a dispatch effect\" and decide if maintenance is needed.</li><li>\"If, during or after engine start, a red warning or amber caution light illuminates: do the respective non-normal checklist (NNC); on the ground, check the DDG or the operator equivalent.\"</li><li>If an amber caution illuminates on recall and then extinguishes after a master caution reset, check the DDG. \"The respective non-normal checklist is not needed.\"</li></ul><p>Before resetting a tripped CB on the ground, \"Maintenance must first determine that it is safe.\"</p>"
+ },
+ {
+  "module": "memory",
+  "after": "_end",
+  "ref": "FCOM 7.15.8, 8.10.3 (PDF p1471, p1500)",
+  "title": "Engine start lever CUTOFF and the fire switch override",
+  "html": "<p>Engine start lever:</p><ul><li><b>IDLE</b>: \"energizes ignition system through EEC; electrically opens spar fuel shutoff valve…; electrically opens engine–mounted fuel shutoff valve via the EEC.\"</li><li><b>CUTOFF</b>: \"closes both spar and engine fuel shutoff valves; de–energizes ignition system.\"</li></ul><p>Fire switch override: \"Push – unlocks fire switch.\" Without a fire signal the switch is \"mechanically locked\" (8.10.2). QRH note: \"To manually unlock the engine fire switch, press the override and pull.\"</p><p>CAUTION on the start levers: \"Do not apply rotational force when moving the engine start lever.\"</p>"
+ },
+ {
+  "module": "memory",
+  "after": "_end",
+  "ref": "FCOM 8.10.7, 8.10.1 (PDF p1504, p1498)",
+  "title": "Master FIRE WARN and BELL CUTOUT",
+  "html": "<p>Master FIRE WARN lights (red) show \"a fire warning (or system test) in engine, APU, main gear wheel well or cargo compartment\". The fire bell sounds, and on the ground the remote APU horn sounds too.</p><p>Pushing a master FIRE WARN light or the BELL CUTOUT switch:</p><ul><li>\"extinguishes both master FIRE WARN lights\"</li><li>\"silences fire warning bell\"</li><li>silences the remote APU fire warning horn</li><li>\"resets system for additional warnings\"</li></ul><p>Silencing the bell does not extinguish the fire switch light. The fire switch stays lit while the fire is detected.</p>"
+ },
+ {
+  "module": "memory",
+  "after": "_end",
+  "ref": "FCOM 7.20.10–7.20.11, 7.11.9 (PDF p1483–1484, p1448)",
+  "title": "Aborted Engine Start: what the EEC does and doesn't do",
+  "html": "<p>\"During ground starts, the EEC monitors engine parameters to detect impending hot starts, engine stalls, EGT start limit exceedances, and wet starts. These protection features do not function during inflight starts.\"</p><ul><li>Impending hot start or stall: the white box around EGT flashes. EEC software 7.B.Q and later \"automatically turn off the ignition and shuts off fuel.\"</li><li>EGT start limit exceeded: the EGT display turns red and the EEC shuts off ignition and fuel.</li><li>Wet start (no EGT rise): the EEC shuts off ignition and fuel \"15 seconds after the start lever is moved to IDLE.\"</li></ul><p>Even so, the memory item is the start lever to <b>CUTOFF</b>. Also: \"Initial fuel flow indications lag actual fuel flow by approximately two seconds.\"</p>"
+ },
+ {
+  "module": "memory",
+  "after": "_end",
+  "ref": "FCOM 7.30.3, 8.20.4 (PDF p1494, p1515)",
+  "title": "APU Fire memory items: APU switch OFF vs fire switch",
+  "html": "<p>APU switch OFF: \"trips the APU generator, closes the APU bleed air valve… Shutdown occurs automatically after 60 seconds.\" <b>\"An immediate shutdown can be accomplished by pulling the APU fire switch.\"</b></p><p>An APU fire itself makes \"the APU automatically shuts down\". Pulling the APU fire switch \"provides backup for the automatic shutdown feature\". It closes the fuel shutoff valve, bleed valve and inlet door and arms the squib.</p><p>The APU has one bottle. Rotating the switch \"in either direction\" discharges it.</p>"
+ },
+ {
+  "module": "memory",
+  "after": "_end",
+  "ref": "FCOM 2.10.11, 1.30.23 (PDF p1234, p1122)",
+  "title": "Cabin Altitude memory items: the switches",
+  "html": "<ul><li>Pressurization mode selector <b>MAN</b>: \"pressurization system controlled manually by outflow valve switch; both auto controllers bypassed.\"</li><li>Outflow valve switch (spring-loaded to center) <b>CLOSE</b>: \"closes outflow valve electrically with pressurization mode selector in MAN position.\"</li><li>Outflow VALVE position indicator: \"operates in all modes\".</li><li>PASS OXYGEN <b>ON</b>: \"activates system and drops masks if automatic function fails\". NORMAL gives automatic deployment at 14,000 ft cabin altitude.</li><li>ALT HORN CUTOUT: \"cuts out intermittent cabin altitude warning horn.\"</li></ul>"
+ },
+ {
+  "module": "memory",
+  "after": "_end",
+  "ref": "FCOM 9.20.8, 15.20.6 (PDF p1551, p2499)",
+  "title": "Stabilizer trim authority and the green band",
+  "html": "<p>Trim authority per mode:</p><ul><li>Main electric: flaps extended 0.05 to 14.5 units, flaps retracted 3.95 to 14.5 units</li><li>Autopilot: 0.05 to 14.5 units</li><li>Manual: -0.20 to 16.9 units</li></ul><p>\"If manual trim is used to position the stabilizer beyond the electrical trim limits, the stabilizer trim switches may be used to return the stabilizer to electrical trim limits.\"</p><p>\"An intermittent horn sounds if takeoff is attempted with the stabilizer trim outside the takeoff trim range\". This is one of the triggers for the Takeoff Configuration Warning memory item.</p>"
+ }
+]

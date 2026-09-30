@@ -1,0 +1,429 @@
+<title>LVO Decision Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: briefing strip on top, cockpit (PFD + window + radio log) in the middle, one big GO AROUND key at the bottom.
+   The instruments stay dark in both themes on purpose (that is what a flight deck looks like); the page around them follows the theme. */
+:root{
+  --bg:#E9EDF1; --panel:#FFFFFF; --soft:#DDE3EA; --line:#C5CFDA;
+  --ink:#111C27; --muted:#556476;
+  --accent:#0E6E8C; --good:#157A43; --good-soft:#DCF1E4; --bad:#B3261E; --bad-soft:#FADFDC; --warn:#9A5B00; --warn-soft:#F8E9CF;
+  --deck:#171D24; --deck-2:#0A0D11; --deck-line:#2E3945;
+  --pfd-green:#3EE07A; --pfd-mag:#F062E0; --pfd-amber:#FFB020; --pfd-white:#EEF2F6; --pfd-cyan:#4FD6F0; --pfd-red:#FF4B3E;
+  --sky:#2A6FB0; --ground:#7B4B22;
+  --f-disp:"Chakra Petch","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"B612 Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1116; --panel:#141B22; --soft:#1C252F; --line:#2B3744; --ink:#E3EAF1; --muted:#95A4B4;
+  --accent:#58C4E3; --good:#52C98A; --good-soft:#12301F; --bad:#FF7D72; --bad-soft:#3A1916; --warn:#F2B04A; --warn-soft:#3A2A12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1116; --panel:#141B22; --soft:#1C252F; --line:#2B3744; --ink:#E3EAF1; --muted:#95A4B4;
+  --accent:#58C4E3; --good:#52C98A; --good-soft:#12301F; --bad:#FF7D72; --bad-soft:#3A1916; --warn:#F2B04A; --warn-soft:#3A2A12; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:16px;padding-block:16px 40px}
+h1,h2,h3{font-family:var(--f-disp);margin:0;text-wrap:balance}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lbl{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;font-weight:600;color:var(--muted)}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 24px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.top h1{font-size:1.9rem;line-height:1}
+.top p{margin:4px 0 0;color:var(--muted);max-width:62ch;font-size:.92rem}
+.score{display:flex;gap:18px;flex-wrap:wrap}
+.score div{display:grid}
+.score b{font-family:var(--f-mono);font-size:1.2rem;font-variant-numeric:tabular-nums}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:8px 14px;font-weight:600}
+.btn:hover{border-color:var(--muted)}
+.btn.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.sm{padding:5px 10px;font-size:.84rem}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0}
+select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);max-width:100%}
+
+/* briefing */
+.brief{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:10px}
+.brief h2{font-size:1.35rem}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 16px}
+.kv div{display:grid;gap:1px;min-width:0}
+.kv b{font-family:var(--f-mono);font-size:.95rem}
+.metar{font-family:var(--f-mono);font-size:.85rem;background:var(--soft);border-radius:6px;padding:8px 10px;overflow-x:auto;white-space:nowrap}
+.role{display:inline-block;font-family:var(--f-disp);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;padding:2px 8px;border-radius:3px;background:var(--warn-soft);color:var(--warn)}
+.task{font-size:.9rem;color:var(--muted);margin:0}
+
+/* deck */
+.deck{margin-top:14px;background:var(--deck);border-radius:12px;padding:12px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:12px;color:var(--pfd-white)}
+@media (max-width:860px){.deck{grid-template-columns:minmax(0,1fr)}}
+.glare{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.light{font-family:var(--f-mono);font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:5px 8px;border-radius:3px;background:#20272F;color:#56606B;border:1px solid #2E3945}
+.light.red{background:#5A0F0B;color:#FF6A5E;border-color:#FF4B3E;animation:blink .6s steps(2) infinite}
+.light.amb{background:#4A3300;color:#FFC24D;border-color:#FFB020}
+.light.grn{background:#0D3A1F;color:#5CF095;border-color:#2FAF62}
+@keyframes blink{50%{opacity:.35}}
+.pfd{background:var(--deck-2);border-radius:8px;border:1px solid var(--deck-line);width:100%;height:auto;display:block}
+.right{display:grid;gap:12px;align-content:start;min-width:0}
+canvas.win{width:100%;height:auto;border-radius:8px;border:1px solid var(--deck-line);display:block;background:#8C98A3}
+.log{background:var(--deck-2);border:1px solid var(--deck-line);border-radius:8px;padding:8px 10px;height:190px;overflow-y:auto;font-family:var(--f-mono);font-size:.8rem;display:flex;flex-direction:column-reverse;gap:3px}
+.log p{margin:0}
+.log .w{display:inline-block;min-width:54px;font-weight:700}
+.log .ATC .w{color:var(--pfd-cyan)} .log .AURAL .w{color:var(--pfd-amber)} .log .CAPT .w{color:var(--pfd-mag)} .log .SYS .w{color:var(--pfd-red)} .log .YOU .w{color:var(--pfd-green)}
+.status{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--f-mono);font-size:.75rem;padding:4px 8px;border-radius:4px;background:#11161C;border:1px solid var(--deck-line)}
+.chip b{color:var(--pfd-green)}
+.chip b.amb{color:var(--pfd-amber)}
+.ga{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.gabtn{font-family:var(--f-disp);font-weight:700;letter-spacing:.08em;font-size:1.35rem;padding:16px 18px;border-radius:10px;border:2px solid #FFB020;background:#3A2600;color:#FFD27A;text-transform:uppercase}
+.gabtn:hover:not(:disabled){background:#523600}
+.gabtn:disabled{opacity:.35;cursor:not-allowed}
+.gabtn small{display:block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.02em;color:#E8C88A;text-transform:none;font-weight:400}
+.spd{display:flex;gap:4px;align-items:center}
+.spd .lbl{color:#8995A3}
+.spd button{background:#11161C;border:1px solid var(--deck-line);color:#C9D3DD;border-radius:4px;padding:4px 8px;font-family:var(--f-mono);font-size:.75rem}
+.spd button[aria-pressed="true"]{border-color:var(--pfd-cyan);color:var(--pfd-cyan)}
+
+/* result */
+.result{margin-top:14px;border-radius:10px;padding:16px 18px;border:1px solid var(--line);background:var(--panel);display:grid;gap:10px}
+.result.ok{border-color:var(--good);background:var(--good-soft)}
+.result.no{border-color:var(--bad);background:var(--bad-soft)}
+.verdict{font-family:var(--f-disp);font-size:1.8rem;line-height:1.05}
+.result.ok .verdict{color:var(--good)} .result.no .verdict{color:var(--bad)}
+.result h3{font-size:1rem;letter-spacing:.04em;text-transform:uppercase}
+.result p{margin:0;max-width:78ch}
+.say{font-family:var(--f-mono);font-weight:700;color:var(--accent)}
+.ref{font-size:.82rem;color:var(--muted)}
+.src{display:inline-block;font-size:.72rem;font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.06em;padding:1px 6px;border-radius:3px;background:var(--soft);color:var(--muted);margin-left:6px}
+.hist{margin-top:18px}
+.hist table{border-collapse:collapse;width:100%;min-width:540px;font-size:.86rem}
+.hist td,.hist th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.hist th{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.06em;font-size:.74rem;color:var(--muted)}
+.tw{overflow-x:auto}
+.okc{color:var(--good);font-weight:700}.noc{color:var(--bad);font-weight:700}
+.rules{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.rules ul{margin:6px 0 0;padding-left:18px}
+.rules li{margin:3px 0}
+.foot{color:var(--muted);font-size:.8rem;margin-top:16px;max-width:85ch}
+@media (prefers-reduced-motion:reduce){.light.red{animation:none}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>LVO Decision Trainer</h1>
+      <p>737-800 · right seat · SunExpress CAT I / II / III. The Captain flies; you are PM down to minimums. Press GO AROUND only when the procedure requires it. Pressing it when it is not needed also fails the run.</p>
+    </div>
+    <div class="score">
+      <div><span class="lbl">Runs</span><b id="sRuns">0</b></div>
+      <div><span class="lbl">Correct</span><b id="sOk">0%</b></div>
+      <div><span class="lbl">Missed GA</span><b id="sMiss">0</b></div>
+      <div><span class="lbl">Needless GA</span><b id="sFalse">0</b></div>
+    </div>
+  </header>
+
+  <div class="bar">
+    <button class="btn pri" id="nextBtn">Next random scenario</button>
+    <label class="lbl" for="pick">or pick</label>
+    <select id="pick"></select>
+    <button class="btn sm" id="resetBtn">Reset score</button>
+  </div>
+
+  <section class="brief" id="brief"></section>
+
+  <section class="deck" id="deck" aria-label="Flight deck">
+    <div class="glare">
+      <span class="light" id="lAP">A/P DISENGAGE</span>
+      <span class="light" id="lAT">A/T DISENGAGE</span>
+      <span class="light" id="lMC">MASTER CAUTION</span>
+      <span class="light" id="lFire">ENG FAIL</span>
+      <span class="light" id="lMins">MINIMUMS</span>
+    </div>
+    <svg class="pfd" id="pfd" viewBox="0 0 400 320" role="img" aria-label="Primary flight display"></svg>
+    <div class="right">
+      <canvas class="win" id="win" width="480" height="250" aria-label="Out of the window view"></canvas>
+      <div class="log" id="log" aria-live="polite"></div>
+    </div>
+    <div class="status" id="status"></div>
+    <div class="ga">
+      <button class="gabtn" id="gaBtn" disabled>Go around<small id="gaSub">Start the approach first · Space</small></button>
+      <div class="spd"><span class="lbl">Sim speed</span><button data-r="0.75">0.75×</button><button data-r="1" aria-pressed="true">1×</button><button data-r="1.5">1.5×</button></div>
+    </div>
+  </section>
+
+  <section id="result"></section>
+
+  <section class="rules">
+    <span class="lbl">Rules the scenarios test</span>
+    <ul>
+      <li><b>FO role:</b> in LVO the Captain is PF and you are PM (OM-A 5.1.4.5.2). You watch head-down to roll-out, call deviations and failures, and if the Captain does not respond you initiate the go-around. Any malfunction after the Captain goes head-up: you call <span class="say">"GO AROUND"</span> (OM-A 8.4.1.4).</li>
+      <li><b>CAT II and III</b> need a dual-channel automatic approach and landing, flaps 30 or 40, both engines operating, an operative EFIS control panel, and a runway at least 45 m wide (OM-B 1.5.1, 1.5.3.1).</li>
+      <li><b>Autoland wind limits</b>, gusts included: headwind 25 kt, crosswind 10 kt, tailwind 10 kt (OM-B 1.5.1).</li>
+      <li><b>Stabilized approach</b> (OM-A 8.3.1.16.6): stable by 1000 ft, landing flaps set, speed within target +10 / −5 kt. Deviation limits: CAT I 1 dot, CAT II/III ½ dot on the localizer and the glideslope.</li>
+      <li><b>Approach ban:</b> if the controlling RVR is below minima before 1000 ft above the aerodrome, do not continue. Below 1000 ft you may continue to DH (EASA CAT.OP.MPA.305; the OM-A page is not in the screenshots).</li>
+      <li><b>At DH:</b> no required visual reference means a go-around.</li>
+    </ul>
+  </section>
+
+  <section class="hist tw" id="hist"></section>
+  <p class="foot">Training aid built from the SunExpress pages you uploaded. Items tagged “company” come from the OM-A / OM-B screenshots. Items tagged “EASA” or “Boeing” are general rules that were not in the screenshots. RVR minima shown here are the standard EU values (CAT I 550 m, CAT II 300 m, CAT IIIA 200 m); always use the chart and OM-A. Scores are kept in this browser only.</p>
+</div>
+
+<script>
+/* ---------------- scenarios ----------------
+ need: go-around required · trig: RA (ft) where the reason appears · dl: last RA to press
+ ev: timed events {at, who, t, set}  · vis: RA where lights become visible (0 = never)
+ cat: 'I' (manual landing) | 'II' | 'IIIA' (autoland). In every scenario the Captain is PF and you are PM. */
+const S = [
+{id:'c3ok', cat:'IIIA', elev:-11, rwy:'EHAM 06', dh:50, rvr:'R06/0250N', wx:'EHAM 101520Z 05006KT 0200 R06/0250N FG VV001 01/01 Q1022', wind:[50,6], need:false, vis:75,
+ title:'Normal CAT IIIA autoland', ev:[],
+ why:'Nothing was wrong. Dual channel engaged, FLARE armed, wind within limits, the Captain saw the lights and called "LANDING". A go-around here is a needless exposure, and the examiner marks it as a wrong decision.', say:'(monitor head-down to roll-out)', ref:'OM-A 8.4.1.4', src:'company'},
+{id:'c3ap', cat:'IIIA', elev:-11, rwy:'EHAM 06', dh:50, rvr:'R06/0225N', wx:'EHAM 101520Z 06005KT 0150 R06/0225N FG VV001 00/00 Q1024', wind:[60,5], need:true, trig:240, dl:50, vis:70,
+ title:'Autopilot disconnect at 240 ft', ev:[{at:240,who:'SYS',t:'A/P disconnect wailer',set:{ap:'OFF',apLight:1}}],
+ why:'CAT III is only approved as a dual channel automatic approach AND landing. With the autopilot gone at 240 ft there is no autoland and the visibility is far below anything a manual landing allows. You are PM: you call the failure and the go-around.', say:'"AUTOPILOT DISCONNECT — GO AROUND"', ref:'OM-B 1.5.3.1 · OM-A 8.4.1.4 (PM calls any deviation or failure warning)', src:'company'},
+{id:'c2novis', cat:'II', elev:-11, rwy:'EHAM 18C', dh:100, rvr:'R18C/0325N', wx:'EHAM 101520Z 17004KT 0300 R18C/0325N FG VV002 02/02 Q1019', wind:[170,4], need:true, trig:100, dl:75, vis:0,
+ title:'No visual reference at DH, Captain silent', ev:[],
+ why:'At DH 100 ft the Captain had no visual reference and did not call anything. At DH without the required visual reference a go-around is mandatory. OM-A gives the PM the job: if there is no response from the PF, the PM initiates the go-around.', say:'"GO AROUND"', ref:'OM-A 8.4.1.4 (PM: if there is no response from PF, initiates a go-around)', src:'company'},
+{id:'c2single', cat:'II', elev:-11, rwy:'EHAM 18C', dh:100, rvr:'R18C/0350N', wx:'EHAM 101520Z 18006KT 0350 R18C/0350N BR OVC001 03/03 Q1018', wind:[180,6], need:true, trig:800, dl:100, vis:130,
+ title:'Second autopilot drops out (SINGLE CH)', ev:[{at:800,who:'SYS',t:'SINGLE CH annunciated, CMD B off',set:{ap:'SINGLE'}}],
+ why:'CAT II needs dual channel automatic approach and landing. SINGLE CH means only one autopilot is engaged, so the approach no longer meets CAT II. With RVR 350 m you are below CAT I minima (550 m), so a go-around is the only option. You call the FMA change and the go-around.', say:'"SINGLE CHANNEL — GO AROUND"', ref:'OM-B 1.5.3.1 · OM-A 8.4.1.4 (PM monitors FMA and calls mode changes)', src:'company'},
+{id:'c2headup', cat:'II', elev:-11, rwy:'EHAM 06', dh:100, rvr:'R06/0400N', wx:'EHAM 101520Z 06007KT 0400 R06/0400N FG OVC001 01/01 Q1021', wind:[60,7], need:true, trig:165, dl:100, vis:120,
+ title:'Localizer excursion after the Captain goes head-up', ev:[{at:200,who:'CAPT',t:'(head up, looking for visual references)',set:{}},{at:165,who:'SYS',t:'LOC deviation increasing',set:{locTo:0.9}}],
+ why:'From 100 ft above DH the Captain looks outside. After that, OM-A puts the call on you: in case any malfunction occurs after the Captain is "head up", the F/O calls "GO AROUND". The localizer went past ½ dot, the CAT II limit.', say:'"GO AROUND"', ref:'OM-A 8.4.1.4 CAUTION · OM-A 8.3.1.16.6 (CAT II/III ½ dot)', src:'company'},
+{id:'banBefore', cat:'II', elev:-11, rwy:'EHAM 18C', dh:100, rvr:'R18C/0400N', wx:'EHAM 101520Z 17005KT 0400 R18C/0400N FG VV002 02/02 Q1020', wind:[170,5], need:true, trig:1350, dl:1000, vis:0,
+ title:'RVR falls below minima before 1000 ft', ev:[{at:1350,who:'ATC',t:'"SunExpress 2UM, RVR touchdown 250 metres, cleared to land runway 18C"',set:{}}],
+ why:'CAT II needs RVR 300 m. The drop to 250 m came at 1350 ft, above 1000 ft above the aerodrome, so the approach ban applies and you may not continue. Discontinue the approach with a go-around.', say:'"RVR BELOW MINIMA — GO AROUND"', ref:'EASA CAT.OP.MPA.305 approach ban (OM-A page not in the screenshots)', src:'EASA'},
+{id:'banAfter', cat:'II', elev:-11, rwy:'EHAM 18C', dh:100, rvr:'R18C/0400N', wx:'EHAM 101520Z 17005KT 0400 R18C/0400N FG VV002 02/02 Q1020', wind:[170,5], need:false, vis:135,
+ title:'RVR falls below minima after 1000 ft', ev:[{at:700,who:'ATC',t:'"SunExpress 2UM, RVR touchdown now 250 metres"',set:{}}],
+ why:'The RVR drop came at 700 ft, below 1000 ft above the aerodrome. The approach ban no longer applies: you may continue to DH and land if the Captain has the visual reference, and the Captain called "LANDING".', say:'(continue; acknowledge the RVR)', ref:'EASA CAT.OP.MPA.305 (OM-A page not in the screenshots)', src:'EASA'},
+{id:'gsDev', cat:'II', elev:-11, rwy:'EHAM 06', dh:100, rvr:'R06/0400N', wx:'EHAM 101520Z 05008KT 0400 R06/0400N FG OVC001 01/01 Q1021', wind:[50,8], need:true, trig:640, dl:100, vis:0,
+ title:'Glideslope deviation beyond ½ dot', ev:[{at:700,who:'SYS',t:'',set:{gsTo:0.85}}],
+ why:'The glideslope deviation passed ½ dot at about 640 ft. For CAT II/III the stabilized-approach limit is ½ dot. The approach is no longer stable, so it is a go-around, and as PM you call the deviation.', say:'"GLIDESLOPE — GO AROUND"', ref:'OM-A 8.3.1.16.6 (CAT II/III ½ dot)', src:'company'},
+{id:'gsSmall', cat:'II', elev:-11, rwy:'EHAM 06', dh:100, rvr:'R06/0400N', wx:'EHAM 101520Z 05008KT 0400 R06/0400N FG OVC001 01/01 Q1021', wind:[50,8], need:false, vis:130,
+ title:'Small glideslope wobble inside ½ dot', ev:[{at:700,who:'SYS',t:'',set:{gsTo:0.3}},{at:450,who:'SYS',t:'',set:{gsTo:0}}],
+ why:'The glideslope moved about ⅓ dot and came back. That is inside the ½ dot CAT II limit. Call it if it keeps growing, but it does not require a go-around.', say:'(optional: "GLIDESLOPE" if it keeps growing)', ref:'OM-A 8.3.1.16.6', src:'company'},
+{id:'tail', cat:'IIIA', elev:-11, rwy:'EHAM 06', dh:50, rvr:'R06/0200N', wx:'EHAM 101520Z 23010KT 0175 R06/0200N FG VV001 00/00 Q1023', wind:[230,10], need:true, trig:1150, dl:50, vis:70,
+ title:'Tailwind above the autoland limit', ev:[{at:1150,who:'ATC',t:'"SunExpress 2UM, wind 240 degrees 13 knots, runway 06 cleared to land"',set:{wind:[240,13]}}],
+ why:'Wind 240/13 on runway 06 (055°) is almost straight behind you: about 13 kt tailwind. The autoland limit is 10 kt tailwind, gusts included. With no autoland there is no CAT III, and RVR 200 m does not allow a manual landing.', say:'"TAILWIND ABOVE LIMIT — GO AROUND"', ref:'OM-B 1.5.1 (CAT II/III wind limits: 25 head / 10 cross / 10 tail)', src:'company'},
+{id:'xwOk', cat:'IIIA', elev:-11, rwy:'EHAM 18C', dh:50, rvr:'R18C/0250N', wx:'EHAM 101520Z 13011KT 0200 R18C/0250N FG VV001 01/01 Q1022', wind:[130,11], need:false, vis:75,
+ title:'Crosswind 8 kt on a CAT IIIA', ev:[{at:1100,who:'ATC',t:'"SunExpress 2UM, wind 130 degrees 11 knots, cleared to land 18C"',set:{}}],
+ why:'130/11 on runway 18C (181°) gives about 8.5 kt crosswind and 7 kt headwind. That is inside the 10 kt autoland crosswind limit, so continue.', say:'(continue)', ref:'OM-B 1.5.1', src:'company'},
+{id:'engFail', cat:'IIIA', elev:-11, rwy:'EHAM 06', dh:50, rvr:'R06/0200N', wx:'EHAM 101520Z 06004KT 0150 R06/0200N FG VV001 00/00 Q1024', wind:[60,4], need:true, trig:600, dl:50, vis:70,
+ title:'Engine failure at 600 ft on a CAT IIIA', ev:[{at:600,who:'SYS',t:'ENG 2 N1 decaying, master caution',set:{eng:1,mc:1,fire:1}}],
+ why:'Autoland may only be used with both engines operating. After an engine failure at 600 ft there is no CAT III, so go around and follow OM-B 3.10 logic once you are climbing.', say:'"ENGINE FAILURE — GO AROUND"', ref:'OM-B 1.5.1 (autoland: flaps 30/40, both engines operative)', src:'company'},
+{id:'flaps15', cat:'II', elev:-11, rwy:'EHAM 18C', dh:100, rvr:'R18C/0350N', wx:'EHAM 101520Z 18004KT 0350 R18C/0350N FG VV001 02/02 Q1020', wind:[180,4], need:true, trig:1150, dl:100, vis:130,
+ title:'Flaps stay at 15', ev:[{at:1250,who:'CAPT',t:'"FLAPS 30"',set:{}},{at:1150,who:'SYS',t:'Flap indicator stays at 15, flaps not moving',set:{}}],
+ why:'Flaps 30 was selected but the flaps stayed at 15. Autoland is only approved with flaps 30 or 40, and the stabilized-approach rule needs landing flaps by 1000 ft. There is no time to fix it, so it is a go-around; run the flap NNC on the missed approach.', say:'"FLAPS FIFTEEN — NOT STABILISED — GO AROUND"', ref:'OM-B 1.5.1 · 1.5.3.1 · OM-A 8.3.1.16.6', src:'company', flaps:15},
+{id:'efis', cat:'II', elev:-11, rwy:'EHAM 06', dh:100, rvr:'R06/0325N', wx:'EHAM 101520Z 06006KT 0300 R06/0325N FG VV001 01/01 Q1021', wind:[60,6], need:true, trig:1250, dl:100, vis:125,
+ title:'EFIS control panel failure', ev:[{at:1250,who:'SYS',t:'Captain EFIS control panel failed, master caution',set:{mc:1}}],
+ why:'With an EFIS control panel failure, CAT II and III approaches are prohibited. RVR 325 m is below CAT I minima, so you go around and sort it out on the missed approach.', say:'"EFIS FAILURE — GO AROUND"', ref:'OM-B 1.5.3.1', src:'company'},
+{id:'lvp', cat:'IIIA', elev:-11, rwy:'EHAM 18C', dh:50, rvr:'R18C/0200N', wx:'EHAM 101520Z 18005KT 0200 R18C/0200N FG VV001 01/01 Q1022', wind:[180,5], need:true, trig:1300, dl:50, vis:70,
+ title:'LVP suspended by ATC', ev:[{at:1300,who:'ATC',t:'"SunExpress 2UM, be advised LVP are no longer in force, ILS 18C sensitive area not protected"',set:{}}],
+ why:'CAT II/III needs the aerodrome and runway to be operating CAT II/III with LVP in force (it is also a briefing item). Without LVP the ILS sensitive area is not protected and the autoland can follow a bent beam, so discontinue.', say:'"NO LVP — GO AROUND"', ref:'OM-A 8.4.1.5 (airfield and runway status CAT II/III, LVP) · EASA', src:'company'},
+{id:'opc6', cat:'IIIA', elev:-11, rwy:'EHAM 06', dh:50, rvr:'R06/0250N', wx:'EHAM 151325Z 12022KT 0300 R06/0250N +SN BLSN VV002 M04/M05 Q1025', wind:[120,22], need:true, trig:1500, dl:50, vis:70,
+ title:'OPC-6 return to 06: crosswind 20 kt', ev:[{at:1500,who:'ATC',t:'"SunExpress 2UM, wind 120 degrees 22 knots, runway 06 cleared to land"',set:{}}],
+ why:'120/22 on runway 06 (055°): the angle is 65°, so crosswind is about 20 kt. The autoland limit is 10 kt, so no CAT III. RVR 250 m is below CAT I. It is a go-around, and really a diversion decision (FORDEC) that should have been made before the approach.', say:'"CROSSWIND ABOVE AUTOLAND LIMIT — GO AROUND"', ref:'OM-B 1.5.1 · OPC-6 data sheet', src:'company'},
+{id:'c1vis', cat:'I', elev:412, rwy:'LTBJ 34L', dh:200, rvr:'R34L/0700N', wx:'LTBJ 151320Z 33008KT 0700 R34L/0700N BR OVC002 03/03 Q1023', wind:[330,8], need:false, vis:260,
+ title:'CAT I: approach lights at DA', ev:[],
+ why:'CAT I with RVR 700 m. The approach lights came through above DA and the Captain called "LANDING". The PF had the required visual reference, so you keep monitoring head-down and let the Captain land.', say:'(monitor; no call needed)', ref:'OM-B 1.5.3.1 (CAT I: manual or automatic approach, manual landing)', src:'company'},
+{id:'c1novis', cat:'I', elev:412, rwy:'LTBJ 34L', dh:200, rvr:'R34L/0600N', wx:'LTBJ 151320Z 33006KT 0600 R34L/0600N FG VV002 02/02 Q1024', wind:[330,6], need:true, trig:200, dl:170, vis:0,
+ title:'CAT I: nothing at DA', ev:[],
+ why:'At DA there was nothing outside and the Captain did not call "LANDING". Without the required visual reference at DA a go-around is mandatory. If the PF does not respond, the PM initiates the go-around. The Captain then flies it: TO/GA, thrust by hand (A/T INOP), "GO AROUND, FLAPS 15".', say:'"GO AROUND"', ref:'OM-A 8.4.1.4 (PM initiates if no response from PF) · OM-B 1.5.3.1', src:'company'},
+{id:'c1speed', cat:'I', elev:412, rwy:'LTBJ 34L', dh:200, rvr:'R34L/0800N', wx:'LTBJ 151320Z 34012G22KT 0800 R34L/0800N BR OVC003 04/03 Q1023', wind:[340,12], need:true, trig:450, dl:200, vis:280,
+ title:'CAT I: speed Vref+15 below 500 ft', ev:[{at:450,who:'SYS',t:'IAS rising: Vref +15',set:{spdTo:15}}],
+ why:'Stable means speed within target +10 / −5 kt. At 450 ft the Captain was +15 and not correcting. That is an unstable approach, so it is a go-around even though the lights would have come. As PM you call the deviation, then the go-around.', say:'"SPEED" … "GO AROUND"', ref:'OM-A 8.3.1.16.6 (speed +10/−5)', src:'company'},
+{id:'c1gust', cat:'I', elev:412, rwy:'LTBJ 34L', dh:200, rvr:'R34L/0800N', wx:'LTBJ 151320Z 34012G20KT 0800 R34L/0800N BR OVC003 04/03 Q1023', wind:[340,12], need:false, vis:280,
+ title:'CAT I: short gust +7 kt', ev:[{at:420,who:'SYS',t:'',set:{spdTo:7}},{at:330,who:'SYS',t:'',set:{spdTo:2}}],
+ why:'The gust took the speed to +7 kt for a moment. That is inside +10 / −5, and OM-A accepts brief fluctuations in gusty conditions. The approach stayed stable, so land.', say:'(continue)', ref:'OM-A 8.3.1.16.6', src:'company'}
+];
+
+/* ---------------- state ---------------- */
+const $=s=>document.querySelector(s);
+const KEY='lvosim.v1';
+let ST={runs:0,ok:0,miss:0,fals:0,hist:[],seen:[]};
+try{Object.assign(ST,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}}
+let sc=null, run=null, rate=1, raf=null;
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const done=id=>ST.hist.some(h=>h.id===id);
+
+function fillPick(){
+  $('#pick').innerHTML='<option value="">— scenario —</option>'+S.map((s,i)=>`<option value="${s.id}">Scenario ${String(i+1).padStart(2,'0')} · CAT ${s.cat} · ${s.rwy}${done(s.id)?' · '+esc(s.title):''}</option>`).join('');
+}
+function score(){
+  $('#sRuns').textContent=ST.runs;$('#sOk').textContent=ST.runs?Math.round(ST.ok/ST.runs*100)+'%':'—';
+  $('#sMiss').textContent=ST.miss;$('#sFalse').textContent=ST.fals;
+  $('#hist').innerHTML=ST.hist.length?`<span class="lbl">Your last runs</span><table><tr><th>#</th><th>Scenario</th><th>Needed</th><th>You</th><th>Result</th></tr>${ST.hist.slice(-12).reverse().map((h,i)=>`<tr><td>${ST.hist.length-i}</td><td>${esc(S.find(s=>s.id===h.id).title)}</td><td>${h.need?'Go around':'Continue'}</td><td>${h.you}</td><td class="${h.ok?'okc':'noc'}">${h.ok?'Correct':'Wrong'}</td></tr>`).join('')}</table>`:'';
+}
+
+/* ---------------- briefing ---------------- */
+function role(s){return 'Captain PF · You PM'}
+function minima(s){return s.cat==='I'?'DA 200 ft · RVR 550 m':s.cat==='II'?'DH 100 ft RA · RVR 300 m':'DH 50 ft RA · RVR 200 m'}
+function brief(s){
+  const i=S.indexOf(s)+1;
+  $('#brief').innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><h2>Scenario ${String(i).padStart(2,'0')} · ILS ${s.rwy.split(' ')[1]} · CAT ${s.cat}</h2><span class="role">${role(s)}</span></div>
+  <div class="metar">${esc(s.wx)}</div>
+  <div class="kv"><div><span class="lbl">Airport / runway</span><b>${s.rwy}</b></div><div><span class="lbl">Minima (drill)</span><b>${minima(s)}</b></div>
+   <div><span class="lbl">Automation</span><b>${s.cat==='I'?'Captain: manual landing':'CMD A + B · autoland'}</b></div><div><span class="lbl">Landing flaps</span><b>30</b></div>
+   <div><span class="lbl">LVP</span><b>${s.cat==='I'?'n/a':'In force'}</b></div><div><span class="lbl">Aircraft</span><b>737-800 · both engines</b></div></div>
+  <p class="task">${s.cat==='I'?'The Captain flies and lands manually. You monitor speed, deviations and the FMA and make the PM calls. At DA the Captain calls "LANDING" with the visual reference; if there is no call, you call the go-around.':'The Captain flies and looks out from 100 ft above DH. You stay head-down: FMA, deviations, warnings, radio. Press GO AROUND only when you must call it.'}</p>
+  <div><button class="btn pri" id="startBtn">Start approach · 1500 ft RA</button></div>`;
+}
+
+/* ---------------- sim loop ---------------- */
+function base(s){
+  const e=[{at:1000,who:'AURAL',t:'"ONE THOUSAND"'},{at:500,who:'AURAL',t:'"FIVE HUNDRED"'},{at:s.dh+100,who:'AURAL',t:'"APPROACHING MINIMUMS"'},{at:s.dh,who:'AURAL',t:'"MINIMUMS"',set:{mins:1}}];
+  if(s.cat!=='I'){[40,30,20,10].forEach(a=>{if(a<s.dh)e.push({at:a,who:'AURAL',t:`"${a===40?'FORTY':a===30?'THIRTY':a===20?'TWENTY':'TEN'}"`})});
+    e.push({at:1450,who:'CAPT',t:'"FLARE armed, dual channel"'});e.push({at:50,who:'SYS',t:'FMA: FLARE',set:{flare:1}});e.push({at:27,who:'SYS',t:'FMA: RETARD',set:{retard:1}});
+  }
+  if(s.vis)e.push({at:s.dh,who:'CAPT',t:'"LANDING"'});
+  return e;
+}
+function start(){
+  const s=sc;stop();
+  run={ra:1500,t:0,gs:0,loc:0,gsTo:0,locTo:0,spd:0,spdTo:0,ap:s.cat==='I'?'MAN':'CMD',eng:2,mc:0,fire:0,apLight:0,mins:0,flare:0,retard:0,flaps:s.flaps||30,wind:s.wind,
+    evs:base(s).concat(s.ev).sort((a,b)=>b.at-a.at),fired:new Set(),pressed:null,reasonSeen:false,ended:false,last:performance.now(),touch:null};
+  $('#log').innerHTML='';$('#result').innerHTML='';
+  log('ATC',`"SunExpress 2UM, cleared ILS ${s.rwy.split(' ')[1]}${s.cat==='I'?'':', LVP in force'}"`);
+  $('#gaBtn').disabled=false;$('#gaSub').textContent='Call "GO AROUND" · you are PM · Space';
+  $('#deck').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  raf=requestAnimationFrame(tick);
+}
+function stop(){if(raf)cancelAnimationFrame(raf);raf=null}
+function log(who,t){if(!t)return;const p=document.createElement('p');p.className=who;p.innerHTML=`<span class="w">${who}</span> ${esc(t)}`;$('#log').prepend(p)}
+function tick(now){
+  const r=run,s=sc;if(!r||r.ended)return;
+  const dt=Math.min(.1,(now-r.last)/1000)*rate;r.last=now;
+  if(r.ra>0){const v=r.ra>520?55:11;r.ra=Math.max(0,r.ra-v*dt)}else{r.touch=(r.touch||0)+dt}
+  r.gs+=(r.gsTo-r.gs)*Math.min(1,dt*.8);r.loc+=(r.locTo-r.loc)*Math.min(1,dt*.8);r.spd+=(r.spdTo-r.spd)*Math.min(1,dt*1.2);
+  for(const e of r.evs){if(r.fired.has(e))continue;if(r.ra<=e.at){r.fired.add(e);log(e.who,e.t);if(e.set)Object.assign(r,e.set)}}
+  if(s.need&&!r.reasonSeen&&r.ra<=s.trig)r.reasonSeen=true;
+  draw();
+  if(s.need&&r.ra<s.dl-0.5&&!r.pressed){return finish(false,'none')}
+  if(r.touch!==null&&r.touch>2.5){return finish(!s.need,'landed')}
+  raf=requestAnimationFrame(tick);
+}
+function press(){
+  const r=run;if(!r||r.ended)return;
+  r.pressed=Math.round(r.ra);log('YOU','"GO AROUND"');
+  if(!sc.need)return finish(false,'false');
+  if(!r.reasonSeen)return finish(false,'early');
+  finish(true,'ga');
+}
+function finish(ok,how){
+  const r=run,s=sc;r.ended=true;stop();$('#gaBtn').disabled=true;$('#gaSub').textContent='Run finished';
+  ST.runs++;if(ok)ST.ok++;if(how==='none')ST.miss++;if(how==='false')ST.fals++;
+  ST.hist.push({id:s.id,need:s.need,ok,you:how==='landed'?'Continued':how==='none'?'No GA':`GA at ${r.pressed} ft`});ST.hist=ST.hist.slice(-60);
+  if(!ST.seen.includes(s.id))ST.seen.push(s.id);save();score();fillPick();
+  const head={ga:'Correct go-around',landed:'Correct: continued and landed',none:'Missed go-around',false:'Needless go-around',early:'Go-around before the reason appeared'}[how];
+  const what={ga:`You called it at ${r.pressed} ft. The reason appeared at ${s.trig} ft; the last acceptable point was ${s.dl} ft.`,
+    landed:'You stayed with the approach to touchdown.',
+    none:`You passed ${s.dl} ft without a go-around. The reason appeared at ${s.trig} ft.`,
+    false:`You pressed at ${r.pressed} ft, but nothing required a go-around.`,
+    early:`You pressed at ${r.pressed} ft. The reason only appeared at ${s.trig} ft, so this was a guess, not a decision.`}[how];
+  $('#result').innerHTML=`<div class="result ${ok?'ok':'no'}"><div class="verdict">${head}</div>
+   <p class="lbl">${esc(s.title)} · ${s.need?'go-around required':'no go-around required'}</p>
+   <p>${what}</p><h3>Why</h3><p>${esc(s.why)}</p>
+   <h3>What you say</h3><p class="say">${esc(s.say)}</p>
+   <p class="ref">Reference: ${esc(s.ref)}<span class="src">${s.src}</span></p>
+   <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" id="againNext">Next random scenario</button><button class="btn" id="againSame">Fly this one again</button></div></div>`;
+  $('#result').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
+}
+
+/* ---------------- drawing ---------------- */
+const NS='http://www.w3.org/2000/svg';
+function draw(){
+  const r=run,s=sc;
+  const auto=s.cat!=='I';
+  const at=auto?(r.retard?'RETARD':'MCP SPD'):'';
+  const roll=r.touch!==null&&auto?'ROLLOUT':'VOR/LOC';
+  const pitch=r.flare?'FLARE':'G/S';
+  const armed=auto&&!r.flare?'FLARE':'';
+  const apTxt=r.ap==='CMD'?'CMD':r.ap==='SINGLE'?'SINGLE CH':r.ap==='OFF'?'':'FD';
+  const apCol=r.ap==='SINGLE'?'#FFB020':'#3EE07A';
+  const ias=Math.round((s.cat==='I'?141:141)+r.spd+(Math.sin(r.ra/37)*1.2));
+  const mins=r.ra<=s.dh+0.5;
+  const pitchDeg=r.flare?5:2.5;const bank=Math.sin(r.ra/90)*1.5+(r.loc*4);
+  const hy=160+pitchDeg*6;
+  const dot=22;
+  $('#pfd').innerHTML=`
+   <rect x="0" y="0" width="400" height="320" fill="#0A0D11"/>
+   <g font-family="B612 Mono,monospace" font-size="13" text-anchor="middle">
+    <rect x="70" y="4" width="260" height="38" fill="none" stroke="#2E3945"/>
+    <line x1="156" y1="4" x2="156" y2="42" stroke="#2E3945"/><line x1="243" y1="4" x2="243" y2="42" stroke="#2E3945"/>
+    <text x="113" y="21" fill="#3EE07A">${at}</text>
+    <text x="200" y="21" fill="#3EE07A">${roll}</text>
+    <text x="286" y="21" fill="#3EE07A">${pitch}</text>
+    <text x="286" y="37" fill="#EEF2F6" font-size="11">${armed}</text>
+    <text x="200" y="37" fill="#EEF2F6" font-size="11">${auto&&r.touch===null?'ROLLOUT':''}</text>
+    <text x="200" y="62" fill="${apCol}" font-size="15" font-weight="700">${apTxt}</text>
+   </g>
+   <defs><clipPath id="adi"><rect x="112" y="70" width="176" height="176" rx="14"/></clipPath></defs>
+   <g clip-path="url(#adi)"><g transform="rotate(${-bank} 200 158)">
+    <rect x="40" y="-200" width="320" height="${hy+200}" fill="#2A6FB0"/><rect x="40" y="${hy}" width="320" height="400" fill="#7B4B22"/>
+    <line x1="40" y1="${hy}" x2="360" y2="${hy}" stroke="#fff" stroke-width="1.5"/>
+    ${[-10,-5,5,10].map(p=>`<line x1="${p%10?185:175}" x2="${p%10?215:225}" y1="${hy-p*6}" y2="${hy-p*6}" stroke="#fff" stroke-width="1"/>`).join('')}
+   </g></g>
+   <path d="M150 158 h30 v6 M250 158 h-30 v6" stroke="#EEF2F6" stroke-width="3" fill="none"/><rect x="197" y="155" width="6" height="6" fill="#EEF2F6"/>
+   <g font-family="B612 Mono,monospace">
+    <rect x="18" y="120" width="72" height="76" fill="#11161C" stroke="#2E3945"/>
+    <text x="54" y="164" text-anchor="middle" fill="${Math.abs(r.spd)>10?'#FFB020':'#EEF2F6'}" font-size="24" font-weight="700">${ias}</text>
+    <text x="54" y="186" text-anchor="middle" fill="#F062E0" font-size="11">BUG 141</text>
+    <text x="54" y="112" text-anchor="middle" fill="#8995A3" font-size="10">IAS</text>
+    <rect x="310" y="120" width="76" height="76" fill="#11161C" stroke="#2E3945"/>
+    <text x="348" y="164" text-anchor="middle" fill="#EEF2F6" font-size="20" font-weight="700">${Math.round(r.ra+s.elev)}</text>
+    <text x="348" y="112" text-anchor="middle" fill="#8995A3" font-size="10">ALT</text>
+    <text x="348" y="214" text-anchor="middle" fill="#3EE07A" font-size="11">MINS ${s.cat==='I'?'BARO':'RADIO'} ${s.cat==='I'?s.dh+s.elev:s.dh}</text>
+    <text x="200" y="238" text-anchor="middle" fill="${mins?'#FFB020':'#EEF2F6'}" font-size="22" font-weight="700">${Math.round(r.ra)}</text>
+    ${mins&&r.ra>0?'<text x="200" y="92" text-anchor="middle" fill="#FFB020" font-size="15" font-weight="700">MINIMUMS</text>':''}
+   </g>
+   <g>${[-2,-1,1,2].map(d=>`<circle cx="${200+d*dot}" cy="272" r="3.5" fill="none" stroke="#EEF2F6"/>`).join('')}<line x1="200" x2="200" y1="264" y2="280" stroke="#EEF2F6"/>
+    <path d="M${200+Math.max(-2.4,Math.min(2.4,r.loc))*dot} 264 l7 8 l-7 8 l-7 -8z" fill="#F062E0"/>
+    ${[-2,-1,1,2].map(d=>`<circle cx="298" cy="${158+d*dot}" r="3.5" fill="none" stroke="#EEF2F6"/>`).join('')}<line x1="290" x2="306" y1="158" y2="158" stroke="#EEF2F6"/>
+    <path d="M298 ${158+Math.max(-2.4,Math.min(2.4,r.gs))*dot-8} l7 8 l-7 8 l-7 -8z" fill="#F062E0"/>
+    <text x="200" y="304" text-anchor="middle" fill="#8995A3" font-family="B612 Mono,monospace" font-size="10">LOC ${Math.abs(r.loc).toFixed(2)} DOT · G/S ${Math.abs(r.gs).toFixed(2)} DOT</text></g>`;
+  $('#lAP').className='light'+(r.apLight?' red':'');$('#lMC').className='light'+(r.mc?' amb':'');$('#lFire').className='light'+(r.fire?' amb':'');
+  $('#lMins').className='light'+(mins&&r.ra>0?' amb':'');$('#lAT').className='light';
+  const wd=r.wind;
+  $('#status').innerHTML=`<span class="chip">FLAPS <b class="${r.flaps!==30?'amb':''}">${r.flaps}</b></span><span class="chip">GEAR <b>DN ▪▪▪</b></span>
+   <span class="chip">ENG <b class="${r.eng<2?'amb':''}">${r.eng<2?'1 · ENG 2 FAIL':'2 RUNNING'}</b></span>
+   <span class="chip">WIND <b>${String(wd[0]).padStart(3,'0')}/${wd[1]}</b></span><span class="chip">RVR <b>${esc(s.rvr)}</b></span>`;
+  window3(r,s);
+}
+function window3(r,s){
+  const c=$('#win'),x=c.getContext('2d'),W=c.width,H=c.height;
+  let v=0;if(s.vis){v=Math.max(0,Math.min(1,(s.vis-r.ra)/(s.vis*.45)))}
+  const fog=x.createLinearGradient(0,0,0,H);fog.addColorStop(0,'#9AA6B1');fog.addColorStop(1,'#7C8791');x.fillStyle=fog;x.fillRect(0,0,W,H);
+  if(v>0){
+    const hz=H*.32,cx=W/2+r.loc*-30;x.save();x.globalAlpha=Math.min(1,v*1.2);
+    if(r.ra<60){x.fillStyle='#4A5058';x.beginPath();x.moveTo(cx-6,hz);x.lineTo(cx+6,hz);x.lineTo(cx+W*.42,H);x.lineTo(cx-W*.42,H);x.closePath();x.fill()}
+    for(let i=0;i<14;i++){const f=i/13,y=hz+(H-hz)*Math.pow(f,1.6),sp=4+f*W*.35;const a=Math.max(0,v-(1-f)*0.8);if(a<=0)continue;
+      x.fillStyle=`rgba(255,238,190,${a})`;
+      for(let k=-2;k<=2;k++){x.beginPath();x.arc(cx+k*sp*.08,y,1.5+f*3,0,7);x.fill()}
+      if(i===8||i===11){for(let k=-6;k<=6;k++){x.beginPath();x.arc(cx+k*sp*.13,y,1.5+f*2.5,0,7);x.fill()}}}
+    if(r.ra<120){x.fillStyle=`rgba(120,255,140,${v})`;for(let k=-10;k<=10;k++){x.beginPath();x.arc(cx+k*W*.035,hz+(H-hz)*.93,2.5,0,7);x.fill()}}
+    x.restore();
+  }
+  x.fillStyle='rgba(20,26,32,.55)';x.fillRect(0,H-22,W,22);x.fillStyle='#DDE6EE';x.font='12px "B612 Mono",monospace';
+  x.fillText(v>0.25?'VISUAL REFERENCE':'NO VISUAL REFERENCE',10,H-7);
+}
+
+/* ---------------- wiring ---------------- */
+function load(s){stop();run=null;sc=s;brief(s);$('#result').innerHTML='';$('#log').innerHTML='';$('#gaBtn').disabled=true;$('#gaSub').textContent='Start the approach first · Space';
+  run={ra:1500,gs:0,loc:0,spd:0,ap:s.cat==='I'?'MAN':'CMD',eng:2,flaps:s.flaps||30,wind:s.wind,touch:null};draw();run=null}
+function nextRandom(){
+  let pool=S.filter(s=>!ST.seen.includes(s.id));if(!pool.length){ST.seen=[];save();pool=S.slice()}
+  const s=pool[Math.floor(Math.random()*pool.length)];$('#pick').value='';load(s);
+}
+$('#nextBtn').onclick=nextRandom;
+$('#pick').onchange=e=>{const s=S.find(x=>x.id===e.target.value);if(s)load(s)};
+$('#resetBtn').onclick=()=>{ST={runs:0,ok:0,miss:0,fals:0,hist:[],seen:[]};save();score();fillPick()};
+$('#gaBtn').onclick=press;
+document.addEventListener('click',e=>{
+  if(e.target.id==='startBtn')start();
+  if(e.target.id==='againNext')nextRandom();
+  if(e.target.id==='againSame')load(sc);
+  const b=e.target.closest('[data-r]');if(b){rate=+b.dataset.r;document.querySelectorAll('[data-r]').forEach(x=>x.setAttribute('aria-pressed',x===b))}
+});
+document.addEventListener('keydown',e=>{if(e.code==='Space'&&run&&!run.ended&&!e.target.closest('select,input,textarea')){e.preventDefault();press()}});
+
+fillPick();score();nextRandom();
+</script>

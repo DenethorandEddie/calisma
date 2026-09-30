@@ -1,0 +1,615 @@
+<title>PF Maneuver Drill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=Saira+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: maneuver rail on the left (a scroller on phones), one working panel on the right.
+   Colour language borrowed from the flight deck: magenta = what you say (commanded), amber = caution, green = done. */
+:root{
+  --bg:#EEF1F4; --panel:#FFFFFF; --soft:#E3E8EE; --line:#CCD5DF;
+  --ink:#13202C; --muted:#5A6878;
+  --mag:#B0198C; --mag-soft:#F6E3F0;
+  --amber:#A86400; --amber-soft:#FBEBD2;
+  --green:#1A7F48; --green-soft:#DDF2E6;
+  --red:#B42318; --red-soft:#FBE3E0;
+  --cyan:#0B6E8A;
+  --f-disp:"Saira Condensed","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"B612 Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0C1218; --panel:#131C25; --soft:#1B2632; --line:#2A3847;
+  --ink:#E4EBF2; --muted:#93A3B4;
+  --mag:#EE7AD6; --mag-soft:#3A1B33;
+  --amber:#F2A93B; --amber-soft:#3A2A12;
+  --green:#4CC784; --green-soft:#133224;
+  --red:#FF7B6E; --red-soft:#3B1A17;
+  --cyan:#5CC6E4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1218; --panel:#131C25; --soft:#1B2632; --line:#2A3847;
+  --ink:#E4EBF2; --muted:#93A3B4;
+  --mag:#EE7AD6; --mag-soft:#3A1B33;
+  --amber:#F2A93B; --amber-soft:#3A2A12;
+  --green:#4CC784; --green-soft:#133224;
+  --red:#FF7B6E; --red-soft:#3B1A17;
+  --cyan:#5CC6E4; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:16px 48px}
+h1,h2,h3{font-family:var(--f-disp);letter-spacing:.01em;text-wrap:balance;margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,.blank:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.say{font-family:var(--f-mono);color:var(--mag);font-weight:700;font-size:.92em;letter-spacing:.01em}
+.say::before{content:"“"}.say::after{content:"”"}
+.lbl{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--muted);font-weight:600}
+
+/* top bar */
+.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:end;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.top h1{font-size:2rem;line-height:1}
+.top h1 span{color:var(--mag)}
+.top p{margin:4px 0 0;color:var(--muted);max-width:60ch}
+.stats{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.stat{display:grid;gap:2px}
+.stat b{font-family:var(--f-mono);font-size:1.25rem;font-variant-numeric:tabular-nums}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:8px 14px;font-weight:600}
+.btn:hover{border-color:var(--muted)}
+.btn.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.mag{background:var(--mag);color:#fff;border-color:var(--mag)}
+.btn.sm{padding:5px 10px;font-size:.85rem}
+
+/* grid */
+.main{display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;margin-top:18px}
+@media (max-width:820px){.main{grid-template-columns:minmax(0,1fr)}}
+.rail{display:grid;gap:4px;align-content:start}
+@media (max-width:820px){.rail{display:flex;overflow-x:auto;padding-bottom:6px;gap:6px}.rail .grp{display:none}.mv{min-width:190px}}
+.grp{margin:10px 0 2px}
+.mv{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center;text-align:left;border:1px solid transparent;background:transparent;border-radius:6px;padding:7px 10px}
+.mv:hover{background:var(--soft)}
+.mv[aria-current="true"]{background:var(--panel);border-color:var(--line)}
+.mv .n{font-weight:600;font-size:.92rem;line-height:1.25}
+.mv .r{grid-column:1;font-size:.75rem;color:var(--muted)}
+.mv .pc{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:.78rem;font-variant-numeric:tabular-nums}
+.meter{height:4px;background:var(--soft);border-radius:2px;overflow:hidden;grid-column:1/3}
+.meter i{display:block;height:100%;background:var(--green)}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+.mhead{display:grid;gap:8px}
+.mhead h2{font-size:1.75rem;line-height:1.05}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-family:var(--f-disp);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:.75rem;padding:2px 8px;border-radius:3px;background:var(--soft);color:var(--muted)}
+.pill.role{background:var(--mag-soft);color:var(--mag)}
+.trig{color:var(--muted);max-width:75ch;margin:0}
+
+/* hook chain */
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.chain .c{font-family:var(--f-mono);font-size:.8rem;font-weight:700;padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--bg)}
+.chain .c b{color:var(--mag)}
+.chain .ar{color:var(--muted);font-size:.8rem}
+
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:16px 0 12px;border-bottom:1px solid var(--line)}
+.tab{border:0;background:transparent;padding:8px 12px;font-family:var(--f-disp);font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.9rem;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--mag)}
+.hint{color:var(--muted);font-size:.88rem;margin:0 0 12px;max-width:75ch}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+
+/* learn */
+.seq{display:grid;gap:0}
+.ph{font-family:var(--f-disp);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;color:var(--cyan);padding:12px 0 4px;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:28px minmax(0,.8fr) minmax(0,1.2fr);gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:start}
+@media (max-width:560px){.row{grid-template-columns:24px minmax(0,1fr)}.row .pf{grid-column:2}}
+.row .no{font-family:var(--f-mono);color:var(--muted);font-size:.8rem;padding-top:2px}
+.row .cue{color:var(--muted);font-size:.9rem}
+.row .pf{min-width:0}
+.row .pf .a{display:block}
+.row.bg .pf .a::after{content:" · technique";font-size:.72rem;color:var(--amber);font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.06em}
+.cover .row .pf{filter:blur(6px);cursor:pointer;user-select:none}
+.cover .row .pf.shown{filter:none}
+.box{border-radius:8px;padding:10px 12px;margin-top:14px;font-size:.9rem}
+.box.am{background:var(--amber-soft)}
+.box.mg{background:var(--mag-soft)}
+.box ul{margin:4px 0 0;padding-left:18px}
+
+/* cloze */
+.blank{display:inline-block;min-width:3.2em;border:0;border-bottom:2px solid var(--mag);background:var(--mag-soft);color:transparent;border-radius:3px 3px 0 0;padding:0 4px;margin:1px 0;font:inherit;line-height:1.3}
+.blank.hint1{color:var(--muted)}
+.blank.open{color:var(--ink);background:var(--green-soft);border-bottom-color:var(--green)}
+.blank.big{display:block;width:100%;min-height:2.2em;text-align:left}
+
+/* order */
+.pool,.built{display:flex;flex-wrap:wrap;gap:8px}
+.built{flex-direction:column;flex-wrap:nowrap;min-height:40px;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:8px 10px;text-align:left;font-size:.88rem;max-width:100%}
+.chip:hover{border-color:var(--mag)}
+.chip.bad{animation:shake .35s;border-color:var(--red);background:var(--red-soft)}
+.built .chip{background:var(--green-soft);border-color:transparent;cursor:default}
+.built .chip .k{font-family:var(--f-mono);color:var(--muted);margin-right:6px}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* flash / sim */
+.stage{display:grid;gap:14px;max-width:760px}
+.ctx{font-size:.85rem;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+.cuebox{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.cuebox .who{font-family:var(--f-mono);font-size:.78rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.06em}
+.cuebox .txt{font-size:1.15rem;font-weight:600;margin-top:4px}
+.ans{border:1px dashed var(--line);border-radius:8px;padding:14px 16px;min-height:74px}
+.ans .ph2{color:var(--muted);font-style:italic}
+.grades{display:flex;gap:8px;flex-wrap:wrap}
+.g-again{border-color:var(--red);color:var(--red)}
+.g-good{border-color:var(--green);color:var(--green)}
+.timer{height:6px;background:var(--soft);border-radius:3px;overflow:hidden}
+.timer i{display:block;height:100%;width:100%;background:var(--mag);transform-origin:left}
+.progress{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.sum{display:grid;gap:8px}
+.sum .big{font-family:var(--f-disp);font-size:2.4rem;line-height:1}
+.miss{border-left:3px solid var(--red);padding:4px 10px;background:var(--red-soft);border-radius:0 6px 6px 0;font-size:.9rem}
+
+/* compare */
+.cmp{overflow-x:auto;margin-top:6px}
+.cmp table{border-collapse:collapse;min-width:560px;width:100%;font-size:.88rem}
+.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+.cmp th{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;color:var(--muted)}
+.cmp td.v{font-family:var(--f-mono);font-weight:700}
+.foot{margin-top:22px;color:var(--muted);font-size:.8rem;max-width:80ch}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>PF Maneuver <span>Drill</span></h1>
+      <p>OPC-6 · 737-800 · SunExpress OM-B / QRH MAN. The PF side of every maneuver, drilled until you can say it without looking. Autothrottle is INOP all flight (MEL 22-04).</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="lbl">Mastery</span><b id="stMastery">0%</b></div>
+      <div class="stat"><span class="lbl">Weak steps</span><b id="stWeak">0</b></div>
+      <button class="btn mag" id="mixBtn">Mixed drill · weakest 12</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <nav class="rail" id="rail" aria-label="Maneuvers"></nav>
+    <section class="card" id="panel" aria-live="polite"></section>
+  </div>
+
+  <p class="foot">Wording in magenta is the exact OM-B / QRH callout. Rows marked “technique” are FCTM flying technique, not company callouts. The hooks and chains are study aids made for this page, not company material. Progress is saved in this browser only.</p>
+</div>
+
+<script>
+/* ---------- data ---------- */
+/* step: ph = phase header, cue = what triggers you, a = your action, s = exact callout, k = words blanked in Cloze, bg = technique (not OM-B) */
+const MV = [
+{id:'efato', grp:'Takeoff', t:'Engine Failure / Fire after V1', role:'You: PF', ref:'OM-B 3.10',
+ trig:'Engine failure or fire after V1. EHAM 18L, Flap 5, V1 132 · VR 143 · V2 148, EO acceleration height 1610 ft, EOSID AMSX4 (hold 181° inbound, right turns).',
+ chain:['<b>R</b>otate','<b>G</b>ear up','<b>4</b>00: HDG · BANK 15','<b>M</b>emory items','<b>A</b>ccel: SPEED UP','<b>F</b>laps','<b>L</b>VL CHG · 25 · MCT','<b>C</b>hecklists'],
+ hook:'R-G-4-M-A-F-L-C: “Rotate, Gear, 400, Memory, Accelerate, Flaps, Level change, Checklists.” Nothing but gear below 400 ft RA.',
+ steps:[
+  {ph:'Takeoff roll', cue:'PM: "ENGINE FAILURE" or "ENGINE FIRE" (no further details)', a:'Continue the takeoff. Keep the centerline with rudder.', k:['rudder'], bg:1},
+  {ph:'At VR', cue:'PM: "ROTATE"', a:'Rotate (slightly slower rate) and establish a positive rate of climb.', k:['positive rate of climb']},
+  {cue:'PM: "POSITIVE RATE"', a:'Verify positive rate of climb on the altimeter and call:', s:'GEAR UP', k:['altimeter']},
+  {ph:'At 400 ft RA', cue:'PM: "FOUR HUNDRED"', a:'If desired, engage the autopilot and call:', s:'AUTOPILOT A/B COMMAND', k:['autopilot']},
+  {cue:'Still at 400 ft RA', a:'Call / select:', s:'SELECT HEADING, SET BANK ANGLE FIFTEEN', k:['HEADING','FIFTEEN']},
+  {ph:'Memory items', cue:'PM: "ENGINE NUMBER __ FIRE" (or SEVERE DAMAGE / SEPARATION)', a:'Verify correct identification, then call:', s:'ENGINE FIRE MEMORY ITEMS', k:['identification','MEMORY ITEMS']},
+  {cue:'You lead the memory items', a:'Call, disengage, and call "DISENGAGE". With A/T INOP: verify it is disengaged.', s:'AUTOTHROTTLE DISENGAGE', k:['AUTOTHROTTLE','DISENGAGE']},
+  {cue:'You lead', a:'Hand on the thrust lever and call. After PM "NUMBER __ CONFIRMED", close it and call "CLOSE".', s:'THRUST LEVER NUMBER __ – CONFIRM – CLOSE', k:['THRUST LEVER','CLOSE']},
+  {cue:'PM: "ENGINE START LEVER NUMBER __ – CONFIRM – CUTOFF"', a:'Check it is the correct engine start lever and call:', s:'NUMBER __ CONFIRMED', k:['start lever','CONFIRMED']},
+  {cue:'PM: "ENGINE FIRE SWITCH NUMBER __ – CONFIRM – PULL"', a:'Check it is the correct engine fire switch and call:', s:'NUMBER __ CONFIRMED', k:['fire switch','CONFIRMED']},
+  {cue:'PM: "ROTATE TO THE STOP AND HOLD FOR ONE SECOND" … "BOTTLE DISCHARGED" … "MEMORY ITEMS COMPLETE"', a:'Monitor the actions silently. Fire still on and at least 30 s since the first shot: you may direct the second bottle by memory.', k:['silently','30 s','second bottle']},
+  {ph:'Acceleration altitude · 1610 ft', cue:'PM: "ACCELERATION ALTITUDE"', a:'Call / set and verify acceleration (level off or lower the pitch).', s:'SPEED UP', k:['acceleration']},
+  {cue:'Flap retraction speeds', a:'Call flaps on the retraction schedule (5 → 1 → UP).', s:'FLAPS __', k:['schedule']},
+  {ph:'Flaps up', cue:'PM: "FLAPS UP SPEED"', a:'Call / set, then set MCT on the live engine by hand.', s:'SELECT LEVEL CHANGE, SET BANK ANGLE TWENTY-FIVE, SELECT MAX CONTINUOUS THRUST', k:['LEVEL CHANGE','TWENTY-FIVE','MAX CONTINUOUS THRUST','by hand']},
+  {ph:'Checklists', cue:'At a safe altitude, airplane under control', a:'Call the NNC:', s:'ENGINE FIRE CHECKLIST', k:['ENGINE FIRE CHECKLIST']},
+  {cue:'PM: "… CHECKLIST COMPLETE"', a:'Call:', s:'AFTER TAKEOFF CHECKLIST', k:['AFTER TAKEOFF']},
+  {cue:'After FORDEC (OM-A)', a:'Call. You answer every deferred landing item yourself.', s:'ONE ENGINE INOPERATIVE LANDING CHECKLIST', k:['ONE ENGINE INOPERATIVE','deferred']}
+ ],
+ notes:['ATC must be told by a distress call before you turn off the assigned track (EOSID).','The A/P may be engaged with the correct rudder pedal or trim input.','Only once the airplane is positively under control: Aviate, Navigate, Communicate.']},
+
+{id:'rto', grp:'Takeoff', t:'Rejected Takeoff', role:'You: FO · PF until C takes over', ref:'OM-B 3.9 · QRH MAN.1.3',
+ trig:'The Captain alone decides. If you are flying the takeoff, you keep control until the Captain makes a positive input. Then you verify and call.',
+ chain:['<b>H</b>old until C input','<b>V</b>erify thrust · A/T','<b>A</b>utobrake','<b>S</b>peedbrakes','<b>R</b>eversers','<b>60</b> + ATC','<b>F</b>laps 40'],
+ hook:'After "STOP" you are the verifier. Say what you see, in the order the Captain moves: thrust, brakes, speedbrake, reverse, sixty.',
+ steps:[
+  {ph:'Decision', cue:'Captain: "STOP"', a:'Keep flying until the Captain makes a positive input to the controls. Then hand over.', k:['positive input']},
+  {ph:'Verify', cue:'Captain closes thrust levers and disengages A/T', a:'Verify thrust levers closed and autothrottle disengaged.', k:['closed','disengaged']},
+  {cue:'Braking', a:'Verify max manual brakes or RTO autobrake. AUTO BRAKE DISARM light on: call', s:'AUTO BRAKE DISARM', k:['AUTO BRAKE DISARM']},
+  {cue:'Captain raises the SPEED BRAKE lever', a:'Lever UP: call (not UP: "SPEEDBRAKES NOT UP")', s:'SPEED BRAKES UP', k:['SPEED BRAKES UP']},
+  {cue:'Captain applies reverse thrust', a:'Both REV green: call. None or amber: "NO REVERSER ENGINE NUMBER __" / "NO REVERSERS".', s:'REVERSERS NORMAL', k:['REVERSERS NORMAL']},
+  {cue:'Throughout the stop', a:'Call out omitted action items.', k:['omitted']},
+  {cue:'60 kt', a:'Call, then tell ATC "(Callsign) STOPPING, STANDBY". If needed: "REQUEST FIRE BRIGADE".', s:'SIXTY', k:['SIXTY','STOPPING, STANDBY']},
+  {ph:'Stopped', cue:'Aircraft stopped', a:'Set the Flap lever to 40 without delay (the Captain verifies it).', k:['40']},
+  {cue:'Captain: reversers stowed, speedbrake down, parking brake, PA "ATTENTION CREW ON STATION"', a:'Verify all needed actions are done and call out omissions.', k:['omissions']},
+  {ph:'If engine fire', cue:'Fire warning', a:'Identify and call:', s:'ENGINE NUMBER __ FIRE', k:['FIRE']},
+  {cue:'Captain: start lever CUTOFF', a:'Pull the fire switch and call at the same time:', s:'ENGINE FIRE SWITCH NUMBER __ – PULL', k:['PULL']},
+  {cue:'Fire switch or ENG OVERHEAT light still on', a:'Rotate to the stop, hold 1 s, check the BOTTLE DISCHARGED light, start the stopwatch. Calls:', s:'ROTATE TO THE STOP AND HOLD FOR ONE SECOND · BOTTLE DISCHARGED · MEMORY ITEMS COMPLETE · NO FIRE, NO OVERHEAT', k:['stopwatch','BOTTLE DISCHARGED']},
+  {ph:'Then', cue:'Captain: "EVACUATION CHECKLIST"', a:'Read it and call "EVACUATION CHECKLIST COMPLETE". Not needed: Captain PA "CANCEL ALERT", you inform ATC of intentions.', k:['EVACUATION','ATC']}
+ ],
+ notes:['Before 80 kt: master caution, system failure, noise/vibration, tire, slow acceleration, config warning, fire, engine failure, PWS, side window, unsafe.','80 kt – V1: fire or fire warning, engine failure, predictive windshear, unsafe or unable to fly.']},
+
+{id:'drift', grp:'In flight', t:'Engine Failure Driftdown', role:'You: PF', ref:'OM-B 3.11',
+ trig:'Engine failure at FL370. Heavy airplane: a driftdown is certain.',
+ chain:['<b>HDG</b> SEL','<b>D</b>RIFTDOWN','<b>M</b>CT by hand','<b>MCP</b> alt + speed','<b>S</b>low','<b>L</b>VL CHG','<b>T</b>urn?'],
+ hook:'“Heading, Drift, MCT, MCP, Slow, Level change, Turn.” Heading first so the airplane does not follow LNAV into a turn you did not plan.',
+ steps:[
+  {ph:'Recognition', cue:'First pilot to notice: "ENGINE FAILURE" (or FIRE / SEVERE DAMAGE / SEPARATION)', a:'Execute the memory items if applicable.', k:['memory items']},
+  {ph:'Driftdown', cue:'Airplane under control', a:'Select / call HDG SEL on the MCP.', k:['HDG SEL']},
+  {cue:'Heading held', a:'Call:', s:'ENGINE FAILURE DRIFTDOWN', k:['DRIFTDOWN']},
+  {cue:'You', a:'Disengage the autothrottle, call, and set the thrust lever to MCT by hand.', s:'SELECT MAX CONTINUOUS THRUST', k:['MAX CONTINUOUS THRUST','by hand']},
+  {cue:'PM: CON on N1 LIMIT · ENG OUT CRZ page · notifies ATC', a:'Set the engine-out altitude and airspeed on the MCP.', k:['engine-out altitude','airspeed']},
+  {cue:'Altitude and speed set', a:'Slow to the ENG OUT airspeed.', k:['ENG OUT airspeed']},
+  {cue:'At ENG OUT speed', a:'Select / call LVL CHG.', k:['LVL CHG']},
+  {cue:'Terrain or traffic', a:'Initiate a turn if required (ATC told first).', k:['turn']},
+  {ph:'Then', cue:'Driftdown configuration set', a:'Run the NNC and decide the further course of action (FORDEC).', k:['NNC','FORDEC']}
+ ],
+ notes:['PM: selects CON on the N1 LIMIT page, selects the ENG OUT CRZ page, notifies ATC, and selects HDG SEL / LVL CHG if you are hand flying.']},
+
+{id:'ws', grp:'Maneuvers', t:'Windshear Escape', role:'You: PF', ref:'QRH MAN.1.18',
+ trig:'Siren + "WINDSHEAR" or below 1000 ft AGL: ±15 kt IAS, ±500 fpm, ±5° pitch, 1 dot GS, odd thrust lever position. A/T INOP: fly the MANUAL column.',
+ chain:['<b>"W</b>INDSHEAR"','<b>A</b>/P off','<b>T</b>O/GA','<b>M</b>AX thrust','<b>A</b>/T off','<b>15°</b> wings level','<b>S</b>peedbrakes in','<b>F</b>D (PLI)'],
+ hook:'Say it, click it, push it, shove it: “WINDSHEAR” · A/P off · TO/GA · thrust full forward · A/T off · wings level 15° · speedbrakes · follow FD.',
+ steps:[
+  {ph:'Manual flight', cue:'Windshear warning or unacceptable flight path deviation', a:'Call out:', s:'WINDSHEAR', k:['WINDSHEAR']},
+  {cue:'Immediately', a:'Disengage the autopilot.', k:['autopilot']},
+  {cue:'Immediately', a:'Push either TO/GA switch.', k:['TO/GA']},
+  {cue:'Immediately', a:'Aggressively apply maximum thrust: thrust levers full forward.', k:['maximum thrust','full forward']},
+  {cue:'Immediately', a:'Disengage the autothrottle (INOP today: verify).', k:['autothrottle']},
+  {cue:'Simultaneously', a:'Roll wings level and rotate toward an initial pitch attitude of 15°.', k:['wings level','15°']},
+  {cue:'Then', a:'Retract the speedbrakes.', k:['speedbrakes']},
+  {cue:'Then', a:'Follow the flight director TO/GA guidance. Do not exceed the Pitch Limit Indicator.', k:['TO/GA','Pitch Limit']},
+  {ph:'Until clear', cue:'While in windshear', a:'Do not change flap or gear configuration.', k:['flap','gear']},
+  {cue:'While in windshear', a:'Keep wings level (turn only for obstacle clearance). Monitor vertical speed and altitude.', k:['wings level','vertical speed']},
+  {cue:'While in windshear', a:'Do not try to regain lost airspeed until windshear is no longer a factor.', k:['airspeed']},
+  {ph:'Takeoff roll cases', cue:'"WINDSHEAR AHEAD" on the takeoff roll', a:'Before V1: reject. After V1: windshear escape maneuver.', k:['reject','escape']},
+  {cue:'Windshear on the roll, before V1', a:'At VR rotate at a normal rate toward 15°. Low speed near VR and not enough runway: rotate at least 2000 ft before the end.', k:['15°','2000 ft']}
+ ],
+ notes:['Approach "GO-AROUND, WINDSHEAR AHEAD": escape maneuver, or a normal go-around at pilot discretion.','Intermittent stick shaker or initial buffet is the upper pitch limit.']},
+
+{id:'gpws', grp:'Maneuvers', t:'GPWS Pull Up', role:'You: PF', ref:'QRH MAN.1.10–1.11',
+ trig:'"PULL UP", "TERRAIN TERRAIN PULL UP", "OBSTACLE OBSTACLE PULL UP", or any unacceptable flight toward terrain.',
+ chain:['<b>A</b>/P off','<b>A</b>/T off','<b>MAX</b> thrust','<b>20°</b> wings level','<b>S</b>peedbrakes in','<b>PLI</b> / shaker','<b>N</b>o config','<b>C</b>lear → accel'],
+ hook:'Same hands as windshear, but NO TO/GA and NO flight director, and the number is 20°.',
+ steps:[
+  {ph:'Immediately', cue:'"PULL UP" / "TERRAIN TERRAIN PULL UP"', a:'Disengage the autopilot.', k:['autopilot']},
+  {cue:'Immediately', a:'Disengage the autothrottle.', k:['autothrottle']},
+  {cue:'Immediately', a:'Aggressively apply maximum thrust (full forward).', k:['maximum']},
+  {cue:'Simultaneously', a:'Roll wings level and rotate to an initial pitch attitude of 20°.', k:['wings level','20°']},
+  {cue:'Then', a:'Retract the speedbrakes.', k:['speedbrakes']},
+  {cue:'Terrain still a threat', a:'Continue rotation up to the PLI, stick shaker or initial buffet.', k:['PLI','stick shaker']},
+  {ph:'Climbing', cue:'Until terrain separation is assured', a:'Do not change gear or flap configuration.', k:['gear','flap']},
+  {cue:'PM calls altitude trend', a:'Monitor the radio altimeter for sustained or increasing terrain separation.', k:['radio altimeter']},
+  {cue:'Clear of terrain', a:'Slowly decrease the pitch attitude and accelerate.', k:['decrease','accelerate']}
+ ],
+ notes:['No flight director commands.','Company: only the Commander, with no doubt, may disregard a false LOOK-AHEAD alert, and only on the ground, in daylight VMC, above MSA/MGA, or established on ILS at/after FAP.','Radio-altitude alerts are always real. "TOO LOW TERRAIN" may be RA-based.']},
+
+{id:'tcas', grp:'Maneuvers', t:'TCAS TA / RA', role:'You: PF', ref:'QRH MAN.1.12–1.13',
+ trig:'Traffic advisory or resolution advisory. Comply with the RA even against ATC.',
+ chain:['<b>TA</b>: look','<b>RA</b>: A/P · A/T off','<b>P</b>itch to green','<b>L</b>ateral path','<b>Climb RA</b> landing: MAX · F15 · GEAR UP'],
+ hook:'TA = eyes. RA = hands: A/P and A/T off, fly the green, keep the lateral path.',
+ steps:[
+  {ph:'TA', cue:'"TRAFFIC, TRAFFIC"', a:'Look for traffic using the display. Maneuver only if the traffic is sighted and it is needed.', k:['display','sighted']},
+  {ph:'RA', cue:'RA (except a climb in landing configuration)', a:'Disengage the autopilot and the autothrottle.', k:['autopilot','autothrottle']},
+  {cue:'RA', a:'Smoothly adjust pitch and thrust to satisfy the RA command.', k:['pitch','thrust']},
+  {cue:'RA', a:'Follow the planned lateral flight path unless visual contact requires other action.', k:['lateral']},
+  {ph:'Climb RA in landing config', cue:'"CLIMB, CLIMB" on final', a:'A/P and A/T off, thrust levers forward to max, and call:', s:'FLAPS 15', k:['max','FLAPS 15']},
+  {cue:'Still', a:'Smoothly adjust pitch to satisfy the RA. Keep the lateral path.', k:['pitch']},
+  {cue:'PM: "POSITIVE RATE"', a:'Verify a positive rate of climb on the altimeter and call:', s:'GEAR UP', k:['altimeter']}
+ ],
+ notes:['Never follow a DESCEND RA below 1000 ft AGL.','Once an RA is issued, do not change vertical speed except to comply with it.','Stick shaker: approach-to-stall recovery. High-speed buffet: relax pitch force, keep maneuvering.']},
+
+{id:'stall', grp:'Maneuvers', t:'Approach to Stall / Stall', role:'You: PF', ref:'QRH MAN.1.1',
+ trig:'First indication: buffet or stick shaker. Recover as if it were a real stall. No flight director.',
+ chain:['<b>H</b>old column','<b>A</b>/P · A/T off','<b>N</b>ose down','<b>W</b>ings level','<b>T</b>hrust','<b>S</b>peedbrakes in','<b>N</b>o config','<b>S</b>peed · pitch · path'],
+ hook:'Initiate (unload) → Continue (roll, thrust, brakes) → Complete (speed, pitch, path). Nose down BEFORE thrust.',
+ steps:[
+  {ph:'Initiate the recovery', cue:'Stick shaker / buffet', a:'Hold the control column firmly.', k:['firmly']},
+  {cue:'Initiate', a:'Disengage the autopilot and autothrottle.', k:['autopilot','autothrottle']},
+  {cue:'Initiate', a:'Smoothly apply nose-down elevator until buffet or stick shaker stops. Nose-down trim may be needed.', k:['nose-down','trim']},
+  {ph:'Continue the recovery', cue:'Shaker stopped', a:'Roll in the shortest direction to wings level if needed.', k:['shortest','wings level']},
+  {cue:'Continue', a:'Advance the thrust levers as needed.', k:['thrust levers']},
+  {cue:'Continue', a:'Retract the speedbrakes.', k:['speedbrakes']},
+  {cue:'Continue', a:'Do not change gear or flap. Exception: at liftoff with flaps up, call for flaps 1.', s:'FLAPS ONE', k:['gear','flap']},
+  {ph:'Complete the recovery', cue:'Recovered', a:'Check airspeed and adjust thrust. Establish pitch attitude. Return to the desired flight path.', k:['airspeed','pitch','flight path']},
+  {cue:'Stable', a:'Re-engage the autopilot and autothrottle if desired.', k:['Re-engage']}
+ ],
+ notes:['Excessive pitch trim can make it worse or overload the structure.']},
+
+{id:'high', grp:'Maneuvers', t:'Upset · Nose High', role:'You: PF', ref:'QRH MAN.1.15',
+ trig:'PM calls "UPSET" and then attitude, airspeed and altitude through the recovery.',
+ chain:['<b>A</b>/P · A/T off','<b>N</b>ose down elevator','<b>T</b>rim down','<b>R</b>educe thrust','<b>R</b>oll for pitch rate','<b>H</b>orizon: wings level'],
+ hook:'Push, trim, pull power, bank it over. Roll level at the horizon.',
+ steps:[
+  {ph:'Recognize', cue:'PM: "UPSET" (nose high)', a:'Disengage the autopilot and the autothrottle.', k:['autopilot','autothrottle']},
+  {ph:'Recover', cue:'Recover', a:'Apply nose-down elevator, as much as needed to get a nose-down pitch rate.', k:['nose-down pitch rate']},
+  {cue:'Recover', a:'Apply appropriate nose-down stabilizer trim.', k:['stabilizer trim']},
+  {cue:'Recover', a:'Reduce thrust.', k:['Reduce']},
+  {cue:'Recover', a:'Roll (adjust bank angle) to obtain a nose-down pitch rate.', k:['bank angle']},
+  {ph:'Complete', cue:'Approaching the horizon', a:'Roll to wings level.', k:['wings level']},
+  {cue:'Complete', a:'Check airspeed and adjust thrust. Establish pitch attitude.', k:['airspeed','pitch attitude']}
+ ], notes:['Rudder only if roll control is ineffective and the airplane is not stalled.']},
+
+{id:'low', grp:'Maneuvers', t:'Upset · Nose Low', role:'You: PF', ref:'QRH MAN.1.15',
+ trig:'PM calls "UPSET" and then attitude, airspeed and altitude through the recovery.',
+ chain:['<b>A</b>/P · A/T off','<b>S</b>tall? recover','<b>R</b>oll shortest','<b>&gt;90°</b>: unload + roll','<b>P</b>ull','<b>T</b>rim up','<b>T</b>hrust / drag'],
+ hook:'Roll BEFORE pull. Never pull while banked.',
+ steps:[
+  {ph:'Recognize', cue:'PM: "UPSET" (nose low)', a:'Disengage the autopilot and the autothrottle.', k:['autopilot','autothrottle']},
+  {ph:'Recover', cue:'Recover', a:'Recover from the stall, if needed.', k:['stall']},
+  {cue:'Recover', a:'Roll in the shortest direction to wings level. Bank over 90°: unload and roll.', k:['shortest','unload']},
+  {ph:'Complete', cue:'Wings level', a:'Apply nose-up elevator.', k:['nose-up']},
+  {cue:'Complete', a:'Apply nose-up trim, if needed.', k:['trim']},
+  {cue:'Complete', a:'Adjust thrust and drag, if needed.', k:['thrust','drag']}
+ ], notes:['Excessive pitch trim or rudder can aggravate an upset.']},
+
+{id:'orw', grp:'Maneuvers', t:'Overrun Warning', role:'You: PF', ref:'QRH MAN.1.20–1.21',
+ trig:'In the air "OVERRUN, GO-AROUND" → go around. On the ground "MAX BRAKES, MAX REVERSE" → below.',
+ chain:['<b>C</b>lose + max brakes','<b>S</b>peedbrakes','<b>R</b>everse max','<b>B</b>rake to stop','<b>R</b>ev idle before taxi speed'],
+ hook:'Same order as the Captain\'s RTO: thrust + brakes, speedbrake, reverse, keep braking.',
+ steps:[
+  {ph:'In the air', cue:'"OVERRUN, GO-AROUND" / GO-AROUND on PFD', a:'Execute a go-around.', k:['go-around']},
+  {ph:'On the ground', cue:'"MAX BRAKES, MAX REVERSE"', a:'Without delay, simultaneously close the thrust levers and apply maximum manual wheel brakes.', k:['close','maximum manual']},
+  {cue:'Then', a:'Verify the speedbrakes are deployed, or raise the SPEED BRAKE lever.', k:['speedbrakes']},
+  {cue:'Then', a:'Apply reverse thrust up to the maximum consistent with conditions.', k:['reverse']},
+  {cue:'Then', a:'Continue maximum braking until certain the airplane will stop on the runway.', k:['maximum braking']},
+  {cue:'Stop assured', a:'Bring the reversers to reverse idle before taxi speed, then full down.', k:['reverse idle','taxi speed']}
+ ]},
+
+{id:'depress', grp:'In flight', t:'Rapid Depress + Emergency Descent', role:'You: FO · C flies', ref:'OM-B 3.4.1 / 3.4.2 · QRH 2.1 / 0.1',
+ trig:'Cabin altitude horn or CABIN ALTITUDE light at FL370. The Captain takes control. You run masks, pressurization, ATC, transponder, lights and the MGA.',
+ chain:['<b>M</b>asks 100%','<b>C</b>omms','<b>MAN</b> · outflow CLOSE','<b>C</b>ontrollable?','<b>MAYDAY</b>','<b>S</b>igns · CONT · lights','<b>7700</b> · QNH','<b>MGA</b>','<b>2000 · 1000</b>'],
+ hook:'Masks, Comms, MAN, Close → "controllable?" → MAYDAY, Signs, CONT, Lights, 7700, QNH, MGA.',
+ steps:[
+  {ph:'Rapid depressurization', cue:'Captain: "I HAVE CONTROL, RAPID DEPRESSURIZATION MEMORY ITEMS"', a:'Memory items 1–2: don oxygen masks, regulators 100%; establish crew communications.', k:['100%','communications']},
+  {cue:'Memory items 3–4', a:'Pressurization mode selector MAN. Outflow VALVE switch: hold in CLOSE until the indication shows fully closed.', k:['MAN','CLOSE','fully closed']},
+  {cue:'Outflow valve closed, cabin controllable', a:'Call:', s:'CABIN CONTROLLABLE, MEMORY ITEMS COMPLETE', k:['CONTROLLABLE']},
+  {cue:'Cabin not controllable', a:'Call, then continue: passenger signs ON, PASS OXYGEN switch ON, go to Emergency Descent.', s:'CABIN OUT OF CONTROL', k:['PASS OXYGEN','OUT OF CONTROL']},
+  {ph:'Emergency descent', cue:'Captain: "EMERGENCY DESCENT MEMORY ITEMS" + PA', a:'Tell ATC:', s:'MAYDAY MAYDAY MAYDAY, __ RADAR, (callsign), EMERGENCY DESCENT ON HDG __, REQUEST LOCAL QNH', k:['MAYDAY','HDG','LOCAL QNH']},
+  {cue:'Your flow', a:'Passenger signs ON · ENGINE START switches CONT · fixed LANDING and TURNOFF lights ON.', k:['CONT','LANDING','TURNOFF']},
+  {cue:'Your flow', a:'Squawk A7700. Altimeter to BARO with local QNH, if required.', k:['7700','QNH']},
+  {cue:'Your flow', a:'Check and announce:', s:'MINIMUM GRID ALTITUDE __', k:['MINIMUM GRID ALTITUDE']},
+  {cue:'Flow done', a:'Call:', s:'MEMORY ITEMS COMPLETED', k:['COMPLETED']},
+  {cue:'Captain: "RAPID DEPRESSURIZATION AND EMERGENCY DESCENT CHECKLISTS"', a:'Read both checklists.', k:['Read']},
+  {ph:'Level-off', cue:'2000 ft above level-off', a:'Call (Captain: "Checked"):', s:'TWO THOUSAND', k:['TWO THOUSAND']},
+  {cue:'1000 ft above level-off', a:'Call (Captain: "Checked", speedbrake DOWN):', s:'ONE THOUSAND', k:['ONE THOUSAND']}
+ ], notes:['Target: lowest safe altitude or 10,000 ft, whichever is higher. Speed Mmo/Vmo unless structure is in doubt.','Captain does: PA, A/P verify, lower MCP altitude, LVL CHG, thrust idle by hand (A/T INOP), speedbrake FLIGHT DETENT, speed.']},
+
+{id:'evac', grp:'Ground', t:'Evacuation · FO items', role:'You: FO', ref:'QRH Back Cover.4',
+ trig:'Evacuation needed. Captain: parking brake, speedbrake down, start levers CUTOFF, PA. The rest is yours.',
+ chain:['<b>F</b>laps 40','<b>P</b>ress MAN','<b>O</b>utflow OPEN','<b>A</b>TC','<b>F</b>ire switches pull','<b>R</b>otate if fire'],
+ hook:'“Forty, MAN, Open, ATC, Pull, Rotate.”',
+ steps:[
+  {ph:'Checklist', cue:'Step 3', a:'FLAP lever 40.', k:['40']},
+  {cue:'Step 4', a:'Pressurization mode selector MAN.', k:['MAN']},
+  {cue:'Step 5', a:'Outflow VALVE switch: hold in OPEN until the indication shows fully open.', k:['OPEN','fully open']},
+  {cue:'Step 9 (after C: "evacuate")', a:'Advise ATC.', k:['ATC']},
+  {cue:'Step 10', a:'Engine and APU fire switches (all): override and pull.', k:['override and pull']},
+  {cue:'Step 11', a:'If an engine or APU fire is observed or indicated: rotate the related fire switch to the stop and hold 1 s.', k:['rotate','1 s']}
+ ]},
+
+{id:'circ', grp:'Arrival', t:'Circling 45/45 (company)', role:'You: PF', ref:'QRH MAN.2.11',
+ trig:'LTBJ is CAVOK with a 34L headwind: a likely place for a circling. Stabilized by 500 ft, wings level on final by 300 ft AFE.',
+ chain:['<b>DA</b>: ALT HOLD · MA alt','<b>HDG</b> 45° · 25°','<b>G</b>ear · F15','<b>45 s</b>','<b>D</b>ownwind time','<b>B</b>ase: flaps · descend','<b>300 ft</b> wings level'],
+ hook:'At DA: hold, missed alt, turn 45. Then 45 seconds. Downwind: 3 s per 100 ft.',
+ steps:[
+  {ph:'At DA (circling)', cue:'Circling altitude reached', a:'Select ALT HOLD (as needed). Set the missed approach altitude.', k:['ALT HOLD','missed approach']},
+  {cue:'At DA', a:'Select HDG SEL and start a 25° bank turn 45° away.', k:['HDG SEL','25°','45°']},
+  {cue:'At DA', a:'Gear down, flaps 15, flaps 15 speed, speedbrake armed. OEI: gear up, flaps 10, flaps 10 speed.', k:['flaps 15','flaps 10']},
+  {ph:'45° leg', cue:'Heading 45° off', a:'Fly 45 s level, then 25° bank onto downwind (≈2 NM abeam).', k:['45 s','25°']},
+  {ph:'Downwind', cue:'Abeam the threshold', a:'Time 3 s per 100 ft AGL; −2 s per 10 kt tailwind, +2 s per 10 kt headwind.', k:['3 s','100 ft']},
+  {ph:'Base', cue:'Start of the base turn', a:'Gear down (if one engine), landing flaps, start descent when appropriate, landing checklist.', k:['landing flaps','landing checklist']},
+  {ph:'Final', cue:'Intercepting the landing profile', a:'A/P and A/T off at the latest here. Wings level by 300 ft AFE.', k:['300 ft']},
+  {ph:'Missed approach', cue:'Visual reference lost', a:'Make an initial climbing turn toward the landing runway and intercept the missed approach course.', k:['toward the landing runway']}
+ ]}
+];
+
+/* ---------- storage ---------- */
+const KEY='pfdrill.v1';
+let DB={};
+try{DB=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){DB={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
+const box=(m,i)=>DB[m+'.'+i]||0;          /* Leitner box 0..5 */
+function grade(m,i,g){const k=m+'.'+i;let b=DB[k]||0;b=g===0?0:g===1?Math.min(5,b+1):Math.min(5,b+2);DB[k]=b;save();refreshRail();refreshStats()}
+const mastery=m=>{const mv=MV.find(x=>x.id===m);return Math.round(mv.steps.reduce((a,_,i)=>a+box(m,i),0)/(mv.steps.length*5)*100)};
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function phaseOf(mv,i){for(let j=i;j>=0;j--)if(mv.steps[j].ph)return mv.steps[j].ph;return ''}
+function pfHTML(st){return `<span class="a">${esc(st.a)}</span>${st.s?` <span class="say">${esc(st.s)}</span>`:''}`}
+function label(st){return st.s?`${st.a.replace(/[:.]\s*$/,'')} → “${st.s}”`:st.a}
+
+/* ---------- rail ---------- */
+let cur=MV[0].id, mode='learn';
+try{const h=location.hash.slice(1);if(MV.some(m=>m.id===h))cur=h}catch(e){}
+function refreshRail(){
+  let html='',g='';
+  MV.forEach(m=>{if(m.grp!==g){g=m.grp;html+=`<div class="grp lbl">${g}</div>`}
+    const p=mastery(m.id);
+    html+=`<button class="mv" data-m="${m.id}" aria-current="${m.id===cur}"><span class="n">${esc(m.t)}</span><span class="pc">${p}%</span><span class="r">${esc(m.role)}</span><span class="meter"><i style="width:${p}%"></i></span></button>`});
+  $('#rail').innerHTML=html;
+}
+function refreshStats(){
+  let tot=0,n=0,weak=0;MV.forEach(m=>m.steps.forEach((_,i)=>{const b=box(m.id,i);tot+=b;n++;if(b<3)weak++}));
+  $('#stMastery').textContent=Math.round(tot/(n*5)*100)+'%';$('#stWeak').textContent=weak;
+}
+$('#rail').addEventListener('click',e=>{const b=e.target.closest('.mv');if(!b)return;cur=b.dataset.m;mixed=null;stopTimer();render();refreshRail();try{history.replaceState(null,'','#'+cur)}catch(_){}});
+
+/* ---------- panel ---------- */
+const MODES=[['learn','Learn'],['cloze','Fill in'],['order','Order'],['recall','Recall'],['sim','Sim run'],['cmp','Don\'t mix up']];
+let clozeLvl=1, cover=false, mixed=null;
+function head(mv){
+  return `<div class="mhead"><div class="pills"><span class="pill role">${esc(mv.role)}</span><span class="pill">${esc(mv.ref)}</span><span class="pill">${mv.steps.length} steps · ${mastery(mv.id)}% mastered</span></div>
+  <h2>${esc(mv.t)}</h2><p class="trig">${esc(mv.trig)}</p>
+  <div class="chain" aria-label="Memory chain">${mv.chain.map((c,i)=>`${i?'<span class="ar">›</span>':''}<span class="c">${c}</span>`).join('')}</div></div>
+  <div class="tabs" role="tablist">${MODES.map(([k,l])=>`<button class="tab" role="tab" data-mode="${k}" aria-selected="${k===mode}">${l}</button>`).join('')}</div>`;
+}
+function render(){
+  const mv=MV.find(m=>m.id===cur);
+  if(mixed){renderMixed();return}
+  let body='';
+  if(mode==='learn')body=learn(mv);else if(mode==='cloze')body=cloze(mv);else if(mode==='order')body=orderUI(mv);else if(mode==='recall')body=recallUI(mv);else if(mode==='sim')body=simUI(mv);else body=cmp();
+  $('#panel').innerHTML=head(mv)+body;
+  if(mode==='order')orderInit(mv);if(mode==='recall')recallInit(mv);if(mode==='sim')simInit(mv);
+}
+$('#panel').addEventListener('click',e=>{
+  const t=e.target.closest('[data-mode]');if(t){mode=t.dataset.mode;stopTimer();render();return}
+});
+
+/* Learn */
+function seqRows(mv,fn){let out='<div class="seq">';mv.steps.forEach((st,i)=>{if(st.ph)out+=`<div class="ph">${esc(st.ph)}</div>`;out+=`<div class="row${st.bg?' bg':''}"><span class="no">${String(i+1).padStart(2,'0')}</span><span class="cue">${esc(st.cue)}</span><span class="pf" data-i="${i}">${fn(st,i)}</span></div>`});return out+'</div>'}
+function learn(mv){
+  return `<p class="hint">Read the cue on the left, say your action and callout out loud, then check. Turn on “Cover my side” and tap each row to uncover it.</p>
+  <div class="tools"><button class="btn sm" id="covBtn">${cover?'Show my side':'Cover my side'}</button><span class="lbl">Hook</span><span style="font-size:.9rem">${esc(mv.hook)}</span></div>
+  <div class="${cover?'cover':''}" id="learnWrap">${seqRows(mv,st=>pfHTML(st))}</div>
+  ${mv.notes?`<div class="box am"><span class="lbl">Also know</span><ul>${mv.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul></div>`:''}`;
+}
+document.addEventListener('click',e=>{
+  if(e.target.id==='covBtn'){cover=!cover;render();return}
+  const pf=e.target.closest('#learnWrap.cover .pf');if(pf)pf.classList.toggle('shown');
+});
+
+/* Cloze */
+function blankify(text,keys,lvl){
+  /* mark matches on the raw text first, then build HTML, so one key never matches inside another's markup */
+  let parts=[{t:text,k:false}];
+  (keys||[]).forEach(k=>{const re=new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+    const nx=[];let done=false;parts.forEach(p=>{if(p.k||done){nx.push(p);return}const m=p.t.match(re);if(!m){nx.push(p);return}
+      done=true;nx.push({t:p.t.slice(0,m.index),k:false},{t:m[0],k:true},{t:p.t.slice(m.index+m[0].length),k:false})});parts=nx});
+  return parts.map(p=>p.k?`<button class="blank${lvl===1?' hint1':''}" data-full="${esc(p.t)}">${esc(lvl===1?p.t[0]+'·'.repeat(Math.max(2,p.t.length-1)):p.t)}</button>`:esc(p.t)).join('');
+}
+function cloze(mv){
+  const lv=[[1,'Key words · first letter'],[2,'Key words · no hint'],[3,'Whole PF side']];
+  return `<p class="hint">Say the missing words before you tap them. Level 3 hides your whole side: only the cue stays.</p>
+  <div class="tools">${lv.map(([n,l])=>`<button class="btn sm${n===clozeLvl?' pri':''}" data-lvl="${n}">${l}</button>`).join('')}<button class="btn sm" id="openAll">Reveal all</button></div>
+  ${seqRows(mv,st=>{
+    if(clozeLvl===3)return `<button class="blank big" data-full="${esc(label(st))}">tap to reveal</button>`;
+    let a=blankify(st.a,st.k,clozeLvl);
+    let s='';if(st.s){const inKeys=(st.k||[]).some(k=>st.s.toUpperCase().includes(k.toUpperCase()));
+      s=' <span class="say">'+(inKeys?blankify(st.s,st.k,clozeLvl):`<button class="blank${clozeLvl===1?' hint1':''}" data-full="${esc(st.s)}">${clozeLvl===1?esc(st.s.split(' ')[0]):'callout'}</button>`)+'</span>'}
+    return `<span class="a">${a}</span>${s}`;})}`;
+}
+document.addEventListener('click',e=>{
+  const l=e.target.closest('[data-lvl]');if(l){clozeLvl=+l.dataset.lvl;render();return}
+  if(e.target.id==='openAll'){document.querySelectorAll('.blank').forEach(open);return}
+  const b=e.target.closest('.blank');if(b)open(b);
+});
+function open(b){b.textContent=b.dataset.full;b.classList.add('open');b.classList.remove('hint1')}
+
+/* Order */
+function orderUI(){return `<p class="hint">Tap your actions in the order you do them. A wrong tap shakes and counts as an error.</p>
+ <div class="tools"><span class="progress" id="oProg"></span><button class="btn sm" id="oReset">Shuffle again</button></div>
+ <div class="built" id="oBuilt"></div><div class="pool" id="oPool"></div>`}
+let oState=null;
+function orderInit(mv){
+  oState={next:0,err:0,mv};
+  const pool=shuffle(mv.steps.map((s,i)=>i));
+  $('#oPool').innerHTML=pool.map(i=>`<button class="chip" data-o="${i}">${esc(label(mv.steps[i]))}</button>`).join('');
+  oProg();
+}
+function oProg(){$('#oProg').textContent=`${oState.next}/${oState.mv.steps.length} placed · ${oState.err} errors`}
+document.addEventListener('click',e=>{
+  if(e.target.id==='oReset'){orderInit(MV.find(m=>m.id===cur));$('#oBuilt').innerHTML='';return}
+  const c=e.target.closest('[data-o]');if(!c||!oState)return;
+  const i=+c.dataset.o,mv=oState.mv;
+  /* identical labels are interchangeable */
+  if(i===oState.next||label(mv.steps[i])===label(mv.steps[oState.next])){
+    c.remove();$('#oBuilt').insertAdjacentHTML('beforeend',`<div class="chip"><span class="k">${String(oState.next+1).padStart(2,'0')}</span>${esc(label(mv.steps[oState.next]))}</div>`);oState.next++;
+    if(oState.next===mv.steps.length){$('#oBuilt').insertAdjacentHTML('beforeend',`<div class="box ${oState.err?'am':'mg'}">${oState.err?`Done with ${oState.err} error${oState.err>1?'s':''}. Shuffle and go again until it is zero.`:'Clean run. Now try Recall or a Sim run.'}</div>`);if(!oState.err)mv.steps.forEach((_,j)=>grade(mv.id,j,1))}
+  }else{oState.err++;c.classList.remove('bad');void c.offsetWidth;c.classList.add('bad')}
+  oProg();
+});
+
+/* Recall (spaced) */
+let rQ=[],rI=0,rShown=false;
+function recallUI(){return `<p class="hint">Weakest steps come first. See the cue, say your action and callout, then reveal and grade yourself honestly. Keys: Space = reveal, 1 = Again, 2 = Good, 3 = Easy.</p><div class="stage" id="rStage"></div>`}
+function recallInit(mv){rQ=mv.steps.map((s,i)=>({m:mv.id,i})).sort((a,b)=>box(a.m,a.i)-box(b.m,b.i)||a.i-b.i);rI=0;rShown=false;rDraw()}
+function card(m,i,showCtx){
+  const mv=MV.find(x=>x.id===m),st=mv.steps[i],prev=i>0?mv.steps[i-1]:null;
+  return `${showCtx?`<div class="lbl">${esc(mv.t)}</div>`:''}
+  <div class="ctx">${esc(phaseOf(mv,i))}${prev?` · after: ${esc(label(prev))}`:' · first action'}</div>
+  <div class="cuebox"><div class="who">Cue</div><div class="txt">${esc(st.cue)}</div></div>`;
+}
+function rDraw(){
+  const st=$('#rStage');if(!st)return;
+  if(rI>=rQ.length){st.innerHTML=`<div class="sum"><div class="big">Round done</div><p>Run it again. Steps you graded “Again” come first.</p><div><button class="btn pri" id="rAgain">Next round</button></div></div>`;return}
+  const q=rQ[rI],mv=MV.find(x=>x.id===q.m);
+  st.innerHTML=`<div class="progress">${rI+1}/${rQ.length} · box ${box(q.m,q.i)}/5</div>${card(q.m,q.i,!!mixed)}
+   <div class="ans" id="rAns">${rShown?pfHTML(mv.steps[q.i]):'<span class="ph2">Your action and callout…</span>'}</div>
+   <div class="grades">${rShown?`<button class="btn g-again" data-g="0">1 · Again</button><button class="btn g-good" data-g="1">2 · Good</button><button class="btn" data-g="2">3 · Easy</button>`:`<button class="btn pri" id="rReveal">Reveal (Space)</button>`}</div>`;
+}
+function rGrade(g){const q=rQ[rI];grade(q.m,q.i,g);if(g===0)rQ.push(q);rI++;rShown=false;rDraw()}
+document.addEventListener('click',e=>{
+  if(e.target.id==='rReveal'){rShown=true;rDraw();return}
+  const g=e.target.closest('[data-g]');if(g){rGrade(+g.dataset.g);return}
+  if(e.target.id==='rAgain'){mixed?startMixed():recallInit(MV.find(m=>m.id===cur))}
+});
+document.addEventListener('keydown',e=>{
+  if(!$('#rStage')||e.target.closest('input,textarea'))return;
+  if(e.code==='Space'&&!rShown&&rI<rQ.length){e.preventDefault();rShown=true;rDraw()}
+  else if(rShown&&['Digit1','Digit2','Digit3'].includes(e.code)){rGrade(+e.code.slice(-1)-1)}
+});
+
+/* Mixed drill across maneuvers */
+function startMixed(){
+  const all=[];MV.forEach(m=>m.steps.forEach((_,i)=>all.push({m:m.id,i,b:box(m.id,i),r:Math.random()})));
+  all.sort((a,b)=>a.b-b.b||a.r-b.r);mixed=true;rQ=all.slice(0,12);rI=0;rShown=false;renderMixed();
+}
+function renderMixed(){
+  $('#panel').innerHTML=`<div class="mhead"><div class="pills"><span class="pill role">Mixed</span><span class="pill">All maneuvers</span></div><h2>Mixed drill · weakest 12</h2><p class="trig">Steps from every maneuver, lowest box first. This is how the examiner hits you: out of order and out of context.</p></div>
+  <div class="tools" style="margin-top:12px"><button class="btn sm" id="mixExit">Back to ${esc(MV.find(m=>m.id===cur).t)}</button></div>`+recallUI();rDraw();
+}
+$('#mixBtn').addEventListener('click',()=>{stopTimer();startMixed()});
+document.addEventListener('click',e=>{if(e.target.id==='mixExit'){mixed=null;mode='recall';render()}});
+
+/* Sim run */
+let sI=0,sRes=[],sT=null,sSec=8,sOpen=false,sMv=null;
+function simUI(){return `<p class="hint">The whole maneuver in order, against the clock, like the box. Say your action before the bar runs out. Then mark yourself.</p>
+ <div class="tools"><span class="lbl">Time per step</span>${[5,8,12].map(n=>`<button class="btn sm${n===sSec?' pri':''}" data-sec="${n}">${n} s</button>`).join('')}</div><div class="stage" id="sStage"></div>`}
+function simInit(mv){sMv=mv;sI=0;sRes=[];sOpen=false;sDraw()}
+function stopTimer(){if(sT){clearTimeout(sT);sT=null}}
+function sDraw(){
+  stopTimer();const st=$('#sStage');if(!st)return;const mv=sMv;
+  if(sI>=mv.steps.length){const ok=sRes.filter(Boolean).length;const miss=mv.steps.map((s,i)=>sRes[i]?null:i).filter(x=>x!==null);
+    st.innerHTML=`<div class="sum"><div class="big">${ok}/${mv.steps.length}</div><p>${miss.length?'Missed steps. Drill these in Recall, then run it again.':'Clean run. Shorten the time and go again.'}</p>${miss.map(i=>`<div class="miss"><b>${String(i+1).padStart(2,'0')}</b> ${esc(mv.steps[i].cue)} → ${pfHTML(mv.steps[i])}</div>`).join('')}<div><button class="btn pri" id="sRestart">Run again</button></div></div>`;return}
+  const s=mv.steps[sI];
+  st.innerHTML=`<div class="progress">Step ${sI+1}/${mv.steps.length} · ${esc(phaseOf(mv,sI))}</div>
+   <div class="cuebox"><div class="who">Cue</div><div class="txt">${esc(s.cue)}</div></div>
+   ${sOpen?'':`<div class="timer"><i id="sBar"></i></div>`}
+   <div class="ans">${sOpen?pfHTML(s):'<span class="ph2">Say it now…</span>'}</div>
+   <div class="grades">${sOpen?`<button class="btn g-again" data-s="0">Missed</button><button class="btn g-good" data-s="1">Got it</button>`:`<button class="btn pri" id="sReveal">Reveal</button>`}</div>`;
+  if(!sOpen){const bar=$('#sBar');const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce){bar.style.transition=`transform ${sSec}s linear`;requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.transform='scaleX(0)'}))}
+    sT=setTimeout(()=>{sOpen=true;sDraw()},sSec*1000)}
+}
+document.addEventListener('click',e=>{
+  const sec=e.target.closest('[data-sec]');if(sec){sSec=+sec.dataset.sec;render();return}
+  if(e.target.id==='sReveal'){sOpen=true;sDraw();return}
+  const r=e.target.closest('[data-s]');if(r){const ok=r.dataset.s==='1';sRes[sI]=ok;grade(sMv.id,sI,ok?1:0);sI++;sOpen=false;sDraw();return}
+  if(e.target.id==='sRestart'){simInit(sMv)}
+});
+
+/* Don't mix up */
+function cmp(){return `<p class="hint">The maneuvers share hands but not numbers. These are the traps.</p>
+<div class="cmp"><table><tr><th>Maneuver</th><th>Pitch</th><th>TO/GA</th><th>Flight director</th><th>Thrust</th><th>Config</th></tr>
+<tr><td>Windshear escape</td><td class="v">15°</td><td>Push</td><td>Follow (≤ PLI)</td><td>Max, full forward</td><td>No change</td></tr>
+<tr><td>GPWS pull up</td><td class="v">20°</td><td>No</td><td>Do not use</td><td>Max, full forward</td><td>No change</td></tr>
+<tr><td>Stall recovery</td><td class="v">Nose down first</td><td>No</td><td>Do not use</td><td>Advance as needed, after unloading</td><td>No change (liftoff, flaps up: flaps 1)</td></tr>
+<tr><td>TCAS climb RA, landing config</td><td class="v">Fly the RA</td><td>No</td><td>Not until clear</td><td>Max</td><td>Flaps 15, then gear up</td></tr>
+<tr><td>Windshear on takeoff roll</td><td class="v">15° at VR</td><td>—</td><td>—</td><td>Max</td><td>Rotate ≥ 2000 ft before end</td></tr>
+<tr><td>Upset nose high</td><td class="v">Push + trim down</td><td>No</td><td>—</td><td>Reduce</td><td>—</td></tr>
+<tr><td>Upset nose low</td><td class="v">Roll first, then pull</td><td>No</td><td>—</td><td>Adjust thrust / drag</td><td>—</td></tr>
+</table></div>
+<div class="cmp" style="margin-top:14px"><table><tr><th>Who moves what · V1 cut (OM-B 3.10)</th><th>PF (you)</th><th>PM</th></tr>
+<tr><td>Autothrottle</td><td>Calls and disengages</td><td>—</td></tr>
+<tr><td>Thrust lever</td><td>Hand on, “CONFIRM”, closes</td><td>“NUMBER __ CONFIRMED”</td></tr>
+<tr><td>Start lever</td><td>“NUMBER __ CONFIRMED”</td><td>Hand on, “CONFIRM”, CUTOFF</td></tr>
+<tr><td>Fire switch</td><td>“NUMBER __ CONFIRMED”</td><td>Hand on, “CONFIRM”, pulls, rotates</td></tr>
+<tr><td>Second bottle</td><td>May direct it by memory after 30 s</td><td>Discharges</td></tr>
+<tr><td>Deferred landing items</td><td>Answers all of them</td><td>Reads</td></tr></table></div>
+<div class="cmp" style="margin-top:14px"><table><tr><th>Height gates · V1 cut</th><th>What happens</th></tr>
+<tr><td class="v">VR 143</td><td>Rotate toward EO attitude</td></tr><tr><td class="v">Positive rate</td><td>GEAR UP, nothing else</td></tr>
+<tr><td class="v">400 ft RA</td><td>A/P if desired · HEADING · BANK 15 · memory items</td></tr>
+<tr><td class="v">1610 ft (EO accel)</td><td>SPEED UP · flaps on schedule</td></tr>
+<tr><td class="v">Flaps up speed</td><td>LVL CHG · BANK 25 · MCT by hand · NNC</td></tr></table></div>`}
+
+/* boot */
+refreshRail();refreshStats();render();
+</script>
