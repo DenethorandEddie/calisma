@@ -41,28 +41,39 @@ th{background:#E6ECF2;color:#23405F}
 <p>GPWS, uçağın araziye kontrollü şekilde çarpmasını (CFIT) önlemek için vardır. İki ayrı yöntemle çalışır ve bu ayrım şirket prosedürünün tam kalbindedir:</p>
 <div class="grid2">
  <div class="qrh" style="border-color:#C62828;background:#FDF3F2"><div lang="en" class="t" style="color:#C62828">Radyo altimetre tabanlı (klasik GPWS)</div>
-  <p>Uçağın <b>altındaki</b> gerçek yüksekliği (RA) ve alçalma/yaklaşma hızını ölçer. Mod 1–6. Arazi veritabanına ihtiyaç duymaz; ölçülen bir şeyi söyler.</p>
+  <p>Uçağın <b>altındaki</b> gerçek yüksekliği (RA) ve alçalma/yaklaşma hızını ölçer. Arazi veritabanına ihtiyaç duymaz; ölçülen bir şeyi söyler.</p>
   <p><b>Şirket kuralı: RA tabanlı uyarılar her zaman geçerlidir ve anında manevra uygulanır.</b></p></div>
  <div class="qrh" style="border-color:#1565C0;background:#F1F6FD"><div lang="en" class="t" style="color:#1565C0">Look-ahead (Enhanced GPWS)</div>
   <p>GPS/FMC konumu + dünya arazi/engel veritabanı ile uçağın <b>önündeki</b> araziye bakar. ND'de TERR ekranı, "CAUTION TERRAIN", "TERRAIN TERRAIN PULL UP".</p>
   <p>Konum ya da veritabanı hatasıyla <b>yanlış</b> uyarı verebilir. Şirket, belirli şartlarda Kaptanın bunu yok saymasına izin verir (bölüm 5).</p></div>
 </div>
 
-<h2>2 · Uyarı modları ve sesli ikazlar</h2>
+<h2>2 · Uyarılar ve sesli ikazlar <span style="font-weight:400;font-size:8.5pt">(FCOM 15.20 Ground Proximity Alerts)</span></h2>
+<p><b>FCOM:</b> <i>"The GPWS provides alerts based on radio altitude and combinations of barometric altitude, airspeed, glideslope deviation, and airplane configuration"</i>. Bunlar "radio altitude based alerts". EGPWS ayrıca dahili dünya arazi veritabanıyla <b>tahmini çarpma süresine</b> göre "look-ahead terrain alerts" verir. Tüm uyarılarda her iki PFD'de <b>PULL UP</b> yazısı çıkar (glideslope için BELOW G/S ışığı).</p>
+<h3>Radyo altimetre tabanlı uyarılar <span class="tag ra">RA</span> — FCOM 15.20.16–17</h3>
 <table>
- <tr><th style="width:17%">Mod</th><th style="width:30%">Ne zaman</th><th style="width:28%">Sesli ikaz</th><th>Tür</th></tr>
- <tr><td>1 · Aşırı alçalma hızı</td><td>RA'ya göre alçalma hızı fazla</td><td class="en">"SINK RATE" → "PULL UP"</td><td><span class="tag ra">RA</span> caution → warning</td></tr>
- <tr><td>2 · Arazi yaklaşma hızı</td><td>Altındaki arazi hızla yükseliyor (RA hızla azalıyor)</td><td class="en">"TERRAIN TERRAIN" → "PULL UP"</td><td><span class="tag ra">RA</span> caution → warning</td></tr>
- <tr><td>3 · Kalkış/GA sonrası irtifa kaybı</td><td>Kalkışta veya pas geçmede tırmanırken irtifa kaybı</td><td class="en">"DON'T SINK"</td><td><span class="tag ra">RA</span> caution</td></tr>
- <tr><td>4 · Yetersiz arazi mesafesi</td><td>Alçakta gear veya flap iniş konumunda değil / hız yüksek</td><td class="en">"TOO LOW GEAR" · "TOO LOW FLAPS" · "TOO LOW TERRAIN"</td><td><span class="tag ra">RA</span> caution</td></tr>
- <tr><td>5 · Glideslope altı</td><td>ILS'te glideslope'un belirgin altında</td><td class="en">"GLIDESLOPE"</td><td><span class="tag ra">RA</span> caution · iptal edilebilir</td></tr>
- <tr><td>6 · Callout'lar</td><td>Aşırı yatış, minimumlar, irtifa sayımı</td><td class="en">"BANK ANGLE" · "MINIMUMS" · "FIVE HUNDRED"…</td><td>bilgi / caution</td></tr>
- <tr><td>Look-ahead</td><td>Önde arazi veya engel var</td><td class="en">"CAUTION TERRAIN" · "CAUTION OBSTACLE" → "TERRAIN TERRAIN PULL UP" · "OBSTACLE OBSTACLE PULL UP"</td><td><span class="tag la">Look-ahead</span></td></tr>
- <tr><td>TCF</td><td>Piste yakın, pist etrafındaki arazi zeminine göre çok alçak</td><td class="en">"TOO LOW TERRAIN"</td><td><span class="tag la">Look-ahead</span></td></tr>
+ <tr><th style="width:26%">Sesli ikaz</th><th>Ne zaman (FCOM)</th><th style="width:24%">Inhibit</th></tr>
+ <tr><td class="en">"SINK RATE"</td><td>Aşırı alçalma hızı</td><td>—</td></tr>
+ <tr><td class="en">"PULL UP"</td><td>SINK RATE devam eder/artarsa; ya da RA tabanlı TERRAIN devam eder ve gear/flap iniş konumunda değilse</td><td>—</td></tr>
+ <tr><td class="en">"TERRAIN"</td><td>Aşırı arazi yaklaşma hızı</td><td>—</td></tr>
+ <tr><td class="en">"DON'T SINK"</td><td>Kalkış veya go-around sonrası aşırı irtifa kaybı</td><td>—</td></tr>
+ <tr><td class="en">"TOO LOW, GEAR"</td><td>Düşük hızda, gear aşağıda değilken yetersiz arazi mesafesi</td><td>GEAR INHIBIT switch</td></tr>
+ <tr><td class="en">"TOO LOW, FLAPS"</td><td>Düşük hızda, flap normal iniş konumunda değilken yetersiz arazi mesafesi</td><td>FLAP INHIBIT switch</td></tr>
+ <tr><td class="en">"TOO LOW, TERRAIN"</td><td>Yüksek hızda, gear aşağıda değil ya da flap iniş konumunda değilken yetersiz arazi mesafesi. İlk ikazdan sonra, başlangıç irtifasına tırmanmadan tekrar alçalırsan DON'T SINK'in ardından gelir.</td><td>—</td></tr>
+ <tr><td class="en">"GLIDESLOPE"</td><td>Glideslope (ya da FMC flight path angle) altına sapma; sapma arttıkça ses ve tekrar hızı artar</td><td>BELOW G/S P-INHIBIT ışığına basmak, <b>1000 ft RA altında</b> iptal eder</td></tr>
+ <tr><td class="en">"BANK ANGLE, BANK ANGLE"</td><td>Yatış <b>35°, 40° ve 45°</b>'yi geçince; her biri yatış 30°'nin altına inene kadar bir kez</td><td>—</td></tr>
 </table>
-<div class="warn"><b>"TOO LOW TERRAIN" tuzağı:</b> Bu ikaz hem mod 4 (RA tabanlı) hem TCF (look-ahead) olabilir. QRH: <span class="en">"TOO LOW TERRAIN" MAY BE an RA-based alert (no ND alert)</span>. ND'de terrain uyarısı görmüyorsan RA tabanlı kabul et: <b>asla yok sayılmaz.</b></div>
-<div class="gen">Mod numaraları ve eşikleri genel Honeywell EGPWS bilgisidir; yüklediğin QRH sayfalarında yoktu. Uçağındaki kurulum (örn. OBSTACLE, RUNWAY ikazları "as installed") için FCOM Warning Systems bölümüne bak.</div>
-
+<h3>Look-ahead uyarıları <span class="tag la">Look-ahead</span> — FCOM 15.20.14–15</h3>
+<table>
+ <tr><th style="width:26%">Sesli ikaz</th><th>Görsel</th><th>Ne zaman (FCOM)</th></tr>
+ <tr><td class="en">"CAUTION TERRAIN"</td><td>ND'de amber TERRAIN mesajı, solid amber arazi</td><td>Tahmini çarpmaya <b>40–60 saniye</b></td></tr>
+ <tr><td class="en">"TERRAIN TERRAIN, PULL UP"</td><td>PFD'de PULL UP, ND'de kırmızı TERRAIN, solid red arazi</td><td>Tahmini çarpmaya <b>20–30 saniye</b></td></tr>
+ <tr><td class="en">"TOO LOW, TERRAIN"</td><td>PFD'de PULL UP</td><td>Veritabanındaki <b>her havalimanından uzakken</b> güvenli olmayan irtifanın altına inmek</td></tr>
+ <tr><td class="en">"CAUTION OBSTACLE" / "OBSTACLE OBSTACLE, PULL UP"</td><td>ND'de amber / kırmızı OBSTACLE</td><td>100 ft ve üstü insan yapımı engeller; 40–60 s / 20–30 s. (Bazı tescillerde, "as installed")</td></tr>
+</table>
+<p>Look-ahead uyarıları TERR INHIBIT switch'iyle engellenir. FCOM: look-ahead uyarıları <b>uçağın konumu, barometrik irtifası, dikey uçuş yolu ve yer hızına</b> dayanır.</p>
+<div class="warn"><b>"TOO LOW, TERRAIN" tuzağı:</b> FCOM'da bu ikaz <b>iki listede de</b> var: RA tabanlı (yüksek hız, konfigürasyon yok) ve look-ahead (havalimanlarından uzakta alçak). QRH: <span class="en">"TOO LOW TERRAIN" MAY BE an RA-based alert (no ND alert)</span>. ND'de terrain uyarısı görmüyorsan RA tabanlı kabul et: <b>asla yok sayılmaz.</b></div>
+<div class="gen"><b>FCOM notları:</b> "A ground proximity alert does not guarantee terrain clearance" (öndeki arazi tırmanma performansını aşabilir). Look-ahead ve RA uyarıları, gerçek bir windshear uyarısı (uçak windshear içindeyken) varken <b>susturulur</b>. Arazi verisi olmayan bölgelerde look-ahead ve terrain ekranı çalışmaz; RA tabanlı uyarılar normal çalışır.</div>
 <h2>3 · İki seviye: CAUTION ve WARNING</h2>
 <div class="grid2">
 <div class="qrh"><div lang="en" class="t">GPWS Caution · QRH MAN.1.10</div>
@@ -76,6 +87,21 @@ th{background:#E6ECF2;color:#23405F}
 <p><b>Glideslope ikazının iptali:</b> QRH'ye göre glideslope altı ikazı şu durumlarda iptal/engellenebilir: localizer veya backcourse yaklaşma, ILS'ten circling, bilerek glideslope altında uçmayı gerektiren durum, güvenilmez glideslope sinyali.</p>
 <p><b>Gündüz VMC notu:</b> Gündüz VMC'de bir terrain caution gelirse ve görsel olarak engel/arazi tehlikesi olmadığı kesin doğrulanırsa, ikaz caution olarak değerlendirilip yaklaşmaya devam edilebilir.</p>
 
+<h3>ND terrain ekranı renkleri (FCOM 15.10.16)</h3>
+<table><tr><th style="width:26%">Renk</th><th>Anlamı</th></tr>
+ <tr><td>Solid red / solid amber</td><td>Look-ahead warning / caution aktif</td></tr>
+ <tr><td>Dotted red</td><td>Arazi uçağın irtifasından 2000 ft'ten fazla yukarıda</td></tr>
+ <tr><td>Dotted amber</td><td>Arazi 500 ft (gear aşağıda 250 ft) aşağıdan 2000 ft yukarıya kadar</td></tr>
+ <tr><td>Dotted green</td><td>Arazi 2000 ft aşağıdan 500 ft (gear aşağıda 250 ft) aşağıya kadar</td></tr>
+ <tr><td>Black · dotted magenta</td><td>Önemli arazi yok · arazi verisi yok</td></tr></table>
+<p style="font-size:8.5pt">Uçak ekrandaki en yüksek araziden 500 ft ya da daha yukarıdaysa arazi sadece yeşil tonlarında gösterilir. Look-ahead uyarısı geldiğinde, iki pilot da terrain seçmemişse ve ND uygun moddaysa (expanded MAP, center MAP, expanded VOR/APP) terrain ekranı <b>otomatik açılır</b>. Terrain ve hava radarı aynı ekranda birlikte gösterilemez.</p>
+<h3>GPWS paneli (FCOM 15.10.9–12)</h3>
+<ul><li><b>BELOW G/S P-INHIBIT</b> ışığı: amber = glideslope altı uyarısı aktif. Basmak 1000 ft RA altında GLIDESLOPE ikazını iptal eder.</li>
+<li><b>INOP</b> (amber): GPWS bilgisayar arızası ya da güç kaybı; RA, ADIRU, ILS, FMC, stall computer veya EFIS panelinden geçersiz veri.</li>
+<li><b>FLAP INHIBIT / GEAR INHIBIT:</b> TOO LOW FLAPS / TOO LOW GEAR ikazlarını engeller (örneğin non-normal flap iniş).</li>
+<li><b>TERR INHIBIT:</b> look-ahead terrain uyarılarını <b>ve</b> terrain ekranını kapatır. RA tabanlı uyarılar çalışmaya devam eder.</li>
+<li><b>RUNWAY INHIBIT</b> (sadece RAAS olan tescillerde): RAAS callout'larını kapatır.</li>
+<li><b>SYS TEST:</b> yerde tam test; uçuşta test engellidir.</li></ul>
 <h2 class="pb">4 · GPWS Warning manevrası (memory)</h2>
 <div class="qrh" style="border-color:#C62828"><div lang="en" class="t" style="color:#C62828">QRH MAN.1.10–1.11 · GPWS Warning</div>
 <table>
@@ -127,11 +153,11 @@ th{background:#E6ECF2;color:#23405F}
 <ul>
  <li><b>"Şüphe varsa manevra":</b> Karar akışının ilk kutusu budur. Simde gece, IMC ve MSA altında gelen bir look-ahead uyarısını yok saymak kesin hata.</li>
  <li><b>RA mı look-ahead mı?</b> ND'de kırmızı/amber terrain alanı ve TERRAIN mesajı → look-ahead. ND'de hiçbir şey yok ama "SINK RATE", "TERRAIN", "PULL UP", "TOO LOW …" → büyük ihtimalle RA tabanlı → her zaman uygula.</li>
- <li><b>Soğuk hava (OPC-6'da −4 °C):</b> Soğukta barometrik altimetre gerçek yüksekliği <b>olduğundan fazla</b> gösterir; araziye düşündüğünden yakınsındır. Cold temperature correction yapılmamış bir yaklaşmada GPWS uyarısı gerçek olabilir. Look-ahead kısmının hangi irtifa kaynağını kullandığı kuruluma bağlıdır (FCOM'dan kontrol et).</li>
+ <li><b>Soğuk hava (OPC-6'da −4 °C):</b> Soğukta barometrik altimetre gerçek yüksekliği <b>olduğundan fazla</b> gösterir; araziye düşündüğünden yakınsındır. FCOM'a göre look-ahead uyarıları <b>barometrik irtifaya</b> dayanır; yani soğukta look-ahead uyarısı <b>geç</b> gelebilir. RA tabanlı uyarılar gerçek yüksekliği ölçtüğü için etkilenmez. Cold temperature correction bu yüzden önemli.</li>
  <li><b>Konfigürasyon uyarıları</b> ("TOO LOW GEAR/FLAPS"): A/T INOP ile yaklaşmada gazı erken kısıp gear'ı unutursan hem bu ikaz hem landing configuration horn gelir. Çözüm: konfigürasyonu düzelt ya da pas geç.</li>
  <li><b>Manevradan çıkış:</b> Arazi tehdidi geçince pitch'i <b>yavaş</b> azalt ve hızlan. Gear/flap ancak arazi ayrımı kesinleşince.</li>
- <li><b>DESCEND RA ile karıştırma:</b> TCAS "DESCEND" 1000 ft AGL altında takip edilmez; GPWS uyarısı TCAS'tan önceliklidir.</li>
+ <li><b>Öncelikler:</b> Gerçek windshear uyarısı GPWS uyarılarını susturur (FCOM). TCAS "DESCEND" RA 1000 ft AGL altında takip edilmez (QRH).</li>
 </ul>
 
-<div class="note">Kaynak: SunExpress QRH MAN.1.8 (GPWS Response – company procedure), MAN.1.9 (flowchart), MAN.1.10–1.11 (GPWS Caution / Warning), MAN.1.12–1.13 (TCAS notu). Mod açıklamaları, soğuk hava etkisi ve ND ipuçları genel Boeing/Honeywell bilgisidir; yüklenen sayfalarda yoktu, FCOM Warning Systems bölümünden doğrulayın. Manevra ve callout metinleri QRH'deki orijinal İngilizce halleriyle verilmiştir.</div>
+<div class="note">Kaynaklar: SunExpress QRH MAN.1.8–1.11 (şirket prosedürü, akış şeması, GPWS Caution/Warning), MAN.1.12–1.13 (TCAS). FCOM Vol 2 bölüm 15 Warning Systems (D6-27370-86N-SNS, Rev 68): 15.10.9–15.10.17 GPWS controls ve terrain display, 15.20.13–15.20.17 Ground Proximity Alerts, 15.20.30 Bank Angle. Bazı maddeler tescile göre değişir (OBSTACLE, RAAS, AIRSPEED LOW); kendi uçağının effectivity'sine bak. Manevra ve callout metinleri orijinal İngilizce.</div>
 </body></html>
